@@ -107,8 +107,10 @@ Enviar requisicao entre pods
 1 - Deploy Argocd in K8s cluster
 - `kubectl create namespace argocd`
 - `kubectl apply -n argocd -f https://raw.githubusercontent.com/argoproj/argo-cd/stable/manifests/core-install.yaml`
-- `kubectl port-forward -n argocd svc/argocd-server 8080:443`
-- `127.0.0.1:8080` admin `kubectl get secret argocd-initial-admin-secret -n argocd -o yaml | grep password: | awk '{print $2}' | base64 --decode`
+- `kubectl patch svc argocd-server -n argocd -p '{"spec": {"type": "LoadBalancer"}}'`
+- `kubectl port-forward svc/argocd-server -n argocd 8080:443`
+- `127.0.0.1:8080` admin `kubectl -n argocd get secret argocd-initial-admin-secret -o jsonpath="{.data.password}" | base64 -d; echo`
+- `argocd account update-password`
 
 2 - Configure ArgoCD to track Git repository
 - clone repository locally (do git flow)
