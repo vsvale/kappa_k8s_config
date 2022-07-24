@@ -1,0 +1,19 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: kappa-deployment
+spec:
+  selector:
+    matchLabels:
+      app: kappa
+  replicas: 2
+  template:
+    metadata:
+      labels:
+        app: kappa
+    spec:
+      containers:
+        - name: kappa
+          image: vsvale/argocd-app:1.0
+          ports:
+            - containerPort: 8080
