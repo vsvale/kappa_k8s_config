@@ -1,12 +1,11 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: kappa-deployment
+  name: kappa
 spec:
   selector:
     matchLabels:
       app: kappa
-  replicas: 2
   template:
     metadata:
       labels:
@@ -14,6 +13,6 @@ spec:
     spec:
       containers:
         - name: kappa
-          image: vsvale/argocd-app:1.0
+          image: wesleywillians/argocd-fullcycle:latest
           ports:
             - containerPort: 8080
