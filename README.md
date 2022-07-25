@@ -14,6 +14,15 @@ Update Ubuntu `sudo apt update && sudo apt upgrade -y`
 
 In docker desktop enable wsl2 and attach Ubuntu
 
+## Brew
+`sudo apt-get install build-essential curl file git`
+`/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"`
+`test -d ~/.linuxbrew && eval $(~/.linuxbrew/bin/brew shellenv)`
+`test -d /home/linuxbrew/.linuxbrew && eval $(/home/linuxbrew/.linuxbrew/bin/brew shellenv)`
+`test -r ~/.bash_profile && echo "eval ($(brew --prefix)/bin/brew shellenv)" >>~/.bash_profile`
+`echo "eval $($(brew --prefix)/bin/brew shellenv)" >>~/.profile`
+`brew install hello`
+
 ## Minikube
 
 Install Minikube
@@ -33,6 +42,9 @@ Install Minikube
 `minikube start --memory=4096 --driver=docker`
 
 Iniciar o minikube `minikube start --memory=4096`
+
+if needed reset minikube to fabric values
+minikube delete
 
 ## [Kubectl](https://kubernetes.io/docs/tasks/tools/)
 
@@ -55,6 +67,7 @@ deb [trusted=yes] http://ftp.de.debian.org/debian buster main`
 `sudo apt install kubectx`
 `kubens`
 `kubens other-namespace`
+OR `kubectl config set-context --current --namespace=argocd`
 
 Criar pods
 `kubectl run nginx-pod --image=nginx:latest`
