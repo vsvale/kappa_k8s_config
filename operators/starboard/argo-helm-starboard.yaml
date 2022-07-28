@@ -6,16 +6,11 @@ metadata:
 spec:
   project: default
   source:
+    repoURL: "https://aquasecurity.github.io/helm-charts/"
+    targetRevision: 0.10.6
     chart: starboard-operator
-    repoURL: <https://aquasecurity.github.io/helm-charts/>
-    targetRevision: 0.9.1
-    helm:
-      values: |
-        targetNamespaces: app
-        trivy:
-          ignoreUnfixed: true
   destination:
-    server: <https://kubernetes.default.svc>
+    server: "https://kubernetes.default.svc"
     namespace: starboard-system
   syncPolicy:
     automated:
