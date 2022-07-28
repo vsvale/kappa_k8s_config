@@ -1,0 +1,11 @@
+[ ] https://towardsdatascience.com/setting-up-data-pipelines-using-apache-airflow-on-kubernetes-4506baea3ce0
+- Airflow
+  - Sensor: Verifica de tempo em tempo se algo aconteceu (arquivo chegou)
+  - Operador:
+  - Transform
+- horizontal pod scaling
+- MiniO no kubernetes (S3)
+  - bucket landing
+  - bucket processing
+  - bucket curated
+- YugabiteDB no kubernetes (Postgres)
