@@ -4,20 +4,24 @@ metadata:
   name: starboard
   namespace: argocd
 spec:
-  project: default
+  destination:
+    name: ""
+    namespace: starboard-system
+    server: https://kubernetes.default.svc
   source:
-    chart: starboard-operator
-    repoURL: <https://aquasecurity.github.io/helm-charts/>
+    path: ""
+    repoURL: https://aquasecurity.github.io/helm-charts/
     targetRevision: 0.9.1
+    chart: starboard-operator
     helm:
       values: |
         targetNamespaces: app
         trivy:
           ignoreUnfixed: true
-  destination:
-    server: <https://kubernetes.default.svc>
-    namespace: starboard-system
+  project: default
   syncPolicy:
     automated:
       prune: true
       selfHeal: true
+    syncOptions:
+      - CreateNamespace=true

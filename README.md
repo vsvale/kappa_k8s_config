@@ -1,5 +1,5 @@
-1. Install [WSL](kappa/docs/wsl.md)
-2. Install [minikube](kappa/docs/minikube.md)
+1. Install [WSL](./docs/wsl.md)
+2. Install [minikube](./docs/minikube.md)
 3. minikube start
-4. Install [argocd](kappa/docs/argocd.md)
-5. Install []
+4. Install [argocd](./docs/argocd.md)
+5. Install [operators](./docs/operators.md)
