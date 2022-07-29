@@ -11,3 +11,5 @@
 - `kubectl port-forward service/prometheus-grafana -n monitoring 5000:80`
 - admin prom-operator
 - `kubectl apply -n argocd -f https://raw.githubusercontent.com/vsvale/kappa_k8s_config/master/operators/starboard/argo-helm-starexporter.yaml`
+- `kubectl port-forward service/starboard-exporter -n starboard-system 3000:8080`
+- search starboard_exporter_vulnerabilityreport_image_vulnerability_severity_count
