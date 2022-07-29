@@ -4,16 +4,14 @@ metadata:
   name: starboard-exporter
   namespace: argocd
 spec:
-  destination:
-    name: ""
-    namespace: starboard-system
-    server: "https://kubernetes.default.svc"
+  project: default
   source:
-    path: ""
     repoURL: "https://giantswarm.github.io/giantswarm-catalog"
     targetRevision: 0.5.1
     chart: starboard-exporter
-  project: default
+  destination:
+    server: "https://kubernetes.default.svc"
+    namespace: starboard-system
   syncPolicy:
     automated:
       prune: true
