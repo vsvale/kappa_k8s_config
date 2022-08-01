@@ -1,35 +1,51 @@
 ## Argo CD
-1 - Deploy Argocd in K8s cluster
-- `kubectl create namespace argocd`
-- `kubectl apply -n argocd -f https://raw.githubusercontent.com/argoproj/argo-cd/stable/manifests/install.yaml`
-- `watch kubectl get pods -n argocd`
-- `kubectl patch svc argocd-server -n argocd -p '{"spec": {"type": "LoadBalancer"}}'`
-- `sudo curl -sSL -o /usr/local/bin/argocd https://github.com/argoproj/argo-cd/releases/latest/download/argocd-linux-amd64`
-- `sudo chmod +x /usr/local/bin/argocd`
-- `kubectl port-forward svc/argocd-server -n argocd 8080:443`
-- `127.0.0.1:8080`
-- admin 
-- `argoPass=$(kubectl -n argocd get secret argocd-initial-admin-secret -o jsonpath="{.data.password}" | base64 -d)`
-- `echo $argoPass`
-- `argocd login localhost:8080 --username admin --insecure`
-- `argocd account update-password`
 
-2 - Configure ArgoCD to track Git repository
-- clone repository locally (do git flow)
-- `code .`
-- create [application.yaml](https://raw.githubusercontent.com/vsvale/kappa_k8s_config/master/application.yaml)
-- `kubectl apply -f application.yaml`
+### Namespaces
 
-3- ArgoCD monitors for anychanges and applies automatically
+- `kubectl create namespace orchestrator`
+- `kubectl create namespace database`
+- `kubectl create namespace ingestion`
+- `kubectl create namespace processing`
+- `kubectl create namespace datastore`
+- `kubectl create namespace deepstorage`
+- `kubectl create namespace tracing`
+- `kubectl create namespace logging`
+- `kubectl create namespace monitoring`
+- `kubectl create namespace viz`
+- `kubectl create namespace cicd`
+- `kubectl create namespace security`
+- `kubectl create namespace app`
+- `kubectl create namespace cost`
+- `kubectl create namespace misc`
+- `kubectl create namespace dataops`
+- `kubectl create namespace gateway`
 
-- Workflow: Code change saved in App Source code is tested in CI pipeline >> Build Image >> Push to Docker Repo >> Update K8s manifest File >> Update yaml in Git repo App Configuration >> ArgoCD synced changes in yaml/helm charts and pull it to the cluster
+### Helm Chart
 
-- Git as Single Source of Truth: ArgoCD verify is cluster actual status == Desired State in git repo, if not send alerts. Gives history of changes and easy rollback and disaster recover.
+- `helm repo add argo https://argoproj.github.io/argo-helm`
+- `helm repo update`
+- get version in <https://artifacthub.io/packages/helm/argo/argo-cd>
+- `helm install argocd argo/argo-cd --namespace cicd --version XXXX`
+- `kubens cicd`
+- `kubectl get pods`
 
-- GitOps Flow:
-  - Yaml in separated repository
-  - Create Pull/Merge Request on develop and master branch
-  - CI pipeline validade configuration files runnning automated tests
-  - Teamets review and approve PR
-  - Merge to main branch
-  - AgorCD pull changes to K8s cluster
+### Argo UI
+
+- `kubectl patch svc argocd-server -n cicd -p '{"spec": {"type": "LoadBalancer"}}'`
+- In minikube: `minikube tunnel`
+- `kubens cicd`
+- External ip: `kubectl get services -l app.kubernetes.io/name=argocd-server,app.kubernetes.io/instance=argocd -o jsonpath="{.items[0].status.loadBalancer.ingress[0].ip}"`
+- `ARGOCD_EXTRIP=$(kubectl get services -l app.kubernetes.io/name=argocd-server,app.kubernetes.io/instance=argocd -o jsonpath="{.items[0].status.loadBalancer.ingress[0].ip}")`
+- Port: `kubectl get services -l app.kubernetes.io/name=argocd-server,app.kubernetes.io/instance=argocd -o jsonpath="{.items[0].spec.ports[0].port}"`
+- `kubectl -n cicd get secret argocd-initial-admin-secret -o jsonpath="{.data.password}" | base64 -d | xargs -t -I {} argocd login $ARGOCD_EXTRIP --username admin --password {} --insecure`
+
+### create cluster role binding for admin user
+
+- `kubectl create clusterrolebinding cluster-admin-binding --clusterrole=cluster-admin --user=system:serviceaccount:cicd:argocd-application-controller -n cicd`
+
+### Register cluster como default
+
+- `CLUSTER=$(kubectx)"`
+- `argocd cluster add $CLUSTER --in-cluster`
+
+### repository k8_config
