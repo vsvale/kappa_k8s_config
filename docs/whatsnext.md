@@ -1,11 +1,19 @@
-[ ] https://towardsdatascience.com/setting-up-data-pipelines-using-apache-airflow-on-kubernetes-4506baea3ce0
-- Airflow
-  - Sensor: Verifica de tempo em tempo se algo aconteceu (arquivo chegou)
-  - Operador:
-  - Transform
-- horizontal pod scaling
-- MiniO no kubernetes (S3)
-  - bucket landing
-  - bucket processing
-  - bucket curated
-- YugabiteDB no kubernetes (Postgres)
+# To research
+
+- Rebalance Kafka
+- Kafka Broker
+- Kubernetes Secrets
+- Kafka Connect
+- Enterprise Datahub
+- Strimzi cruise control
+- Schema registry
+- Apache Pinot
+- YugabyteDB
+- Filebeat
+- Kinana
+- Prometheus
+- Grafana
+
+# To do
+
+- Resolver yaml/ingestion/metrics [artigo](https://blog.devgenius.io/kafka-on-kubernetes-using-strimzi-part-1-83d74564135e)
