@@ -1,0 +1,3 @@
+- [Partition Rebalacing](https://www.logicbig.com/tutorials/misc/kafka/kafka-partition-rebalancing.html)
+- [Consumer]
+- <https://blog.devgenius.io/kafka-on-kubernetes-using-strimzi-part-1-83d74564135e>

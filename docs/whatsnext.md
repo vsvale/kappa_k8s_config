@@ -1,7 +1,10 @@
 # To research
 
-- Rebalance Kafka
+-
+- kafka exporter
 - Kafka Broker
+- JBOD
+- Kafka mirror maker
 - Kubernetes Secrets
 - Kafka Connect
 - Enterprise Datahub

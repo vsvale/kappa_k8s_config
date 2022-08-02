@@ -1,14 +1,14 @@
-#https://cwiki.apache.org/confluence/display/KAFKA/KIP-112%3A+Handle+disk+failure+for+JBOD
+#https://blog.devgenius.io/kafka-on-kubernetes-using-strimzi-part-2-71a8ba8e9605
 
 apiVersion: kafka.strimzi.io/v1beta2
 kind: Kafka
 metadata:
   #kafka cluster name
-  name: edh
+  name: kafka-cluster
 spec:
   kafka:
     #broker version
-    version: 3.2.0
+    #version: 3.2.0
     #initial replicas
     replicas: 3
     #provision tls
@@ -17,29 +17,29 @@ spec:
         port: 9092
         type: internal
         tls: false
-      - name: tls
-        port: 9093
-        type: internal
-        tls: true
-      - name: external
-        port: 9094
-        type: loadbalancer
-        tls: false
-    readinessProbe:
-      initialDelaySeconds: 15
-      timeoutSeconds: 5
-    livenessProbe:
-      initialDelaySeconds: 15
-      timeoutSeconds: 5
+    #      - name: tls
+    #        port: 9093
+    #        type: internal
+    #        tls: true
+    #      - name: external
+    #        port: 9094
+    #        type: loadbalancer
+    #        tls: false
+    #    readinessProbe:
+    #      initialDelaySeconds: 15
+    #      timeoutSeconds: 5
+    #    livenessProbe:
+    #      initialDelaySeconds: 15
+    #      timeoutSeconds: 5
     config:
       offsets.topic.replication.factor: 3
       transaction.state.log.replication.factor: 3
       transaction.state.log.min.isr: 1
       default.replication.factor: 3
       min.insync.replicas: 2
-      inter.broker.protocol.version: "3.2"
-      log.message.format.verion: "3.2"
-      log.retention.hours: 2160
+    #      inter.broker.protocol.version: "3.2"
+    #      log.message.format.verion: "3.2"
+    #      log.retention.hours: 2160
     storage:
       type: jbod
       volumes:
@@ -51,51 +51,50 @@ spec:
           type: persistent-claim
           size: 15Gi
           deleteClaim: false
-    resources:
-      #requests and limits
-      requests:
-        memory: 512Mi
-        cpu: "500m"
-      limits:
-        memory: 1Gi
-        cpu: "1000m"
-    metricsConfig:
-      type: jmxPrometheusExporter
-      valueFrom:
-        configMapKeyRef:
-          name: kafka-metrics
-          key: kafka -metrics-config.yml
+    #   resources:
+    #requests and limits
+    #     requests:
+    #       memory: 512Mi
+    #       cpu: "500m"
+    #     limits:
+    #       memory: 1Gi
+    #       cpu: "1000m"
+    #   metricsConfig:
+    #     type: jmxPrometheusExporter
+    #     valueFrom:
+    #       configMapKeyRef:
+    #         name: kafka-metrics
+    #         key: kafka -metrics-config.yml
+    zookeeper:
+      replicas: 3
+      storage:
+        type: persistent-claim
+        size: 10Gi
+        deleteClaim: false
+    #      resources:
+    #requests and limits
+    #        requests:
+    #          memory: 512Mi
+    #          cpu: "250m"
+    #        limits:
+    #          memory: 1Gi
+    #          cpu: "500m"
+    #      metricsConfig:
+    #        type: jmxPrometheusExporter
+    #        valueFrom:
+    #          configMapKeyRef:
+    #            name: zookeeper-metrics
+    #            key: zookeeper-metrics-config.yml
 
-  zookeeper:
-    replicas: 3
-    storage:
-      type: persistent-claim
-      size: 10Gi
-      deleteClaim: false
-    resources:
-      #requests and limits
-      requests:
-        memory: 512Mi
-        cpu: "250m"
-      limits:
-        memory: 1Gi
-        cpu: "500m"
-    metricsConfig:
-      type: jmxPrometheusExporter
-      valueFrom:
-        configMapKeyRef:
-          name: zookeeper-metrics
-          key: zookeeper-metrics-config.yml
-
-  entityOperator:
-    topicOperator: {}
-    userOperator: {}
-  cruiseControl:
-    type: jmxPrometheusExporter
-    valueFrom:
-      configMapKeyRef:
-        name: cruise-control-metrics
-        key: metrics-config.yml
-  kafkaExporter:
-    topicRegex: ".*"
-    groupRegex: ".*"
+    entityOperator:
+      topicOperator: {}
+      userOperator: {}
+#    cruiseControl:
+#      type: jmxPrometheusExporter
+#      valueFrom:
+#        configMapKeyRef:
+#          name: cruise-control-metrics
+#          key: metrics-config.yml
+#    kafkaExporter:
+#      topicRegex: ".*"
+#      groupRegex: ".*"
