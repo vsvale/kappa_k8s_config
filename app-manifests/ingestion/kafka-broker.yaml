@@ -4,10 +4,7 @@ metadata:
   name: kafka-broker
   namespace: cicd
 spec:
-  destination:
-    name: ""
-    namespace: ingestion
-    server: "https://kubernetes.default.svc"
+  project: default
   source:
     repoURL: "https://github.com/vsvale/kappa_k8s_config.git"
     path: "yamls/ingestion/broker/"
@@ -15,7 +12,9 @@ spec:
     directory:
       recurse: true
       jsonnet: {}
-  project: default
+  destination:
+    server: "https://kubernetes.default.svc"
+    namespace: ingestion
   syncPolicy:
     automated:
       prune: true
