@@ -54,11 +54,11 @@ spec:
     resources:
       #requests and limits
       requests:
-        memory: 512Ni
+        memory: 512Mi
         cpu: "500m"
       limits:
         memory: 1Gi
-        cpu: "1080m"
+        cpu: "1000m"
     metricsConfig:
       type: jmxPrometheusExporter
       valueFrom:
@@ -75,11 +75,11 @@ spec:
     resources:
       #requests and limits
       requests:
-        memory: 512Ni
+        memory: 512Mi
         cpu: "250m"
       limits:
         memory: 1Gi
-        cpu: "508m"
+        cpu: "500m"
     metricsConfig:
       type: jmxPrometheusExporter
       valueFrom:
