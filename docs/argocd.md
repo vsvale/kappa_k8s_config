@@ -49,3 +49,8 @@
 - `argocd cluster add $CLUSTER --in-cluster`
 
 ### repository k8_config
+
+- `kubens cicd`
+- `REPOSITORY="https://github.com/vsvale/kappa_k8s_config.git"`
+- Public repo: `argocd repo add $REPOSITORY --port-forward`
+- Private repo: `argocd repo add $REPOSITORY --username xxxx --pasword xxxx --port-forward`
