@@ -62,12 +62,28 @@ spec:
         configMapKeyRef:
           name: kafka-metrics
           key: yamls/ingestion/metrics/kafka-metrics-config.yaml
+  kafkaExporter:
+    topicRegex: ".*"
+    groupRegex: ".*"
   zookeeper:
     replicas: 3
     storage:
       type: persistent-claim
       size: 10Gi
       deleteClaim: false
+    resources:
+      requests:
+        memory: "512Mi"
+        cpu: "250m"
+      limits:
+        memory: "1Gi"
+        cpu: "500m"
+    metricsConfig:
+      type: jmxPrometheusExporter
+      valueFrom:
+        configMapKeyRef:
+          name: zookeeper-metrics
+          key: zookeeper-metrics.yaml
   entityOperator:
     topicOperator: {}
     userOperator: {}
