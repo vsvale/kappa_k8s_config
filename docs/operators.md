@@ -18,6 +18,10 @@
 - `kubectl port-forward service/starboard-exporter -n starboard-system 3000:8080`
 - search starboard_exporter_vulnerabilityreport_image_vulnerability_severity_count
 
+### MiniO
+
+- `kubectl apply -n deepstorage -f https://raw.githubusercontent.com/vsvale/kappa_k8s_config/master/app-manifests/deepstore/argo-helm-minio.yaml`
+
 spark-operator
 confluentinc
 kong
