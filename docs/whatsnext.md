@@ -16,7 +16,3 @@
 - Kinana
 - Prometheus
 - Grafana
-
-# To do
-
-- Resolver yaml/ingestion/metrics [artigo](https://blog.devgenius.io/kafka-on-kubernetes-using-strimzi-part-1-83d74564135e)

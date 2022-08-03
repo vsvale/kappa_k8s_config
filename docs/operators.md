@@ -26,7 +26,7 @@ valeriano-monassero
 stable <https://kubernetes-charts.storage.googleapis.com>
 incubator <https://kubernetes-charts.storage.googleapis.com>
 jahstreet
-apache-airflow
+apache-airflow ns orchestrator
 elastic
 minio ns deepstore
 argocd ns cicd

@@ -4,7 +4,7 @@
 - `kubens ingestion`
 - `helm repo add strimzi https://strimzi.io/charts/`
 - `helm repo update`
-- `helm install kafka strimzi/strimzi-kafka-operator --namespace ingestion --version 0.30.0`
+- `helm install kafka strimzi/strimzi-kafka-operator --namespace ingestion`
 
 ### Metrics
 
