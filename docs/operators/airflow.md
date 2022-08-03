@@ -4,5 +4,5 @@
 - `kubens orchestrator`
 - `helm repo add apache-airflow https://airflow.apache.org/`
 - `helm repo update`
-- `helm install airflow apache-airflow/airflow --namespace orchestrator --version 1.6.0`
+- `helm upgrade --install airflow apache-airflow/airflow --namespace orchestrator`
 - `kubectl apply -f app-manifests/orchestrator/airflow.yaml`

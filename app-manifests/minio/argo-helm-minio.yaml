@@ -5,17 +5,15 @@ metadata:
 spec:
   destination:
     name: ""
-    namespace: storages
+    namespace: deepstore
     server: "https://kubernetes.default.svc"
   source:
     path: ""
     repoURL: "https://charts.bitnami.com/bitnami"
-    targetRevision: 11.7.15
+    targetRevision: 11.7.16
     chart: minio
   project: default
   syncPolicy:
     automated:
       prune: true
       selfHeal: true
-    syncOptions:
-      - CreateNamespace=true

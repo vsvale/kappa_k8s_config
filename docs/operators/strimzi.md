@@ -16,5 +16,3 @@
 ### Apply Manifest to Argo
 
 - `kubectl apply -f app-manifests/ingestion/kafka-broker.yaml`
-
-### Test producer and Cosumer
