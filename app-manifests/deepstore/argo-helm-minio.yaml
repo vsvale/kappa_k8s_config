@@ -1,7 +1,7 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: MiniO
+  name: minio
 spec:
   destination:
     name: ""
