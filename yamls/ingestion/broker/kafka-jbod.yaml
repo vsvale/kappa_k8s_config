@@ -57,16 +57,17 @@ spec:
       valueFrom:
         configMapKeyRef:
           name: kafka-metrics
-          key: yamls/ingestion/metrics/kafka-metrics-config.yaml
+          key: kafka-metrics-config.yaml
   kafkaExporter:
     topicRegex: ".*"
     groupRegex: ".*"
   cruiseControl:
-    type: jmxPrometheusExporter
-    valueFrom:
-      configMapKeyRef:
-        name: cruise-control-metrics
-        key: cruise-control-metrics-config.yaml
+    metricsConfig:
+      type: jmxPrometheusExporter
+      valueFrom:
+        configMapKeyRef:
+          name: cruise-control-metrics
+          key: cruise-control-metrics-config.yaml
   zookeeper:
     replicas: 1
     storage:
