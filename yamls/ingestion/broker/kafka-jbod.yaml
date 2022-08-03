@@ -1,3 +1,4 @@
+#https://blog.devgenius.io/kafka-on-kubernetes-using-strimzi-part-1-83d74564135e
 apiVersion: kafka.strimzi.io/v1beta2
 kind: Kafka
 metadata:

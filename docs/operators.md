@@ -28,16 +28,30 @@ incubator <https://kubernetes-charts.storage.googleapis.com>
 jahstreet
 apache-airflow
 elastic
-minio
-argo
-yugabytedb
+minio ns deepstore
+argocd ns cicd
+yugabytedb ns database
 astronomer
-prometheus-community
+prometheus-community ns monitoring
 lensesio
 banzaicloud-stable
 bitnami
-
-apache pinot
+apache pinot ns datastore
 kafka connect
 KSQLDB
 apache superset
+python-app-data-stores ns app
+cost-naluzer-checks ns cost
+kubecos ns cost
+postgressql ns database
+druid ns datastore
+monitoring-operator ns monitoring
+botkube ns monitoring
+alertmanager ns monitoring
+mlflow ns ml
+kibana ns logging
+filebeat ns logging
+elasticsearch ns logging
+strimzi-cluster-operator ns ingestion
+schema-registry ns ingestion
+keda ns ingestion !!!!Autoscaling very nice
