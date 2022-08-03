@@ -36,10 +36,6 @@ spec:
           type: persistent-claim
           size: 15Gi
           deleteClaim: false
-        - id: 2
-          type: persistent-claim
-          size: 15Gi
-          deleteClaim: false
     config:
       offsets.topic.replication.factor: 3
       transaction.state.log.replication.factor: 3
@@ -65,8 +61,14 @@ spec:
   kafkaExporter:
     topicRegex: ".*"
     groupRegex: ".*"
+  cruiseControl:
+    type: jmxPrometheusExporter
+    valueFrom:
+      configMapKeyRef:
+        name: cruise-control-metrics
+        key: cruise-control-metrics-config.yaml
   zookeeper:
-    replicas: 3
+    replicas: 1
     storage:
       type: persistent-claim
       size: 10Gi
