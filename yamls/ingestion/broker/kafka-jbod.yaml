@@ -52,22 +52,22 @@ spec:
       limits:
         memory: "1Gi"
         cpu: "1000m"
-    metricsConfig:
-      type: jmxPrometheusExporter
-      valueFrom:
-        configMapKeyRef:
-          name: kafka-metrics
-          key: kafka-metrics-config.yaml
+  #    metricsConfig:
+  #      type: jmxPrometheusExporter
+  #      valueFrom:
+  #        configMapKeyRef:
+  #          name: kafka-metrics
+  #          key: kafka-metrics-config.yaml
   kafkaExporter:
     topicRegex: ".*"
     groupRegex: ".*"
-  cruiseControl:
-    metricsConfig:
-      type: jmxPrometheusExporter
-      valueFrom:
-        configMapKeyRef:
-          name: cruise-control-metrics
-          key: cruise-control-metrics-config.yaml
+  #  cruiseControl:
+  #    metricsConfig:
+  #      type: jmxPrometheusExporter
+  #      valueFrom:
+  #        configMapKeyRef:
+  #          name: cruise-control-metrics
+  #          key: cruise-control-metrics-config.yaml
   zookeeper:
     replicas: 3
     storage:
@@ -81,12 +81,12 @@ spec:
       limits:
         memory: "1Gi"
         cpu: "500m"
-    metricsConfig:
-      type: jmxPrometheusExporter
-      valueFrom:
-        configMapKeyRef:
-          name: zookeeper-metrics
-          key: zookeeper-metrics.yaml
+  #    metricsConfig:
+  #      type: jmxPrometheusExporter
+  #      valueFrom:
+  #        configMapKeyRef:
+  #          name: zookeeper-metrics
+  #          key: zookeeper-metrics.yaml
   entityOperator:
     topicOperator: {}
     userOperator: {}
