@@ -1,3 +1,4 @@
+#https://blog.devgenius.io/kafka-on-kubernetes-using-strimzi-part-1-83d74564135e
 apiVersion: kafka.strimzi.io/v1beta2
 kind: Kafka
 metadata:
@@ -5,7 +6,7 @@ metadata:
 spec:
   kafka:
     version: 3.2.0
-    replicas: 1
+    replicas: 3
     listeners:
       - name: plain
         port: 9092
@@ -15,26 +16,78 @@ spec:
         port: 9093
         type: internal
         tls: true
-    config:
-      offsets.topic.replication.factor: 1
-      transaction.state.log.replication.factor: 1
-      transaction.state.log.min.isr: 1
-      default.replication.factor: 1
-      min.insync.replicas: 1
-      inter.broker.protocol.version: "3.2"
+    #      - name: external
+    #        port: 9094
+    #        type: loadbalancer
+    #        tls: false
+    readinessProbe:
+      initialDelaySeconds: 15
+      timeoutSeconds: 5
+    livenessProbe:
+      initialDelaySeconds: 15
+      timeoutSeconds: 5
     storage:
       type: jbod
       volumes:
         - id: 0
           type: persistent-claim
-          size: 10Gi
+          size: 15Gi
           deleteClaim: false
+    #        - id: 1
+    #          type: persistent-claim
+    #          size: 15Gi
+    #          deleteClaim: false
+    config:
+      offsets.topic.replication.factor: 3
+      transaction.state.log.replication.factor: 3
+      transaction.state.log.min.isr: 1
+      default.replication.factor: 3
+      min.insync.replicas: 2
+      inter.broker.protocol.version: "3.2"
+      log.message.format.version: "3.2"
+      log.retention.hours: 2160
+    resources:
+      requests:
+        memory: "512Mi"
+        cpu: "500m"
+      limits:
+        memory: "1Gi"
+        cpu: "1000m"
+  #    metricsConfig:
+  #      type: jmxPrometheusExporter
+  #      valueFrom:
+  #        configMapKeyRef:
+  #          name: kafka-metrics
+  #          key: kafka-metrics-config.yaml
+  kafkaExporter:
+    topicRegex: ".*"
+    groupRegex: ".*"
+  #  cruiseControl:
+  #    metricsConfig:
+  #      type: jmxPrometheusExporter
+  #      valueFrom:
+  #        configMapKeyRef:
+  #          name: cruise-control-metrics
+  #          key: cruise-control-metrics-config.yaml
   zookeeper:
-    replicas: 1
+    replicas: 3
     storage:
       type: persistent-claim
       size: 10Gi
       deleteClaim: false
+    resources:
+      requests:
+        memory: "512Mi"
+        cpu: "250m"
+      limits:
+        memory: "1Gi"
+        cpu: "500m"
+  #    metricsConfig:
+  #      type: jmxPrometheusExporter
+  #      valueFrom:
+  #        configMapKeyRef:
+  #          name: zookeeper-metrics
+  #          key: zookeeper-metrics.yaml
   entityOperator:
     topicOperator: {}
     userOperator: {}
