@@ -16,6 +16,10 @@ spec:
         type: internal
         tls: true
       - name: external
+        port: 9094
+        type: loadbalancer
+        tls: false
+      - name: external
         port: 9095
         type: loadbalancer
         tls: false
