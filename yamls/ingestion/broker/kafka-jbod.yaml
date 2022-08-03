@@ -19,6 +19,12 @@ spec:
         port: 9094
         type: loadbalancer
         tls: false
+        readinessProbe:
+          initialDelaySeconds: 15
+          timeoutSeconds: 5
+        livenessProbe:
+          initialDelaySeconds: 15
+          timeoutSeconds: 5
     storage:
       type: jbod
       volumes:
@@ -27,8 +33,8 @@ spec:
           size: 10Gi
           deleteClaim: false
     config:
-      offsets.topic.replication.factor: 1
-      transaction.state.log.replication.factor: 1
+      offsets.topic.replication.factor: 3
+      transaction.state.log.replication.factor: 3
       transaction.state.log.min.isr: 1
       default.replication.factor: 3
       min.insync.replicas: 2
