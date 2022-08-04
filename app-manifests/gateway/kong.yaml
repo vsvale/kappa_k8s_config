@@ -16,9 +16,6 @@ spec:
     helm:
       valueFiles:
         - values.yaml
-      parameters:
-        - name: ingressController.installCRDs
-          value: "false"
   project: default
   syncPolicy:
     automated:
