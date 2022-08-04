@@ -2,7 +2,7 @@ apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
   name: prometheus
-  namespace: argocd
+  namespace: cicd
 spec:
   destination:
     namespace: monitoring
@@ -58,5 +58,3 @@ spec:
     automated:
       prune: true
       selfHeal: true
-    syncOptions:
-      - CreateNamespace=true

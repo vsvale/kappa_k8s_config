@@ -1,0 +1,32 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: yugabitedb
+  namespace: cicd
+spec:
+  project: default
+  source:
+    repoURL: "https://charts.yugabyte.com"
+    targetRevision: 2.15.1
+    helm:
+      valueFiles:
+        - values.yaml
+      parameters:
+        - name: resource.master.requests.cpu
+          value: "0.5"
+        - name: resource.master.requests.memory
+          value: 0.5Gi
+        - name: resource.tserver.requests.cpu
+          value: "0.5"
+        - name: resource.tserver.requests.memory
+          value: 0.5Gi
+        - name: Image.tag
+          value: 2.15.1
+    chart: yugabyte
+  destination:
+    server: "https://kubernetes.default.svc"
+    namespace: database
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true

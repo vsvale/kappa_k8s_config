@@ -24,7 +24,6 @@
 
 - `helm repo add argo https://argoproj.github.io/argo-helm`
 - `helm repo update`
-- get version in <https://artifacthub.io/packages/helm/argo/argo-cd>
 - `helm install argocd argo/argo-cd --namespace cicd`
 - `kubens cicd`
 - `kubectl get pods`
@@ -32,7 +31,7 @@
 ### Argo UI
 
 - `kubectl patch svc argocd-server -n cicd -p '{"spec": {"type": "LoadBalancer"}}'`
-- In minikube: `minikube tunnel`
+- `minikube tunnel`
 - `kubens cicd`
 
 #### Login
@@ -45,12 +44,9 @@
 
 ### Register cluster como default
 
-- `CLUSTER=$(kubectx)`
-- `argocd cluster add $CLUSTER --in-cluster`
+- `CLUSTER=$(kubectx) && argocd cluster add $CLUSTER --in-cluster`
 
 ### repository k8_config
 
 - `kubens cicd`
-- `REPOSITORY="https://github.com/vsvale/kappa_k8s_config.git"`
-- Public repo: `argocd repo add $REPOSITORY --port-forward`
-- Private repo: `argocd repo add $REPOSITORY --username xxxx --pasword xxxx --port-forward`
+- `REPOSITORY="https://github.com/vsvale/kappa_k8s_config.git" && argocd repo add $REPOSITORY --port-forward`

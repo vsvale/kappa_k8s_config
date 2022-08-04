@@ -16,15 +16,15 @@
 
 ### Create Cluster
 
-`minikube -p minikube start --nodes 3 --cpus='3' --memory=5120 --disk-size=50g`
+`minikube -p minikube start --cpus='10' --memory='40g' --disk-size=250g`
 
 `minikube kubectl -- get po -A`
 
 `minikube addons enable ingress`
 
-[ingress](https://kubernetes.io/docs/tasks/access-application-cluster/ingress-minikube/)
-
 `minikube status -p minikube`
+
+`minikube dashboard`
 
 ### Reset ambiente
 
