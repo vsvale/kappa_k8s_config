@@ -16,7 +16,7 @@
 
 ### Create Cluster
 
-`minikube -p minikube start --cpus='10' --memory='20g' --disk-size=250g`
+`minikube -p minikube start --nodes 3  --cpus='3' --memory='12g' --disk-size=100g --container-runtime='docker' --driver='docker'`
 
 `minikube kubectl -- get po -A`
 

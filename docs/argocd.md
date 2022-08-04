@@ -30,7 +30,7 @@
 
 ### Argo UI
 
-- `kubectl patch svc argocd-server -n cicd -p '{"spec": {"ports": [{"port": 443,"targetPort": "server","name": "https"},{"port": 81,"targetPort": "server","name": "http"}],"type": "LoadBalancer"}}'`
+- `kubectl patch svc argocd-server -n cicd -p '{"spec": {"ports": [{"port": 443,"targetPort": "server","name": "https"},{"port": 80,"targetPort": "server","name": "http"}],"type": "LoadBalancer"}}'`
 - `minikube tunnel`
 - `kubens cicd`
 
