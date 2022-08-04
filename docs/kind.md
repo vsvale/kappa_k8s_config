@@ -6,5 +6,5 @@ sudo mv ./kind /usr/local/bin/kind
 
 ## Create cluster
 
-kind create cluster --name kappa --config kappa/kappa_k8s_config/yamls/cluster/kind-cluster.yaml
+kind create cluster --name kappa --config <https://raw.githubusercontent.com/vsvale/kappa_k8s_config/master/yamls/cluster/kind-cluster.yaml>
 kubectl cluster-info --context kind-kappa
