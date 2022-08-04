@@ -1,6 +1,6 @@
 Yugabitedb: `kubectl apply -n cicd -f https://raw.githubusercontent.com/vsvale/kappa_k8s_config/master/app-manifests/database/yugabite.yaml`
 
-Kong: `kubectl apply -n cicd -f`
+Kong: `kubectl apply -n cicd -f https://raw.githubusercontent.com/vsvale/kappa_k8s_config/master/app-manifests/gateway/kong.yaml`
 
 ### Spark
 
