@@ -4,19 +4,22 @@ metadata:
   name: kong
   namespace: cicd
 spec:
-  destination:
-    name: ""
-    namespace: gateway
-    server: "https://kubernetes.default.svc"
+  project: default
   source:
-    path: ""
     repoURL: "https://charts.konghq.com"
     targetRevision: 2.11.0
-    chart: kong
     helm:
       valueFiles:
         - values.yaml
-  project: default
+      parameters:
+        - name: ingressController.admissionWebhook.port
+          value: "8081"
+        - name: proxy.http.servicePort
+          value: "81"
+    chart: kong
+  destination:
+    server: "https://kubernetes.default.svc"
+    namespace: gateway
   syncPolicy:
     automated:
       prune: true

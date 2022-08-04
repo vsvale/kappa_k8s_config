@@ -1,0 +1,3 @@
+- NoSQL no Kubernetes com Api Postgresql e Api Cassandra
+- Possivel conectar via JDBC Kafka connect no Postgresql
+- Query de baixa latência

@@ -20,15 +20,27 @@
 
 `minikube kubectl -- get po -A`
 
-`minikube addons enable ingress`
-
 `minikube status -p minikube`
 
-`minikube dashboard`
+### Addons
+
+[Ingress](https://minikube.sigs.k8s.io/docs/handbook/addons/ingress-dns/)
+`minikube addons enable ingress`
+`minikube addons enable ingress-dns`
+`minikube dashboard --url`
 
 ### Reset ambiente
 
 `minikube delete --all --purge`
+
+### [LoadBalancer](https://minikube.sigs.k8s.io/docs/handbook/accessing/)
+
+- `minikube tunnel`
+- `kubectl patch svc <service-name> -n <namespace> -p '{"spec": {"type": "LoadBalancer"}}'`
+
+### Acessar node
+
+- `minikube ssh -n minikube`
 
 ### [Configure-persistent-volume-storage](https://kubernetes.io/docs/tasks/configure-pod-container/configure-persistent-volume-storage/)
 
