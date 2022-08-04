@@ -16,7 +16,7 @@
 
 ### Create Cluster
 
-`minikube -p minikube start --cpus='10' --memory='40g' --disk-size=250g`
+`minikube -p minikube start --cpus='10' --memory='20g' --disk-size=250g`
 
 `minikube kubectl -- get po -A`
 
