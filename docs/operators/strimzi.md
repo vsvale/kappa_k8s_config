@@ -16,10 +16,11 @@
 - `helm repo update`
 - `helm install kafka strimzi/strimzi-kafka-operator --namespace ingestion`
 - `helm ls`
+- `watch kubectl get pods`
 
 ### Raise Broker
 
-- `kubectl apply -f app-manifests/ingestion/kafka-broker.yaml`
+- `kubectl apply -f kappa/kappa_k8s_config/app-manifests/ingestion/kafka-broker.yaml`
 
 ### Metrics
 
