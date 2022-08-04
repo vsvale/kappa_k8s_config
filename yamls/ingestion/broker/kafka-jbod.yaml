@@ -29,6 +29,10 @@ spec:
           type: persistent-claim
           size: 100Gi
           deleteClaim: false
+        - id: 1
+          type: persistent-claim
+          size: 100Gi
+          deleteClaim: false
   zookeeper:
     replicas: 3
     storage:
