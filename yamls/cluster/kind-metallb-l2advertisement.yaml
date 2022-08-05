@@ -3,3 +3,6 @@ kind: L2Advertisement
 metadata:
   name: l2adv
   namespace: gateway
+spec:
+  ipAddressPools:
+    - ippools

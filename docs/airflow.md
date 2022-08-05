@@ -8,10 +8,11 @@
 - `kubens orchestrator`
 - `watch kubectl get pods -n orchestrator`
 
-    Your release is named airflow.
-    You can now access your dashboard(s) by executing the following command(s) and visiting the corresponding port at localhost in your browser:
+- Tentando `kubectl patch svc airflow-webserver -n orchestrator -p '{"spec": {"type": "LoadBalancer"}}'`
+- `kubectl port-forward svc/airflow-webserver 8081:8080 --namespace orchestrator`
 
-    Airflow Webserver:     kubectl port-forward svc/airflow-webserver 8080:8080 --namespace orchestrator
+-
+
     Default Webserver (Airflow UI) Login credentials:
         username: admin
         password: admin
@@ -26,7 +27,7 @@
 
     ###########################################################
 
-#  WARNING: You should set a static webserver secret key  #
+# WARNING: You should set a static webserver secret key #
 
     ###########################################################
 
@@ -35,3 +36,5 @@
 
     Information on how to set a static webserver secret key can be found here:
     <https://airflow.apache.org/docs/helm-chart/stable/production-guide.html#webserver-secret-key>
+
+`helm show values apache-airflow/airflow > kappa/kappa_k8s_config/app-manifests/orchestrator/values.yaml`

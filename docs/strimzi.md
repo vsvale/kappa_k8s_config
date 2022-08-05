@@ -10,7 +10,6 @@
 ## Install Kafka
 
 - `cd ~/kappa/kappa_k8s_config`
-- `kubectl create namespace ingestion`
 - `kubens ingestion`
 - `helm repo add strimzi https://strimzi.io/charts/`
 - `helm repo update`
