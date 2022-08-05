@@ -35,16 +35,6 @@ Update Ubuntu `sudo -- sh -c 'apt-get update; apt-get upgrade -y; apt-get dist-u
 
 In [docker desktop](https://docs.docker.com/desktop/windows/wsl/) enable wsl2 and attach Ubuntu
 
-## Brew
-
-- `sudo apt-get install build-essential curl file git`
-- `/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"`
-- `test -d ~/.linuxbrew && eval $(~/.linuxbrew/bin/brew shellenv)`
-- `test -d /home/linuxbrew/.linuxbrew && eval $(/home/linuxbrew/.linuxbrew/bin/brew shellenv)`
-- `test -r ~/.bash_profile && echo "eval ($(brew --prefix)/bin/brew shellenv)" >>~/.bash_profile`
-- `echo "eval $($(brew --prefix)/bin/brew shellenv)" >>~/.profile`
-- `brew install gcc`
-
 ## GitFlow
 
 - `sudo apt install git-flow`
