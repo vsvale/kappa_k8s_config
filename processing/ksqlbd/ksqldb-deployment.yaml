@@ -28,3 +28,12 @@ spec:
         value: https://0.0.0.0:8088
         - name: KSQL_KSQL_LOGGING_PROCESSING_STREAM_AUTO_CREATE
         value: "true"
+        - name: KSQL_KSQL_CONNECT_URL
+        value: 'http://edh-connect.ingestion.svc.Cluster.local:8083'
+      resources:
+        requests:
+          cpu: 500m
+          memory: 1000Mi
+        limits:
+          cpu: 1000M
+          memory: 2000Mi

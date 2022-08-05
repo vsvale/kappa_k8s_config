@@ -19,4 +19,4 @@
 
 ### Raise Broker
 
-- `kubectl apply -f kappa/kappa_k8s_config/app-manifests/ingestion/kafka-broker.yaml`
+- `kubectl apply -f https://raw.githubusercontent.com/vsvale/kappa_k8s_config/master/ingestion/yamls/kafka-broker.yaml`
