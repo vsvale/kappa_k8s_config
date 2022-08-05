@@ -1,0 +1,30 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ksqldb-server
+  labels:
+   app: ksqldb-server
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: ksqldb-server
+  template:
+    metadata:
+      labels:
+        app: ksqldb-server
+    spec:
+      containers:
+      - name: ksqldb-server
+        image: confluentic/ksqldb-server:0.12.0
+        ports:
+        - containerPort: 8088
+        env:
+        - name: KSQL_BOOTSTRAP_SERVERS
+        value: PLAINTEXT://edh-kafka-brokers.ingestion.svc.Cluster.local:9002
+        - name: KSQL_KSQL_SCHEMA_REGISTRY_URL
+        value: 'http://schema-registry-cp-schema-registry.ingestion.svc.Cluster.local:8081'
+        - name: KSQL_LISTENERS
+        value: https://0.0.0.0:8088
+        - name: KSQL_KSQL_LOGGING_PROCESSING_STREAM_AUTO_CREATE
+        value: "true"

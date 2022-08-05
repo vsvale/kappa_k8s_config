@@ -20,10 +20,3 @@
 ### Raise Broker
 
 - `kubectl apply -f kappa/kappa_k8s_config/app-manifests/ingestion/kafka-broker.yaml`
-
-### Metrics
-
-- `kubectl apply -f kappa/kappa_k8s_config/yamls/ingestion/metrics/connect-metrics-config.yaml`
-- `kubectl apply -f kappa/kappa_k8s_config/yamls/ingestion/metrics/cruise-control-metrics-config.yaml`
-- `kubectl apply -f yamls/ingestion/metrics/kafka-metrics-config.yaml`
-- `kubectl apply -f kappa/kappa_k8s_config/yamls/ingestion/metrics/zookeeper-metrics-config.yaml`
