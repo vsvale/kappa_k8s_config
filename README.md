@@ -1,8 +1,9 @@
-1. [WSL](./docs/wsl.md)
-2. [kind](./docs/kind.md)
-4. [argocd](./docs/argocd.md) --username admin --password gbW2EEqI-43ntP1x
+# Kappa
 
-5. Install [operators](./docs/operators/README.md)
+## Prerequesites
 
-kubectl port-forward service/argocd-server -n cicd 8081:443
---username admin --password gbW2EEqI-43ntP1x
+[Prerequesites](https://github.com/vsvale/kappa_k8s_config/blob/master/cluster/prerequisites.md)
+
+## Create cluster
+
+[minikube](https://github.com/vsvale/kappa_k8s_config/blob/master/cluster/minikube.md)

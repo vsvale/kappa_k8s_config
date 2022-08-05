@@ -24,7 +24,7 @@
 
 ### Create namespaces
 
-- `kubectl apply -f https://raw.githubusercontent.com/vsvale/kappa_k8s_config/master/yamls/cluster/kind-namespaces.yaml`
+- `kubectl apply -f https://raw.githubusercontent.com/vsvale/kappa_k8s_config/master/cluster/yaml/namespaces.yaml`
 
 ### Addons
 
