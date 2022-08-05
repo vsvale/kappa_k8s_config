@@ -9,7 +9,7 @@
 - `watch kubectl get pods -n orchestrator`
 
 - Tentando `kubectl patch svc airflow-webserver -n orchestrator -p '{"spec": {"type": "LoadBalancer"}}'`
-- `kubectl port-forward svc/airflow-webserver 8081:8080 --namespace orchestrator`
+- `kubectl port-forward svc/airflow-webserver 8082:8080 --namespace orchestrator`
 
 -
 
