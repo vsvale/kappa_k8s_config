@@ -1,0 +1,32 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: mysql
+  namespace: cicd
+spec:
+  destination:
+    name: ""
+    namespace: database
+    server: "https://kubernetes.default.svc"
+  source:
+    path: ""
+    repoURL: "https://charts.bitnami.com/bitnami"
+    targetRevision: 9.2.5
+    chart: mysql
+    helm:
+      parameters:
+        - name: primary.containerSecurityContext.runAsNonRoot
+          value: "false"
+        - name: primary.containerSecurityContext.runAsUser
+          value: "0"
+        - name: primary.podSecurityContext.fsGroup
+          value: "0"
+        - name: secondary.containerSecurityContext.runAsUser
+          value: "0"
+        - name: secondary.containerSecurityContext.runAsNonRoot
+          value: "false"
+  project: default
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true

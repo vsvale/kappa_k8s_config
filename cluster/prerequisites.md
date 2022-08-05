@@ -54,6 +54,10 @@ In [docker desktop](https://docs.docker.com/desktop/windows/wsl/) enable wsl2 an
 - `sudo apt-get update`
 - `sudo apt-get install helm`
 
+### To get values
+
+helm show values apache-airflow/airflow > kappa/kappa_k8s_config/app-manifests/orchestrator/values.yaml
+
 ## Kubectx  e Kubens
 
 - `sudo apt-get update`
