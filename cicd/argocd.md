@@ -11,8 +11,7 @@
 ### Argo UI
 
 - `kubectl patch svc argocd-server -n cicd -p '{"spec": {"type": "LoadBalancer"}}'`
-- `curl -sSL -o /usr/local/bin/argocd https://github.com/argoproj/argo-cd/releases/latest/download/argocd-linux-amd64`
-- `chmod +x /usr/local/bin/argocd`
+- `sudo chmod +x /usr/local/bin/argocd`
 
 #### Login
 
