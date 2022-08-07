@@ -1,5 +1,6 @@
 ## WSL
-
+- `dism.exe /online /enable-feature /featurename:VirtualMachinePlatform /all /norestart`
+- `dism.exe /online /enable-feature /featurename:Microsoft-Windows-Subsystem-Linux /all /norestart`
 Default WSL2 `wsl.exe --set-default-version 2` in Admin PowerShell
 
 ## WSL fora do diretorio padrão
@@ -9,7 +10,7 @@ No Powershell
 - `cd B:`
 - `mkdir wsl`
 - `cd wsl`
-- `Invoke-WebRequest -Uri shorturl.at/fixFQ -OutFile Ubuntu.appx -UseBasicParsing`
+- `Invoke-WebRequest -Uri https://aka.ms/wslubuntu2204 -OutFile Ubuntu.appx -UseBasicParsing`
 - `mkdir installer`
 - `move .\Ubuntu.appx .\installer\Ubuntu.zip`
 - `cd installer`
