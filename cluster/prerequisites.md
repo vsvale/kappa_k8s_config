@@ -1,7 +1,9 @@
 ## WSL
+In Admin PowerSehll 7
 - `dism.exe /online /enable-feature /featurename:VirtualMachinePlatform /all /norestart`
 - `dism.exe /online /enable-feature /featurename:Microsoft-Windows-Subsystem-Linux /all /norestart`
-Default WSL2 `wsl.exe --set-default-version 2` in Admin PowerShell
+- [Update Kernel Linux](https://wslstorestorage.blob.core.windows.net/wslblob/wsl_update_x64.msi)
+- `wsl.exe --set-default-version 2`
 
 ## WSL fora do diretorio padrão
 
