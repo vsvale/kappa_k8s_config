@@ -28,13 +28,15 @@ No Powershell
 - `.\ubuntu2204.exe`
 - `wslconfig /setdefault Ubuntu-22.04`
 
-## Sudo password-less
+## Config & Update Ubuntu
 
+- On [visual studio Code](https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.vscode-remote-extensionpack) install [Remote Development](https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.vscode-remote-extensionpack)
+- Acesse o WSL
 `sudo visudo`
-
 `%sudo   ALL=(ALL:ALL) NOPASSWD: ALL`
+- `sudo -- sh -c 'apt-get update; apt-get upgrade -y; apt-get dist-upgrade -y; apt-get autoremove -y; apt-get autoclean -y'`
 
-Update Ubuntu `sudo -- sh -c 'apt-get update; apt-get upgrade -y; apt-get dist-upgrade -y; apt-get autoremove -y; apt-get autoclean -y'`
+## Install Docker desktop
 
 In [docker desktop](https://docs.docker.com/desktop/windows/wsl/) enable wsl2 and attach Ubuntu
 
