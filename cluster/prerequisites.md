@@ -5,7 +5,9 @@ In Admin PowerSehll 7
 - [Update Kernel Linux](https://wslstorestorage.blob.core.windows.net/wslblob/wsl_update_x64.msi)
 - `wsl.exe --set-default-version 2`
 
-## WSL fora do diretorio padrão
+## Install [Ubuntu](https://apps.microsoft.com/store/detail/ubuntu-2204-lts/9PN20MSR04DW?hl=pt-br&gl=BR)
+
+## Ubuntu choose folder instalation (optional)
 
 No Powershell
 
