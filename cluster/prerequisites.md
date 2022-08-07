@@ -42,6 +42,9 @@ No Powershell
 
 In [docker desktop](https://docs.docker.com/desktop/windows/wsl/) enable wsl2 and attach Ubuntu
 
+## Clone repository
+git clone https://github.com/vsvale/kappa_k8s_config.git
+
 ## GitFlow
 
 - `sudo apt install git-flow`
