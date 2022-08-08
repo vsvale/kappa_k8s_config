@@ -11,6 +11,7 @@
 ### Argo UI
 
 - `kubectl patch svc argocd-server -n cicd -p '{"spec": {"type": "LoadBalancer"}}'`
+- `sudo chmod +x /usr/local/bin/argocd`
 
 #### Login
 
