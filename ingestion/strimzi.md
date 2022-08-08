@@ -17,3 +17,6 @@
 ### Raise Broker
 
 - `kubectl apply -f https://raw.githubusercontent.com/vsvale/kappa_k8s_config/master/ingestion/yamls/kafka-broker.yaml`
+
+### Create a topic
+- `kubectl apply -f https://raw.githubusercontent.com/vsvale/kappa_k8s_config/master/ingestion/yamls/topic.yaml`

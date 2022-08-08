@@ -55,6 +55,10 @@ spec:
     groupRegex: ".*"
   zookeeper:
     replicas: 3
+    storage:
+      type: persistent-claim
+      size: 100Gi
+      deleteClaim: false
     resources:
       requests:
         memory: "512Mi"
