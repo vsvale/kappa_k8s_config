@@ -23,3 +23,15 @@
 
 ### Create User
 - `kubectl apply -f https://raw.githubusercontent.com/vsvale/kappa_k8s_config/master/ingestion/yamls/user.yaml`
+
+### Show users
+- `kubectl get kafkausers`
+
+### Show topics
+- `kubectl get kafkatopics`
+
+### get password in secrets
+kubectl get secrets/vinicius.vale --template={{.data.password}} | base64
+
+### get certificate
+kubectl get secret kafka-cluster-clients-ca-cert -o jsonpath='{.data.ca\.crt}' | base64 -d > ~/cert
