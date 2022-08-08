@@ -17,12 +17,12 @@ spec:
         tls: true
         authentication:
           type: scram-sha-512
-      - name: external
-        port: 9094
-        type: loadbalancer
-        tls: true
-        authentication:
-          type: scram-sha-512
+#      - name: external
+#        port: 9094
+#        type: loadbalancer
+#        tls: true
+#        authentication:
+#          type: scram-sha-512
     authorization:
       type: simple
     readinessProbe:
