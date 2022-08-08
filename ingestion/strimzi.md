@@ -1,11 +1,8 @@
-### Strimzi
+# Strimzi
 
 ## Yamls Example
 
-- `mkdir ~/Charts`
-- `cd ~/Charts`
-- `git clone https://github.com/strimzi/strimzi-kafka-operator.git`
-- `cd ~/Charts/strimzi-kafka-operator/examples`
+- `https://github.com/strimzi/strimzi-kafka-operator/tree/main/examples`
 
 ## Install Kafka
 

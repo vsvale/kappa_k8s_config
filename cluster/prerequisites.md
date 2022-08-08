@@ -71,3 +71,9 @@ helm show values apache-airflow/airflow > kappa/kappa_k8s_config/app-manifests/o
 - `sudo git clone https://github.com/ahmetb/kubectx /usr/local/kubectx`
 - `sudo ln -s /usr/local/kubectx/kubectx /usr/local/bin/kubectx`
 - `sudo ln -s /usr/local/kubectx/kubens /usr/local/bin/kubens`
+
+## Terraform
+- `wget -O- https://apt.releases.hashicorp.com/gpg | gpg --dearmor | sudo tee /usr/share/keyrings/hashicorp-archive-keyring.gpg`
+- `echo "deb [signed-by=/usr/share/keyrings/hashicorp-archive-keyring.gpg] https://apt.releases.hashicorp.com $(lsb_release -cs) main" | sudo tee /etc/apt/sources.list.d/hashicorp.list`
+- `sudo apt update && sudo apt install terraform`
+- `terraform version`
