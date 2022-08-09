@@ -12,18 +12,6 @@ spec:
     directory:
       recurse: true
       jsonnet: {}
-  sync:
-    comparedTo:
-      destination:
-        namespace: gateway
-        server: https://kubernetes.default.svc
-      source:
-        path: "gateway/kong/yamls/manifests/"
-        repoURL: "https://github.com/vsvale/kappa_k8s_config.git"
-        targetRevision: HEAD
-        directory:
-          recurse: true
-          jsonnet: {}
   destination:
     server: "https://kubernetes.default.svc"
     namespace: gateway
