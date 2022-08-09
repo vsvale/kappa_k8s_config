@@ -10,7 +10,7 @@ spec:
     namespace: gateway
   project: default
   source:
-  path: gateway/kong/yamls
+  path: gateway/kong/yamls/manifests
     repoURL: https://github.com/vsvale/kappa_k8s_config
     targetRevision: master
   sync:
@@ -19,7 +19,7 @@ spec:
         namespace: gateway
         server: https://kubernetes.default.svc
       source:
-        path: gateway/kong/yamls
+        path: gateway/kong/yamls/manifests
         repoURL: https://github.com/vsvale/kappa_k8s_config
         targetRevision: master
   syncPolicy:
