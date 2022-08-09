@@ -11,7 +11,7 @@ spec:
   project: default
   source:
   path: gateway/kong/yamls
-    repoURL: "https://github.com/vsvale/kappa_k8s_config"
+    repoURL: https://github.com/vsvale/kappa_k8s_config
     targetRevision: master
   sync:
     comparedTo:
