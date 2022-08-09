@@ -35,3 +35,12 @@ kubectl get secrets/vinicius.vale --template={{.data.password}} | base64
 
 ### get certificate
 kubectl get secret kafka-cluster-clients-ca-cert -o jsonpath='{.data.ca\.crt}' | base64 -d > ~/cert
+
+### Describe topic
+kubectl describe kafkatopic src-app-movies-titles-data-json
+
+### logs
+kubectl logs <service>
+
+### View topic
+kafkacat -C -b <ip>:9092 -t src-app-movies-titles-data-json -J -o end

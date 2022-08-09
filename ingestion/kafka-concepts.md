@@ -3,6 +3,22 @@
 - Um datalake em tempo real
 - Open Source
 
+### Broker
+- Servidor principal do kafka, onde ficam as configurações de topico e partições
+- É disk based gravando em formato binario
+
+### Topico
+- Onde o evento é gravado, semelhante a uma tabela
+
+### Particoes
+- Um topico é reparticionado em inumeras partições
+- Quanto mais topico, maior velocidade de leitura por poder alocar mais threads
+
+### Replicação
+- Alta disponibilidade garantida com replicação a nivel de topico
+- Deve ser igual ou inferior a quantidade de brokers, ideal entre 3 e 8 no maximo
+- Lider recebe o evento, followers recebem as replicas
+
 ### Security
 - Consumidor e produtor comunica em plain text binario aberto, o que pode ser um problema de sugurança
 - É possivel criptografar entre producer, Kafka e consumer on the fly com SSL e TLS
@@ -19,8 +35,28 @@
 - Buscar os dados que foram inseridos em um banco de dados
 - Apis mandam os dados para o Kafka e esse descarrega nos bancos
 
+### Producer
+- Producer: produz os eventos. 
+    - Acks=0 manda e não aguarda retorno, pode haver perda de dados.
+    - Acks=1 manda e aguarda retorno do Lider garantindo que chegou,pode ocorrer duplicidade de dados.
+    - Acks=all manda evendo e aguarda retorno de lider e followers
+    - Use Callback
 
+### Consumer
+- Consumer: le os eventos do Kafka
+- Offset: identificador numero da ultima posição lida
+- Cria um consumer group, que contém offset e partição lida, todas as threads ficam no mesmo counsumer group
+- 
 
+### Kafka Connect
+
+- Producer e Consumer made easy
+- Open Source
+- Ler e gravar filesystem e banco de dados
+- Jars do conector disponiveis no confluent hub para serem instalados no Kafka
+- O arquivo de configuração utiliza a classe do conector para fazer a conexão
+- Source: le de uma fonte de dados e traz para dentro do Kafka
+-Sync: kafka para datastore
 
 ### Nomenclatura topico
 
