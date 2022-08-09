@@ -1,0 +1,28 @@
+---
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: kong-subchart
+  namespace: cicd
+spec:
+  destination:
+    server: "https://kubernetes.default.svc"
+    namespace: gateway
+  project: default
+  source:
+  path: gateway/kong/yamls
+    repoURL: "https://github.com/vsvale/kappa_k8s_config.git"
+    targetRevision: master
+  sync:
+    comparedTo:
+      destination:
+        namespace: gateway
+        server: https://kubernetes.default.svc
+      source:
+        path: gateway/kong/yamls
+        repoURL: https://github.com/vsvale/kappa_k8s_config.git
+        targetRevision: master
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
