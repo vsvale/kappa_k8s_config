@@ -1,0 +1,26 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: kong
+  namespace: cicd
+spec:
+  project: default
+  source:
+    repoURL: "https://charts.konghq.com"
+    targetRevision: 2.11.0
+    helm:
+      valueFiles:
+        - values.yaml
+      parameters:
+        - name: ingressController.admissionWebhook.port
+          value: "8082"
+        - name: proxy.http.servicePort
+          value: "82"
+    chart: kong
+  destination:
+    server: "https://kubernetes.default.svc"
+    namespace: gateway
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true

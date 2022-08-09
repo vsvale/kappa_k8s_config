@@ -1,0 +1,23 @@
+### To do
+- Caso a origem seja uma API rest será necessário utilizar Kong, uma api gateway
+- Identificar os conectores necessarios
+    - [JDBC](https://www.confluent.io/hub/confluentinc/kafka-connect-jdbc)
+    - [Debezium SQL Server](https://www.confluent.io/hub/debezium/debezium-connector-sqlserver)
+    - [Debezium Mysql](https://www.confluent.io/hub/debezium/debezium-connector-mysql)
+    - [Debezium PostgreSQL](https://www.confluent.io/hub/debezium/debezium-connector-postgresql)
+    - [MongoDB](https://www.confluent.io/hub/mongodb/kafka-connect-mongodb)
+    - [Debezium MongoDB](https://www.confluent.io/hub/debezium/debezium-connector-mongodb)
+    - [Oracle CDC](https://www.confluent.io/hub/a2solutions/oracdc-kafka)
+- Baixar Jars
+    - [PostgreSQL](https://jdbc.postgresql.org/download.html)
+        - `curl -Lo postgresql.jar https://jdbc.postgresql.org/download/postgresql-42.4.1.jar`
+        - `sudo mv ./postgresql.jar ./ingestion/jars/postgresql.jar`
+    - [SQLServer](https://docs.microsoft.com/pt-br/sql/connect/jdbc/download-microsoft-jdbc-driver-for-sql-server?view=sql-server-ver16)
+        - `curl -Lo sqlserver.jar https://go.microsoft.com/fwlink/?linkid=2195718`
+        - `sudo mv ./sqlserver.jar ./ingestion/jars/sqlserver.jar`
+    - [Mysql](https://dev.mysql.com/downloads/file/?id=513221)
+        - `curl -Lo mysql.jar https://dev.mysql.com/downloads/file/?id=513221`
+        - `sudo mv ./mysql.jar ./ingestion/jars/mysql.jar`
+    - [Oracle](https://www.oracle.com/br/database/technologies/appdev/jdbc-downloads.html)
+    - [MongoDB](https://search.maven.org/artifact/org.mongodb/mongodb-jdbc)
+
