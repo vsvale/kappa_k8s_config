@@ -24,6 +24,11 @@ appVersion: "1.0.0"
 
 #https://artifacthub.io/packages/helm/argo/argo-cd?modal=install
 dependencies:
+- name: argo-cd-crds
+  repository: https://github.com/argoproj/argo-helm.git
+  path: charts/argo-cd/crds/
+  directory:
+    recurse: true
 - name: argo-cd
   version: 4.10.4
   repository: https://argoproj.github.io/argo-helm
