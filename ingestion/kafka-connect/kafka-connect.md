@@ -1,5 +1,5 @@
 ### To do
-- Caso a origem seja uma API rest será necessário utilizar Skin, app producer + uma api gateway (kong)
+- Caso a origem seja uma API rest será necessário utilizar Skin (app producer + uma api gateway (kong))
 - Identificar os conectores necessarios
     - [JDBC](https://www.confluent.io/hub/confluentinc/kafka-connect-jdbc)
     - [Debezium SQL Server](https://www.confluent.io/hub/debezium/debezium-connector-sqlserver)
