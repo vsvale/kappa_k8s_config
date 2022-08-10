@@ -10,7 +10,8 @@
 - `kubens ingestion`
 - `helm repo add strimzi https://strimzi.io/charts/`
 - `helm repo update`
-- `helm install kafka strimzi/strimzi-kafka-operator --namespace ingestion`
+- `helm show values strimzi/strimzi-kafka-operator > kappa_k8s_config/ingestion/kafka/yamls/values.yaml`
+- `helm upgrade --install -f https://raw.githubusercontent.com/vsvale/kappa_k8s_config/master/ingestion/yamls/values.yaml strimzi/strimzi-kafka-operator --namespace ingestion --debug --timeout 10m0s`
 - `helm ls`
 - `watch kubectl get pods`
 

@@ -1,2 +1,4 @@
 - `helm repo add prometheus-community https://prometheus-community.github.io/helm-charts`
 - `helm search repo prometheus-community/kube-prometheus-stack`
+- `kubectl apply -f https://raw.githubusercontent.com/vsvale/kappa_k8s_config/master/monitoring/yamls/prometheus.yaml`
+- `kubectl apply -f https://raw.githubusercontent.com/vsvale/kappa_k8s_config/master/monitoring/yamls/prometheus-crds.yaml`
