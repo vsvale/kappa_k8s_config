@@ -4,7 +4,7 @@
 
 - `helm repo add argo https://argoproj.github.io/argo-helm`
 - `helm repo update`
-- `helm install -f https://raw.githubusercontent.com/vsvale/kappa_k8s_config/master/cicd/yamls/values.yaml argocd argo/argo-cd --namespace cicd`
+- `helm upgrade --install -f https://raw.githubusercontent.com/vsvale/kappa_k8s_config/master/cicd/yamls/values.yaml argocd argo/argo-cd --namespace cicd --debug --timeout 10m0s`
 - `kubens cicd`
 - `watch kubectl get pods`
 
