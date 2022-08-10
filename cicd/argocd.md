@@ -5,8 +5,7 @@
 - `helm repo add argo https://argoproj.github.io/argo-helm`
 - `helm repo update`
 - `helm upgrade --install -f https://raw.githubusercontent.com/vsvale/kappa_k8s_config/master/cicd/yamls/values.yaml argocd argo/argo-cd --namespace cicd --debug --timeout 10m0s`
-- `kubens cicd`
-- `watch kubectl get pods`
+- `watch kubectl get pods -n cicd`
 
 ### Argo UI
 
@@ -15,6 +14,8 @@
 
 #### Login
 
+- `kubens cicd`
+- `minikube tunnel`
 - `ARGOCD_EXTRIP=$(kubectl -n cicd get services -l app.kubernetes.io/name=argocd-server,app.kubernetes.io/instance=argocd -o jsonpath="{.items[0].status.loadBalancer.ingress[0].ip}") && kubectl -n cicd get secret argocd-initial-admin-secret -o jsonpath="{.data.password}" | base64 -d | xargs -t -I {} argocd login $ARGOCD_EXTRIP --username admin --password {} --insecure`
 
 ### create cluster role binding for admin user
