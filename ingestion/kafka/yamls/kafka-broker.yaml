@@ -7,7 +7,7 @@ spec:
   project: default
   source:
     repoURL: "https://github.com/vsvale/kappa_k8s_config.git"
-    path: "ingestion/yamls/broker/"
+    path: "ingestion/kafka/yamls/broker/"
     targetRevision: HEAD
     directory:
       recurse: true
