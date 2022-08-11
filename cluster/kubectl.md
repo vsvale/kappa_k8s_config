@@ -1,7 +1,8 @@
 ### StorageClass
 - `kubectl get sc`
 - `kubectl describe sc standard`
-- AllowVolumeExpansion: `kubectl patch sc standard -p '{"metadata":{"AllowVolumeExpansion":true}}'`
+- `kubectl get sc standard -o=yaml > standard.yaml`
+- `kubectl replace -f standard.yaml --force`
 
 ### Delete PVC & PV
 

@@ -26,6 +26,9 @@
 
 - `kubectl apply -f https://raw.githubusercontent.com/vsvale/kappa_k8s_config/master/cluster/yamls/namespaces.yaml`
 
+### Change StorageClass
+- `kubectl replace -f https://raw.githubusercontent.com/vsvale/kappa_k8s_config/master/cluster/yamls/standard.yaml --force`
+
 ### Addons
 
 [Ingress](https://minikube.sigs.k8s.io/docs/handbook/addons/ingress-dns/)

@@ -1,0 +1,35 @@
+apiVersion: kafka.strimzi.io/v1beta2
+kind: "KafkaConnector"
+metadata:
+  name: "ingest-src-mssql-advtw-json-td99ff4d"
+  labels:
+    strimzi.io/cluster: kafka-cluster
+spec:
+  class: io.confluent.connect.jdbc.JdbcSourceConnector
+  tasksMax: 1
+config:
+    key.converter: org.apache.kafka.connect.json.JsonConverter
+    value.converter: org.apache.kafka.connect.json.JsonConverter
+    key.converter.schemas.enable: true
+    value.converter.schemas.enable: true
+
+    connection.url: "jdbc:sqlserver://sampledb.mssql.somee.com;databaseName=sampledb"
+    connection.user: "vsvale_SQLLogin_1"
+    connection.password: "41y12q7yhx"
+    connection.attempts: "1"
+    query: "SELECT * FROM SaLesLt.Customer"
+    mode: "incrementing"
+    topic.prefix: "src-mssql-advtw-json"
+    incrementing.column.name: "CustomerID"
+    validate.non.null: "false"
+  
+    transforms: "createKey,extractInt,InsertTopic,InsertSourceDetails"
+    transforms.createKey.type: "org.apache.kafka.connect.transforms.ValueToKey"
+    transforms.createKey.fields: "CustomerID"
+    transforms.extractInt.type: "org.apache.kafka.connect.transforms.ExtractField$Key"
+    transforms.extractInt.field: "CustomerID"
+    transforms.InsertTopic.type: "org.apache.kafka.connect.transforms.InsertField$Value"
+    transforms.InsertTopic.topic.field: "messagetopic"
+    transforms.InsertSourceDetails.type: "org.apache.kafka.connect.transforms.InsertField$Value"
+    transforms.InsertSourceDetails.static.field: "messagesource"
+    transforms.InsertSourceDetails.static.value: "mssql"
