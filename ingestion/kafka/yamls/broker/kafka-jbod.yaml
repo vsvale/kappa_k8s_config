@@ -54,6 +54,11 @@ spec:
         memory: "1Gi"
         cpu: "1000m"
     storage:
+      type: jbod
+      volumes:
+      - id: 0
+      type: ephemeral
+      - id: 1
       type: ephemeral
   kafkaExporter:
     topicRegex: ".*"
@@ -62,7 +67,7 @@ spec:
     replicas: 3
     storage:
       type: persistent-claim
-      size: 100Gi
+      size: 10Gi
       deleteClaim: false
     resources:
       requests:
