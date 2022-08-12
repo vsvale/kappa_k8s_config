@@ -1,8 +1,8 @@
 ### StorageClass
 - `kubectl get sc`
 - `kubectl describe sc standard`
-- `kubectl get sc standard -o=yaml > standard.yaml`
-- `kubectl replace -f standard.yaml --force`
+- `kubectl get sc standard -o=yaml > flexible.yaml`
+- `kubectl replace -f flexible.yaml --force`
 
 ### Delete PVC & PV
 

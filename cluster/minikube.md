@@ -27,7 +27,7 @@
 - `kubectl apply -f https://raw.githubusercontent.com/vsvale/kappa_k8s_config/master/cluster/yamls/namespaces.yaml`
 
 ### Change StorageClass
-- `kubectl replace -f https://raw.githubusercontent.com/vsvale/kappa_k8s_config/master/cluster/yamls/standard.yaml --force`
+- `kubectl replace -f https://raw.githubusercontent.com/vsvale/kappa_k8s_config/master/cluster/yamls/flexible.yaml --force`
 
 ### Addons
 
