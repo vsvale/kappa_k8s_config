@@ -18,4 +18,5 @@
 ## Deploy Strimzi
 [Strimzi](https://github.com/vsvale/kappa_k8s_config/blob/master/ingestion/kafka/strimzi.md)
 
-Problems? Problems? `kubectl -n <namespace> get events --sort-by='{.lastTimestamp}'`
+## Deploy Kafka Connect
+[Kafka Connect](https://github.com/vsvale/kappa_k8s_config/blob/master/ingestion/kafka-connect/kafka-connect.md)

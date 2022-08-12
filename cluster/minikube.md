@@ -1,6 +1,6 @@
-## Minikube
+# Minikube
 
-### Install Minikube
+## Install Minikube
 
 `sudo apt install curl git`
 
@@ -26,9 +26,13 @@
 
 - `kubectl apply -f https://raw.githubusercontent.com/vsvale/kappa_k8s_config/master/cluster/yamls/namespaces.yaml`
 
-### Change StorageClass
+### Change default StorageClass
+- `kubectl get storageclass`
+- `kubectl patch storageclass standard -p '{"metadata": {"annotations":{"storageclass.kubernetes.io/is-default-class":"false"}}}'`
 - `kubectl replace -f https://raw.githubusercontent.com/vsvale/kappa_k8s_config/master/cluster/yamls/flexible.yaml --force`
+- 
 
+## Helpfull commands
 ### Addons
 
 [Ingress](https://minikube.sigs.k8s.io/docs/handbook/addons/ingress-dns/)
@@ -47,3 +51,19 @@
 ### Acessar node
 
 - `minikube ssh -n minikube`
+
+### Get standard StorageClass
+- `kubectl get sc`
+- `kubectl describe sc standard`
+- `kubectl get sc standard -o=yaml > flexible.yaml`
+
+### Delete PVC & PV
+
+- `kubectl get pv -n {namespace}`
+- `kubectl delete pv {PV_NAME}`
+- `kubectl patch pv {PV_NAME} -p '{"metadata":{"finalizers":null}}'`
+- `kubectl get pvc -n storage`
+- `kubectl delete pvc {PVC_NAME} -n {namespace}`
+
+### See logs k8s
+- `kubectl -n <namespace> get events --sort-by='{.lastTimestamp}'`
