@@ -4,9 +4,12 @@
 - Democratização dos dados: substituir várias conexões com diversos bancos para uma conexão para consulta de arquivos em batch
 - Seviços de Object Storage: S3, HDFS, Blob Storage, Cloud Storage
 - Ler o dado Raw e fazer o incremento é um desafio
-- Data Swamp: dados desorganizados, sem metadado
-- Parquet: formato ideal para data lakes, é compresso, colunar e otimizado para processsamento
+- Data Swamp: dados desorganizados, sem metadado ou governança. Dado apenas para encher disco.
 - Datalake é suscetível a Small files problem
+- Datalake atualmente é um datasource que unifica sources
+- Sem governança os acessos não são definidos o que resulta em falta de credibilidade no dado
+- Parquet: formato ideal para data lakes, é compresso, colunar e otimizado para processsamento
+- No caso de eventos a estratégia é utilizar uma ingestion Layer como Kafka ao inves de colocar no data lake para depois processar
 
 # [Delta Lake](https://delta.io/)
 - Storage Layer with ACID Open Source acima do datalake para gerar dados limpos e sanitizados para permitir processamento spark eficiente
@@ -16,7 +19,9 @@
 - Schema Enforciment e Schema Evolution: os tipos dos dados é forçado, mas a inclusão de novos campos não quebra o processo de ETL
 - Transaction Log: guarda todas as informações para auditiorias
 - Update, delete, merge (upsert) por key
+- Data GOvernance: Magement & Understand of huge amounts of data to achieve Veracity (source of truth)
 - Compativel com LGPD
+- Realiza data skipping
 
 ## The data Licecicle (traditional)
 Fonte de dados: Apache Kafka, Apache Kinesis, Google Pub/Sub, Azure Event Hubs, Json, CSV, Relational Databases
