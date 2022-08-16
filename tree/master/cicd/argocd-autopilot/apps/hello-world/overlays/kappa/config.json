@@ -1,0 +1,11 @@
+{
+  "appName": "hello-world",
+  "userGivenName": "hello-world",
+  "destNamespace": "default",
+  "destServer": "https://kubernetes.default.svc",
+  "srcPath": "tree/master/cicd/argocd-autopilot/apps/hello-world/overlays/kappa",
+  "srcRepoURL": "https://github.com/vsvale/kappa_k8s_config.git",
+  "srcTargetRevision": "",
+  "labels": null,
+  "annotations": null
+}
