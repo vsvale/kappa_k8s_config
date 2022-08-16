@@ -1,4 +1,10 @@
-## Argo CD
+# Argo CD
+
+## Argocd-autopilot
+
+- `https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/creating-a-personal-access-token`
+- `export GIT_TOKEN=<Acesstokengerado>`
+- `export GIT_REPO=https://github.com/owner/name/some/relative/path`
 
 ### Helm Chart
 
@@ -23,6 +29,7 @@
 - `kubectl create clusterrolebinding cluster-admin-binding --clusterrole=cluster-admin --user=system:serviceaccount:cicd:argocd-application-controller -n cicd`
 
 ### Register default cluster
+
 - `CLUSTER=$(kubectx) && argocd cluster add $CLUSTER --in-cluster`
 
 ### repository k8_config
@@ -32,17 +39,21 @@
 ------------------------------------------------------------
 
 ### Argocd dex
+
 - Seviço que permite integração com Active directory, possibilitando single sign on
 
 ### Argocd metrics
+
 - Serviço que permite integração com Prometheus
 
 ### Argocd backup and disaster recovery
+
 - `argocd admin export > backup.yaml`
 - `argocd admin import - < backup.yaml`
 - Some information are in kubernetes etcd so backup it
 
 ### Cluster commands
+
 - `argocd cluster add <name>`
 - `argocd cluster get <name>`
 - `argocd cluster list`
@@ -52,6 +63,7 @@ To register a Cluster first add it to kubectl config
 - `argocd cluster add <name>`
 
 ### Projects
+
 - Logical grouping of apps
 - Restrict what Gits repos can deployed from
 - Retrict what clusters & namespaces can be deployed to
@@ -67,6 +79,7 @@ To register a Cluster first add it to kubectl config
 - `argocd proj allow-namespace-resource <namespace>`
 
 ### Repositories
+
 - Add using SSH, HTTP, HTTPS
 - Public or private
 - git or helm
@@ -74,29 +87,37 @@ To register a Cluster first add it to kubectl config
 - `argocd repo add https://github.com/vsvale/kappa_k8s_config.git`
 
 ### Deploy App
+
 - Git, Helm or Kustomize
 - `argocd app create hellok8s --repo https://github.com/paulbouwer/hello_kubernetes.git --path deploy/helm/hello-kubernetes --dest-server https://kubernetes.default.svc --dest-namespace default`
 
 ### Sync
+
 - Auto Sync: Argo cd applies every object in the application. Argo cd will sync when it detects differences betwwen git and live state in K8s cluster
 - Selective Sync: sync only out-of-sync resources
 - Sync Windows: sync every crontab
 - Sync Phases: pre-sync, sync and post-sync. Ensure certain resources are healthy before subsequent resources are synced in the next phase
 
 ### Rollback
+
 - Argo cd keeps a cache of git repository, a history of all deployments
 - Rollback application not healthy to previous version
 - Auto-sync need to be disable in order for rollback occur
 - `argocd app rollback <appname> <historyid>`
 
 ### Delete app
+
 - Non-cascade delete, deletes only the app not its resources on K8s cluster `argocd app delete <appname> --cascade=false`
 - Cascade delete (default) `argoccd delete <appname> --cascade`
-- `` 
-
+- ``
 
 ### Useful docs
+
 [Role Based Access Control](https://argo-cd.readthedocs.io/en/stable/operator-manual/rbac/)
 [AWS IAM as SSO](https://www.modulo2.nl/blog/argocd-on-aws-with-multiple-clusters)
 [Argocd Notification](https://argocd-notifications.readthedocs.io/en/stable/)
 [App of Apps](https://github.com/argoproj/argocd-example-apps)
+
+### Education
+
+- [GitOps Fundamentals](https://codefresh.learnworlds.com)

@@ -1,5 +1,7 @@
 ## WSL
+
 In Admin PowerSehll 7
+
 - `dism.exe /online /enable-feature /featurename:VirtualMachinePlatform /all /norestart`
 - `dism.exe /online /enable-feature /featurename:Microsoft-Windows-Subsystem-Linux /all /norestart`
 - [Update Kernel Linux](https://wslstorestorage.blob.core.windows.net/wslblob/wsl_update_x64.msi)
@@ -43,7 +45,8 @@ No Powershell
 In [docker desktop](https://docs.docker.com/desktop/windows/wsl/) enable wsl2 and attach Ubuntu
 
 ## Clone repository
-git clone https://github.com/vsvale/kappa_k8s_config.git
+
+git clone <https://github.com/vsvale/kappa_k8s_config.git>
 
 ## GitFlow
 
@@ -76,7 +79,15 @@ helm show values apache-airflow/airflow > kappa/kappa_k8s_config/app-manifests/o
 - `sudo ln -s /usr/local/kubectx/kubens /usr/local/bin/kubens`
 
 ## Terraform
+
 - `wget -O- https://apt.releases.hashicorp.com/gpg | gpg --dearmor | sudo tee /usr/share/keyrings/hashicorp-archive-keyring.gpg`
 - `echo "deb [signed-by=/usr/share/keyrings/hashicorp-archive-keyring.gpg] https://apt.releases.hashicorp.com $(lsb_release -cs) main" | sudo tee /etc/apt/sources.list.d/hashicorp.list`
 - `sudo apt update && sudo apt install terraform`
 - `terraform version`
+
+## Argocd auto pilot
+
+- `VERSION=$(curl --silent "https://api.github.com/repos/argoproj-labs/argocd-autopilot/releases/latest" | grep '"tag_name"' | sed -E 's/.*"([^"]+)".*/\1/')`
+- `curl -L --output - https://github.com/argoproj-labs/argocd-autopilot/releases/download/$VERSION/argocd-autopilot-linux-amd64.tar.gz | tar zx`
+- `sudo mv ./argocd-autopilot-* /usr/local/bin/argocd-autopilot`
+- `argocd-autopilot version`
