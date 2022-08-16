@@ -1,11 +1,5 @@
 # Argo CD
 
-## Argocd-autopilot
-
-- `https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/creating-a-personal-access-token`
-- `export GIT_TOKEN=<Acesstokengerado>`
-- `export GIT_REPO=https://github.com/owner/name/some/relative/path`
-
 ### Helm Chart
 
 - `helm repo add argo https://argoproj.github.io/argo-helm`
