@@ -16,7 +16,8 @@
 
 ### Deploy Argocd-autopilot
 
-- `argocd app create argo-cd --repo https://github.com/vsvale/kappa_k8s_config.git --path cicd/argocd-autopilot/yamls --dest-server https://kubernetes.default.svc --dest-namespace cicd`
+- `argocd app create argo-cd --repo https://github.com/vsvale/kappa_k8s_config.git --path cicd/argocd/autopilot --dest-server https://kubernetes.default.svc --dest-namespace cicd`
+- `argocd app sync argo-cd`
 
 ### create cluster role binding for admin user
 
