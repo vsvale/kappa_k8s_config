@@ -40,7 +40,7 @@ spec:
           kind: Application
       project: default
       source:
-        path: kappa_k8s_config/cluster/yamls
+        path: cluster/{{name}}
         repoURL: https://github.com/vsvale/kappa_k8s_config.git
       syncPolicy:
         automated:
