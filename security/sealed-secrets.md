@@ -1,0 +1,3 @@
+- `helm repo add sealed-secrets https://bitnami-labs.github.io/sealed-secrets`
+- `helm repo update`
+- `kubectl apply -f https://raw.githubusercontent.com/vsvale/kappa_k8s_config/master/security/yamls/sealed-secrets.yaml`
