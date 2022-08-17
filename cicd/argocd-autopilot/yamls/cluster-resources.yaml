@@ -8,19 +8,19 @@ metadata:
   namespace: cicd
 spec:
   generators:
-  - git:
-      files:
-      - path: tree/master/cicd/argocd-autopilot/bootstrap/cluster-resources/*.json
-      repoURL: https://github.com/vsvale/kappa_k8s_config.git
-      requeueAfterSeconds: 20
-      revision: ""
-      template:
-        metadata: {}
-        spec:
-          destination: {}
-          project: ""
-          source:
-            repoURL: ""
+    - git:
+        files:
+          - path: cluster/*.json
+        repoURL: https://github.com/vsvale/kappa_k8s_config.git
+        requeueAfterSeconds: 20
+        revision: ""
+        template:
+          metadata: {}
+          spec:
+            destination: {}
+            project: ""
+            source:
+              repoURL: ""
   syncPolicy:
     preserveResourcesOnDeletion: true
   template:
@@ -32,15 +32,15 @@ spec:
       namespace: cicd
     spec:
       destination:
-        server: '{{server}}'
+        server: "{{server}}"
       ignoreDifferences:
-      - group: argoproj.io
-        jsonPointers:
-        - /status
-        kind: Application
+        - group: argoproj.io
+          jsonPointers:
+            - /status
+          kind: Application
       project: default
       source:
-        path: tree/master/cicd/argocd-autopilot/bootstrap/cluster-resources/{{name}}
+        path: kappa_k8s_config/cluster/yamls
         repoURL: https://github.com/vsvale/kappa_k8s_config.git
       syncPolicy:
         automated:

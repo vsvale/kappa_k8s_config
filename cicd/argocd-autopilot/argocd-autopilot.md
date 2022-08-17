@@ -5,10 +5,11 @@
 - `export GIT_REPO=https://github.com/vsvale/kappa_k8s_config/tree/master/cicd/argocd-autopilot`
 - `argocd-autopilot repo bootstrap --namespace cicd`
 - `kubectl port-forward -n cicd svc/argocd-server 8080:80`
-- `kubectl -n cicd get secret argocd-initial-admin-secret -o jsonpath="{.data.password}" | base64 -d`
 - `argocd-autopilot project create kappa`
--
-- `argocd-autopilot app create hello-world --app github.com/argoproj-labs/argocd-autopilot/examples/demo-app/ -p testing --wait-timeout 2m`
+- `kubectl apply -n cicd -f https://raw.githubusercontent.com/vsvale/kappa_k8s_config/master/cicd/argocd-autopilot/yamls/service.yaml`
+- `kubectl -n cicd get secret argocd-initial-admin-secret -o jsonpath="{.data.password}" | base64 -d | xargs -t -I {} argocd login localhost:8080 --username admin --password {} --insecure`
+- `argocd-autopilot app create hello-world --app github.com/argoproj-labs/argocd-autopilot/examples/demo-app/ -p kappa -n app --wait-timeout 2m --repo $GIT_REPO --apps-git-token $GIT_TOKEN`
+- `argocd-autopilot app delete hello-world  -p kappa  --repo $GIT_REPO`
 
 ### Next steps
 

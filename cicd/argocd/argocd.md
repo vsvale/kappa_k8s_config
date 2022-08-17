@@ -92,6 +92,7 @@ To register a Cluster first add it to kubectl config
 - Selective Sync: sync only out-of-sync resources
 - Sync Windows: sync every crontab
 - Sync Phases: pre-sync, sync and post-sync. Ensure certain resources are healthy before subsequent resources are synced in the next phase
+- `argocd app sync {APP NAME}`
 
 ### Rollback
 
@@ -104,7 +105,6 @@ To register a Cluster first add it to kubectl config
 
 - Non-cascade delete, deletes only the app not its resources on K8s cluster `argocd app delete <appname> --cascade=false`
 - Cascade delete (default) `argoccd delete <appname> --cascade`
-- ``
 
 ### Useful docs
 

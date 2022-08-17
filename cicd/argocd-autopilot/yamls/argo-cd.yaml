@@ -2,25 +2,23 @@ apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
   creationTimestamp: null
-  finalizers:
-  - resources-finalizer.argocd.argoproj.io
   labels:
     app.kubernetes.io/managed-by: argocd-autopilot
-    app.kubernetes.io/name: root
-  name: root
+    app.kubernetes.io/name: argo-cd
+  name: argo-cd
   namespace: cicd
 spec:
   destination:
     namespace: cicd
     server: https://kubernetes.default.svc
   ignoreDifferences:
-  - group: argoproj.io
-    jsonPointers:
-    - /status
-    kind: Application
+    - group: argoproj.io
+      jsonPointers:
+        - /status
+      kind: Application
   project: default
   source:
-    path: tree/master/cicd/argocd-autopilot/projects
+    path: cicd/argocd/yamls/
     repoURL: https://github.com/vsvale/kappa_k8s_config.git
   syncPolicy:
     automated:
@@ -28,7 +26,7 @@ spec:
       prune: true
       selfHeal: true
     syncOptions:
-    - allowEmpty=true
+      - allowEmpty=true
 status:
   health: {}
   summary: {}

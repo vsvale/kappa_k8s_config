@@ -91,3 +91,8 @@ helm show values apache-airflow/airflow > kappa/kappa_k8s_config/app-manifests/o
 - `curl -L --output - https://github.com/argoproj-labs/argocd-autopilot/releases/download/$VERSION/argocd-autopilot-linux-amd64.tar.gz | tar zx`
 - `sudo mv ./argocd-autopilot-* /usr/local/bin/argocd-autopilot`
 - `argocd-autopilot version`
+
+## Argocd CLI
+
+`sudo curl -sSL -o /usr/local/bin/argocd https://github.com/argoproj/argo-cd/releases/latest/download/argocd-linux-amd64`
+`sudo chmod +x /usr/local/bin/argocd`
