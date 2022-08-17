@@ -1,5 +1,7 @@
 # Argo CD
 
+## Install
+
 ### Helm Chart
 
 - `helm repo add argo https://argoproj.github.io/argo-helm`
@@ -14,6 +16,8 @@
 - `kubens cicd`
 - `ARGOCD_EXTRIP=$(kubectl -n cicd get services -l app.kubernetes.io/name=argocd-server,app.kubernetes.io/instance=argocd -o jsonpath="{.items[0].status.loadBalancer.ingress[0].ip}") && kubectl -n cicd get secret argocd-initial-admin-secret -o jsonpath="{.data.password}" | base64 -d | xargs -t -I {} argocd login $ARGOCD_EXTRIP --username admin --password {} --insecure`
 
+## Optional
+
 ### create cluster role binding for admin user
 
 - `kubectl create clusterrolebinding cluster-admin-binding --clusterrole=cluster-admin --user=system:serviceaccount:cicd:argocd-application-controller -n cicd`
@@ -26,7 +30,7 @@
 
 - `REPOSITORY="https://github.com/vsvale/kappa_k8s_config.git" && argocd repo add $REPOSITORY --port-forward`
 
-------------------------------------------------------------
+## More about Argo cd
 
 ### Argocd dex
 
@@ -42,7 +46,7 @@
 - `argocd admin import - < backup.yaml`
 - Some information are in kubernetes etcd so backup it
 
-### Cluster commands
+### Cluster
 
 - `argocd cluster add <name>`
 - `argocd cluster get <name>`
@@ -108,6 +112,20 @@ To register a Cluster first add it to kubectl config
 [Argocd Notification](https://argocd-notifications.readthedocs.io/en/stable/)
 [App of Apps](https://github.com/argoproj/argocd-example-apps)
 
-### Education
+### App Health
+
+- Healthy: Resource is 100% healthy
+- Progressing: Resource is not healthy but still has a chance to reach healthy state
+- Suspended: Resource is suspended or paused. The typical example is a cron job
+- Missing: Resource is not present in the cluster
+- Degraded: Resource status indicates failure or resource could not reach healthy state in time
+- Unknown: Health assessment failed and actual health status is unknown
+
+### Auto Sync
+
+- Auto-pruning: defines what Argo CD does when you remove/delete files from Git. If it is enabled, Argo CD will also remove the respective resources in the cluster as well. If disabled, Argo CD will never delete anything from the cluster.
+- Self-heal: defines what Argo CD does when you make changes directly to the cluster (via kubectl or any other way). Note that doing manual changes in the cluster is not recommended if you want to follow GitOps principles (as all changes should pass from Git). If enabled, then Argo CD will discard the extra changes and bring the cluster back to the state described in Git.
+
+# Education
 
 - [GitOps Fundamentals](https://codefresh.learnworlds.com)
