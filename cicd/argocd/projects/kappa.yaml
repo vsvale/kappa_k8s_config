@@ -36,7 +36,7 @@ spec:
   generators:
     - git:
         files:
-          - path: /app/**/kappa/config.json
+          - path: app/**/kappa/config.json
         repoURL: https://github.com/vsvale/kappa_k8s_config.git
         requeueAfterSeconds: 20
         revision: ""
@@ -49,7 +49,7 @@ spec:
               repoURL: ""
     - git:
         files:
-          - path: /app/**/kappa/config_dir.json
+          - path: app/**/kappa/config_dir.json
         repoURL: https://github.com/vsvale/kappa_k8s_config.git
         requeueAfterSeconds: 20
         revision: ""
