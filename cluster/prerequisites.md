@@ -85,14 +85,14 @@ helm show values apache-airflow/airflow > kappa/kappa_k8s_config/app-manifests/o
 - `sudo apt update && sudo apt install terraform`
 - `terraform version`
 
-## Argocd auto pilot
-
-- `VERSION=$(curl --silent "https://api.github.com/repos/argoproj-labs/argocd-autopilot/releases/latest" | grep '"tag_name"' | sed -E 's/.*"([^"]+)".*/\1/')`
-- `curl -L --output - https://github.com/argoproj-labs/argocd-autopilot/releases/download/$VERSION/argocd-autopilot-linux-amd64.tar.gz | tar zx`
-- `sudo mv ./argocd-autopilot-* /usr/local/bin/argocd-autopilot`
-- `argocd-autopilot version`
-
 ## Argocd CLI
 
 `sudo curl -sSL -o /usr/local/bin/argocd https://github.com/argoproj/argo-cd/releases/latest/download/argocd-linux-amd64`
 `sudo chmod +x /usr/local/bin/argocd`
+
+## sealed-secrets
+
+- `VERSION=$(curl --silent "https://api.github.com/repos/bitnami-labs/sealed-secrets/releases/latest" | grep '"tag_name"' | sed -E 's/.*"([^"]+)".*/\1/')`
+- `curl -L --output - https://github.com/bitnami-labs/sealed-secrets/releases/download/v0.18.1/kubeseal-0.18.1-linux-amd64.tar.gz | tar zx`
+- `sudo mv ./kubeseal /usr/local/bin/kubeseal`
+- `sudo chmod +x /usr/local/bin/kubeseal`
