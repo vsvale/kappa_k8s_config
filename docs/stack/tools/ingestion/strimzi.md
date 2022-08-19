@@ -1,4 +1,4 @@
-# Strimzi
+# Install Strimzi
 
 ## Yamls Example
 
@@ -13,18 +13,22 @@
 - `helm ls -n ingestion`
 - `watch kubectl get pods -n ingestion`
 
-## config maps
+## Config maps
 
-- `kubectl apply -f repository/yamls/ingestion/metrics/kafka-metrics-config.yaml`
-- `kubectl apply -f repository/yamls/ingestion/metrics/zookeeper-metrics-config.yaml`
-- `kubectl apply -f repository/yamls/ingestion/metrics/connect-metrics-config.yaml`
-- `kubectl apply -f repository/yamls/ingestion/metrics/cruise-control-metrics-config.yaml`
+- `https://raw.githubusercontent.com/vsvale/kappa_k8s_config/master/repository/yamls/ingestion/metrics/kafka-metrics-config.yaml`
+- `https://raw.githubusercontent.com/vsvale/kappa_k8s_config/master/repository/yamls/ingestion/metrics/zookeeper-metrics-config.yaml`
+- `kubectl apply -f https://raw.githubusercontent.com/vsvale/kappa_k8s_config/master/repository/yamls/ingestion/metrics/connect-metrics-config.yaml`
+- `kubectl apply -f https://raw.githubusercontent.com/vsvale/kappa_k8s_config/master/repository/yamls/ingestion/metrics/cruise-control-metrics-config.yaml`
+
+## Ingestion
+
+- `kubectl apply -f https://raw.githubusercontent.com/vsvale/kappa_k8s_config/master/repository/app-manifests/ingestion/kafka-broker.yaml`
+- `kubectl apply -f https://raw.githubusercontent.com/vsvale/kappa_k8s_config/master/repository/app-manifests/ingestion/schema-registry.yaml`
+- `kubectl apply -f https://raw.githubusercontent.com/vsvale/kappa_k8s_config/master/repository/app-manifests/ingestion/kafka-connect.yaml`
+- `kubectl apply -f https://raw.githubusercontent.com/vsvale/kappa_k8s_config/master/repository/app-manifests/ingestion/cruise-control.yaml`
+- `kubectl apply -f https://raw.githubusercontent.com/vsvale/kappa_k8s_config/master/repository/app-manifests/ingestion/kafka-connectors.yaml`
 
 ## AKHQ
-
-### Raise Broker
-
-- `kubectl apply -f https://raw.githubusercontent.com/vsvale/kappa_k8s_config/master/ingestion/kafka/yamls/kafka-broker.yaml`
 
 ### Create a topic
 
