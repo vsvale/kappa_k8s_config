@@ -1,4 +1,4 @@
-![argo.png](kappa_k8s_config/docs/imgs/argo.png)
+![argo.png](../../../imgs/argo.png)
 
 ## What is
 
