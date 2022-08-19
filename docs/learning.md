@@ -17,6 +17,7 @@
 ## GitOps
 
 - [GitOps: The Big Picture](https://app.pluralsight.com/library/courses/gitops-the-big-picture/table-of-contents)
+- [Introduction to GitOps (LFS169)](https://training.linuxfoundation.org/training/introduction-to-gitops-lfs169/)
 
 ## ArgoCD
 

@@ -1,6 +1,6 @@
 **AS-IS**
 
-- ETL batch consome da source e disponibiliza no datalake
+- ETL batch consome das sources (OLTP, NOSQL) e disponibiliza no datalake em formato de arquivo para o data pipeline acionado por um orquestrador
 
 **TO-BE**
 

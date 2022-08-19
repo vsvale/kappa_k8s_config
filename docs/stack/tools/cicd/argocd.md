@@ -90,7 +90,8 @@ To register a Cluster first add it to kubectl config
 ### Deploy App
 
 - Git, Helm or Kustomize
-- `argocd app create hellok8s --repo https://github.com/paulbouwer/hello_kubernetes.git --path deploy/helm/hello-kubernetes --dest-server https://kubernetes.default.svc --dest-namespace default --sync-policy auto`
+- `argocd app create hellok8s --repo https://github.com/paulbouwer/hello_kubernetes.git --path deploy/helm/hello-kubernetes --dest-server https://kubernetes.default.svc --dest-namespace default --sync-policy auto --auto-prune --self-heal`
+- `argocd app create demo --project default --repo https://github.com/codefresh-contrib/gitops-certification-examples --path ./kustomize-app/overlays/staging --sync-policy auto --dest-namespace default --dest-server https://kubernetes.default.svc`
 
 ### Sync
 

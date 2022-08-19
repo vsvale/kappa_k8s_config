@@ -9,9 +9,18 @@
 - `helm repo add strimzi https://strimzi.io/charts/`
 - `helm repo update`
 - `helm show values strimzi/strimzi-kafka-operator > ./repository/helm-charts/ingestion/strimzi/values.yaml`
-- `helm upgrade --install -f https://raw.githubusercontent.com/vsvale/kappa_k8s_config/master/ingestion/kafka/yamls/values.yaml strimzi strimzi/strimzi-kafka-operator --namespace ingestion --debug --timeout 10m0s`
-- `helm ls`
-- `watch kubectl get pods`
+- `helm upgrade --install -f https://raw.githubusercontent.com/vsvale/kappa_k8s_config/master/repository/helm-charts/ingestion/strimzi/values.yaml strimzi strimzi/strimzi-kafka-operator --namespace ingestion --debug --timeout 10m0s --create-namespace`
+- `helm ls -n ingestion`
+- `watch kubectl get pods -n ingestion`
+
+## config maps
+
+- `kubectl apply -f repository/yamls/ingestion/metrics/kafka-metrics-config.yaml`
+- `kubectl apply -f repository/yamls/ingestion/metrics/zookeeper-metrics-config.yaml`
+- `kubectl apply -f repository/yamls/ingestion/metrics/connect-metrics-config.yaml`
+- `kubectl apply -f repository/yamls/ingestion/metrics/cruise-control-metrics-config.yaml`
+
+## AKHQ
 
 ### Raise Broker
 
