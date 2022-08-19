@@ -14,3 +14,5 @@
 - You deploy your application that expects normal Kubernetes secrets to function. (The application needs no modifications of any kind.)
 - The controller decrypts the Sealed secrets and passes them to your application as plain secrets.
 - The application works as usual.
+
+

@@ -1,4 +1,0 @@
-- [Partition Rebalacing](https://www.logicbig.com/tutorials/misc/kafka/kafka-partition-rebalancing.html)
-- [Consumer]
-- <https://blog.devgenius.io/kafka-on-kubernetes-using-strimzi-part-1-83d74564135e>
-- Kafka Connect: Arquivos de configuração que conectam em um banco de dados e gravam em outro banco de dados (source) ou pegam os dados que estão no kafka e grava em um banco de dados (sync)
