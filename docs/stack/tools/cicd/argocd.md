@@ -1,3 +1,5 @@
+![argo.png](kappa_k8s_config/docs/imgs/argo.png)
+
 ## What is
 
 - GitOps Operator
