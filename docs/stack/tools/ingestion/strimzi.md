@@ -15,8 +15,8 @@
 
 ## Config maps
 
-- `https://raw.githubusercontent.com/vsvale/kappa_k8s_config/master/repository/yamls/ingestion/metrics/kafka-metrics-config.yaml`
-- `https://raw.githubusercontent.com/vsvale/kappa_k8s_config/master/repository/yamls/ingestion/metrics/zookeeper-metrics-config.yaml`
+- `kubectl apply -f https://raw.githubusercontent.com/vsvale/kappa_k8s_config/master/repository/yamls/ingestion/metrics/kafka-metrics-config.yaml`
+- `kubectl apply -f https://raw.githubusercontent.com/vsvale/kappa_k8s_config/master/repository/yamls/ingestion/metrics/zookeeper-metrics-config.yaml`
 - `kubectl apply -f https://raw.githubusercontent.com/vsvale/kappa_k8s_config/master/repository/yamls/ingestion/metrics/connect-metrics-config.yaml`
 - `kubectl apply -f https://raw.githubusercontent.com/vsvale/kappa_k8s_config/master/repository/yamls/ingestion/metrics/cruise-control-metrics-config.yaml`
 
@@ -27,8 +27,7 @@
 - `kubectl apply -f https://raw.githubusercontent.com/vsvale/kappa_k8s_config/master/repository/app-manifests/ingestion/kafka-connect.yaml`
 - `kubectl apply -f https://raw.githubusercontent.com/vsvale/kappa_k8s_config/master/repository/app-manifests/ingestion/cruise-control.yaml`
 - `kubectl apply -f https://raw.githubusercontent.com/vsvale/kappa_k8s_config/master/repository/app-manifests/ingestion/kafka-connectors.yaml`
-
-## AKHQ
+- `kubectl apply -f https://raw.githubusercontent.com/vsvale/kappa_k8s_config/master/repository/app-manifests/ingestion/akhq.yaml`
 
 ### Create a topic
 
