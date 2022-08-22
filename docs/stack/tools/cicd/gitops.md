@@ -1,6 +1,7 @@
 ## What is
 
 GitOps is a set of best practices where the entire code delivery process is controlled via Git, including infrastructure and application definition as code and automation to complete updates and rollbacks.
+GitOps is about running operations out of Git by pull requests with goal of continuos delivery of cloud native app insfrastructure typically to Kubernetes
 
 ## The Key GitOps Principles
 
@@ -28,10 +29,14 @@ GitOps is a set of best practices where the entire code delivery process is cont
 
 - Faster deployments
 - Safer deployments
-- Easier rollbacks
+- Easier rollbacks and low Mean Time to Recover
 - Straightforward auditing
 - Better traceability
 - Eliminating configuration drift
+- Developer Centric
+- Secure
+- Self Documented code
+- Increase Stability & Reability
 
 ## Chalanges of GitOps
 
@@ -43,3 +48,21 @@ GitOps is a set of best practices where the entire code delivery process is cont
 - Good testing and CI already in place
 - A strategy for dealing with promotions between environments (something will cover in later certifications)
 - Secrets strategy
+
+## Use cases
+
+- Continous delivery of application Configurations: tipically to the Kubernetes enviroment in form of yaml manifests, helm chart, kustomized codes. Includes deployments, service configuration, load balancer, replicasets, configmaps, secrets, ingress etc.
+- Apply release strategies like blue/green, rolling update, canary, progressing releases
+- Infrastructure rollouts to Kubernetes
+- Disaster Recovery: recover from a failure quickly
+- Sync Secrets
+- Drift Dection: Notify or Reconcile manual changes in cluster
+- Deploy to Multiple Kubernetes Clusters
+- Securely handoff Deployments to Devs: no cluster access to devs, CI not acess CD and multi Tenancy
+- Auto Update Kubernetes YAMLs on new image in Registry (only on FluxCD)
+
+## Tools
+
+- JenkinsX: CI + CD
+- ArgoCD: Nice UI and easy to use
+- FluxCD : Automatic Image Updates

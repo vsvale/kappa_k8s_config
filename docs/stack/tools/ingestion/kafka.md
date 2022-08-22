@@ -14,7 +14,7 @@ ingestion
 - Criado em 2011 no LinkedIn, doado para Apache Foundation em 2011
 - Um datalake em tempo real
 - É uma engine de armazenamento, mas possui apis para inserção, leitura, processamento e integração com datastores
-- Open Source
+- Open Source Distributed Event Stream Plataform for high-performance Data pipelines, Streaming Analytics, Data Integration and mission-critical applications
 
 ## Caracteristicas
 

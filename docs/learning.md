@@ -1,7 +1,23 @@
+## Containers
+
+- [Introduction to Containers](https://developers.redhat.com/courses/subsystems/intro) &check;
+- [Container Images](https://developers.redhat.com/courses/subsystems/management)
+- [Container Registries](https://developers.redhat.com/courses/subsystems/registries)
+- [Container Hosts](https://developers.redhat.com/courses/subsystems/hosts)
+- [Container Orchestration](https://developers.redhat.com/courses/subsystems/orchestration)
+- [CLOUD FUNDAMENTALS, ADMINISTRATION AND SOLUTION ARCHITECT](https://on.fiap.com.br/local/nanocourses/index.php)
+
 ## Kubernetes
 
 - [Getting Started with Kubernetes](https://app.pluralsight.com/library/courses/kubernetes-getting-started)
+- [Kubernetes API Fundamentals](https://developers.redhat.com/courses/openshift-operators/kubernetes-fundamentals)
+
+## Helm & Kustomize
+
 - [Packaging Applications with Helm for Kubernetes](https://app.pluralsight.com/library/courses/kubernetes-packaging-applications-helm)
+- [Working with Helm](https://developers.redhat.com/courses/gitops/working-helm)
+- [Getting Started with Helm 3 on OpenShift](https://developers.redhat.com/learn/getting-started-helm-3-openshift)
+- [Working with Kustomize](https://developers.redhat.com/courses/gitops/working-kustomize)
 
 ## EKS
 
@@ -17,16 +33,20 @@
 ## GitOps
 
 - [GitOps: The Big Picture](https://app.pluralsight.com/library/courses/gitops-the-big-picture/table-of-contents)
-- [Introduction to GitOps (LFS169)](https://training.linuxfoundation.org/training/introduction-to-gitops-lfs169/)
+- [Introduction to GitOps (LFS169)](https://training.linuxfoundation.org/training/introduction-to-gitops-lfs169/) &check;
 
 ## ArgoCD
 
-- [Getting Started with Argo CD](https://app.pluralsight.com/library/courses/argo-cd-getting-started)
-- [GitOps Fundamentals](https://codefresh.learnworlds.com/)
+- [Getting Started with Argo CD](https://app.pluralsight.com/library/courses/argo-cd-getting-started) &check;
+- [GitOps Fundamentals](https://codefresh.learnworlds.com/) &check;
+- [GitOps com ArgoCD para Engenheiros de Dados no Kubernetes](https://www.youtube.com/watch?v=A30IOS8ZGLc) &check;
+- [Getting Started with ArgoCD and OpenShift GitOps Operator](https://developers.redhat.com/courses/gitops/getting-started-argocd-and-openshift-gitops-operator)
 
 ## Prometheus
 
 - [Getting Started with Prometheus](https://app.pluralsight.com/library/courses/getting-started-prometheus)
+- [Prometheus metrics for Data Science on OpenShift](https://developers.redhat.com/courses/ai-ml/prometheus)
+- [sumo logic](https://www.sumologic.com/learn/training/)
 
 ## Grafana
 
@@ -41,6 +61,8 @@
 ## kafka
 
 - [Getting Started with Apache Kafka](https://app.pluralsight.com/library/courses/apache-kafka-getting-started)
+- [Kafka 101](https://developers.redhat.com/learn/openshift-streams-for-apache-kafka/kafka-101)
+- [Get started with OpenShift Streams for Apache Kafka](https://developers.redhat.com/learn/openshift-streams-for-apache-kafka/get-started-with-openshift-streams-for-apache-kafka)
 - [Designing Event-driven Applications Using Apache Kafka Ecosystem](https://app.pluralsight.com/library/courses/designing-event-driven-applications-apache-kafka-ecosystem)
 - [Handling Streaming Data with a Kafka Cluster](https://app.pluralsight.com/library/courses/handling-streaming-data-kafka-cluster)
 - [Enforcing Data Contracts with Kafka Schema Registry](https://app.pluralsight.com/library/courses/enforcing-data-contracts-kafka-schema-registry/table-of-contents)
