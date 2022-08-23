@@ -2,4 +2,4 @@
 - `helm repo add stable https://charts.helm.sh/stable`
 - `helm repo update`
 - `helm pull stable/mssql-linux -d ./repository/helm-charts/database/ --untar`
-- `kubectl apply -f ./repository/app-manifests/database/mssql.yaml`
+- `kubectl apply -f https://raw.githubusercontent.com/vsvale/kappa_k8s_config/master/repository/app-manifests/database/mssql.yaml`
