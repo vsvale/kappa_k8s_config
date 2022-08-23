@@ -1,0 +1,5 @@
+- `kubectl create namespace database`
+- `helm repo add bitnami https://charts.bitnami.com/bitnami`
+- `helm repo update`
+- `helm pull bitnami/postgresql -d ./repository/helm-charts/database/ --untar`
+- `kubectl apply -f https://raw.githubusercontent.com/vsvale/kappa_k8s_config/master/repository/app-manifests/database/postgres.yaml`
