@@ -1,0 +1,5 @@
+- `kubectl create namespace database`
+- `helm repo add stable https://charts.helm.sh/stable`
+- `helm repo update`
+- `helm pull stable/mssql-linux -d ./repository/helm-charts/database/ --untar`
+- `kubectl apply -f ./repository/app-manifests/database/mssql.yaml`
