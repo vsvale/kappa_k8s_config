@@ -77,15 +77,16 @@ ingestion
 - Buscar os dados que foram inseridos em um banco de dados
 - Apis mandam os dados para o Kafka e esse descarrega nos bancos
 
-### Producer
+### Producer API
 
-- Producer: produz os eventos.
+- produz os eventos e gravado em um segmento de uma partição de um tópico
+
   - Acks=0 manda e não aguarda retorno, pode haver perda de dados.
   - Acks=1 manda e aguarda retorno do Lider garantindo que chegou,pode ocorrer duplicidade de dados.
   - Acks=all manda evendo e aguarda retorno de lider e followers
   - Use Callback
 
-### Consumer
+### Consumer API
 
 - Consumer: le os eventos do Kafka
 - Offset: identificador numero da ultima posição lida

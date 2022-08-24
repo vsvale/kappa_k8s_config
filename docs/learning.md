@@ -66,6 +66,7 @@
 - [Designing Event-driven Applications Using Apache Kafka Ecosystem](https://app.pluralsight.com/library/courses/designing-event-driven-applications-apache-kafka-ecosystem)
 - [Handling Streaming Data with a Kafka Cluster](https://app.pluralsight.com/library/courses/handling-streaming-data-kafka-cluster)
 - [Enforcing Data Contracts with Kafka Schema Registry](https://app.pluralsight.com/library/courses/enforcing-data-contracts-kafka-schema-registry/table-of-contents)
+- [Learn Apache Kafka](https://developer.confluent.io/learn-kafka/?utm_medium=sem&utm_source=google&utm_campaign=ch.sem_br.nonbrand_tp.prs_tgt.kafka_mt.mbm_rgn.latam_lng.eng_dv.all_con.kafka-learn&utm_term=kafka%20course&creative=&device=m&placement=&gclid=EAIaIQobChMI1rCVzrHe-QIVfcLCBB1QzwUjEAAYASAAEgJjiPD_BwE)
 
 ## Kafka Connect
 
