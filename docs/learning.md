@@ -70,6 +70,7 @@
 - [Handling Streaming Data with a Kafka Cluster](https://app.pluralsight.com/library/courses/handling-streaming-data-kafka-cluster)
 - [Enforcing Data Contracts with Kafka Schema Registry](https://app.pluralsight.com/library/courses/enforcing-data-contracts-kafka-schema-registry/table-of-contents)
 - [Confluent training](https://training.confluent.io/)
+- [Apache Kafka Fundamentals and Accreditation](https://training.confluent.io/channeldetail/apache-kafka-fundamentals-and-accreditation)  &check;
 - [Learn Apache Kafka](https://developer.confluent.io/learn-kafka/)
 - [100 days of Code with Apache Kafka](https://developer.confluent.io/100-days-of-code/)
 
