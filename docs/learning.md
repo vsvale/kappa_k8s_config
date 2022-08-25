@@ -5,12 +5,12 @@
 - [Container Registries](https://developers.redhat.com/courses/subsystems/registries)
 - [Container Hosts](https://developers.redhat.com/courses/subsystems/hosts)
 - [Container Orchestration](https://developers.redhat.com/courses/subsystems/orchestration)
-- [CLOUD FUNDAMENTALS, ADMINISTRATION AND SOLUTION ARCHITECT](https://on.fiap.com.br/local/nanocourses/index.php)
 
 ## Kubernetes
 
 - [Getting Started with Kubernetes](https://app.pluralsight.com/library/courses/kubernetes-getting-started)
 - [Kubernetes API Fundamentals](https://developers.redhat.com/courses/openshift-operators/kubernetes-fundamentals)
+- [Introduction to Kubernetes (LFS158x)](https://training.linuxfoundation.org/training/introduction-to-kubernetes/)
 
 ## Helm & Kustomize
 
@@ -54,6 +54,9 @@
 
 ## Elastic search
 
+- [Free Elastic training](https://www.elastic.co/training/free#quick-starts)
+- [Observability](https://www.sumologic.com/learn/training/)
+
 ## Kibana
 
 ## File beat
@@ -66,7 +69,9 @@
 - [Designing Event-driven Applications Using Apache Kafka Ecosystem](https://app.pluralsight.com/library/courses/designing-event-driven-applications-apache-kafka-ecosystem)
 - [Handling Streaming Data with a Kafka Cluster](https://app.pluralsight.com/library/courses/handling-streaming-data-kafka-cluster)
 - [Enforcing Data Contracts with Kafka Schema Registry](https://app.pluralsight.com/library/courses/enforcing-data-contracts-kafka-schema-registry/table-of-contents)
-- [Learn Apache Kafka](https://developer.confluent.io/learn-kafka/?utm_medium=sem&utm_source=google&utm_campaign=ch.sem_br.nonbrand_tp.prs_tgt.kafka_mt.mbm_rgn.latam_lng.eng_dv.all_con.kafka-learn&utm_term=kafka%20course&creative=&device=m&placement=&gclid=EAIaIQobChMI1rCVzrHe-QIVfcLCBB1QzwUjEAAYASAAEgJjiPD_BwE)
+- [Confluent training](https://training.confluent.io/)
+- [Learn Apache Kafka](https://developer.confluent.io/learn-kafka/)
+- [100 days of Code with Apache Kafka](https://developer.confluent.io/100-days-of-code/)
 
 ## Kafka Connect
 
@@ -84,7 +89,7 @@
 
 ## YugabiteDB
 
--[YugabiteDB University](https://university.yugabyte.com/collections)
+- [YugabiteDB University](https://university.yugabyte.com/collections)
 
 ## Apache pinot
 
