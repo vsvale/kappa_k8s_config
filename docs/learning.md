@@ -11,6 +11,7 @@
 - [Getting Started with Kubernetes](https://app.pluralsight.com/library/courses/kubernetes-getting-started)
 - [Kubernetes API Fundamentals](https://developers.redhat.com/courses/openshift-operators/kubernetes-fundamentals)
 - [Introduction to Kubernetes (LFS158x)](https://training.linuxfoundation.org/training/introduction-to-kubernetes/)
+- [Big Data no Kubernetes](https://theplumbers.astronmembers.com/curso/big-data-no-kubernetes/21800/129272)
 
 ## Helm & Kustomize
 
@@ -21,7 +22,7 @@
 
 ## EKS
 
-- [EKS Basics](https://learn.acloud.guru/course/eks-basics/overview)
+- [EKS Basics](https://learn.acloud.guru/course/eks-basics/overview) &check;
 - [Optimizing an EKS Cluster for Price and Performance](https://app.pluralsight.com/library/courses/eks-cluster-optimizing-price-performance)
 - [AWS Identity and Access Management (IAM) Concepts](https://learn.acloud.guru/course/identity-and-access-management-concepts/overview)
 
