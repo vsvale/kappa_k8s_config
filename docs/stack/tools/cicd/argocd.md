@@ -22,7 +22,7 @@
 
 - `helm repo add argo https://argoproj.github.io/argo-helm`
 - `helm repo update`
-- `helm upgrade --install -f https://raw.githubusercontent.com/vsvale/kappa_k8s_config/master/repository/helm-charts/cicd/argocd/values.yaml argocd argo/argo-cd --namespace cicd --debug --timeout 10m0s --create-namespace`
+- `helm upgrade --install -f https://raw.githubusercontent.com/vsvale/kappa_k8s_config/master/repository/helm-charts/cicd/argocd/values.yaml argocd argo/argo-cd --namespace cicd --debug --timeout 10m0s`
 - `watch kubectl get pods -n cicd`
 
 # Install Argocd CLI

@@ -1,3 +1,3 @@
-`kubectl apply -f https://raw.githubusercontent.com/vsvale/kappa_k8s_config/master/database/mysql/yamls/mysql.yaml`
-kubectl get all
-kubectl exec -it pod/mysql-0 -n database -- /bin/bash
+- `helm repo add bitnami https://charts.bitnami.com/bitnami`
+- `helm repo update`
+- `kubectl apply -f https://raw.githubusercontent.com/vsvale/kappa_k8s_config/master/repository/app-manifests/database/mysql.yaml`

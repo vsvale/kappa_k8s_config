@@ -15,20 +15,20 @@
 
 - `minikube status -p minikube`
 
-### Change default storage class
+### Namespaces and Change default storage class
 
-- `kubectl get storageclass`
-- `kubectl patch storageclass standard -p '{"metadata": {"annotations":{"storageclass.kubernetes.io/is-default-class":"false"}}}'`
--
+- go to [terraform](terraform.md)
 
 ### [LoadBalancer](https://minikube.sigs.k8s.io/docs/handbook/accessing/)
 
-`minikube tunnel`
+- `minikube tunnel`
 
 ### Acessar node
 
-`minikube ssh -n minikube`
+- `minikube ssh -n minikube`
+- `minikube ssh -n minikube-m02`
+- `minikube ssh -n minikube-m03`
 
 ### Delete cluster
 
-`minikube delete --all --purge`
+- `minikube delete --all --purge`

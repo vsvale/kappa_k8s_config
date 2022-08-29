@@ -26,3 +26,7 @@
 ![kappa_high.png](../../../imgs/kappa_high.png)
 - O processamento é realizado sobre um tópico Kafka e o resultado é armazenado em outro tópico Kafka. Read raw data and write enriched data.
 - Serving Layer lê de tópicos enriquecidos e disponibilizam em um formato tabular para a camada de data viz
+
+### Demo
+
+- Install [Mysql](../database/mysql.md)
