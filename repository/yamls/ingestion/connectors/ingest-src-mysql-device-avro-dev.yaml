@@ -1,0 +1,38 @@
+apiVersion: "kafka.strimzi.io/v1beta2"
+kind: "KafkaConnector"
+metadata:
+  # connector name {type}-{datasource}-{table}-{connectortype}-{format}-{environment}-{randoncode}
+  name: "ingest-src-mysql-device-avro-dev-3200e8r8"
+  labels:
+    # kafka connect [cluster] name
+    strimzi.io/cluster: edh
+spec:
+  class: io.confluent.connect.jdbc.JdbcSourceConnector
+  tasksMax: 1
+  config:
+    key.converter: "io.confluent.connect.avro.AvroConverter"
+    key.converter.schema.registry.url: "http://schema-registry-cp-schema-registry:8081"
+    value.converter: "io.confluent.connect.avro.AvroConverter"
+    value.converter.schema.registry.url: "http://schema-registry-cp-schema-registry:8081"
+    connection.url: "jdbc:mysql://146.190.0.74:3306/owshq"
+    connection.user: "root"
+    connection.password: "8FlABrUE71"
+    connection.attempts: "2"
+    query: "SELECT * FROM owshq.device"
+    mode: "timestamp"
+    batch.max.rows: "100"
+    poll.interval.ms: "30000"
+    table.poll.interval.ms: "600000"
+    topic.prefix: "src-mysql-device-avro-dev"
+    timestamp.column.name: "dt_current_timestamp"
+    validate.non.null: "false"
+    transforms: "createKey,extractInt,InsertTopic,InsertSourceDetails"
+    transforms.createKey.type: "org.apache.kafka.connect.transforms.ValueToKey"
+    transforms.createKey.fields: "user_id"
+    transforms.extractInt.type: "org.apache.kafka.connect.transforms.ExtractField$Key"
+    transforms.extractInt.field: "user_id"
+    transforms.InsertTopic.type: "org.apache.kafka.connect.transforms.InsertField$Value"
+    transforms.InsertTopic.topic.field: "messagetopic"
+    transforms.InsertSourceDetails.type: "org.apache.kafka.connect.transforms.InsertField$Value"
+    transforms.InsertSourceDetails.static.field: "messagesource"
+    transforms.InsertSourceDetails.static.value: "mysql"

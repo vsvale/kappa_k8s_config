@@ -1,8 +1,8 @@
 apiVersion: "kafka.strimzi.io/v1beta2"
 kind: "KafkaConnector"
 metadata:
-  # connector name
-  name: "ingest-src-mysql-cdc-tables-avro-603ff974"
+  # connector name {type}-{datasource}-{table}-{connectortype}-{format}-{environment}-{randoncode}
+  name: "ingest-src-mysql-cdc-tables-avro-dev-7ee00804"
   labels:
     # kafka connect [cluster] name
     strimzi.io/cluster: edh
@@ -17,10 +17,10 @@ spec:
     database.hostname: "mysql.database.svc.cluster.local"
     database.port: "3306"
     database.user: "root"
-    database.password: "8FlABrUE71"
-    database.server.name: "owshq.mysql"
-    table.whitelist: "owshq.device,owshq.commerce,owshq.computer"
+    database.password: "PlumberSDE"
+    database.server.name: "owshq-mysql"
+    table.whitelist: "owshq.commerce"
     database.history.kafka.bootstrap.servers: "edh-kafka-bootstrap:9092"
     database.history.kafka.topic: "ddl-dbhistory-mysql-cdc-tables"
-    message.key.columns: "owshq.device:incr;owshq.commerce:incr;owshq.computer:incr"
+    message.key.columns: "owshq.commerce:id"
     tombstones.on​.delete: "true"

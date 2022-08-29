@@ -30,4 +30,4 @@
 ### Demo
 
 - Install [Mysql](../database/mysql.md)
-- Install [Strimzi](../ingestion/strimzi.md)
+- Install [Strimzi](../ingestion/strimzi.md), configmaps, kafkaconnect, schemaregistry

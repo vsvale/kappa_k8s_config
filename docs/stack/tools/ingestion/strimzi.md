@@ -14,6 +14,7 @@
 
 ## Config maps
 
+- `kubens ingestion`
 - `kubectl apply -f https://raw.githubusercontent.com/vsvale/kappa_k8s_config/master/repository/yamls/ingestion/metrics/kafka-metrics-config.yaml`
 - `kubectl apply -f https://raw.githubusercontent.com/vsvale/kappa_k8s_config/master/repository/yamls/ingestion/metrics/zookeeper-metrics-config.yaml`
 - `kubectl apply -f https://raw.githubusercontent.com/vsvale/kappa_k8s_config/master/repository/yamls/ingestion/metrics/connect-metrics-config.yaml`
