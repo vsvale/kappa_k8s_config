@@ -45,22 +45,22 @@ spec:
       log.retention.hours: 2160
     storage:
       type: ephemeral
-    template:
-      pod:
-        tolerations:
-          - key: "dedicated"
-            operator: "Equal"
-            value: "Kafka"
-            effect: "NoSchedule"
-        affinity:
-          nodeAffinity:
-            requiredDuringSchedulingIgnoredDuringExecution:
-              nodeSelectorTerms:
-                - matchExpressions:
-                    - key: dedicated
-                      operator: In
-                      values:
-                        - Kafka
+    #    template:
+    #      pod:
+    #        tolerations:
+    #          - key: "dedicated"
+    #            operator: "Equal"
+    #            value: "Kafka"
+    #            effect: "NoSchedule"
+    #        affinity:
+    #          nodeAffinity:
+    #            requiredDuringSchedulingIgnoredDuringExecution:
+    #              nodeSelectorTerms:
+    #                - matchExpressions:
+    #                    - key: dedicated
+    #                      operator: In
+    #                      values:
+    #                        - Kafka
     # resource limitation
     # -xms -xmx set as same as resources [limit]
     resources:
