@@ -284,8 +284,7 @@ primary:
   ##
   podSecurityContext:
     enabled: true
-    fsGroup: 0
-    runAsUser: 0
+    fsGroup: 1001
   ## MySQL primary container security context
   ## ref: https://kubernetes.io/docs/tasks/configure-pod-container/security-context/#set-the-security-context-for-a-container
   ## @param primary.containerSecurityContext.enabled MySQL primary container securityContext
@@ -294,7 +293,7 @@ primary:
   ##
   containerSecurityContext:
     enabled: true
-    runAsUser: 0
+    runAsUser: 1001
     runAsNonRoot: true
   ## MySQL primary container's resource requests and limits
   ## ref: https://kubernetes.io/docs/user-guide/compute-resources/
@@ -646,7 +645,7 @@ secondary:
   ##
   podSecurityContext:
     enabled: true
-    fsGroup: 0
+    fsGroup: 1001
   ## MySQL secondary container security context
   ## ref: https://kubernetes.io/docs/tasks/configure-pod-container/security-context/#set-the-security-context-for-a-container
   ## @param secondary.containerSecurityContext.enabled MySQL secondary container securityContext
@@ -655,7 +654,7 @@ secondary:
   ##
   containerSecurityContext:
     enabled: true
-    runAsUser: 0
+    runAsUser: 1001
     runAsNonRoot: true
   ## MySQL secondary container's resource requests and limits
   ## ref: https://kubernetes.io/docs/user-guide/compute-resources/
