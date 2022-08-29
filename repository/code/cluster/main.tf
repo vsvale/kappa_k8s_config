@@ -105,12 +105,6 @@ resource "kubernetes_namespace" "gateway" {
   }
 }
 
-resource "null_resource" "storage_patch" {
-  provisioner "local-exec" {
-    command = "kubectl patch storageclass standard -p '{\"metadata\": {\"annotations\":{\"storageclass.kubernetes.io/is-default-class\":\"false\"}}}'"
-  }
-}
-
 resource "kubernetes_storage_class" "flexible" {
   metadata {
     name = "flexible"

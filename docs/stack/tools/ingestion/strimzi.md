@@ -12,6 +12,8 @@
 - `helm ls -n ingestion`
 - `watch kubectl get pods -n ingestion`
 
+- `kubectl apply -f https://raw.githubusercontent.com/vsvale/kappa_k8s_config/master/repository/app-manifests/ingestion/strimzi.yaml`
+
 ## Config maps
 
 - `kubens ingestion`
