@@ -122,9 +122,9 @@ controller:
     # -- define the application controller `--app-resync`
     appResyncPeriod: "180"
     # -- define the application controller `--self-heal-timeout-seconds`
-    selfHealTimeout: "5"
+    selfHealTimeout: "15"
     # -- define the application controller `--repo-server-timeout-seconds`
-    repoServerTimeoutSeconds: "60"
+    repoServerTimeoutSeconds: "600"
 
   # -- Application controller log format. Either `text` or `json`
   logFormat: text
