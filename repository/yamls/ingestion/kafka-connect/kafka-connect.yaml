@@ -11,7 +11,7 @@ spec:
   version: 3.2.0
   replicas: 1
   bootstrapServers: edh-kafka-bootstrap:9093
-  image: vsvale/our-image-kafka-connect-strimzi:3.2.1
+  image: mateushenrique/owshq-kafka-connect-strimzi:3.2.0
   # imagePullPolicy: Always
   tls:
     trustedCertificates:
@@ -62,3 +62,4 @@ spec:
   logging:
     type: inline
     loggers:
+      log4j.rootLogger: "INFO"
