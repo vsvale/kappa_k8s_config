@@ -30,3 +30,4 @@
 ### Demo
 
 - Install [Mysql](../database/mysql.md)
+- Install [Strimzi](../ingestion/strimzi.md)

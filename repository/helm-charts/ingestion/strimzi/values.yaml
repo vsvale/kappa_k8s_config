@@ -130,10 +130,10 @@ mavenBuilder:
     tag: ""
 resources:
   limits:
-    memory: 384Mi
+    memory: 512Mi
     cpu: 1000m
   requests:
-    memory: 384Mi
+    memory: 512Mi
     cpu: 200m
 livenessProbe:
   initialDelaySeconds: 10
@@ -149,4 +149,3 @@ labelsExclusionPattern: ""
 generateNetworkPolicy: true
 # Override the value for Connect build timeout
 connectBuildTimeoutMs: 300000
-
