@@ -15,6 +15,10 @@ spec:
         port: 9093
         type: internal
         tls: true
+      - name: external
+        port: 9094
+        type: loadbalancer
+        tls: false
     config:
       default.replication.factor: 3
       num.partitions: 15
