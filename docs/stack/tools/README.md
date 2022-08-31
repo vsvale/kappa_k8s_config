@@ -8,7 +8,12 @@ Install [prerequisites](../prerequesites/README.md)
 
 ## Ingestion
 
-2. [Strimzi](./ingestion/strimzi.md)
-3. [Spark](./processing/spark.md)
+[Strimzi](./ingestion/strimzi.md)
+
+##
+
+[Spark](./processing/spark.md)
 
 ### Databases
+
+[Mysql](./database/mysql.md)

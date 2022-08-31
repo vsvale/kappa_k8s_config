@@ -3,5 +3,5 @@
 3. [Git](./git.md) clone o repositório
 4. Install [Helm](./helm.md)
 5. Install [Kubens](./kubens.md)
-6. Install [Terraform](./terraform.md)
-7. Create cluster [Minikube](./minikube.md)
+6. Create cluster [Minikube](./minikube.md)
+7. Install [Terraform](./terraform.md)

@@ -12,6 +12,8 @@
 - [Kubernetes API Fundamentals](https://developers.redhat.com/courses/openshift-operators/kubernetes-fundamentals)
 - [Introduction to Kubernetes (LFS158x)](https://training.linuxfoundation.org/training/introduction-to-kubernetes/)
 - [Big Data no Kubernetes](https://theplumbers.astronmembers.com/curso/big-data-no-kubernetes/21800/129272)
+- [Basic of Kubernetes](https://www.infracloud.io/kubernetes-school/basics-of-kubernetes/)
+- [Writing Kubernetes Controller from Scratch](https://www.infracloud.io/kubernetes-school/writing-custom-k8s-controller/)
 
 ## Helm & Kustomize
 
@@ -19,6 +21,7 @@
 - [Working with Helm](https://developers.redhat.com/courses/gitops/working-helm)
 - [Getting Started with Helm 3 on OpenShift](https://developers.redhat.com/learn/getting-started-helm-3-openshift)
 - [Working with Kustomize](https://developers.redhat.com/courses/gitops/working-kustomize)
+- [Basics of Helm](https://www.infracloud.io/kubernetes-school/basics-of-helm/)
 
 ## EKS
 
@@ -47,11 +50,14 @@
 
 - [Getting Started with Prometheus](https://app.pluralsight.com/library/courses/getting-started-prometheus)
 - [Prometheus metrics for Data Science on OpenShift](https://developers.redhat.com/courses/ai-ml/prometheus)
+- [Introduction to Prometheus](https://training.promlabs.com/training/introduction-to-prometheus/training-overview/introduction) &check;
 - [sumo logic](https://www.sumologic.com/learn/training/)
 
 ## Grafana
 
 - [Building Dashboards from Prometheus Data in Grafana](https://app.pluralsight.com/library/courses/prometheus-grafana-building-dashboards-data)
+- [Grafana university](https://university.grafana.com/learn)
+- [Grafana tutorials](https://grafana.com/tutorials/)
 
 ## Elastic search
 
