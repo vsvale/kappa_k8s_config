@@ -1,11 +1,5 @@
 # Install Strimzi
 
-## Yamls Example
-
-- `https://github.com/strimzi/strimzi-kafka-operator/tree/main/examples`
-
-## Install Kafka
-
 - `helm repo add strimzi https://strimzi.io/charts/`
 - `helm repo update`
 - `kubectl apply -f https://raw.githubusercontent.com/vsvale/kappa_k8s_config/master/repository/app-manifests/ingestion/strimzi.yaml`
@@ -15,6 +9,7 @@
 
 - `kubens ingestion`
 - `kubectl apply -f https://raw.githubusercontent.com/vsvale/kappa_k8s_config/master/repository/app-manifests/ingestion/metrics.yaml`
+- `kubectl get configmaps`
 
 ## Broker
 
@@ -28,6 +23,10 @@
 - `kubectl apply -f https://raw.githubusercontent.com/vsvale/kappa_k8s_config/master/repository/app-manifests/ingestion/cruise-control.yaml`
 - `kubectl apply -f https://raw.githubusercontent.com/vsvale/kappa_k8s_config/master/repository/app-manifests/ingestion/kafka-connectors.yaml`
 - `kubectl get kafkaconnectors`
+
+### Yamls Example
+
+- `https://github.com/strimzi/strimzi-kafka-operator/tree/main/examples`
 
 ### Create a topic
 

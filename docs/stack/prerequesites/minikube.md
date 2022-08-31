@@ -15,7 +15,7 @@
 
 - `minikube status -p minikube`
 
-### Namespaces and Change default storage class
+### Namespaces
 
 - go to [terraform](terraform.md)
 

@@ -1,2 +1,19 @@
-start with [prerequisites](./docs/stack/prerequesites/README.md)
-then go to [tools](./docs/stack/tools/README.md)
+## Prerequisites
+
+Install [prerequisites](./docs/stack/prerequesites/README.md)
+
+## CICD
+
+[Argocd](./docs/stack/tools/cicd/argocd.md)
+
+## Ingestion
+
+[Strimzi](./docs/stack/tools/ingestion/strimzi.md)
+
+##
+
+[Spark](./processing/spark.md)
+
+### Databases
+
+[Mysql](./database/mysql.md)
