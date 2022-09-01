@@ -1,11 +1,3 @@
-# Install
-
-- `kubectl create namespace database`
-- `helm repo add yugabyte https://charts.yugabyte.com`
-- `helm repo update`
-- `helm pull yugabyte/yugabyte -d ./repository/helm-charts/database/ --untar`
-- `kubectl apply -f https://raw.githubusercontent.com/vsvale/kappa_k8s_config/master/repository/app-manifests/database/yugabytedb.yaml`
-
 ### What is distributed SQL?
 
 - The defining characteristic of a distributed SQL database is that the entire database cluster (irrespective of the number of nodes in it) looks to applications as a single logical SQL database.
