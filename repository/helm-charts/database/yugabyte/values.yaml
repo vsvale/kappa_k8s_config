@@ -12,11 +12,13 @@ storage:
   master:
     count: 1
     size: 10Gi
-    storageClass: "do-block-storage"
+    storageClass: standard
+  #    storageClass: "do-block-storage"
   tserver:
     count: 1
     size: 10Gi
-    storageClass: "do-block-storage"
+    storageClass: standard
+#    storageClass: "do-block-storage"
 
 resource:
   master:
