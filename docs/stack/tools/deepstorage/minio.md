@@ -1,5 +1,4 @@
-- `helm repo add minio https://charts.min.io/`
-
 - `helm repo add miniop https://operator.min.io/`
-k apply -f repository/app-manifests/deepstorage/minio-operator.yaml
-k apply -f repository/app-manifests/deepstorage/minio.yaml
+- `kubectl apply -f https://raw.githubusercontent.com/vsvale/kappa_k8s_config/master/repository/app-manifests/deepstorage/miniooperator.yaml`
+- `helm repo add minio https://charts.min.io/`
+- `kubectl apply -f https://raw.githubusercontent.com/vsvale/kappa_k8s_config/master/repository/app-manifests/deepstorage/minio.yaml`
