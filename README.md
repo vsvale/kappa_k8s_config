@@ -16,4 +16,4 @@ Install [prerequisites](./docs/stack/prerequesites/README.md)
 
 ### Databases
 
-[Mysql](./database/mysql.md)
+[Mysql](./docs/stack/tools/database/databases.md)
