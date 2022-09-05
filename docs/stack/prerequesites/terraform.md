@@ -1,6 +1,7 @@
 # Terraform
 
 ## IaC
+
 - Provisioning infrastructure through software to achieve consistent and predictable deployments
 - Defined in code: json, yaml
 - stored in source control: git
@@ -9,6 +10,7 @@
 - push-type to the enviroment
 
 ### Benefits of IaC
+
 - Automated deployment
 - Repeatable process
 - Consistent environments
@@ -16,6 +18,7 @@
 - Documented architecture
 
 ## Terraform
+
 - Infrastructure automation tool
 - Open-source and vendor agnostic
 - Declarative syntax
@@ -23,6 +26,7 @@
 - push-type to the enviroment
 
 ### Components
+
 - Executable
 - Configuration files
 - Provider plugins
@@ -37,7 +41,7 @@
 
 ## Namespaces and Change default storage class
 
-- `cd ./repository/code/cluster`
+- `cd ./repository/code/cluster/minikube`
 - `terraform init`
 - `terraform plan`
 - `terraform apply`
