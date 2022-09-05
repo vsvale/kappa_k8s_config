@@ -1,0 +1,72 @@
+{{- if gt (int .Values.config.worker.replicas) 0 }}
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ template "trino.worker" . }}
+  labels:
+    {{- include "trino.labels" . | nindent 4 }}
+    app.kubernetes.io/component: worker
+data:
+  node.properties: |
+    node.environment={{ .Values.config.general.node.environment }}
+    node.data-dir={{ .Values.config.general.node.dataDir }}
+    plugin.dir={{ .Values.config.general.node.pluginDir }}
+
+  jvm.config: |
+    -server
+    -Xmx{{ .Values.config.worker.jvm.maxHeapSize }}
+    -XX:+{{ .Values.config.worker.jvm.gcMethod.type }}
+    -XX:G1HeapRegionSize={{ .Values.config.worker.jvm.gcMethod.g1.heapRegionSize }}
+    -XX:+UseGCOverheadLimit
+    -XX:+ExplicitGCInvokesConcurrent
+    -XX:+HeapDumpOnOutOfMemoryError
+    -XX:+ExitOnOutOfMemoryError
+    -Djdk.attach.allowAttachSelf=true
+{{ .Values.config.worker.jvmExtraConfig | indent 4 }}
+
+  config.properties: |
+    coordinator=false
+    http-server.http.port={{ .Values.config.general.http.port }}
+    query.max-memory={{ .Values.config.general.query.maxMemory }}
+    query.max-memory-per-node={{ .Values.config.general.query.maxMemoryPerNode }}
+    query.max-total-memory={{ .Values.config.general.query.maxTotalMemory }}
+    discovery.uri=http://{{ template "trino.fullname" . }}:{{ .Values.config.general.http.port }}
+{{- if .Values.config.general.prestoCompatibleHeader }}
+    protocol.v1.alternate-header-name=Presto
+{{- end }}
+{{- if .Values.config.general.internalCommunicationSharedSecret }}
+    internal-communication.shared-secret={{ .Values.config.general.internalCommunicationSharedSecret }}
+{{- end }}
+{{ .Values.config.worker.extraConfig | indent 4 }}
+
+
+  log.properties: |
+    io.trino={{ .Values.config.general.log.trino.level }}
+
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ template "trino.worker" . }}-health-check
+  labels:
+    {{- include "trino.labels" . | nindent 4 }}
+    app.kubernetes.io/component: worker
+data:
+  health_check.sh: |
+    #!/bin/bash
+    curl -H 'X-trino-User: healthCheck' -m 3 --silent {{ template "trino.fullname" . }}:{{ .Values.config.general.http.port }}/v1/info/state | grep --silent 'ACTIVE'
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: schemas-volume-worker
+  labels:
+    {{- include "trino.labels" . | nindent 4 }}
+    app.kubernetes.io/component: worker
+data:
+  {{- range $key, $val := .Values.schemas }}
+  {{ $key }}: {{ $val | quote }}
+  {{- end }}
+
+---
+{{- end }}
