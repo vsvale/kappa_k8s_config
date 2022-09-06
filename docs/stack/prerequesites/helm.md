@@ -13,3 +13,4 @@
 - Revision number: `helm history release_name`
 - Rollback: `helm rollback release_name revision_id`
 - Upgrade a release: `helm upgrade release_name chart_name`
+- Download char repo: `helm pull chartname -d destination/folder`
