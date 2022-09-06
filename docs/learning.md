@@ -80,6 +80,7 @@
 - [Apache Kafka Fundamentals and Accreditation](https://training.confluent.io/channeldetail/apache-kafka-fundamentals-and-accreditation)  &check;
 - [Learn Apache Kafka](https://developer.confluent.io/learn-kafka/)
 - [100 days of Code with Apache Kafka](https://developer.confluent.io/100-days-of-code/)
+- [Confluent Developer LIVE](https://developer.confluent.io/live/)
 
 ## Kafka Connect
 
@@ -94,6 +95,7 @@
 
 - [Building ETL Pipelines from Streaming Data with Kafka and ksqlDB](https://app.pluralsight.com/library/courses/kafka-streams-ksql-fundamentals)
 - [Apache Kafka and KSQLDb in Action: Let's Build a Streaming Data Pipeline](https://app.pluralsight.com/library/courses/big-data-ldn-2020-apache-kafka-ksqldb)
+- [From Batch to Real-time: How to Get Started with Stream Processing](https://www.confluent.io/resources/video/on-demand-from-batch-to-real-time-how-to-get-started-with-stream-processing/?ajs_aid=29460c3f-1cb9-48f6-9ac4-c5ec6cdafdf4&ajs_uid=849478)
 
 ## YugabiteDB
 
