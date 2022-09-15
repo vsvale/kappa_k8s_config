@@ -37,8 +37,8 @@ resource:
       memory: 5Gi
 
 replicas:
-  master: 2
-  tserver: 3
+  master: 1
+  tserver: 2
 
 partition:
   master: 0
