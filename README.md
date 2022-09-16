@@ -20,7 +20,7 @@ Install [prerequisites](./docs/stack/prerequesites/README.md)
 
 ### Resume
 
-- `minikube -p minikube start --nodes 3  --cpus='4' --memory='16g' --disk-size=150g --container-runtime='docker' --driver='docker' --extra-config=kubelet.runtime-request-timeout=10m0s`
+- `minikube -p minikube start --nodes 2  --cpus='6' --memory='20g' --disk-size=150g --container-runtime='docker' --driver='docker' --extra-config=kubelet.runtime-request-timeout=10m0s`
 - `minikube kubectl -- get po -A`
 - `cd kappa_k8s_config`
 - `cd ./repository/code/cluster/minikube`
@@ -33,8 +33,10 @@ Install [prerequisites](./docs/stack/prerequesites/README.md)
 - `helm upgrade --install -f https://raw.githubusercontent.com/vsvale/kappa_k8s_config/master/repository/helm-charts/cicd/argo-cd/values-deployment.yaml argocd argo/argo-cd --namespace cicd --debug --timeout 10m0s`
 - `kubectl patch svc argocd-server -n cicd -p '{"spec": {"type": "LoadBalancer"}}'`
 - `ARGOCD_EXTRIP=$(kubectl -n cicd get services -l app.kubernetes.io/name=argocd-server,app.kubernetes.io/instance=argocd -o jsonpath="{.items[0].status.loadBalancer.ingress[0].ip}") && kubectl -n cicd get secret argocd-initial-admin-secret -o jsonpath="{.data.password}" | base64 -d | xargs -t -I {} argocd login $ARGOCD_EXTRIP --username admin --password {} --insecure`
-- `kubectl create clusterrolebinding cluster-admin-binding --clusterrole=cluster-admin --user=system:serviceaccount:cicd:argocd-application-controller -n cicd`
-- `kubens cicd && CLUSTER=$(kubectx) && argocd cluster add $CLUSTER --in-cluster --insecure`
+
+# - `kubectl create clusterrolebinding cluster-admin-binding --clusterrole=cluster-admin --user=system:serviceaccount:cicd:argocd-application-controller -n cicd`
+
+- `kubens cicd  && argocd cluster add minikube --in-cluster --insecure`
 - `argocd repo add https://github.com/vsvale/kappa_k8s_config.git --port-forward`
 - `kubectl apply -f https://raw.githubusercontent.com/vsvale/kappa_k8s_config/master/repository/app-manifests/ingestion/strimzi.yaml`
 - `kubectl apply -f https://raw.githubusercontent.com/vsvale/kappa_k8s_config/master/repository/app-manifests/ingestion/metrics.yaml`
@@ -47,7 +49,10 @@ Install [prerequisites](./docs/stack/prerequesites/README.md)
 - `kubectl apply -f https://raw.githubusercontent.com/vsvale/kappa_k8s_config/master/repository/app-manifests/database/yugabytedb.yaml`
 - `kubectl apply -f https://raw.githubusercontent.com/vsvale/kappa_k8s_config/master/repository/app-manifests/deepstorage/miniooperator.yaml`
 - `kubectl get secret $(kubectl get serviceaccount console-sa --namespace deepstorage -o jsonpath="{.secrets[0].name}") --namespace deepstorage -o jsonpath="{.data.token}" | base64 --decode`
-- `kubectl patch svc console -n deepstorage -p '{"spec": {"type": "LoadBalancer"}}'`
+
+# - `kubectl patch svc console -n deepstorage -p '{"spec": {"type": "LoadBalancer"}}'`
+
+- `kubectl apply -f https://raw.githubusercontent.com/vsvale/kappa_k8s_config/master/repository/yamls/svc/lb_minio.yaml -n deepstorage`
 - `kubectl apply -f https://raw.githubusercontent.com/vsvale/kappa_k8s_config/master/repository/app-manifests/datastore/pinot.yaml`
 - `kubectl apply -f https://raw.githubusercontent.com/vsvale/kappa_k8s_config/master/repository/app-manifests/processing/ksqldb.yaml`
 - `kubectl apply -f https://raw.githubusercontent.com/vsvale/kappa_k8s_config/master/repository/app-manifests/processing/trino.yaml`

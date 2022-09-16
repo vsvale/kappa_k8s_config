@@ -4,7 +4,7 @@ Using <https://uibakery.io/sql-playground> as source for Postgresql.
     - USERNAME: ghqebhyocdpebafjqlsptgcd@psql-mock-database-cloud
     - PASSWORD: bqjhfgeynzgmftcmbwsmpnuq
     - DATABASE: booking1659905721422xwjeapkgjlhjepbc
-    - TABLES: appartments,bookings, company,users
+    - TABLES: appartments,bookings,company,users
 Using <https://docs.rfam.org/en/latest/database.html> as source for Mysql
     - HOST: mysql-rfam-public.ebi.ac.uk
     - PORT: 4497

@@ -1,6 +1,6 @@
 ## Containers
 
-- [Introduction to Containers](https://developers.redhat.com/courses/subsystems/intro) &check;
+- [Introduction to Containers](https://developers.redhat.com/courses/subsystems/intro) ✅
 - [Container Images](https://developers.redhat.com/courses/subsystems/management)
 - [Container Registries](https://developers.redhat.com/courses/subsystems/registries)
 - [Container Hosts](https://developers.redhat.com/courses/subsystems/hosts)
@@ -25,7 +25,7 @@
 
 ## EKS
 
-- [EKS Basics](https://learn.acloud.guru/course/eks-basics/overview) &check;
+- [EKS Basics](https://learn.acloud.guru/course/eks-basics/overview) ✅
 - [Optimizing an EKS Cluster for Price and Performance](https://app.pluralsight.com/library/courses/eks-cluster-optimizing-price-performance)
 - [AWS Identity and Access Management (IAM) Concepts](https://learn.acloud.guru/course/identity-and-access-management-concepts/overview)
 
@@ -37,20 +37,20 @@
 ## GitOps
 
 - [GitOps: The Big Picture](https://app.pluralsight.com/library/courses/gitops-the-big-picture/table-of-contents)
-- [Introduction to GitOps (LFS169)](https://training.linuxfoundation.org/training/introduction-to-gitops-lfs169/) &check;
+- [Introduction to GitOps (LFS169)](https://training.linuxfoundation.org/training/introduction-to-gitops-lfs169/) ✅
 
 ## ArgoCD
 
-- [Getting Started with Argo CD](https://app.pluralsight.com/library/courses/argo-cd-getting-started) &check;
-- [GitOps Fundamentals](https://codefresh.learnworlds.com/) &check;
-- [GitOps com ArgoCD para Engenheiros de Dados no Kubernetes](https://www.youtube.com/watch?v=A30IOS8ZGLc) &check;
+- [Getting Started with Argo CD](https://app.pluralsight.com/library/courses/argo-cd-getting-started) ✅
+- [GitOps Fundamentals](https://codefresh.learnworlds.com/) ✅
+- [GitOps com ArgoCD para Engenheiros de Dados no Kubernetes](https://www.youtube.com/watch?v=A30IOS8ZGLc) ✅
 - [Getting Started with ArgoCD and OpenShift GitOps Operator](https://developers.redhat.com/courses/gitops/getting-started-argocd-and-openshift-gitops-operator)
 
 ## Prometheus
 
 - [Getting Started with Prometheus](https://app.pluralsight.com/library/courses/getting-started-prometheus)
 - [Prometheus metrics for Data Science on OpenShift](https://developers.redhat.com/courses/ai-ml/prometheus)
-- [Introduction to Prometheus](https://training.promlabs.com/training/introduction-to-prometheus/training-overview/introduction) &check;
+- [Introduction to Prometheus](https://training.promlabs.com/training/introduction-to-prometheus/training-overview/introduction) ✅
 - [sumo logic](https://www.sumologic.com/learn/training/)
 
 ## Grafana
@@ -77,7 +77,7 @@
 - [Handling Streaming Data with a Kafka Cluster](https://app.pluralsight.com/library/courses/handling-streaming-data-kafka-cluster)
 - [Enforcing Data Contracts with Kafka Schema Registry](https://app.pluralsight.com/library/courses/enforcing-data-contracts-kafka-schema-registry/table-of-contents)
 - [Confluent training](https://training.confluent.io/)
-- [Apache Kafka Fundamentals and Accreditation](https://training.confluent.io/channeldetail/apache-kafka-fundamentals-and-accreditation)  &check;
+- [Apache Kafka Fundamentals and Accreditation](https://training.confluent.io/channeldetail/apache-kafka-fundamentals-and-accreditation)  ✅
 - [Learn Apache Kafka](https://developer.confluent.io/learn-kafka/)
 - [100 days of Code with Apache Kafka](https://developer.confluent.io/100-days-of-code/)
 - [Confluent Developer LIVE](https://developer.confluent.io/live/)

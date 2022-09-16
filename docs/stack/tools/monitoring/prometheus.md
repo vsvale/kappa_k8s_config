@@ -27,3 +27,7 @@
 - To create a highly available (HA) setup for alerting, you can still run two identically configured Prometheus servers computing the same alerts (the Alertmanager will deduplicate notifications)
 - A single large Prometheus server can ingest up to 1 million time series samples per second and uses 1-2 bytes for the storage of each sample on disk. It can handle several million concurrently active (present in one scrape iteration of all targets) time series at once.
 - Prometheus collects metrics from monitored targets by scraping metrics HTTP endpoints on these targets. Since Prometheus also exposes data in the same way about itself, it can also scrape and monitor its own health.
+
+## Install
+
+- `helm repo add prometheus-community https://prometheus-community.github.io/helm-charts`
