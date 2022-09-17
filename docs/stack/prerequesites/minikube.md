@@ -9,7 +9,7 @@
 
 ### Create Cluster
 
-- `minikube -p minikube start --nodes 3  --cpus='4' --memory='16g' --disk-size=150g --container-runtime='docker' --driver='docker' --extra-config=kubelet.runtime-request-timeout=10m0s`
+- `minikube -p minikube start --nodes 3  --cpus='3' --memory='12g' --disk-size=100g --container-runtime='docker' --driver='docker' --extra-config=kubelet.runtime-request-timeout=10m0s`
 
 - `minikube kubectl -- get po -A`
 

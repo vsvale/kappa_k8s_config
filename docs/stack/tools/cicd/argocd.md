@@ -43,7 +43,7 @@
 
 ### Register default cluster
 
-- `CLUSTER=$(kubectx) && argocd cluster add $CLUSTER --in-cluster --insecure`
+- `kubens cicd  && argocd cluster add minikube --in-cluster --insecure`
 
 ### repository k8_config
 

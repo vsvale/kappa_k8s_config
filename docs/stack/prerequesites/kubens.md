@@ -3,10 +3,8 @@
 - `sudo apt-get update`
 - `sudo apt-get install -y ca-certificates curl`
 - `sudo apt-get install -y apt-transport-https`
-- `sudo curl -fsSLo /usr/share/keyrings/kubernetes-archive-keyring.gpg <https://packages.cloud.google.com/apt/doc/apt-key.gpg>`
-- `echo "deb [signed-by=/usr/share/keyrings/kubernetes-archive-keyring.gpg] <https://apt.kubernetes.io/> kubernetes-xenial main" | sudo tee /etc/apt/sources.list.d/kubernetes.list`
-- `sudo apt-get update`
-- `sudo apt-get install -y kubectl kubelet`
+- `sudo curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl"`
+- `sudo install -o root -g root -m 0755 kubectl /usr/local/bin/kubectl`
 
 ## Kubectx  e Kubens
 
