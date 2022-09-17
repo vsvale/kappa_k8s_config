@@ -12,6 +12,16 @@
 - Stop containers: `docker stop containerid`
 - Delete container: `docker rm containerid`
 
+## Install
+- `sudo apt update`
+- `sudo apt install -y ca-certificates curl gnupg lsb-release`
+- `curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /usr/share/keyrings/docker-archive-keyring.gpg`
+- `echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/docker-archive-keyring.gpg] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null`
+- `sudo apt-get update`
+- `sudo apt install docker-ce docker-ce-cli containerd.io -y`
+- `sudo usermod -aG docker $USER`
+- `newgrp docker`
+
 ## Docker compose
 
 - Compose is a tool for defining and running multi-container Docker applications. With Compose, you use a YAML file to configure your application’s services. Then, with a single command, you create and start all the services from your configuration.
