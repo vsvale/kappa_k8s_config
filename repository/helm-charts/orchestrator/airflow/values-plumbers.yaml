@@ -54,8 +54,8 @@ airflowVersion: "2.3.0"
 # Images
 images:
   airflow:
-    repository: ~
-    tag: ~
+    repository: mateushenrique/owshq-apache-airflow
+    tag: 2.2.1.1
     pullPolicy: IfNotPresent
   # To avoid images with user code, you can turn this to 'true' and
   # all the 'run-airflow-migrations' and 'wait-for-airflow-migrations' containers/jobs
@@ -105,7 +105,7 @@ labels: {}
 # Ingress configuration
 ingress:
   # Enable all ingress resources (deprecated - use ingress.web.enabled and ingress.flower.enabled)
-  enabled: ~
+  enabled: false
 
   # Configs for the Ingress of the web Service
   web:
@@ -227,7 +227,7 @@ rbac:
 
 # Airflow executor
 # One of: LocalExecutor, LocalKubernetesExecutor, CeleryExecutor, KubernetesExecutor, CeleryKubernetesExecutor
-executor: "CeleryExecutor"
+executor: "CeleryKubernetesExecutor"
 
 # If this is true and using LocalExecutor/KubernetesExecutor/CeleryKubernetesExecutor, the scheduler's
 # service account will have access to communicate with the api-server and launch pods.
@@ -415,7 +415,7 @@ kerberos:
 # Airflow Worker Config
 workers:
   # Number of airflow celery workers in StatefulSet
-  replicas: 1
+  replicas: 3
 
   # Command to use when running Airflow workers (templated).
   command: ~
@@ -497,13 +497,13 @@ workers:
     #   cpu: 100m
     #   memory: 128Mi
 
-  resources: {}
-  #  limits:
-  #   cpu: 100m
-  #   memory: 128Mi
-  #  requests:
-  #   cpu: 100m
-  #   memory: 128Mi
+  resources:
+    limits:
+      cpu: 1
+      memory: 3Gi
+    requests:
+      cpu: 1
+      memory: 1Gi
 
   # Grace period for tasks to finish after SIGTERM is sent from kubernetes
   terminationGracePeriodSeconds: 600
@@ -526,16 +526,15 @@ workers:
   # Select certain nodes for airflow worker pods.
   nodeSelector: {}
   priorityClassName: ~
-  affinity: {}
-  # default worker affinity is:
-  #  podAntiAffinity:
-  #    preferredDuringSchedulingIgnoredDuringExecution:
-  #    - podAffinityTerm:
-  #        labelSelector:
-  #          matchLabels:
-  #            component: worker
-  #        topologyKey: kubernetes.io/hostname
-  #      weight: 100
+  affinity:
+    podAntiAffinity:
+      preferredDuringSchedulingIgnoredDuringExecution:
+        - weight: 100
+          podAffinityTerm:
+            labelSelector:
+              matchLabels:
+                component: worker
+            topologyKey: "kubernetes.io/hostname"
   tolerations: []
   topologySpreadConstraints: []
   # hostAliases to use in worker pods.
@@ -572,7 +571,7 @@ scheduler:
   # scheduler and let Kubernetes restart it
   livenessProbe:
     initialDelaySeconds: 10
-    timeoutSeconds: 20
+    timeoutSeconds: 10
     failureThreshold: 5
     periodSeconds: 60
     command: ~
@@ -640,16 +639,15 @@ scheduler:
 
   # Select certain nodes for airflow scheduler pods.
   nodeSelector: {}
-  affinity: {}
-  # default scheduler affinity is:
-  #  podAntiAffinity:
-  #    preferredDuringSchedulingIgnoredDuringExecution:
-  #    - podAffinityTerm:
-  #        labelSelector:
-  #          matchLabels:
-  #            component: scheduler
-  #        topologyKey: kubernetes.io/hostname
-  #      weight: 100
+  affinity:
+    podAntiAffinity:
+      preferredDuringSchedulingIgnoredDuringExecution:
+        - weight: 100
+          podAffinityTerm:
+            labelSelector:
+              matchLabels:
+                component: scheduler
+            topologyKey: "kubernetes.io/hostname"
   tolerations: []
   topologySpreadConstraints: []
 
@@ -869,13 +867,13 @@ webserver:
       ports:
         - port: "{{ .Values.ports.airflowUI }}"
 
-  resources: {}
-  #   limits:
-  #     cpu: 100m
-  #     memory: 128Mi
-  #   requests:
-  #     cpu: 100m
-  #     memory: 128Mi
+  resources:
+    limits:
+      cpu: 1000m
+      memory: 1500Mi
+    requests:
+      cpu: 500m
+      memory: 1000Mi
 
   # Create initial user.
   defaultUser:
@@ -955,7 +953,7 @@ webserver:
 
 # Airflow Triggerer Config
 triggerer:
-  enabled: true
+  enabled: false
   # Number of airflow triggerers in the deployment
   replicas: 1
 
@@ -974,7 +972,7 @@ triggerer:
   # triggerer and let Kubernetes restart it
   livenessProbe:
     initialDelaySeconds: 10
-    timeoutSeconds: 20
+    timeoutSeconds: 10
     failureThreshold: 5
     periodSeconds: 60
     command: ~
@@ -1022,16 +1020,15 @@ triggerer:
 
   # Select certain nodes for airflow triggerer pods.
   nodeSelector: {}
-  affinity: {}
-  # default triggerer affinity is:
-  #  podAntiAffinity:
-  #    preferredDuringSchedulingIgnoredDuringExecution:
-  #    - podAffinityTerm:
-  #        labelSelector:
-  #          matchLabels:
-  #            component: triggerer
-  #        topologyKey: kubernetes.io/hostname
-  #      weight: 100
+  affinity:
+    podAntiAffinity:
+      preferredDuringSchedulingIgnoredDuringExecution:
+        - weight: 100
+          podAffinityTerm:
+            labelSelector:
+              matchLabels:
+                component: triggerer
+            topologyKey: "kubernetes.io/hostname"
   tolerations: []
   topologySpreadConstraints: []
 
@@ -1412,8 +1409,12 @@ cleanup:
   # Command to use when running the cleanup cronjob (templated).
   command: ~
   # Args to use when running the cleanup cronjob (templated).
-  args: ["bash", "-c", "exec airflow kubernetes cleanup-pods --namespace={{ .Release.Namespace }}"]
-
+  args:
+    [
+      "bash",
+      "-c",
+      "exec airflow kubernetes cleanup-pods --namespace={{ .Release.Namespace }}",
+    ]
 
   # Select certain nodes for airflow cleanup pods.
   nodeSelector: {}
@@ -1468,23 +1469,23 @@ config:
   core:
     dags_folder: '{{ include "airflow_dags" . }}'
     # This is ignored when used with the official Docker image
-    load_examples: 'False'
-    executor: '{{ .Values.executor }}'
+    load_examples: "False"
+    executor: "{{ .Values.executor }}"
     # For Airflow 1.10, backward compatibility; moved to [logging] in 2.0
-    colored_console_log: 'False'
+    colored_console_log: "False"
     remote_logging: '{{- ternary "True" "False" .Values.elasticsearch.enabled }}'
   logging:
     remote_logging: '{{- ternary "True" "False" .Values.elasticsearch.enabled }}'
-    colored_console_log: 'False'
+    colored_console_log: "False"
   metrics:
     statsd_on: '{{ ternary "True" "False" .Values.statsd.enabled }}'
     statsd_port: 9125
     statsd_prefix: airflow
     statsd_host: '{{ printf "%s-statsd" .Release.Name }}'
   webserver:
-    enable_proxy_fix: 'True'
+    enable_proxy_fix: "True"
     # For Airflow 1.10
-    rbac: 'True'
+    rbac: "True"
   celery:
     worker_concurrency: 16
   scheduler:
@@ -1496,27 +1497,27 @@ config:
     # `run_duration` included for Airflow 1.10 backward compatibility; removed in 2.0.
     run_duration: 41460
   elasticsearch:
-    json_format: 'True'
+    json_format: "True"
     log_id_template: "{dag_id}_{task_id}_{execution_date}_{try_number}"
   elasticsearch_configs:
     max_retries: 3
     timeout: 30
-    retry_timeout: 'True'
+    retry_timeout: "True"
   kerberos:
-    keytab: '{{ .Values.kerberos.keytabPath }}'
-    reinit_frequency: '{{ .Values.kerberos.reinitFrequency }}'
-    principal: '{{ .Values.kerberos.principal }}'
-    ccache: '{{ .Values.kerberos.ccacheMountPath }}/{{ .Values.kerberos.ccacheFileName }}'
+    keytab: "{{ .Values.kerberos.keytabPath }}"
+    reinit_frequency: "{{ .Values.kerberos.reinitFrequency }}"
+    principal: "{{ .Values.kerberos.principal }}"
+    ccache: "{{ .Values.kerberos.ccacheMountPath }}/{{ .Values.kerberos.ccacheFileName }}"
   celery_kubernetes_executor:
-    kubernetes_queue: 'kubernetes'
+    kubernetes_queue: "kubernetes"
   kubernetes:
-    namespace: '{{ .Release.Namespace }}'
+    namespace: "{{ .Release.Namespace }}"
     airflow_configmap: '{{ include "airflow_config" . }}'
     airflow_local_settings_configmap: '{{ include "airflow_config" . }}'
     pod_template_file: '{{ include "airflow_pod_template_file" . }}/pod_template_file.yaml'
-    worker_container_repository: '{{ .Values.images.airflow.repository | default .Values.defaultAirflowRepository }}'
-    worker_container_tag: '{{ .Values.images.airflow.tag | default .Values.defaultAirflowTag }}'
-    multi_namespace_mode: '{{ if .Values.multiNamespaceMode }}True{{ else }}False{{ end }}'
+    worker_container_repository: "{{ .Values.images.airflow.repository | default .Values.defaultAirflowRepository }}"
+    worker_container_tag: "{{ .Values.images.airflow.tag | default .Values.defaultAirflowTag }}"
+    multi_namespace_mode: "{{ if .Values.multiNamespaceMode }}True{{ else }}False{{ end }}"
 # yamllint enable rule:line-length
 
 # Whether Airflow can launch workers and/or pods in multiple namespaces
@@ -1570,15 +1571,15 @@ dags:
     # ssh examples ssh://git@github.com/apache/airflow.git
     # git@github.com:apache/airflow.git
     # https example: https://github.com/apache/airflow.git
-    repo: https://github.com/apache/airflow.git
-    branch: v2-2-stable
+    repo: https://github.com/vsvale/kappa_airflow.git
+    branch: master
     rev: HEAD
     depth: 1
     # the number of consecutive failures allowed before aborting
     maxFailures: 0
     # subpath within the repo where dags are located
     # should be "" if dags are at repo root
-    subPath: "tests/dags"
+    subPath: "dags/"
     # if your repo needs a user name password
     # you can load them to a k8s secret like the one below
     #   ---
@@ -1614,7 +1615,7 @@ dags:
     #    <host1>,<ip1> <key1>
     #    <host2>,<ip2> <key2>
     # interval between git sync attempts in seconds
-    wait: 60
+    wait: 65
     containerName: git-sync
     uid: 65533
 
@@ -1625,13 +1626,13 @@ dags:
 
     extraVolumeMounts: []
     env: []
-    resources: {}
-    #  limits:
-    #   cpu: 100m
-    #   memory: 128Mi
-    #  requests:
-    #   cpu: 100m
-    #   memory: 128Mi
+    resources:
+      limits:
+        cpu: 1000m
+        memory: 1Gi
+      requests:
+        cpu: 500m
+        memory: 1Gi
 
 logs:
   persistence:
