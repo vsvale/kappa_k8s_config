@@ -33,10 +33,10 @@ uid: 50000
 gid: 0
 
 # Default security context for airflow
-securityContext:
-  runAsUser: 50000
-  fsGroup: 0
-  runAsGroup: 0
+securityContext: {}
+#  runAsUser: 50000
+#  fsGroup: 0
+#  runAsGroup: 0
 
 # Airflow home directory
 # Used for mount paths
@@ -437,10 +437,10 @@ workers:
       maxUnavailable: "50%"
 
   # When not set, the values defined in the global securityContext will be used
-  securityContext: 
-    runAsUser: 50000
-    fsGroup: 0
-    runAsGroup: 0
+  securityContext: {}
+  #  runAsUser: 50000
+  #  fsGroup: 0
+  #  runAsGroup: 0
 
   # Create ServiceAccount
   serviceAccount:
@@ -593,10 +593,10 @@ scheduler:
   strategy: ~
 
   # When not set, the values defined in the global securityContext will be used
-  securityContext:
-    runAsUser: 50000
-    fsGroup: 0
-    runAsGroup: 0
+  securityContext: {}
+  #  runAsUser: 50000
+  #  fsGroup: 0
+  #  runAsGroup: 0
 
   # Create ServiceAccount
   serviceAccount:
@@ -710,10 +710,10 @@ createUserJob:
   jobAnnotations: {}
 
   # When not set, the values defined in the global securityContext will be used
-  securityContext: 
-    runAsUser: 50000
-    fsGroup: 0
-    runAsGroup: 0
+  securityContext: {}
+  #  runAsUser: 50000
+  #  fsGroup: 0
+  #  runAsGroup: 0
 
   # Create ServiceAccount
   serviceAccount:
@@ -769,10 +769,10 @@ migrateDatabaseJob:
   jobAnnotations: {}
 
   # When not set, the values defined in the global securityContext will be used
-  securityContext:
-    runAsUser: 50000
-    fsGroup: 0
-    runAsGroup: 0
+  securityContext: {}
+  #  runAsUser: 50000
+  #  fsGroup: 0
+  #  runAsGroup: 0
 
   # Create ServiceAccount
   serviceAccount:
@@ -854,10 +854,10 @@ webserver:
   strategy: ~
 
   # When not set, the values defined in the global securityContext will be used
-  securityContext:
-    runAsUser: 50000
-    fsGroup: 0
-    runAsGroup: 0
+  securityContext: {}
+  #  runAsUser: 50000
+  #  fsGroup: 0
+  #  runAsGroup: 0
 
   # Additional network policies as needed (Deprecated - renamed to `webserver.networkPolicy.ingress.from`)
   extraNetworkPolicies: []
@@ -991,10 +991,10 @@ triggerer:
     annotations: {}
 
   # When not set, the values defined in the global securityContext will be used
-  securityContext: 
-    runAsUser: 50000
-    fsGroup: 0
-    runAsGroup: 0
+  securityContext: {}
+  #  runAsUser: 50000
+  #  fsGroup: 0
+  #  runAsGroup: 0
 
   resources: {}
   #  limits:
@@ -1079,10 +1079,10 @@ flower:
   #     memory: 128Mi
 
   # When not set, the values defined in the global securityContext will be used
-  securityContext:
-    runAsUser: 50000
-    fsGroup: 0
-    runAsGroup: 0
+  securityContext: {}
+  #  runAsUser: 50000
+  #  fsGroup: 0
+  #  runAsGroup: 0
 
   # Create ServiceAccount
   serviceAccount:
