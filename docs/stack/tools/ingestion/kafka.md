@@ -141,3 +141,35 @@ To manage topics, topics data, consumers group, schema registry, connect
 
 - A cada mudança de atributo é versionado o schema
 - É possivel definir qual schema cada api ou source irá utilizar
+
+
+### Security
+- Authentication: verify the identity of the components with which they're communicating: Client-broker; broker-broker; zookeeper-broker
+  - every connection has a Kafka principal, when authentication has not been enable this principal is anonymous
+  - security protocols: SSL and SASL_SSL
+  - listener: host and port where you can apply security protocols
+  - SSL broker configuration: `ssl.client.auth=required` broker will now verify the client certificate in order to confirm the client's identity
+  - SASL_SSL when you want to integrate Kafka with an existing Kerberos server, such as Active Directory or OpenLDAP
+  - use filesystem permission to restrict access to files containing security information
+  - Avoid storing passwords in plaintext
+  - use disk encryption or a secure credential store
+  - use quotas to limit the impact of malicious client behaviours
+  - apply change control to configuration
+- Authorization: determines what an identity is permitted to do on the system once it has been authenticated
+  - Access Control Lists: describes wich users are permitted to perform certain operations on specific resources and wich users are denied permissions
+  - user: Alice(principal) has allow (permission type) permission for write (operation) to Topic:customer (resource type and name)
+  ```
+  kafka-acls --bootstrap-server localhost:9092 \
+  --command-config adminclient-configs.conf  \
+  --add \
+  --allow-principal User:alice \
+  --allow-principal User:fred \
+  --operation read 
+  --operation write \
+  --topic finance`
+  ```
+  - use super users and allow.everyone.if.no.acl.found not at all
+  - Don't grant access to ANONYMOUS principal
+  - Automate the process of creating user credential and assigning ACLs for all environments
+  - Adjust connections.max.reauth.ms to force connection to reauthenticate at intervals
+  - use deny ACLs to prevent actions from compromised users
