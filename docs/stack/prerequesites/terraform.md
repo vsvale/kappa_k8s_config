@@ -41,10 +41,4 @@
 
 ## Namespaces and Change default storage class
 
-- `cd ./repository/code/cluster/minikube`
-- `terraform init`
-- `terraform plan`
-- `terraform apply`
-- `kubectl get ns`
-- `kubectl get storageclass`
-- `cd ../../../..`
+- `cd ./repository/code/cluster/minikube && terraform init && terraform plan && terraform apply -auto-approve && cd ../../../.. && kubectl get ns && kubectl get storageclass`

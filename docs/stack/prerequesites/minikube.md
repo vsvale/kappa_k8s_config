@@ -27,7 +27,6 @@
 
 - `minikube ssh -n minikube`
 - `minikube ssh -n minikube-m02`
-- `minikube ssh -n minikube-m03`
 
 ### Delete cluster
 
