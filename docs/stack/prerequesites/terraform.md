@@ -47,4 +47,4 @@
 - `terraform apply`
 - `kubectl get ns`
 - `kubectl get storageclass`
-- `cd ../../..`
+- `cd ../../../..`
