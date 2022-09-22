@@ -1178,7 +1178,7 @@ server:
   podLabels: {}
 
   # -- Configures the server port
-  containerPort: 8086
+  containerPort: 8080
 
   ## Readiness and liveness probes for default backend
   ## Ref: https://kubernetes.io/docs/tasks/configure-pod-container/configure-liveness-readiness-probes/
