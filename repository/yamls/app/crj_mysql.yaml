@@ -1,0 +1,28 @@
+apiVersion: batch/v1
+# scheduler type
+# how use in docs/stack/tools/app/data_generator.md
+kind: CronJob
+metadata:
+  # name of the metadata
+  name: crj-mysql-ingestion
+spec:
+  # at every 1 minutes
+  schedule: "*/1 * * * *"
+  # stop another job to run
+  # at the same time of another
+  concurrencyPolicy: Forbid
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          containers:
+          # name of the container
+          # image from container registry
+          - name: crj-mysql-ingestion
+            image: owshq/ingestion-data-stores-python-app:1.0
+            imagePullPolicy: Always
+            env:
+              - name: "MYSQL"
+                value: "mysql+pymysql://plumber:PlumberSDE@10.107.84.78:3306/owshq"
+            command: ["python","cli.py","mysql"]
+          restartPolicy: OnFailure

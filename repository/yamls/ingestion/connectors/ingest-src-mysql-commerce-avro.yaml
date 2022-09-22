@@ -15,6 +15,7 @@ spec:
     value.converter: "io.confluent.connect.avro.AvroConverter"
     value.converter.schema.registry.url: "http://schema-registry-cp-schema-registry:8081"
     connection.url: "jdbc:mysql://mysql.database.svc.cluster.local:3306"
+    # use repository/yamls/app/crj_mysql.yaml
     connection.database: "owshq"
     connection.user: "plumber"
     connection.password: "PlumberSDE"
