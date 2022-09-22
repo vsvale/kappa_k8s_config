@@ -6,8 +6,7 @@ metadata:
   # name of the metadata
   name: crj-mysql-ingestion
 spec:
-  # at every 1 minutes
-  schedule: "*/1 * * * *"
+  schedule: "0 */12 * * *"
   # stop another job to run
   # at the same time of another
   concurrencyPolicy: Forbid
