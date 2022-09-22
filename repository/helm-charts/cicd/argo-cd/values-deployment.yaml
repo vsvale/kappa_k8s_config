@@ -1292,7 +1292,7 @@ server:
     # -- Server service https port for NodePort service type (only if `server.service.type` is set to "NodePort")
     nodePortHttps: 30443
     # -- Server service http port
-    servicePortHttp: 80
+    servicePortHttp: 81
     # -- Server service https port
     servicePortHttps: 443
     # -- Server service http port name, can be used to route traffic via istio
@@ -2653,7 +2653,7 @@ notifications:
         # -- Service annotations for Slack bot
         annotations: {}
         # -- Service port for Slack bot
-        port: 80
+        port: 81
         # -- Service type for Slack bot
         type: LoadBalancer
 
