@@ -19,7 +19,7 @@ spec:
     connection.database: "owshq"
     connection.user: "plumber"
     connection.password: "PlumberSDE"
-    connection.attempts: "2"
+    connection.attempts: "3"
     query: "SELECT * FROM owshq.commerce"
     mode: "incrementing"
     topic.prefix: "src-mysql-commerce-avro"

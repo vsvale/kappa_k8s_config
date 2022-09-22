@@ -25,8 +25,7 @@
 - `kubectl apply -f https://raw.githubusercontent.com/vsvale/kappa_k8s_config/master/repository/app-manifests/ingestion/kafka-connectors.yaml`
 - `kubectl get applications -cicd`
 - `kubectl get kafkaconnectors`
-- `kubectl get kafkaconnectors ingest-src-mysql-commerce-avro-90bc1352 -oyaml`
-- `kubectl get kafkaconnectors <name> `
+- `kubectl get kafkaconnectors -n ingestion <name> -oyaml`
 
 ## generators
 see docs/stack/tools/app/data_generator.md
