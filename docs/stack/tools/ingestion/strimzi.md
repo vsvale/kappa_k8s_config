@@ -30,6 +30,22 @@
 ## generators
 see docs/stack/tools/app/data_generator.md
 
+## Kafka consumer console
+- kubectl get pods -n ingestion
+- get schema-registry pod name
+- `CSR=schema-registry-cp-schema-registry-5bbd6bc88f-vxc76`
+- kubens ingestion && kubectl exec $CSR -c cp-schema-registry-server -ti --bash
+- unset JMX_PORT;
+- 
+```
+kafka-avro-console-consumer \
+--bootstrap-server edh-kafka-bootstrap:9092 \
+--property schema.registry.url=http://localhost:8081 \
+--property print.key=true \
+--from-beginning \
+--topic src-mysql-commerce-avro
+```
+
 ### Yamls Example
 
 - `https://github.com/strimzi/strimzi-kafka-operator/tree/main/examples`
@@ -48,7 +64,7 @@ see docs/stack/tools/app/data_generator.md
 
 ### Show topics
 
-- `kubectl get kafkatopics`
+- `kubectl get kafkatopics -n ingestion`
 
 ### get password in secrets
 

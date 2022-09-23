@@ -70,32 +70,17 @@
 
 ## kafka
 
-- [Getting Started with Apache Kafka](https://app.pluralsight.com/library/courses/apache-kafka-getting-started)
-- [Kafka 101](https://developers.redhat.com/learn/openshift-streams-for-apache-kafka/kafka-101)
-- [Get started with OpenShift Streams for Apache Kafka](https://developers.redhat.com/learn/openshift-streams-for-apache-kafka/get-started-with-openshift-streams-for-apache-kafka)
-- [Designing Event-driven Applications Using Apache Kafka Ecosystem](https://app.pluralsight.com/library/courses/designing-event-driven-applications-apache-kafka-ecosystem)
-- [Handling Streaming Data with a Kafka Cluster](https://app.pluralsight.com/library/courses/handling-streaming-data-kafka-cluster)
-- [Enforcing Data Contracts with Kafka Schema Registry](https://app.pluralsight.com/library/courses/enforcing-data-contracts-kafka-schema-registry/table-of-contents)
 - [Confluent training](https://training.confluent.io/)
 - [Apache Kafka Fundamentals and Accreditation](https://training.confluent.io/channeldetail/apache-kafka-fundamentals-and-accreditation)  ✅
 - [Learn Apache Kafka](https://developer.confluent.io/learn-kafka/)
 - [100 days of Code with Apache Kafka](https://developer.confluent.io/100-days-of-code/)
 - [Confluent Developer LIVE](https://developer.confluent.io/live/)
-
-## Kafka Connect
-
-- [Kafka Connect Fundamentals](https://app.pluralsight.com/library/courses/kafka-connect-fundamentals)
+- [From Batch to Real-time: How to Get Started with Stream Processing](https://www.confluent.io/resources/video/on-demand-from-batch-to-real-time-how-to-get-started-with-stream-processing/?ajs_aid=29460c3f-1cb9-48f6-9ac4-c5ec6cdafdf4&ajs_uid=849478)
 
 ## Apache Spark
 
 - [Processing Streaming Data with Apache Spark on Databricks](https://app.pluralsight.com/library/courses/processing-streaming-data-apache-spark-databricks)
 - [Windowing and Join Operations on Streaming Data with Apache Spark on Databricks](https://app.pluralsight.com/library/courses/windowing-join-operations-apache-spark-databricks)
-
-## KSQLDB
-
-- [Building ETL Pipelines from Streaming Data with Kafka and ksqlDB](https://app.pluralsight.com/library/courses/kafka-streams-ksql-fundamentals)
-- [Apache Kafka and KSQLDb in Action: Let's Build a Streaming Data Pipeline](https://app.pluralsight.com/library/courses/big-data-ldn-2020-apache-kafka-ksqldb)
-- [From Batch to Real-time: How to Get Started with Stream Processing](https://www.confluent.io/resources/video/on-demand-from-batch-to-real-time-how-to-get-started-with-stream-processing/?ajs_aid=29460c3f-1cb9-48f6-9ac4-c5ec6cdafdf4&ajs_uid=849478)
 
 ## YugabiteDB
 
