@@ -24,7 +24,7 @@
 - `kubectl apply -f https://raw.githubusercontent.com/vsvale/kappa_k8s_config/master/repository/app-manifests/ingestion/cruise-control.yaml`
 - `kubectl apply -f https://raw.githubusercontent.com/vsvale/kappa_k8s_config/master/repository/app-manifests/ingestion/kafka-connectors.yaml`
 - `kubectl get applications -cicd`
-- `kubectl get kafkaconnectors`
+- `kubectl get kafkaconnectors -n ingestion`
 - `kubectl get kafkaconnectors -n ingestion <name> -oyaml`
 
 ## generators
@@ -34,7 +34,7 @@ see docs/stack/tools/app/data_generator.md
 - kubectl get pods -n ingestion
 - get schema-registry pod name
 - `CSR=schema-registry-cp-schema-registry-5bbd6bc88f-vxc76`
-- kubens ingestion && kubectl exec $CSR -c cp-schema-registry-server -ti --bash
+- kubens ingestion && kubectl exec $CSR -c cp-schema-registry-server -ti -- bash
 - unset JMX_PORT;
 - 
 ```
