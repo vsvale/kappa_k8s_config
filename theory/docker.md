@@ -45,3 +45,17 @@
 - **Powerful API**: Developers, Cluster Admins, and Automation alike can define application state and tenancy
 - **Operational Automation**: The Kubernetes Operator Framework can be thought of as a robot systems administrator deployed side by side with applications managing mundane and complex tasks for the application (backups, restores, etc)
 - **Higher Level Frameworks**: Once you adopt Kubernetes orchestration, you gain access to an innovative ecosystem of tools like Istio, Knative, and the previously mentioned Operator Framework
+
+# [Docker](https://www.docker.com/products/docker-desktop/)
+
+- [Cheat Sheet](https://dockerlabs.collabnix.com/docker/cheatsheet/)
+- check version: `docker --version`
+- [Docker Hub](https://hub.docker.com/): Registry de containers
+- Get image: `docker pull busybox:latest`
+- Build image: `docker run busybox`
+  - run coomand and kill: `docker run busybox echo "busybox"`
+  - iteractive: `docker run -it busybox sh`
+  - port foward: `podman run -d -p 3306:3306 quay.io/fatherlinux/linux-container-internals-2-0-introduction`
+- Get containers: `docker ps -a`
+- Stop containers: `docker stop containerid`
+- Delete container: `docker rm containerid`

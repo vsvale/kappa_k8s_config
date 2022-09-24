@@ -17,7 +17,7 @@ GitOps is about running operations out of Git by pull requests with goal of cont
 3. Once a Git commit happens the GitOps agent is instructing the cluster to reach the same state as what is described in Git.
 4. Developers, operators. and other stakeholders perform all changes via Git operations and never directly touch the cluster (or perform manual kubectl commands).
 
-![gitops.png](../../../imgs/gitops.png)
+![gitops.png](img/gitops.png)
 
 ## Key points here are
 

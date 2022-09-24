@@ -69,7 +69,7 @@ export PS1="\u@\h \[\033[36m\]\w\[\033[91m\]\$(git_data) \[\033[00m\]$ "
 
 ## Create Cluster
 
-- `minikube -p minikube start --nodes 3  --cpus='max' --memory='72g' --disk-size=400g --driver='docker' --auto-update-drivers --kvm-gpu --mount`
+- `minikube -p minikube start --nodes 3  --cpus='max' --memory='72g' --disk-size=400g --driver='docker'`
 - `minikube kubectl -- get po -A`
 - `minikube status -p minikube`
 
