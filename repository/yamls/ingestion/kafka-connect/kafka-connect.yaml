@@ -11,7 +11,7 @@ spec:
   version: 3.2.0
   replicas: 1
   bootstrapServers: edh-kafka-bootstrap:9093
-  image: mateushenrique/owshq-kafka-connect-strimzi
+  image: mateushenrique/owshq-kafka-connect-strimzi:3.2.0
   # imagePullPolicy: Always
   tls:
     trustedCertificates:
