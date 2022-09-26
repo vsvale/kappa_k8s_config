@@ -1,1 +1,2 @@
 - helm pull argo/argo-cd --untar -d ./repository/helm-charts/cicd
+- helm pull strimzi/strimzi-kafka-operator --untar -d ./repository/helm-charts/ingestion

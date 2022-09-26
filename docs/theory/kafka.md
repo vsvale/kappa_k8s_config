@@ -74,6 +74,7 @@ ingestion
 - Persisted in an append-only fashion
 - Horizontal scale for write throughput
 
+
 ### Producer API
 
 - produz os eventos e gravado em um segmento de uma partição de um tópico
