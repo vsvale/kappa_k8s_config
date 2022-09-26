@@ -3,9 +3,6 @@ kind: Application
 metadata:
   name: kafka-broker-ephemeral
   namespace: cicd
-  annotations:
-    argocd.argoproj.io/hook: Sync
-    argocd.argoproj.io/sync-wave: "-99"
 spec:
   project: default
   source:

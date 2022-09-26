@@ -1,13 +1,8 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  # app name
   name: kafka-connect
-  # deployed yaml
   namespace: cicd
-  annotations:
-    argocd.argoproj.io/hook: Sync
-    argocd.argoproj.io/sync-wave: "-80"
 spec:
   project: default
   source:
