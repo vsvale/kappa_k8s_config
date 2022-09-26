@@ -42,23 +42,37 @@ ingestion
 - 10ms
 - Centralized Data Exchange Hub
 - Data sent in binary
-- 
+- Querys: não tem otimizador de plano de execução, mas é possivel utilizar KSQLDB, Trino, spark para otimizar a query
 
+### Storage of Logs
+- Data is written in sequential order as binary
+- Log entry act as a clock fot state of replicas = Timestamp
+- Active-Active model with a primaty-backup (leader and replica)
+- Sequential writes
+- Data persisted on disk directily with batch-operation prefetch, sequentials writes
+- sequential reads, copu from disk buffer to network buffer
+- Log compaction: snapshot of last value of key
 
 ## Evento
 
 - tudo o que acontece a todo momento, pode ser uma mensagem, um registro, uma transação etc.
 - Tem tamanho máximo de 100mb
+- has header (topic, partition and timestamp) & key:value pair
 
 ### Topico
 
 - Onde o evento é gravado, semelhante a uma tabela
 - Salvo no formato binário
+- store stream of records
+- logical structure to record events
 
 ### Particoes
 
 - Um topico é reparticionado em inumeras partições
 - Quanto mais topico, maior velocidade de leitura por poder alocar mais threads
+- Ordered and immutable sequence of records
+- Persisted in an append-only fashion
+- Horizontal scale for write throughput
 
 ### Producer API
 
@@ -72,7 +86,7 @@ ingestion
 ### Consumer API
 
 - Consumer: le os eventos do Kafka
-- Offset: identificador numero da ultima posição lida
+- Offset: identificador inteiro da atual posiçao consumida, numero da ultima posição lida
 - Cria um consumer group, que contém offset e partição lida, todas as threads ficam no mesmo counsumer group
 
 ### Broker
@@ -94,6 +108,7 @@ ingestion
 - Alta disponibilidade garantida com replicação a nivel de topico
 - Deve ser igual ou inferior a quantidade de brokers, ideal entre 3 e 8 no maximo
 - Lider recebe o evento, followers recebem as replicas
+
 
 
 ### Ingestion
@@ -120,30 +135,15 @@ ingestion
 
 output-ksqldb-stream-agent-avro
 src-app-credit-card-avro
-src-sqlserver-agent-json
 
-### ACID
-
-Apartir do Kafka 0.11
-
-Atomicidade: Quando o produtor esta configurado para ter idepotência, o dado vai chegar ordenado e não duplicado. Broker realiza a deduplicação se por alguma razão ela vier do producer.
-
-Consistência: Quando a transação ocorre ela não sobre alteração. Alcançado pelo particionamento. Toda vez que um id sofre alteração vai ser sempre alterado na mesma partição.
-
-Isolamento: Isolamento pelo timestamp do evento, permitindo ordenação das transações
-
-Durabilidade: Replicação em diferentes brokers garantes a disponibilidade
-
-Retenção e Purge: retenção baseada em tempo. Pode ser aplicado a nivel de topico e a nivel de broker. 7 dias como default, mas da para colocar infinito.
-
-Querys: não tem otimizador de plano de execução, mas é possivel utilizar KSQLDB, Trino, spark para otimizar a query
+### Retenção e Purge
+- retenção baseada em tempo. Pode ser aplicado a nivel de topico e a nivel de broker. 7 dias como default, mas da para colocar infinito.
 
 ### Kafka GUI
 
 To manage topics, topics data, consumers group, schema registry, connect
 
 - [Lenses](https://lenses.io/)
-- [AKHQ](https://akhq.io/)
 
 ### Schema Registry
 
