@@ -1,1 +1,0 @@
-![lambda](./img/Lambda.png)
