@@ -104,7 +104,7 @@ jmxTrans:
     repository: ""
     name: jmxtrans
     tag: ""
-kafkaMirrorMaker2:
+kafkaMirrorMaker2: 
   image:
     registry: ""
     repository: ""
