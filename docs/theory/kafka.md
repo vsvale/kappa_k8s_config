@@ -36,9 +36,13 @@ ingestion
 - Veio solucionar o V de velocidade do big data
 - ingest data as fast as possible
 - Streaming Platform (message broker)
-- can be CP, CA, AP
+- can be CP or CA
 - Comsumption mode: Pull
 - Storage Archtecture: Log
+- 10ms
+- Centralized Data Exchange Hub
+- Data sent in binary
+- 
 
 
 ## Evento
@@ -111,6 +115,7 @@ ingestion
 - Source: from fonte de dados to Kafka, producer
 - Sync: kafka para datastore, consumer
 
+
 ### Nomenclatura topico
 
 output-ksqldb-stream-agent-avro
@@ -180,3 +185,59 @@ To manage topics, topics data, consumers group, schema registry, connect
   - Automate the process of creating user credential and assigning ACLs for all environments
   - Adjust connections.max.reauth.ms to force connection to reauthenticate at intervals
   - use deny ACLs to prevent actions from compromised users
+
+### Deployment
+- CLI
+- Docker
+- Amazon MSK (2.8.1)
+- Azure HDInsight (2.4.1)
+- Confluent Platform & Operator
+- Strimzi
+- Confluent Cloud (latest)
+
+### Cloud solutions ingestion
+- Azure Event Hubs
+- Cloud Pub/Sub
+- Amazon Kinesis Data Stream
+- Amazon Kinesis Firehose
+
+### Cloud solutions real-time processing
+- KSQLDB & Kafka Stream
+- Apache Spark structured stream
+- Apache Bean
+- Apache Flink
+- Apache Samza
+- Azure Stream Analytics
+- Azure HDInsight
+- Databricks
+- Cloud DataFlow
+- Google DataProc
+- Amazon Kinesis Data Analytics
+- Amazon EMR
+
+### Confluent Platform
+- Apache Kafka
+- Kafka producer & consumer
+- Kafka Connect and connectors
+- Kafka Streams
+- KSQLDB
+- Schema registry & REST proxy
+- Tiered Storage
+- Operator
+- Role-Based Access Control
+- Strutured Audit logs
+- Secret Protection
+- Schema Validation
+- Support 24x7x365
+- Commercial connectors
+- Control Center
+- Multi-region clusters
+- Replicator
+- Auto Data Balancer
+
+### Strimzi Operator
+- Strimzi simplifies process of running Apache Kafka in a Kubernetes Cluester
+- include Kafka Connect, Kafka Connector, Kafka MirrorMaker, Cruise Control, Kafka Bridge managed by strimzi operator (CRD)
+- Scale kafka broker or resources idenpendently, YAML File based for changinf deployment Spec
+- Obeservability: full integrated with prometheus and Grafana
+- Reduced CPU and memmory footprint

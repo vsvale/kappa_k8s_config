@@ -6,6 +6,9 @@ kind: Kafka
 metadata:
   # kafka cluster name
   name: edh
+  annotations:
+    argocd.argoproj.io/hook: Skip
+    argocd.argoproj.io/sync-wave: "-99"
 spec:
   kafka:
     # broker version
