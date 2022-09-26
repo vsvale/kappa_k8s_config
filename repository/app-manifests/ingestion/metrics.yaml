@@ -5,6 +5,9 @@ metadata:
   name: metrics-ingestion
   # deployed yaml
   namespace: cicd
+  annotations:
+    argocd.argoproj.io/hook: PreSync
+    argocd.argoproj.io/sync-wave: "-50"
 spec:
   project: default
   source:

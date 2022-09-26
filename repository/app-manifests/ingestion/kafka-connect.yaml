@@ -5,6 +5,9 @@ metadata:
   name: kafka-connect
   # deployed yaml
   namespace: cicd
+  annotations:
+    argocd.argoproj.io/hook: Sync
+    argocd.argoproj.io/sync-wave: "-80"
 spec:
   project: default
   source:

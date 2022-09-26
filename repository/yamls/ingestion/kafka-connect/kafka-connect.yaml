@@ -8,7 +8,7 @@ metadata:
   labels:
     app: edh
 spec:
-  version: 3.2.0
+  version: 3.2.3
   replicas: 1
   bootstrapServers: edh-kafka-bootstrap:9093
   image: mateushenrique/owshq-kafka-connect-strimzi:3.2.0

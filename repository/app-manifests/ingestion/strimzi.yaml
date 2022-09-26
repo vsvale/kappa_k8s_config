@@ -3,6 +3,9 @@ kind: Application
 metadata:
   name: strimzi
   namespace: cicd
+  annotations:
+    argocd.argoproj.io/hook: PreSync
+    argocd.argoproj.io/sync-wave: "-99"
 spec:
   project: default
   source:
