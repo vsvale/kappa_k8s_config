@@ -49,7 +49,7 @@ ingestion
 - Log entry act as a clock fot state of replicas = Timestamp
 - Active-Active model with a primaty-backup (leader and replica)
 - Sequential writes
-- Data persisted on disk directily with batch-operation prefetch, sequentials writes
+- Data persisted on disk directily with batch-operation prefetch, serial writes
 - sequential reads, copu from disk buffer to network buffer
 - Log compaction: snapshot of last value of key
 
@@ -74,6 +74,13 @@ ingestion
 - Persisted in an append-only fashion
 - Horizontal scale for write throughput
 
+### Replication
+- Guarantees Availability and durability
+- Leader = Single Replica partition [Producer send messages]
+- Follower = don't serve cliente requests
+- number of copies of a topic
+- max number of brokers
+- folower in-sync (same as leader) and out of sync (less than leader)
 
 ### Producer API
 
@@ -96,6 +103,9 @@ ingestion
 - producers gravam eventos nas partiçoes de um topico leader no broker
 - É disk based gravando em formato binario
 
+### Controller
+- only one
+- 
 
 ### Retenção
 
@@ -242,3 +252,9 @@ To manage topics, topics data, consumers group, schema registry, connect
 - Scale kafka broker or resources idenpendently, YAML File based for changinf deployment Spec
 - Obeservability: full integrated with prometheus and Grafana
 - Reduced CPU and memmory footprint
+
+### Zookeeper-less
+- KIP-500 Replace Zookeeper with a self-managed metadata quorum
+- Apache Kafka raft metadata mode - Kraft
+- Consensus protocol for comunication
+- New Quorum controller service
