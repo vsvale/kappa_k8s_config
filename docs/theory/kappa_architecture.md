@@ -24,3 +24,25 @@
 ### Real-time
 - Near real-time: sem SLA, processamento em janelas
 - Real-time: com SLA, o mais rapido possivel, calcular baseline calculando tempo total fim-a-fim, utilizando contadores nos topicos
+
+### Stream Data pipeline on K8s
+![stream_data_pipeline_on_k8s](img/stream_data_pipeline_on_k8s.png)
+- Symbiosis of big data and kubernetes Infrastructure
+- Backbone System for streaming data pipeline at scale
+1. Data source: APIs write events, can ingest data from databases and other data stores
+2. All eventes are stored in stream stora system
+3. Processing system retrieve the events, enrich and write into a new topic inside the streaming storage system
+
+### Components
+- Ingesting Real-time data from microservices into Apache Kafka (Enterprise data hub)
+- working with KafkaConnect Cluster on Kubernetes for Source and Sink pipelines
+- ETL in Real-time using KSQLDB
+- Data Enrichment in near real-time using Apache Spark
+- Using a OLAP System for Analytical Queries
+- Orchestrating and Managing a Real-Time pipeline with Lenses
+
+### Use-case
+- variety of microservices
+- Necessity of Domain of Data (Data mesh)
+- Scale resources to guarantee the growth of business
+- Complexity Enviroment (Event Sourcing)

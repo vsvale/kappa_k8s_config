@@ -4,7 +4,7 @@ apiVersion: batch/v1
 kind: CronJob
 metadata:
   # name of the metadata
-  name: crj-mysql-ingestion
+  name: crj-postgres-ingestion
 spec:
   # at every 1 minutes
   schedule: "*/10 * * * *"
@@ -18,11 +18,11 @@ spec:
           containers:
           # name of the container
           # image from container registry
-          - name: crj-mysql-ingestion
+          - name: crj-postgres-ingestion
             image: owshq/ingestion-data-stores-python-app:1.0
             imagePullPolicy: IfNotPresent
             env:
-              - name: "MYSQL"
-                value: "mysql+pymysql://plumber:PlumberSDE@10.107.84.78:3306/owshq"
-            command: ["python","cli.py","mysql"]
+              - name: "POSTGRES"
+                value: "postgres+pypostgres://plumber:PlumberSDE@10.107.84.78:3306/owshq"
+            command: ["python","cli.py","postgres"]
           restartPolicy: OnFailure

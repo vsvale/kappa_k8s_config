@@ -89,7 +89,9 @@ ingestion
   - Acks=0 manda e não aguarda retorno, pode haver perda de dados.
   - Acks=1 manda e aguarda retorno do Lider garantindo que chegou,pode ocorrer duplicidade de dados.
   - Acks=all manda evendo e aguarda retorno de lider e followers
-  - Use Callback
+  - remover duplicidade: "enable.idempotence": "true"
+  - Use Callback: p.produce(callback=delivery_reports.on_delivery_json)
+  - [Example](../../repository/code/ingestion/kafka/producer_settings.py)
 
 ### Consumer API
 
@@ -139,8 +141,20 @@ ingestion
 - Jars do conector disponiveis no confluent hub para serem instalados no Kafka
 - O arquivo de configuração utiliza a classe do conector para fazer a conexão
 - Source: from fonte de dados to Kafka, producer
+  - [S3](https://www.confluent.io/hub/confluentinc/kafka-connect-s3-source)
+  - [JDBC](https://www.confluent.io/hub/confluentinc/kafka-connect-jdbc): Query based, inserts and updates
+  - [CDC Mysql](https://www.confluent.io/hub/debezium/debezium-connector-mysql)
+  - [CDC PostgresSQL](https://www.confluent.io/hub/debezium/debezium-connector-postgresql)
+  - [CDC Sql Server](https://www.confluent.io/hub/debezium/debezium-connector-sqlserver)
+  - [MongoDB])(https://www.confluent.io/hub/mongodb/kafka-connect-mongodb)
 - Sync: kafka para datastore, consumer
-
+  - [S3](https://www.confluent.io/hub/confluentinc/kafka-connect-s3)
+  - [JDBC](https://www.confluent.io/hub/confluentinc/kafka-connect-jdbc)
+  - [MongoDB](https://www.confluent.io/hub/mongodb/kafka-connect-mongodb)
+  - [YugabyteDB](https://www.confluent.io/hub/yugabyteinc/yb-kafka-connector)
+- MongoDB: source MongoDb
+- CDC: CDC Debezium. Log based, Insert,update and deletes
+- JDBC: source JDBC. Query based. Inserts and updates
 
 ### Nomenclatura topico
 
