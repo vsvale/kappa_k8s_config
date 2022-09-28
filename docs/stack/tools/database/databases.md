@@ -3,6 +3,9 @@
 
 - `helm repo add simcube https://simcubeltd.github.io/simcube-helm-charts/`
 - `helm repo update`
+- `minikube ssh -n minikube`
+- `sudo mkdir /var/opt/mssql`
+- `sudo chown 10001:10001 /var/opt/mssql`
 - `kubectl apply -f https://raw.githubusercontent.com/vsvale/kappa_k8s_config/master/repository/app-manifests/database/mssql.yaml`
 
 ## MYSQL
