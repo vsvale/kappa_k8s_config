@@ -37,13 +37,19 @@
 - `docker push vsvale/vsvale-kafka-connect-strimzi:3.2.3`
 - `kubectl apply -f https://raw.githubusercontent.com/vsvale/kappa_k8s_config/master/repository/app-manifests/ingestion/kafka-connect.yaml`
 
-
+## Schema Registry
 - `helm upgrade --install -f https://raw.githubusercontent.com/vsvale/kappa_k8s_config/master/repository/helm-charts/ingestion/cp-schema-registry/values-development.yaml schema-registry repository/helm-charts/ingestion/cp-schema-registry --namespace ingestion --debug --timeout 10m0s`
+
+## Cruise cotrol
 - `kubectl apply -f https://raw.githubusercontent.com/vsvale/kappa_k8s_config/master/repository/app-manifests/ingestion/cruise-control.yaml`
+
+## Connectors
 - `kubectl apply -f https://raw.githubusercontent.com/vsvale/kappa_k8s_config/master/repository/app-manifests/ingestion/kafka-connectors.yaml`
+
 - `kubectl get applications -n cicd`
 - `kubectl get kafkaconnectors -n ingestion`
 - `kubectl get kafkaconnectors -n ingestion <name> -oyaml`
+- `kubens ingestion && kubectl get strimzi`
 
 ## generators
 see docs/stack/tools/app/data_generator.md

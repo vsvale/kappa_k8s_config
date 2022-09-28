@@ -35,16 +35,6 @@ processing
 - Stream: Change log, pegar todos os evento
 - Table: ultimo estado do evento, ideal for agg
 
-## Install
-
-- `kubectl apply -f https://raw.githubusercontent.com/vsvale/kappa_k8s_config/master/repository/app-manifests/processing/ksqldb.yaml`
-- `watch kubectl get pods -n processing`
-
-### Iniciar
-
-- KSQLDB=nomedopod
-- `kubectl exec $KSQLDB -n processing -ti -- bash ksql`
-
 ### Componentes
 
 - Topico: são os topicos origem do Kafka

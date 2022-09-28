@@ -9,6 +9,9 @@
 
 - `kubectl apply -f https://raw.githubusercontent.com/vsvale/kappa_k8s_config/master/repository/app-manifests/processing/ksqldb.yaml`
 - `watch kubectl get pods -n processing`
+- KSQLDB=nomedopod
+- `kubectl exec $KSQLDB -n processing -ti -- bash ksql`
+
 
 ## Install Trino
 
