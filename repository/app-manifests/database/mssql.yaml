@@ -7,7 +7,7 @@ spec:
   project: default
   source:
     repoURL: "https://github.com/vsvale/kappa_k8s_config.git"
-    path: repository/helm-charts/database/mssqlserver-2019
+    path: repository/helm-charts/database/mssql-linux
     targetRevision: HEAD
     helm:
       valueFiles:

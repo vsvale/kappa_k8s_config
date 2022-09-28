@@ -15,7 +15,7 @@ existingSecret: ""
 existingSecretKey: sapassword
 image:
   repository: mcr.microsoft.com/mssql/server
-  tag: 2017-latest
+  tag: 2022-latest
   pullPolicy: IfNotPresent
   ## It is possible to specify docker registry credentials
   ## See https://kubernetes.io/docs/concepts/containers/images/#specifying-imagepullsecrets-on-a-pod
