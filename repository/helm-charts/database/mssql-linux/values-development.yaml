@@ -1,0 +1,68 @@
+acceptEula:
+  value: "y"
+edition:
+  value: Developer
+collation: SQL_Latin1_General_CP1_CI_AS
+#dataDir: /var/opt/mssql
+lcid: 1033
+hadr: 0
+replicaCount: 1
+# Override sapassword in templates/secret.yaml
+# sapassword: "MyStrongPassword1234"
+agent:
+  # enable sql server agent
+  enabled: true
+# Override sapassword in templates/secret.yaml
+# user = sa
+sapassword: "IlS27OpKxw9EYObU80dz"
+existingSecret: ""
+existingSecretKey: sapassword
+image:
+  repository: mcr.microsoft.com/mssql/server
+  tag: 2022-latest
+  pullPolicy: IfNotPresent
+  
+
+service:
+  # If headless is set to TRUE then the service type is ignored
+  headless: false
+  type: ClusterIP
+  port: 1433
+  annotations: {}
+  labels: {}
+deployment:
+  annotations: {}
+  labels: {}
+pod:
+  annotations: {}
+  labels: {}
+persistence:
+  enabled: true
+  # existingDataClaim:
+  # existingTransactionLogClaim:
+  # existingBackupClaim:
+  # existingMasterClaim:
+  storageClass: ""
+  dataAccessMode: ReadWriteOnce
+  dataSize: 3Gi
+  transactionLogAccessMode: ReadWriteOnce
+  transactionLogSize: 2Gi
+  backupAccessMode: ReadWriteOnce
+  backupSize: 1Gi
+  masterAccessMode: ReadWriteOnce
+  masterSize: 1Gi
+livenessprobe:
+  initialDelaySeconds: 15
+  periodSeconds: 20
+readinessprobe:
+  initialDelaySeconds: 5
+  periodSeconds: 10
+resources:
+  requests:
+    cpu: 250m
+    memory: 512Mi
+  limits:
+    cpu: 250m
+    memory: 2Gi
+nodeSelector: {}
+  # kubernetes.io/hostname: microk8s
