@@ -17,7 +17,24 @@
 - ephemeral: `kubectl apply -f https://raw.githubusercontent.com/vsvale/kappa_k8s_config/master/repository/app-manifests/ingestion/kafka-broker-ephemeral.yaml`
 
 ## Kafka Connector
-- 
+- Download jars:
+  - [S3 source](https://www.confluent.io/hub/confluentinc/kafka-connect-s3-source)
+  - [S3 sync](https://www.confluent.io/hub/confluentinc/kafka-connect-s3)
+  - [JDBC](https://www.confluent.io/hub/confluentinc/kafka-connect-jdbc)
+  - [CDC Mysql](https://www.confluent.io/hub/debezium/debezium-connector-mysql)
+  - [CDC PostgresSQL](https://www.confluent.io/hub/debezium/debezium-connector-postgresql)
+  - [CDC Sql Server](https://www.confluent.io/hub/debezium/debezium-connector-sqlserver)
+  - [MongoDB])(https://www.confluent.io/hub/mongodb/kafka-connect-mongodb)
+  - [YugabyteDB](https://www.confluent.io/hub/yugabyteinc/yb-kafka-connector)
+  - [Elasticsearch source](https://www.confluent.io/hub/dariobalinzo/kafka-connect-elasticsearch-source)
+  - [Elasticsearch sync](https://www.confluent.io/hub/confluentinc/kafka-connect-elasticsearch)
+- `docker images`
+- see version of strimzi image https://quay.io/repository/strimzi/kafka?tab=tags
+- `docker pull quay.io/strimzi/kafka:latest-kafka-3.2.3`
+- `docker build ./repository/code/ingestion/kafka_connect/ -t vsvale-kafka-connect-strimzi:3.2.3`
+- `docker tag vsvale-kafka-connect-strimzi:3.2.3 vsvale/vsvale-kafka-connect-strimzi:3.2.3`
+- `docker login`
+- `docker push vsvale/vsvale-kafka-connect-strimzi:3.2.3`
 - `kubectl apply -f https://raw.githubusercontent.com/vsvale/kappa_k8s_config/master/repository/app-manifests/ingestion/kafka-connect.yaml`
 
 
