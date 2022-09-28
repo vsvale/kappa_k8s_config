@@ -90,5 +90,17 @@ export PS1="\u@\h \[\033[36m\]\w\[\033[91m\]\$(git_data) \[\033[00m\]$ "
 - `sudo apt update && sudo apt install terraform`
 - `terraform version`
 
+## git
+- `git clone https://github.com/vsvale/kappa_k8s_config.git`
+- [Donwload lfs](https://github.com/git-lfs/git-lfs/releases/download/v3.2.0/git-lfs-linux-amd64-v3.2.0.tar.gz)
+- `cd ~/Downloads`
+- `tar -xf git-lfs-linux-amd64-v3.2.0.tar.gz`
+- `chmod 755 install.sh`
+- `sudo ./install.sh`
+- `cd kappa_k8s_config`
+- `git lfs install`
+- `git lfs track "*.jar"`
+
+
 ## Create namespaces
 - `cd ./repository/code/cluster/minikube && terraform init && terraform plan && terraform apply -auto-approve && cd ../../../.. && kubectl get ns && kubectl get storageclass`
