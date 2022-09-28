@@ -1,9 +1,9 @@
 acceptEula:
-  value: "n"
+  value: "y"
 edition:
   value: Developer
 collation: SQL_Latin1_General_CP1_CI_AS
-dataDir: /var/opt/mssql
+#dataDir: /var/opt/mssql
 lcid: 1033
 hadr: 0
 replicaCount: 1

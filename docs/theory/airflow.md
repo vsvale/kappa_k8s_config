@@ -72,4 +72,7 @@
 - Ingestion, processing and serving
 - Orchestrate an end-to-end data process by scheduling a pipeline to apply complex logic to serve the data for end users
     1. Source: get files from different systems
-    2. S3 Data Lake
+    2. S3 Data Lake: store data in different size and formats, try to use a lakehouse format
+    3. Orchestration: watch data lake using a sensor or in scheduled basis to trigger processing, after that deliver to serving
+    4. Apache Spark: intelligent framework for dealing with transformation
+    5. Seving: MDW
