@@ -1,12 +1,3 @@
-- Data serving
-- OLAP System for real-time insights at scale
-- Realtime Distributed OLAP DataStore, Designed for Ansering OLAP Queries with Low-Latency
-- Colunar Oriented Storage
-- Pluggable indexing Technologies
-- Horizontal Scale & Fault-Tolerant
-- Perform Anomaly Detection using ThirdEye
-- Join using Presto e Trino
-
 ## Install
 
 - `helm repo add pinot https://raw.githubusercontent.com/apache/pinot/master/kubernetes/helm`

@@ -3,5 +3,8 @@
 
 ## Tools
 - [CD](./docs/stack/tools/cicd/argocd.md)
-- [Orchestrator](./docs/stack/tools/orchestrator/airflow.md)
 - [Ingestion](./docs/stack/tools/ingestion/strimzi.md)
+- [Processing](./docs/stack/tools/processing/processing.md)
+
+## Optional
+- [Orchestrator](./docs/stack/tools/orchestrator/airflow.md)

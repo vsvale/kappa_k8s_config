@@ -22,4 +22,4 @@ name: trino
 sources:
 - https://github.com/valeriano-manassero/helm-charts
 - https://github.com/trinodb/trino
-version: 2.2.2
+version: 2.3.1

@@ -45,9 +45,10 @@ config:
         key: ""
     internalCommunicationSharedSecret: some-secret
     query:
-      maxMemory: "3GB"
-      maxMemoryPerNode: "1GB"
-      maxTotalMemory: "6GB"
+      maxMemory: "2GB"
+      maxMemoryPerNode: "2GB"
+      maxTotalMemory: "3GB"
+      maxTotalMemoryPerNode: "3GB"
     prestoCompatibleHeader: false
 
   coordinator:
@@ -80,26 +81,26 @@ config:
 
   worker:
     # -- Replica count when autoscaler is disabled. If autoscaler is enabled, it sets minimum number of replicas.
-    replicas: 2
+    replicas: 1
     env: []
     nodeSelector: {}
     tolerations: []
     affinity: {}
     podAnnotations: {}
-    resources: {}
-    # limits:
-    #  cpu: 100m
-    #  memory: 128Mi
-    # requests:
-    #  cpu: 100m
-    #  memory: 128Mi
+    resources:
+     limits:
+      cpu: 1000m
+      memory: 4000Mi
+     requests:
+      cpu: 500m
+      memory: 2000Mi
     initContainers: {}
     # worker:
     #   - name: init-worker
     #     image: busybox:1.28
     #     command: ['sh', '-c', 'echo The worker is running! && sleep 3600']
     jvm:
-      maxHeapSize: "10G"
+      maxHeapSize: "3G"
       gcMethod:
         type: "UseG1GC"
         g1:
@@ -303,7 +304,22 @@ resourceGroups: {}
 # If you want to provide your own secrets resource, you can use this field:
 # connectorsSecret:
 
-connectors: {}
+groupProvider: {}
+  # # Supported types: pvc or configmap
+  # type: pvc
+  # refreshPeriod: 5s
+  # # Rules file is mounted to /etc/trino/group-provider
+  # configFile: "/group-provider/groups.txt"
+  # # If you use pvc as the type, you have to specify the pvcName field:
+  # pvcName:
+  # # If you use pvc as the type, you can specify the name of the volume with the pvcVolumeName:
+  # pvcVolumeName:
+  # # If you use configmap as the type, you have to specify the groups field:
+  # groups:
+  #   groups.txt: |-
+  #    group_name:user_1,user_2,user_3
+
+connectors:
   # Connectors configuration usually contains sensitive data (like passwords, usernames, ...)
   # so data is stored in a secret
   # mysql.properties: |-
@@ -320,6 +336,11 @@ connectors: {}
   #   elasticsearch.auth.user=elastiuser
   #   elasticsearch.auth.password=elasticpassword
   #   elasticsearch.tls.enabled=true
+    kafka.properties: |-
+     connector.name=kafka
+     kafka.table-names=src-app-users-json,src-app-agent-json,src-app-credit-card-json,src-app-musics-json,src-app-rides-json
+     kafka.nodes=edh-kafka-brokers.ingestion.svc.Cluster.local:9092
+     kafka.hide-internal-columns=false
 
 schemas: {}
   # Custom schemas that will be mounted in /etc/trino/schemas
@@ -355,6 +376,94 @@ schemas: {}
   #         ]
   #     }
   #   }
+   users_schema.json: |-
+     {
+       "tableName": "src-app-users-json",
+       "schemaName": "kafka.default",
+       "topicName": "src-app-users-json",
+       "key": {
+           "dataFormat": "json",
+           "fields": [
+               {
+                   "name": "_key",
+                   "dataFormat": "VARCHAR",
+                   "type": "VARCHAR",
+                   "hidden": "false"
+               }
+           ]
+       },
+       "message": {
+           "dataFormat": "json",
+           "fields": [
+               {
+                   "name": "user_id",
+                   "mapping": "user_id",
+                   "type": "BIGINT"
+               },
+               {
+                   "name": "uuid",
+                   "mapping": "uuid",
+                   "type": "VARCHAR"
+               },
+               {
+                   "name": "first_name",
+                   "mapping": "first_name",
+                   "type": "VARCHAR"
+               },
+               {
+                   "name": "last_name",
+                   "mapping": "last_name",
+                   "type": "VARCHAR"
+               },
+               {
+                   "name": "date_birth",
+                   "mapping": "date_birth",
+                   "type": "VARCHAR"
+               },
+               {
+                   "name": "city",
+                   "mapping": "city",
+                   "type": "VARCHAR"
+               },
+               {
+                   "name": "country",
+                   "mapping": "country",
+                   "type": "VARCHAR"
+               },
+               {
+                   "name": "company_name",
+                   "mapping": "company_name",
+                   "type": "VARCHAR"
+               },
+               {
+                   "name": "job",
+                   "mapping": "job",
+                   "type": "VARCHAR"
+               },
+               {
+                   "name": "phone_number",
+                   "mapping": "phone_number",
+                   "type": "VARCHAR"
+               },
+               {
+                   "name": "last_access_time",
+                   "mapping": "last_access_time",
+                   "type": "VARCHAR"
+               },
+               {
+                   "name": "time_zone",
+                   "mapping": "time_zone",
+                   "type": "VARCHAR"
+               },
+               {
+                   "name": "dt_current_timestamp",
+                   "mapping": "dt_current_timestamp",
+                   "type": "VARCHAR"
+               }
+           ]
+       }
+     }
+
 
 service:
   type: ClusterIP
