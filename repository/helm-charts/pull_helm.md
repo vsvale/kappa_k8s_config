@@ -1,4 +1,4 @@
 - helm pull argo/argo-cd --untar -d ./repository/helm-charts/cicd
 - helm pull strimzi/strimzi-kafka-operator --untar -d ./repository/helm-charts/ingestion
 - helm pull valeriano-manassero/trino --untar -d ./repository/helm-charts/processing
-- helm pull simcube/mssqlserver-2022 --untar -d ./repository/helm-charts/database
+- helm pull simcube/mssqlserver-2019 --untar -d ./repository/helm-charts/database

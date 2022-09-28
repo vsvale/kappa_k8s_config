@@ -1,4 +1,4 @@
-# HELM Chart for Microsoft SQL Server 2022 on Linux
+# HELM Chart for Microsoft SQL Server 2019 on Linux
 
 ## Prerequisites
 
@@ -11,7 +11,7 @@
   * You must change the acceptEula.value in the values.yaml file to `Y` or include `--set acceptEula.value=Y` in the command line of `helm install` to override the default value of `N`.
 ## Chart Components
 
-* Creates a SQL Server 2022 deployment (default edition: Developer)
+* Creates a SQL Server 2019 deployment (default edition: Express)
 * Creates a Kubernetes Service on specified port (default: 1433)
 * Creates a Secert to hold SA_PASSWORD
 
@@ -75,7 +75,7 @@ Password: <Enter SA Password>
 $ 1> select @@VERSION;
 $ 2> go
 ------------------------------------------------------------------------------------
-Microsoft SQL Server 2022
+Microsoft SQL Server 2019
 Dec 22 2017 16:13:22
 Copyright (C) 2017 Microsoft Corporation
 Express Edition (64-bit) on Linux (Ubuntu 16.04.3 LTS)
