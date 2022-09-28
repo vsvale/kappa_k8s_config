@@ -19,7 +19,7 @@ existingSecret: ""
 existingSecretKey: sapassword
 image:
   repository: mcr.microsoft.com/mssql/server
-  tag: 2022-latest
+  tag: 2019-latest
   pullPolicy: IfNotPresent
   
 
