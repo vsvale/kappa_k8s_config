@@ -5,6 +5,7 @@
 - [CD](./docs/stack/tools/cicd/argocd.md)
 - [Ingestion](./docs/stack/tools/ingestion/strimzi.md)
 - [Processing](./docs/stack/tools/processing/processing.md)
+- [Database](./docs/stack/tools/database/databases.md)
 
 ## Optional
 - [Orchestrator](./docs/stack/tools/orchestrator/airflow.md)

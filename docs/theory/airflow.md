@@ -51,3 +51,25 @@
 - use it when you need a condition to decide wich task run next
 - taskA >> check >> [is_true,is_false]
 - after taskA run successfully run a python function with a if else statement with returns. this function must return task_id.
+
+### Spark on Airflow
+
+#### Sensors
+- waiting for a new file to arrive, mos often data landing in a data lake folder in a general format to be consumed by the spark engine to be processed
+- S3KeySensor
+- DateTimeSensor
+- ExternalTaskSensor
+- HttpSensor
+- SqlSensor
+- PythonSensor
+
+#### Compact Files
+- After moving or copying files from the landing zone to the processing zone one of the best practices for spark engineers is to size the files to avoid small files problems
+- file lands in a bucket usually in json or csv
+- listen landing zone til has 128mb of files then compact data and send to processing zone for spark to pick up
+
+#### End-to-end data pipeline
+- Ingestion, processing and serving
+- Orchestrate an end-to-end data process by scheduling a pipeline to apply complex logic to serve the data for end users
+    1. Source: get files from different systems
+    2. S3 Data Lake
