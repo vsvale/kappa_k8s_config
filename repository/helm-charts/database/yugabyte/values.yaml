@@ -4,21 +4,19 @@
 Component: "yugabytedb"
 Image:
   repository: "yugabytedb/yugabyte"
-  tag: 2.15.1.0-b175
+  tag: 2.15.2.0-b87
   pullPolicy: IfNotPresent
 
 storage:
-  ephemeral: false # will not allocate PVs when true
+  ephemeral: false  # will not allocate PVs when true
   master:
     count: 1
     size: 10Gi
-    storageClass: standard
-  #    storageClass: "do-block-storage"
+    storageClass: ""
   tserver:
     count: 1
     size: 10Gi
-    storageClass: standard
-#    storageClass: "do-block-storage"
+    storageClass: ""
 
 resource:
   master:
@@ -37,8 +35,8 @@ resource:
       memory: 5Gi
 
 replicas:
-  master: 1
-  tserver: 2
+  master: 2
+  tserver: 3
 
 partition:
   master: 0
@@ -161,7 +159,7 @@ multicluster:
   ## Enable it to deploy YugabyteDB in a multi-cluster services enabled
   ## Kubernetes cluster (KEP-1645). This will create ServiceExport.
   ## GKE Ref - https://cloud.google.com/kubernetes-engine/docs/how-to/multi-cluster-services#registering_a_service_for_export
-  ## You can use this gist for the reference to deploy the Yugabyte DB in a multi-cluster scenario.
+  ## You can use this gist for the reference to deploy the Yugabyte DB in a multi-cluster scenario. 
   ## Gist - https://gist.github.com/baba230896/78cc9bb6f4ba0b3d0e611cd49ed201bf
   createServiceExports: false
 
@@ -180,8 +178,7 @@ serviceMonitor:
   interval: 30s
   ## extraLabels can be used to add labels to the ServiceMonitors
   ## being created
-  extraLabels:
-    {}
+  extraLabels: {}
     # release: prom
 
   ## Configurations of ServiceMonitor for yb-master
@@ -214,29 +211,29 @@ serviceMonitor:
     path: "/prometheus-metrics"
 
   commonMetricRelabelings:
-    # https://git.io/JJW5p
-    # Save the name of the metric so we can group_by since we cannot by __name__ directly...
-    - sourceLabels: ["__name__"]
-      regex: "(.*)"
-      targetLabel: "saved_name"
-      replacement: "$1"
-    # The following basically retrofit the handler_latency_* metrics to label format.
-    - sourceLabels: ["__name__"]
-      regex: "handler_latency_(yb_[^_]*)_([^_]*)_([^_]*)(.*)"
-      targetLabel: "server_type"
-      replacement: "$1"
-    - sourceLabels: ["__name__"]
-      regex: "handler_latency_(yb_[^_]*)_([^_]*)_([^_]*)(.*)"
-      targetLabel: "service_type"
-      replacement: "$2"
-    - sourceLabels: ["__name__"]
-      regex: "handler_latency_(yb_[^_]*)_([^_]*)_([^_]*)(_sum|_count)?"
-      targetLabel: "service_method"
-      replacement: "$3"
-    - sourceLabels: ["__name__"]
-      regex: "handler_latency_(yb_[^_]*)_([^_]*)_([^_]*)(_sum|_count)?"
-      targetLabel: "__name__"
-      replacement: "rpc_latency$4"
+  # https://git.io/JJW5p
+  # Save the name of the metric so we can group_by since we cannot by __name__ directly...
+  - sourceLabels: ["__name__"]
+    regex: "(.*)"
+    targetLabel: "saved_name"
+    replacement: "$1"
+  # The following basically retrofit the handler_latency_* metrics to label format.
+  - sourceLabels: ["__name__"]
+    regex: "handler_latency_(yb_[^_]*)_([^_]*)_([^_]*)(.*)"
+    targetLabel: "server_type"
+    replacement: "$1"
+  - sourceLabels: ["__name__"]
+    regex: "handler_latency_(yb_[^_]*)_([^_]*)_([^_]*)(.*)"
+    targetLabel: "service_type"
+    replacement: "$2"
+  - sourceLabels: ["__name__"]
+    regex: "handler_latency_(yb_[^_]*)_([^_]*)_([^_]*)(_sum|_count)?"
+    targetLabel: "service_method"
+    replacement: "$3"
+  - sourceLabels: ["__name__"]
+    regex: "handler_latency_(yb_[^_]*)_([^_]*)_([^_]*)(_sum|_count)?"
+    targetLabel: "__name__"
+    replacement: "rpc_latency$4"
 
 resources: {}
 
@@ -305,6 +302,7 @@ master:
   # - name: custom-nfs-vol
   #   mountPath: /home/yugabyte/nfs-backup
   extraVolumeMounts: []
+
 
 tserver:
   ## Ref: https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.22/#affinity-v1-core
@@ -394,6 +392,10 @@ preflight:
   skipAll: false
   # Set to true to skip port bind checks
   skipBind: false
+
+  ## Set to true to skip ulimit verification
+  ## SkipAll has higher priority
+  skipUlimit: false
 
 ## Pod securityContext
 ## Ref: https://kubernetes.io/docs/reference/kubernetes-api/workload-resources/pod-v1/#security-context
