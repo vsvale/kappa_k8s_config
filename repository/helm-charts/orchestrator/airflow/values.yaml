@@ -415,7 +415,7 @@ kerberos:
 # Airflow Worker Config
 workers:
   # Number of airflow celery workers in StatefulSet
-  replicas: 1
+  replicas: 3
 
   # Command to use when running Airflow workers (templated).
   command: ~
@@ -1611,7 +1611,7 @@ dags:
     #    <host1>,<ip1> <key1>
     #    <host2>,<ip2> <key2>
     # interval between git sync attempts in seconds
-    wait: 30
+    wait: 65
     containerName: git-sync
     uid: 65533
 
