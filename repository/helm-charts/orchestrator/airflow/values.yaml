@@ -227,7 +227,7 @@ rbac:
 
 # Airflow executor
 # One of: LocalExecutor, LocalKubernetesExecutor, CeleryExecutor, KubernetesExecutor, CeleryKubernetesExecutor
-executor: "CeleryExecutor"
+executor: "CeleryKubernetesExecutor"
 
 # If this is true and using LocalExecutor/KubernetesExecutor/CeleryKubernetesExecutor, the scheduler's
 # service account will have access to communicate with the api-server and launch pods.
@@ -415,7 +415,7 @@ kerberos:
 # Airflow Worker Config
 workers:
   # Number of airflow celery workers in StatefulSet
-  replicas: 1
+  replicas: 3
 
   # Command to use when running Airflow workers (templated).
   command: ~
@@ -1611,7 +1611,7 @@ dags:
     #    <host1>,<ip1> <key1>
     #    <host2>,<ip2> <key2>
     # interval between git sync attempts in seconds
-    wait: 65
+    wait: 60
     containerName: git-sync
     uid: 65533
 
@@ -1624,11 +1624,11 @@ dags:
     env: []
     resources: {}
     #  limits:
-    #    cpu: 2000m
+    #    cpu: 1000m
     #    memory: 1Gi
     #  requests:
-    #    cpu: 1000m
-    #    memory: 2Gi
+    #    cpu: 500m
+    #    memory: 1Gi
 
 logs:
   persistence:
