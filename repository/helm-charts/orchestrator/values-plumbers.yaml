@@ -54,8 +54,8 @@ airflowVersion: "2.3.0"
 # Images
 images:
   airflow:
-    repository: ~
-    tag: ~
+    repository: mateushenrique/owshq-apache-airflow
+    tag: 2.2.1.1
     pullPolicy: IfNotPresent
   # To avoid images with user code, you can turn this to 'true' and
   # all the 'run-airflow-migrations' and 'wait-for-airflow-migrations' containers/jobs
@@ -105,7 +105,7 @@ labels: {}
 # Ingress configuration
 ingress:
   # Enable all ingress resources (deprecated - use ingress.web.enabled and ingress.flower.enabled)
-  enabled: ~
+  enabled: false
 
   # Configs for the Ingress of the web Service
   web:
@@ -415,7 +415,7 @@ kerberos:
 # Airflow Worker Config
 workers:
   # Number of airflow celery workers in StatefulSet
-  replicas: 1
+  replicas: 3
 
   # Command to use when running Airflow workers (templated).
   command: ~
@@ -737,7 +737,7 @@ createUserJob:
   topologySpreadConstraints: []
   # In case you need to disable the helm hooks that create the jobs after install.
   # Disable this if you are using ArgoCD for example
-  useHelmHooks: false
+  useHelmHooks: true
 
   resources: {}
   #  limits:
@@ -804,7 +804,7 @@ migrateDatabaseJob:
   topologySpreadConstraints: []
   # In case you need to disable the helm hooks that create the jobs after install.
   # Disable this if you are using ArgoCD for example
-  useHelmHooks: false
+  useHelmHooks: true
 
 # Airflow webserver settings
 webserver:
@@ -1409,8 +1409,12 @@ cleanup:
   # Command to use when running the cleanup cronjob (templated).
   command: ~
   # Args to use when running the cleanup cronjob (templated).
-  args: ["bash", "-c", "exec airflow kubernetes cleanup-pods --namespace={{ .Release.Namespace }}"]
-
+  args:
+    [
+      "bash",
+      "-c",
+      "exec airflow kubernetes cleanup-pods --namespace={{ .Release.Namespace }}",
+    ]
 
   # Select certain nodes for airflow cleanup pods.
   nodeSelector: {}
@@ -1465,23 +1469,23 @@ config:
   core:
     dags_folder: '{{ include "airflow_dags" . }}'
     # This is ignored when used with the official Docker image
-    load_examples: 'False'
-    executor: '{{ .Values.executor }}'
+    load_examples: "False"
+    executor: "{{ .Values.executor }}"
     # For Airflow 1.10, backward compatibility; moved to [logging] in 2.0
-    colored_console_log: 'False'
+    colored_console_log: "False"
     remote_logging: '{{- ternary "True" "False" .Values.elasticsearch.enabled }}'
   logging:
     remote_logging: '{{- ternary "True" "False" .Values.elasticsearch.enabled }}'
-    colored_console_log: 'False'
+    colored_console_log: "False"
   metrics:
     statsd_on: '{{ ternary "True" "False" .Values.statsd.enabled }}'
     statsd_port: 9125
     statsd_prefix: airflow
     statsd_host: '{{ printf "%s-statsd" .Release.Name }}'
   webserver:
-    enable_proxy_fix: 'True'
+    enable_proxy_fix: "True"
     # For Airflow 1.10
-    rbac: 'True'
+    rbac: "True"
   celery:
     worker_concurrency: 16
   scheduler:
@@ -1493,27 +1497,27 @@ config:
     # `run_duration` included for Airflow 1.10 backward compatibility; removed in 2.0.
     run_duration: 41460
   elasticsearch:
-    json_format: 'True'
+    json_format: "True"
     log_id_template: "{dag_id}_{task_id}_{execution_date}_{try_number}"
   elasticsearch_configs:
     max_retries: 3
     timeout: 30
-    retry_timeout: 'True'
+    retry_timeout: "True"
   kerberos:
-    keytab: '{{ .Values.kerberos.keytabPath }}'
-    reinit_frequency: '{{ .Values.kerberos.reinitFrequency }}'
-    principal: '{{ .Values.kerberos.principal }}'
-    ccache: '{{ .Values.kerberos.ccacheMountPath }}/{{ .Values.kerberos.ccacheFileName }}'
+    keytab: "{{ .Values.kerberos.keytabPath }}"
+    reinit_frequency: "{{ .Values.kerberos.reinitFrequency }}"
+    principal: "{{ .Values.kerberos.principal }}"
+    ccache: "{{ .Values.kerberos.ccacheMountPath }}/{{ .Values.kerberos.ccacheFileName }}"
   celery_kubernetes_executor:
-    kubernetes_queue: 'kubernetes'
+    kubernetes_queue: "kubernetes"
   kubernetes:
-    namespace: '{{ .Release.Namespace }}'
+    namespace: "{{ .Release.Namespace }}"
     airflow_configmap: '{{ include "airflow_config" . }}'
     airflow_local_settings_configmap: '{{ include "airflow_config" . }}'
     pod_template_file: '{{ include "airflow_pod_template_file" . }}/pod_template_file.yaml'
-    worker_container_repository: '{{ .Values.images.airflow.repository | default .Values.defaultAirflowRepository }}'
-    worker_container_tag: '{{ .Values.images.airflow.tag | default .Values.defaultAirflowTag }}'
-    multi_namespace_mode: '{{ if .Values.multiNamespaceMode }}True{{ else }}False{{ end }}'
+    worker_container_repository: "{{ .Values.images.airflow.repository | default .Values.defaultAirflowRepository }}"
+    worker_container_tag: "{{ .Values.images.airflow.tag | default .Values.defaultAirflowTag }}"
+    multi_namespace_mode: "{{ if .Values.multiNamespaceMode }}True{{ else }}False{{ end }}"
 # yamllint enable rule:line-length
 
 # Whether Airflow can launch workers and/or pods in multiple namespaces
@@ -1561,21 +1565,21 @@ dags:
     ## optional subpath for dag volume mount
     subPath: ~
   gitSync:
-    enabled: true
+    enabled: false
 
     # git repo clone url
     # ssh examples ssh://git@github.com/apache/airflow.git
     # git@github.com:apache/airflow.git
     # https example: https://github.com/apache/airflow.git
     repo: https://github.com/vsvale/kappa_airflow.git
-    branch: main
+    branch: master
     rev: HEAD
     depth: 1
     # the number of consecutive failures allowed before aborting
     maxFailures: 0
     # subpath within the repo where dags are located
     # should be "" if dags are at repo root
-    subPath: ""
+    subPath: "dags/"
     # if your repo needs a user name password
     # you can load them to a k8s secret like the one below
     #   ---
