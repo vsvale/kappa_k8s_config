@@ -953,7 +953,7 @@ webserver:
 
 # Airflow Triggerer Config
 triggerer:
-  enabled: false
+  enabled: true
   # Number of airflow triggerers in the deployment
   replicas: 1
 
