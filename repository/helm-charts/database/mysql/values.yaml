@@ -184,7 +184,7 @@ primary:
     socket=/opt/bitnami/mysql/tmp/mysql.sock
     datadir=/bitnami/mysql/data
     tmpdir=/opt/bitnami/mysql/tmp
-    max_allowed_packet=1000M
+    max_allowed_packet=16M
     bind-address=*
     pid-file=/opt/bitnami/mysql/tmp/mysqld.pid
     log-error=/opt/bitnami/mysql/logs/mysqld.log
@@ -544,7 +544,7 @@ secondary:
     socket=/opt/bitnami/mysql/tmp/mysql.sock
     datadir=/bitnami/mysql/data
     tmpdir=/opt/bitnami/mysql/tmp
-    max_allowed_packet=1000M
+    max_allowed_packet=16M
     bind-address=*
     pid-file=/opt/bitnami/mysql/tmp/mysqld.pid
     log-error=/opt/bitnami/mysql/logs/mysqld.log
