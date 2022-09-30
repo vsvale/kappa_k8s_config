@@ -178,32 +178,32 @@ primary:
     default_authentication_plugin=mysql_native_password
     skip-name-resolve
     explicit_defaults_for_timestamp
-    basedir=/opt/data/mysql
-    plugin_dir=/opt/data/mysql/lib/plugin
+    basedir=/opt/bitnami/mysql
+    plugin_dir=/opt/bitnami/mysql/lib/plugin
     port=3306
-    socket=/opt/data/mysql/tmp/mysql.sock
-    datadir=/data/mysql/data
-    tmpdir=/opt/data/mysql/tmp
+    socket=/opt/bitnami/mysql/tmp/mysql.sock
+    datadir=/bitnami/mysql/data
+    tmpdir=/opt/bitnami/mysql/tmp
     max_allowed_packet=1000M
     bind-address=*
-    pid-file=/opt/data/mysql/tmp/mysqld.pid
-    log-error=/opt/data/mysql/logs/mysqld.log
+    pid-file=/opt/bitnami/mysql/tmp/mysqld.pid
+    log-error=/opt/bitnami/mysql/logs/mysqld.log
     character-set-server=UTF8
     collation-server=utf8_general_ci
     slow_query_log=0
-    slow_query_log_file=/opt/data/mysql/logs/mysqld.log
+    slow_query_log_file=/opt/bitnami/mysql/logs/mysqld.log
     long_query_time=10.0
 
     [client]
     port=3306
-    socket=/opt/data/mysql/tmp/mysql.sock
+    socket=/opt/bitnami/mysql/tmp/mysql.sock
     default-character-set=UTF8
-    plugin_dir=/opt/data/mysql/lib/plugin
+    plugin_dir=/opt/bitnami/mysql/lib/plugin
 
     [manager]
     port=3306
-    socket=/opt/data/mysql/tmp/mysql.sock
-    pid-file=/opt/data/mysql/tmp/mysqld.pid
+    socket=/opt/bitnami/mysql/tmp/mysql.sock
+    pid-file=/opt/bitnami/mysql/tmp/mysqld.pid
   ## @param primary.existingConfigmap Name of existing ConfigMap with MySQL Primary configuration.
   ## NOTE: When it's set the 'configuration' parameter is ignored
   ##
@@ -310,8 +310,8 @@ primary:
     ##    cpu: 250m
     ##    memory: 256Mi
     limits:
-      memory: 512Mi
-      cpu: 250m
+      memory: 1000Mi
+      cpu: 500m
     ## Examples:
     ## requests:
     ##    cpu: 250m
@@ -542,32 +542,32 @@ secondary:
     default_authentication_plugin=mysql_native_password
     skip-name-resolve
     explicit_defaults_for_timestamp
-    basedir=/opt/data/mysql
-    plugin_dir=/opt/data/mysql/lib/plugin
+    basedir=/opt/bitnami/mysql
+    plugin_dir=/opt/bitnami/mysql/lib/plugin
     port=3306
-    socket=/opt/data/mysql/tmp/mysql.sock
-    datadir=/data/mysql/data
-    tmpdir=/opt/data/mysql/tmp
+    socket=/opt/bitnami/mysql/tmp/mysql.sock
+    datadir=/bitnami/mysql/data
+    tmpdir=/opt/bitnami/mysql/tmp
     max_allowed_packet=1000M
     bind-address=*
-    pid-file=/opt/data/mysql/tmp/mysqld.pid
-    log-error=/opt/data/mysql/logs/mysqld.log
+    pid-file=/opt/bitnami/mysql/tmp/mysqld.pid
+    log-error=/opt/bitnami/mysql/logs/mysqld.log
     character-set-server=UTF8
     collation-server=utf8_general_ci
     slow_query_log=0
-    slow_query_log_file=/opt/data/mysql/logs/mysqld.log
+    slow_query_log_file=/opt/bitnami/mysql/logs/mysqld.log
     long_query_time=10.0
 
     [client]
     port=3306
-    socket=/opt/data/mysql/tmp/mysql.sock
+    socket=/opt/bitnami/mysql/tmp/mysql.sock
     default-character-set=UTF8
-    plugin_dir=/opt/data/mysql/lib/plugin
+    plugin_dir=/opt/bitnami/mysql/lib/plugin
 
     [manager]
     port=3306
-    socket=/opt/data/mysql/tmp/mysql.sock
-    pid-file=/opt/data/mysql/tmp/mysqld.pid
+    socket=/opt/bitnami/mysql/tmp/mysql.sock
+    pid-file=/opt/bitnami/mysql/tmp/mysqld.pid
   ## @param secondary.existingConfigmap Name of existing ConfigMap with MySQL Secondary configuration.
   ## NOTE: When it's set the 'configuration' parameter is ignored
   ##
@@ -674,12 +674,16 @@ secondary:
     ## limits:
     ##    cpu: 250m
     ##    memory: 256Mi
-    limits: {}
+    limits:
+      memory: 512Mi
+      cpu: 250m
     ## Examples:
     ## requests:
     ##    cpu: 250m
     ##    memory: 256Mi
-    requests: {}
+    requests:
+      memory: 512Mi
+      cpu: 250m
   ## Configure extra options for liveness probe
   ## ref: https://kubernetes.io/docs/tasks/configure-pod-container/configure-liveness-readiness-probes/#configure-probes
   ## @param secondary.livenessProbe.enabled Enable livenessProbe
@@ -691,7 +695,7 @@ secondary:
   ##
   livenessProbe:
     enabled: true
-    initialDelaySeconds: 5
+    initialDelaySeconds: 120
     periodSeconds: 10
     timeoutSeconds: 1
     failureThreshold: 3
@@ -707,7 +711,7 @@ secondary:
   ##
   readinessProbe:
     enabled: true
-    initialDelaySeconds: 5
+    initialDelaySeconds: 30
     periodSeconds: 10
     timeoutSeconds: 1
     failureThreshold: 3
@@ -723,10 +727,10 @@ secondary:
   ##
   startupProbe:
     enabled: true
-    initialDelaySeconds: 15
+    initialDelaySeconds: 120
     periodSeconds: 10
     timeoutSeconds: 1
-    failureThreshold: 15
+    failureThreshold: 60
     successThreshold: 1
   ## @param secondary.customLivenessProbe Override default liveness probe for MySQL secondary containers
   ##
