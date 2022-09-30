@@ -309,12 +309,16 @@ primary:
     ## limits:
     ##    cpu: 250m
     ##    memory: 256Mi
-    limits: {}
+    limits:
+      memory: 512Mi
+      cpu: 250m
     ## Examples:
     ## requests:
     ##    cpu: 250m
     ##    memory: 256Mi
-    requests: {}
+    requests:
+      memory: 512Mi
+      cpu: 250m
   ## Configure extra options for liveness probe
   ## ref: https://kubernetes.io/docs/tasks/configure-pod-container/configure-liveness-readiness-probes/#configure-probes
   ## @param primary.livenessProbe.enabled Enable livenessProbe
@@ -326,7 +330,7 @@ primary:
   ##
   livenessProbe:
     enabled: true
-    initialDelaySeconds: 5
+    initialDelaySeconds: 120
     periodSeconds: 10
     timeoutSeconds: 1
     failureThreshold: 3
@@ -342,7 +346,7 @@ primary:
   ##
   readinessProbe:
     enabled: true
-    initialDelaySeconds: 5
+    initialDelaySeconds: 30
     periodSeconds: 10
     timeoutSeconds: 1
     failureThreshold: 3
@@ -358,10 +362,10 @@ primary:
   ##
   startupProbe:
     enabled: true
-    initialDelaySeconds: 15
+    initialDelaySeconds: 120
     periodSeconds: 10
     timeoutSeconds: 1
-    failureThreshold: 10
+    failureThreshold: 60
     successThreshold: 1
   ## @param primary.customLivenessProbe Override default liveness probe for MySQL primary containers
   ##

@@ -79,9 +79,9 @@ spec:
             - /bin/bash
             - -ec
             - |
-              mkdir -p "/bitnami/mysql"
-              chown "{{ .Values.primary.containerSecurityContext.runAsUser }}:{{ .Values.primary.podSecurityContext.fsGroup }}" "/bitnami/mysql"
-              find "/bitnami/mysql" -mindepth 1 -maxdepth 1 -not -name ".snapshot" -not -name "lost+found" | xargs -r chown -R "{{ .Values.primary.containerSecurityContext.runAsUser }}:{{ .Values.primary.podSecurityContext.fsGroup }}"
+              mkdir -p "/data/mysql"
+              chown "{{ .Values.primary.containerSecurityContext.runAsUser }}:{{ .Values.primary.podSecurityContext.fsGroup }}" "/data/mysql"
+              find "/data/mysql" -mindepth 1 -maxdepth 1 -not -name ".snapshot" -not -name "lost+found" | xargs -r chown -R "{{ .Values.primary.containerSecurityContext.runAsUser }}:{{ .Values.primary.podSecurityContext.fsGroup }}"
           securityContext:
             runAsUser: 0
           {{- if .Values.volumePermissions.resources }}
@@ -89,7 +89,7 @@ spec:
           {{- end }}
           volumeMounts:
             - name: data
-              mountPath: /bitnami/mysql
+              mountPath: /data/mysql
         {{- end }}
         {{- if .Values.primary.initContainers }}
         {{- include "common.tplvalues.render" (dict "value" .Values.primary.initContainers "context" $) | nindent 8 }}
@@ -119,7 +119,7 @@ spec:
               value: {{ ternary "true" "false" (or .Values.image.debug .Values.diagnosticMode.enabled) | quote }}
             {{- if .Values.auth.usePasswordFiles }}
             - name: MYSQL_ROOT_PASSWORD_FILE
-              value: {{ default "/opt/bitnami/mysql/secrets/mysql-root-password" .Values.auth.customPasswordFiles.root }}
+              value: {{ default "/opt/data/mysql/secrets/mysql-root-password" .Values.auth.customPasswordFiles.root }}
             {{- else }}
             - name: MYSQL_ROOT_PASSWORD
               valueFrom:
@@ -132,7 +132,7 @@ spec:
               value: {{ .Values.auth.username | quote }}
             {{- if .Values.auth.usePasswordFiles }}
             - name: MYSQL_PASSWORD_FILE
-              value: {{ default "/opt/bitnami/mysql/secrets/mysql-password" .Values.auth.customPasswordFiles.user }}
+              value: {{ default "/opt/data/mysql/secrets/mysql-password" .Values.auth.customPasswordFiles.user }}
             {{- else }}
             - name: MYSQL_PASSWORD
               valueFrom:
@@ -152,7 +152,7 @@ spec:
               value: {{ .Values.auth.replicationUser | quote }}
             {{- if .Values.auth.usePasswordFiles }}
             - name: MYSQL_REPLICATION_PASSWORD_FILE
-              value: {{ default "/opt/bitnami/mysql/secrets/mysql-replication-password" .Values.auth.customPasswordFiles.replicator }}
+              value: {{ default "/opt/data/mysql/secrets/mysql-replication-password" .Values.auth.customPasswordFiles.replicator }}
             {{- else }}
             - name: MYSQL_REPLICATION_PASSWORD
               valueFrom:
@@ -232,19 +232,19 @@ spec:
           {{- end }}
           volumeMounts:
             - name: data
-              mountPath: /bitnami/mysql
+              mountPath: /data/mysql
             {{- if or .Values.initdbScriptsConfigMap .Values.initdbScripts }}
             - name: custom-init-scripts
               mountPath: /docker-entrypoint-initdb.d
             {{- end }}
             {{- if or .Values.primary.configuration .Values.primary.existingConfigmap }}
             - name: config
-              mountPath: /opt/bitnami/mysql/conf/my.cnf
+              mountPath: /opt/data/mysql/conf/my.cnf
               subPath: my.cnf
             {{- end }}
             {{- if and .Values.auth.usePasswordFiles (not .Values.auth.customPasswordFiles) }}
             - name: mysql-credentials
-              mountPath: /opt/bitnami/mysql/secrets/
+              mountPath: /opt/data/mysql/secrets/
             {{- end }}
             {{- if .Values.primary.extraVolumeMounts }}
             {{- include "common.tplvalues.render" (dict "value" .Values.primary.extraVolumeMounts "context" $) | nindent 12 }}
@@ -256,7 +256,7 @@ spec:
           env:
             {{- if .Values.auth.usePasswordFiles }}
             - name: MYSQL_ROOT_PASSWORD_FILE
-              value: {{ default "/opt/bitnami/mysqld-exporter/secrets/mysql-root-password" .Values.auth.customPasswordFiles.root }}
+              value: {{ default "/opt/data/mysqld-exporter/secrets/mysql-root-password" .Values.auth.customPasswordFiles.root }}
             {{- else }}
             - name: MYSQL_ROOT_PASSWORD
               valueFrom:
@@ -301,7 +301,7 @@ spec:
           {{- if and .Values.auth.usePasswordFiles (not .Values.auth.customPasswordFiles) }}
           volumeMounts:
             - name: mysql-credentials
-              mountPath: /opt/bitnami/mysqld-exporter/secrets/
+              mountPath: /opt/data/mysqld-exporter/secrets/
           {{- end }}
         {{- end }}
         {{- if .Values.primary.sidecars }}
