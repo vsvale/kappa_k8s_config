@@ -1514,6 +1514,16 @@ config:
     worker_container_repository: '{{ .Values.images.airflow.repository | default .Values.defaultAirflowRepository }}'
     worker_container_tag: '{{ .Values.images.airflow.tag | default .Values.defaultAirflowTag }}'
     multi_namespace_mode: '{{ if .Values.multiNamespaceMode }}True{{ else }}False{{ end }}'
+  smtp:
+    smtp_host: 'smtp.mailtrap.io'
+    smtp_starttls: 'True'
+    smtp_ssl: 'False'
+    smtp_port: 2525
+    smtp_user: 'ca30f00f5d605f'
+    smtp_password: 'ea654b5cbb278e'
+    smtp_mail_from: viniciusdvale@gmail.com
+    smtp_timeout: 30
+    smtp_retry_limit: 5
 # yamllint enable rule:line-length
 
 # Whether Airflow can launch workers and/or pods in multiple namespaces
