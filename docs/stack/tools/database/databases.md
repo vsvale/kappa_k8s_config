@@ -5,12 +5,6 @@
 - `kubectl apply -f https://raw.githubusercontent.com/vsvale/kappa_k8s_config/master/repository/app-manifests/database/mssql.yaml`
 - `kubectl apply -f https://raw.githubusercontent.com/vsvale/kappa_k8s_config/master/repository/yamls/svc/svc_lb_mssql.yaml -n database`
 
-## MYSQL Operator
-- `helm repo add mysql-operator https://mysql.github.io/mysql-operator/`
-- `helm repo update`
-- `kubectl apply -f https://raw.githubusercontent.com/vsvale/kappa_k8s_config/master/repository/app-manifests/database/mysql-operator.yaml`
-- `kubectl apply -f https://raw.githubusercontent.com/vsvale/kappa_k8s_config/master/repository/app-manifests/database/innodb.yaml`
-
 ## MYSQL
 
 - `helm repo add bitnami https://charts.bitnami.com/bitnami`
