@@ -2,7 +2,7 @@ apiVersion: extensions/v1beta1
 kind: Ingress
 metadata:
   name: argocd-ingress
-  namespace: orchestrator
+  namespace: cicd
   labels:
     app: argocd
   annotations:
