@@ -28,11 +28,11 @@ podSpec:
   - name: mysql
     resources:
       requests:
-        memory: "500Mi"  # adapt to your needs
-        cpu: "1800m"      # adapt to your needs
+        memory: "1000Mi"  # adapt to your needs
+        cpu: "500m"      # adapt to your needs
       limits:
-        memory: "4000Mi"  # adapt to your needs
-        cpu: "3600m"      # adapt to your needs
+        memory: "2000Mi"  # adapt to your needs
+        cpu: "2000m"      # adapt to your needs
 
 
 #serverConfig:
@@ -42,12 +42,11 @@ podSpec:
 #    local_infile=off
 
 
-  datadirVolumeClaimTemplate:
-    accessModes: 
-      - ReadWriteOnce
-    resources:
-      requests:
-        storage: 5Gi
+#datadirVolumeClaimTemplate:
+#  accessModes:
+#  resources:
+#    requests:
+#      storage:
 
 #initDB:
 #  dump:
