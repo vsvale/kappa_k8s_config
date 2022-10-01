@@ -1,6 +1,6 @@
 annotations:
   artifacthub.io/changes: |
-    - "[Fixed]: Node selector for repoServer was not rendered correctly"
+    - "[Fixed]: v5.5.0 Upgrade guide heading in README"
 apiVersion: v2
 appVersion: v2.4.12
 dependencies:
@@ -20,4 +20,7 @@ maintainers:
 - name: argoproj
   url: https://argoproj.github.io/
 name: argo-cd
-version: 5.5.3
+sources:
+- https://github.com/argoproj/argo-helm/tree/main/charts/argo-cd
+- https://github.com/argoproj/argo-cd
+version: 5.5.7
