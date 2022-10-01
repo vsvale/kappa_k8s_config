@@ -405,7 +405,7 @@ primary:
     ## @param primary.persistence.existingClaim Name of an existing `PersistentVolumeClaim` for MySQL primary replicas
     ## NOTE: When it's set the rest of persistence parameters are ignored
     ##
-    existingClaim: ""
+    existingClaim: "data-mysql-0"
     ## @param primary.persistence.storageClass MySQL primary persistent volume storage Class
     ## If defined, storageClassName: <storageClass>
     ## If set to "-", storageClassName: "", which disables dynamic provisioning
