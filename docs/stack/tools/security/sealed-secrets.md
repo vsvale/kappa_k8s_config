@@ -12,19 +12,17 @@ The full process is the following:
 6. The controller decrypts the Sealed secrets and passes them to your application as plain secrets.
 7. The application works as usual.
 
-![sealedsecrets.png](../../../imgs/sealedsecrets.png)
+![sealedsecrets.png](imgs/sealedsecrets.png)
 
-## Install dev
-
+## Install
 - `helm repo add sealed-secrets https://bitnami-labs.github.io/sealed-secrets`
-- `helm repo update`
-- `kubectl apply -f https://raw.githubusercontent.com/vsvale/kappa_k8s_config/master/security/yamls/sealed-secrets.yaml`
+- `kubectl apply -f https://raw.githubusercontent.com/vsvale/kappa_k8s_config/master/repository/app-manifests/security/sealedsecret.yaml`
 - `helm upgrade --install  sealed-secrets --namespace security --debug --timeout 10m0s --create-namespace --set-string fullnameOverride=sealed-secrets-controller sealed-secrets/sealed-secrets`
 
 ## Install CLI dev
 
 - `VERSION=$(curl --silent "https://api.github.com/repos/bitnami-labs/sealed-secrets/releases/latest" | grep '"tag_name"' | sed -E 's/.*"([^"]+)".*/\1/')`
-- `curl -L --output - https://github.com/bitnami-labs/sealed-secrets/releases/download/v0.18.1/kubeseal-0.18.1-linux-amd64.tar.gz | tar zx`
+- `curl -L --output - https://github.com/bitnami-labs/sealed-secrets/releases/download/v0.18.5/kubeseal-0.18.5-linux-amd64.tar.gz | tar zx`
 - `sudo mv ./kubeseal /usr/local/bin/kubeseal`
 - `sudo chmod +x /usr/local/bin/kubeseal`
 
