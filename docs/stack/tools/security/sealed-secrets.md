@@ -17,7 +17,6 @@ The full process is the following:
 ## Install
 - `helm repo add sealed-secrets https://bitnami-labs.github.io/sealed-secrets`
 - `kubectl apply -f https://raw.githubusercontent.com/vsvale/kappa_k8s_config/master/repository/app-manifests/security/sealedsecret.yaml`
-- `helm upgrade --install  sealed-secrets --namespace security --debug --timeout 10m0s --create-namespace --set-string fullnameOverride=sealed-secrets-controller sealed-secrets/sealed-secrets`
 
 ## Install CLI dev
 

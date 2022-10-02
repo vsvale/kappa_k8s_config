@@ -28,7 +28,7 @@ kubeVersion: ""
 nameOverride: ""
 ## @param fullnameOverride String to fully override common.names.fullname
 ##
-fullnameOverride: ""
+fullnameOverride: "sealed-secrets-controller"
 ## @param namespaceOverride String to fully override common.names.namespace
 ##
 namespaceOverride: ""
