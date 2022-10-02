@@ -1797,10 +1797,16 @@ repoServer:
     timeoutSeconds: 1
 
   # -- Additional volumeMounts to the repo server main container
-  volumeMounts: []
+  volumeMounts:
+    - name: helm-values
+      mountPath: /helm-values
 
   # -- Additional volumes to the repo server pod
-  volumes: []
+  volumes:
+    - name: helm-values
+      secret:
+        secretName: helm-values
+        optional: true
   ## Use init containers to configure custom tooling
   ## https://argo-cd.readthedocs.io/en/stable/operator-manual/custom_tools/
   ## When using the volumes & volumeMounts section bellow, please comment out those above.

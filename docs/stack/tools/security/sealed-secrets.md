@@ -29,7 +29,7 @@ The full process is the following:
 
 Encryption happens via the kubeseal executable. Decryption happens via the Sealed Secrets controller.
 
-- `kubeseal < unsealed_secrets/db-creds.yml > sealed_secrets/db-creds-encrypted.yaml -o yaml`
+- `kubeseal --controller-name=sealed-secrets-controller --controller-namespace security < ./repository/yamls/security/smtp_insecure.yaml > ./repository/yamls/security/smtp_secure.yaml -o yaml`
 
 db-creds.yml
 
