@@ -1519,8 +1519,8 @@ config:
     smtp_starttls: 'True'
     smtp_ssl: 'False'
     smtp_port: 2525
-    smtp_user: 'ca30f00f5d605f'
-    smtp_password: 'ea654b5cbb278e'
+    smtp_user: ''
+    smtp_password: ''
     smtp_mail_from: viniciusdvale@gmail.com
     smtp_timeout: 30
     smtp_retry_limit: 5
