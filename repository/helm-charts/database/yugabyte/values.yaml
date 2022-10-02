@@ -376,9 +376,9 @@ ip_version_support: "v4_only" # v4_only, v6_only are the only supported values a
 # For more https://docs.yugabyte.com/latest/reference/configuration/yugabyted/#environment-variables
 authCredentials:
   ysql:
-    user: ""
-    password: ""
-    database: ""
+    user: "plumber"
+    password: "PlumberSDE"
+    database: "owshq"
   ycql:
     user: ""
     password: ""

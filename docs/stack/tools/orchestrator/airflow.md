@@ -16,3 +16,6 @@
 - airflow info
 - airflow config list
 - airflow connections list
+
+### SMTP
+- add smpt in values and apply locally dont send to git
