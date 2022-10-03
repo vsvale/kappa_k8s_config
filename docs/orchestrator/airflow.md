@@ -1,3 +1,18 @@
+## Create airflow in Yugabyte
+CREATE DATABASE airflow_db;
+CREATE USER airflow_user WITH PASSWORD 'airflow';
+GRANT ALL PRIVILEGES ON DATABASE airflow_db TO airflow_user;
+
+## change metadataConnection
+  metadataConnection:
+    user: airflow_user
+    pass: airflow
+    protocol: postgresql
+    host: 172.18.0.2
+    port: 5433
+    db: airflow_db
+    sslmode: disable
+
 ## Install
 
 - `helm repo add apache-airflow https://airflow.apache.org/`

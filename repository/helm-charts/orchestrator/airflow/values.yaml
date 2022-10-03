@@ -325,12 +325,12 @@ data:
 
   # Otherwise pass connection values in
   metadataConnection:
-    user: postgres
-    pass: postgres
+    user: airflow_user
+    pass: airflow
     protocol: postgresql
-    host: ~
-    port: 5432
-    db: postgres
+    host: 172.18.0.2
+    port: 5433
+    db: airflow_db
     sslmode: disable
   # resultBackendConnection defaults to the same database as metadataConnection
   resultBackendConnection: ~
@@ -1447,7 +1447,7 @@ cleanup:
 # Configuration for postgresql subchart
 # Not recommended for production
 postgresql:
-  enabled: true
+  enabled: false
   postgresqlPassword: postgres
   postgresqlUsername: postgres
 
