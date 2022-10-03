@@ -104,29 +104,3 @@ resource "kubernetes_namespace" "gateway" {
     name = "gateway"
   }
 }
-
-resource "kubernetes_storage_class" "flexible" {
-  metadata {
-    name = "flexible"
-    annotations = {
-      "storageclass.kubernetes.io/is-default-class" = "false"
-    }
-  }
-  storage_provisioner    = "docker.io/hostpath"
-  reclaim_policy         = "Delete"
-  volume_binding_mode    = "Immediate"
-  allow_volume_expansion = "true"
-}
-
-resource "kubernetes_storage_class" "waiter" {
-  metadata {
-    name = "waiter"
-    annotations = {
-      "storageclass.kubernetes.io/is-default-class" = "false"
-    }
-  }
-  storage_provisioner    = "docker.io/hostpath"
-  reclaim_policy         = "Delete"
-  volume_binding_mode    = "WaitForFirstConsumer"
-  allow_volume_expansion = "true"
-}
