@@ -328,7 +328,7 @@ data:
     user: airflow_user
     pass: airflow
     protocol: postgresql
-    host: 172.18.0.2
+    host: ~
     port: 5433
     db: airflow_db
     sslmode: disable
