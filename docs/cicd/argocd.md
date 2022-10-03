@@ -15,11 +15,7 @@
 - `kubens cicd`
 - `https://raw.githubusercontent.com/vsvale/kappa_k8s_config/master/repository/yamls/cicd/svc_lb_argocd_ui.yaml -n cicd`
 
-
-
-- `kubectl patch svc argocd-server -n cicd -p '{"spec": {"type": "LoadBalancer"}}'`
-- `minikube tunnel`
-- `ARGOCD_EXTRIP=$(kubectl -n cicd get services -l app.kubernetes.io/name=argocd-server,app.kubernetes.io/instance=argocd -o jsonpath="{.items[0].status.loadBalancer.ingress[0].ip}") && kubectl -n cicd get secret argocd-initial-admin-secret -o jsonpath="{.data.password}" | base64 -d | xargs -t -I {} argocd login $ARGOCD_EXTRIP --username admin --password {} --insecure`
+- `ARGOCD_EXTRIP=$(kubectl -n cicd get services svc-lb-argocd-ui -o jsonpath="{.status.loadBalancer.ingress[0].ip}") && kubectl -n cicd get secret argocd-initial-admin-secret -o jsonpath="{.data.password}" | base64 -d | xargs -t -I {} argocd login $ARGOCD_EXTRIP --username admin --password {} --insecure`
 - or
 - `kubectl apply -f https://raw.githubusercontent.com/vsvale/kappa_k8s_config/master/repository/yamls/cicd/ingres_argocd.yaml -n cicd`
 - `kubectl -n cicd get secret argocd-initial-admin-secret -o jsonpath="{.data.password}" | base64 -d`

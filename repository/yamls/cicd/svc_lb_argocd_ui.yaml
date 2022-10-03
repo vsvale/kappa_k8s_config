@@ -9,4 +9,5 @@ spec:
   - port: 8282
     targetPort: 80
   selector:
-    app: argocd-server
+    instance: argocd
+    name: argocd-server
