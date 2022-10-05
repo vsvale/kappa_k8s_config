@@ -1,17 +1,12 @@
-## Create airflow in Yugabyte
-CREATE DATABASE airflow_db;
-CREATE USER airflow_user WITH PASSWORD 'airflow';
-GRANT ALL PRIVILEGES ON DATABASE airflow_db TO airflow_user;
-
-## change metadataConnection
-  metadataConnection:
-    user: airflow_user
-    pass: airflow
-    protocol: postgresql
-    host: 172.18.0.2
-    port: 5433
-    db: airflow_db
-    sslmode: disable
+## Create image
+- `docker images`
+- see version of airflow image https://hub.docker.com/r/apache/airflow/tags
+- `docker pull apache/airflow`
+- `docker build ./repository/code/orchestrator/airflow/ -t vsvale-airflow:2.4.1`
+- `docker tag vsvale-airflow:2.4.1 vsvale/vsvale-airflow:2.4.1`
+- `docker login`
+- `docker push vsvale/vsvale-airflow:2.4.1`
+- update version to [values.yaml](../../repository/helm-charts/orchestrator/airflow/values.yaml)
 
 ## Install
 
