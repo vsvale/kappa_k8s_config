@@ -15,7 +15,7 @@ operator:
   #     value: ""
   image:
     repository: minio/operator
-    tag: v4.3.7
+    tag: v4.2.7
     pullPolicy: IfNotPresent
   imagePullSecrets: []
   initcontainers: []
@@ -28,7 +28,6 @@ operator:
   nodeSelector: {}
   affinity: {}
   tolerations: []
-  topologySpreadConstraints: []
   resources:
     requests:
       cpu: 200m
@@ -38,7 +37,7 @@ operator:
 console:
   image:
     repository: minio/console
-    tag: v0.12.3
+    tag: v0.9.6
     pullPolicy: IfNotPresent
   imagePullSecrets: []
   initcontainers: []
@@ -46,7 +45,6 @@ console:
   nodeSelector: {}
   affinity: {}
   tolerations: []
-  topologySpreadConstraints: []
   resources: {}
   securityContext:
     runAsUser: 1000
