@@ -1,7 +1,7 @@
 ## Create image
 - `docker images`
 - see version of airflow image https://hub.docker.com/r/apache/airflow/tags
-- `docker pull apache/airflow`
+- `docker pull apache/airflow:latest-python`
 - `docker build ./repository/code/orchestrator/airflow/ -t vsvale-airflow:2.4.1`
 - `docker tag vsvale-airflow:2.4.1 vsvale/vsvale-airflow:2.4.1`
 - `docker login`
@@ -11,7 +11,10 @@
 ## Install
 
 - `helm repo add apache-airflow https://airflow.apache.org/`
-- `helm upgrade --install -f https://raw.githubusercontent.com/vsvale/kappa_k8s_config/master/repository/helm-charts/orchestrator/airflow/values.yaml airflow apache-airflow/airflow --namespace orchestrator --debug --timeout 10m0s`
+- without smtp: `helm upgrade --install -f https://raw.githubusercontent.com/vsvale/kappa_k8s_config/master/repository/helm-charts/orchestrator/airflow/values.yaml airflow apache-airflow/airflow --namespace orchestrator --debug --timeout 10m0s`
+- with smtp:
+    -  add smpt in values and apply locally dont send to git
+    - `helm upgrade --install -f ./repository/helm-charts/orchestrator/airflow/values.yaml airflow apache-airflow/airflow --namespace orchestrator --debug --timeout 10m0s`
 - `kubectl apply -f https://raw.githubusercontent.com/vsvale/kappa_k8s_config/master/repository/yamls/orchestrator/svc_lb_airflow_ui.yaml`
 
 ## CLI
@@ -23,6 +26,3 @@
 - airflow info
 - airflow config list
 - airflow connections list
-
-### SMTP
-- add smpt in values and apply locally dont send to git
