@@ -17,6 +17,7 @@
 ### Nodes
 
 - `kubectl get nodes`
+- `kubectl top nodes`
 
 #### Additional information about each node in the cluster
 
@@ -152,3 +153,12 @@ kubectl config use-context minikube
 - can't be used to query resources
 - medatada.anotation: key:value
 - `kubectl annotate pod nginx-pod owner=Anthony --overwrite`
+
+
+### Node Pools
+- utilizar D-series , M-series(memory), Ls-series(storage) e F-series(cpu) para poder escalar as maquinas
+
+### Node Affinity, taint and toleration
+- Node affinity put pods together
+
+

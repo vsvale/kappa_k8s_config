@@ -27,7 +27,6 @@
 
 ### Tasks status
 
-
 - none: The Task has not yet been queued for execution (its dependencies are not yet met)
 - scheduled: The scheduler has determined the Task’s dependencies are met and it should run
 - queued: The task has been assigned to an Executor and is awaiting a worker
@@ -43,6 +42,14 @@
 - deferred: The task has been deferred to a trigger
 - removed: The task has vanished from the DAG since the run started
 
+### Schedule
+- scheduler_interval or schedule
+    - None: manual
+    - @daily, @weekly, @monthly
+    - cronjob: '* * * * * ' minute, hour, day, month, day of week
+- start_date: d-1 start run
+- end_date: when dag stop scheduling
+    - 
 
 ### X-com
 - Cross-communications: push and pull of metadata

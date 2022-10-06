@@ -6,6 +6,7 @@
 - [Ingestion](docs/ingestion/strimzi.md)
 - [Processing](docs/processing/processing.md)
 - [Database YugabyteDB](docs/database/databases.md)
+- [Storage Minio](docs/deepstorage/minio.md)
 
 ## Optional
 - [Orchestrator](docs/orchestrator/airflow.md)
