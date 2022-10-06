@@ -1,7 +1,7 @@
 ## Create image
 - `docker images`
 - see version of airflow image https://hub.docker.com/r/apache/airflow/tags
-- `docker pull apache/airflow:latest-python`
+- `docker pull apache/airflow:latest-python3.7`
 - `docker build ./repository/code/orchestrator/airflow/ -t vsvale-airflow:2.4.1`
 - `docker tag vsvale-airflow:2.4.1 vsvale/vsvale-airflow:2.4.1`
 - `docker login`

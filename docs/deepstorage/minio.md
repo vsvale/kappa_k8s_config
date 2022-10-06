@@ -1,14 +1,12 @@
 - `helm repo add miniop https://operator.min.io/`
 - `kubectl apply -f https://raw.githubusercontent.com/vsvale/kappa_k8s_config/master/repository/app-manifests/deepstorage/miniooperator.yaml`
 - `kubectl apply -f https://raw.githubusercontent.com/vsvale/kappa_k8s_config/master/repository/yamls/deepstorage/svc_lb_minio_ui.yaml`
+- `kubectl apply -f https://raw.githubusercontent.com/vsvale/kappa_k8s_config/master/repository/yamls/deepstorage/jwt_minio.yaml`
+- `kubectl get secret console-sa-secret -o jsonpath="{.data.token}"| base64 --decode`
+- create tenante default disable TLS
+- 4la4YC6ULnXpKMJm WuuISmF50uodFQY9yjcTbFf0BMCJW2Kp
 
 
 
-- `kubectl get secret $(kubectl get serviceaccount console-sa --namespace deepstorage -o jsonpath="{.secrets[0].name}") --namespace deepstorage -o jsonpath="{.data.token}" | base64 --decode`
-- `kubectl patch svc console -n deepstorage -p '{"spec": {"type": "LoadBalancer"}}'`
 - 1 tenant per namespace
 - Tenant must be a storageclass with volume binding mode "WaitForFirstConsumer"
-
-
-- `helm repo add apache-airflow https://airflow.apache.org/`
-- `helm upgrade --install -f https://raw.githubusercontent.com/vsvale/kappa_k8s_config/master/repository/helm-charts/deepstorage/minio-operator/values-development.yaml minio miniop/minio-operator --namespace deepstorage --debug --timeout 10m0s`
