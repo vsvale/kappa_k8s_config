@@ -8,3 +8,7 @@
 - `kubectl patch svc console -n deepstorage -p '{"spec": {"type": "LoadBalancer"}}'`
 - 1 tenant per namespace
 - Tenant must be a storageclass with volume binding mode "WaitForFirstConsumer"
+
+
+- `helm repo add apache-airflow https://airflow.apache.org/`
+- `helm upgrade --install -f https://raw.githubusercontent.com/vsvale/kappa_k8s_config/master/repository/helm-charts/deepstorage/minio-operator/values-development.yaml minio miniop/minio-operator --namespace deepstorage --debug --timeout 10m0s`
