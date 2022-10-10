@@ -1,13 +1,42 @@
+### Why Airflow
+- Recover automatically from errors
+- Monitor tasks
+- Warn task fail and why
+- create, monitor and manage data pipelines
+
+
 ### What is Airflow
-- Orchestrator for Batch
-- Open Source
-- DAG in python
-- Data pipeline
+- Orchestrator for creating dynamic data pipelines
+- Open Source platform to programmatically author, schedule and monitor workflows
+- Not a streaming or a data processing framework
+- Best orchestrator for bash
+
+### Benefits
+- DAG in python: Data pipeline are dynamic
+- highly scalable: k8s and celery
+- Interactive: api, cli and UI
+- Extensible: customize ui, operators and plugins 
 - Sensors in many operators
 - scheduler of tasks
-- develop and monitor workflows
 - backfilling to reprocess historic data
 - integrates with spark, dask
+
+### Core componenetes
+- Webserver: UI
+- Scheduler: schedule and trigger tasks
+- Metadata database: metadata from users, jobs, variables and connections. Anydatabase compatible with SQLAlchemy can be used
+- Executor: how tasks will be executed. Kuberbetes, Celery, Sequential, Local
+- Worker: where tasks are executed
+
+### Architecture
+- Single node: all componentes run in the same machine
+    - Web server presents all data from metastore
+    - Scheduler verify if task is ready to run, change status of task in metastore, create task task instance and send to queque of executor to be fetched by worker and executed
+    - Executor update the task stages in metastore
+- Multi Nodes (Celery): Node with componentes
+    - Webserver, Scheduler, executor in one node
+    - Metastore and queue (redis) in another node
+    - multiple worker nodes pull from queue
 
 ### Operators
 
