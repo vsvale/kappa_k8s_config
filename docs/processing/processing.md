@@ -4,6 +4,7 @@
 - `helm repo update`
 - `kubectl apply -f https://raw.githubusercontent.com/vsvale/kappa_k8s_config/master/repository/app-manifests/processing/spark-operator.yaml`
 - `watch kubectl get pods -n processing`
+- `kubectl apply -f https://raw.githubusercontent.com/vsvale/kappa_k8s_config/master/repository/yamls/processing/spark/crb_spark_operator.yaml`
 
 ## Install ksqldb
 
