@@ -362,9 +362,9 @@ lenses:
       enabled: true
       host: postgres-postgresql.database.svc.cluster.local
       port: 5432              # optional, defaults to 5432
-      username: postgres
-      password: 6e8e5979-25c5-44e2-ad76-7a4e8ee68c6f
-      database: lenses
+      username: plumber
+      password: PlumberSDE
+      database: owshq
       schema:             # optional, defaults to public schema
 
   # Data Application Deployment Framework

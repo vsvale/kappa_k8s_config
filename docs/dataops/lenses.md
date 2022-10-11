@@ -1,2 +1,3 @@
+- Install postgres
 - `helm repo add lensesio https://helm.repo.lenses.io/`
 - `kubectl apply -f https://raw.githubusercontent.com/vsvale/kappa_k8s_config/master/repository/app-manifests/dataops/lenses.yaml`
