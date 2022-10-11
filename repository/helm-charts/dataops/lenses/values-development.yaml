@@ -256,8 +256,8 @@ lenses:
       - name: "edh-kafka-bootstrap.ingestion.svc.cluster.local"
         port: 9092
         sslPort: 9093
-        saslSslPort: 9094
-        saslPlainTextPort: 9095
+#        saslSslPort: 9094
+#        saslPlainTextPort: 9095
 
   # zookeeper
   ## Zookeepers should be behind a service, if so set one entry in the hosts
