@@ -1,13 +1,11 @@
-### https://docs.lenses.io/current/installation/kubernetes/helm/ ###
-
-nameOverride: ""
-fullnameOverride: ""
+### TO DEPLOY SQL RUNNERS IN THE CLUSTER
+### FROM LENSES YOU NEED TO PATCH THE SERVICE ACCOUNT
+### LENSES WILL USE TO DEPLOY. SEE:
+### https://docs.lenses.io/install_setup/deployment-options/kubernetes-deployment.html
 
 image:
   repository: lensesio/lenses
   pullPolicy: IfNotPresent
-  # Default to .Chart.AppVersion
-  # tag:
 
 annotations: {}
 labels: {}
@@ -17,39 +15,32 @@ tolerations: {}
 affinity: {}
 securityContext: {}
 
-# Add Prometheus annotations to the pod for Lenses metric scraping
+# Monitoring
 monitoring:
-  enabled: true
-  # A label to attach to the pods for include in JMX
   pipeline: lenses
+  enabled: true
   port: 9102
   path: "/metrics"
 
 # Resource management
 resources:
-  requests:
-  #   cpu: 1
-    memory: 4Gi
   limits:
-  #   cpu: 2
-    memory: 5Gi
+    memory: 10Gi
+  requests:
+    memory: 6Gi
 
 # rbacEnable indicates if a the cluster has rbac enabled and a cluster role
 # and rolebinding should be created for the service account
 rbacEnable: true
 
-# Lenses container port
+# restPort is the Lenses rest port
 restPort: 3030
-# Lenses service port, service targets restPort
 servicePort: 80
-servicePortName: lenses
 
 # serviceAccount is the Service account to be used by Lenses to deploy apps
 serviceAccount: default
 
 # If you use Data Policies module enable a Persistent Volume to keep your data policies rule.
-# Also used when lenses.storage.enabled: false, and an H2 local filesystem database is used, instead of Postgresql.
-# https://docs.lenses.io/current/installation/kubernetes/persistence/
 persistence:
   enabled: true
   accessModes:
@@ -67,37 +58,17 @@ persistence:
   ##
   # storageClass: "-"
 
-# Additional volume mounts to use in Lenses delpoyments, for example to load additional plugins (UDFs) in Lenses
-# Use it in conjuction with lenses.additionalVolumes
-additionalVolumeMounts:
-  # - name: lenses-plugins
-  #   mountPath: "/data/plugins"
-
-# Additional volumes to use in Lenses delpoyments either by Lenses for other sidecars like Lenses provisioner.
-# Example usages:
-#   Lenses: load additional plugins (UDFs) in Lenses
-#   Lenses provisioner: load additional files from pre-existing volumes, secrets or vault secrets to use in provisioning
-additionalVolumes:
-  # - name: secrets
-  #   secret:
-  #     secretName: lenses-super-secrets
-  # Note: PersistentVolumeClaim should already exist before deploying Helm chart
-  # - name: lenses-plugins
-  #   persistentVolumeClaim:
-  #     claimName: lenses-plugins
-
-# Lenses service
+#service
 service:
   enabled: true
   type: ClusterIP
   annotations: {}
 
+  externalTrafficPolicy:
+
   # If you want to make it available as a node port, then add nodePort: <somePort>
   # Warning: this should not be used with servicePort:
-  # Warning nodePort is deprecated and will be removed on next Lenses major version upgrade
   # nodePort:
-
-  externalTrafficPolicy:
 
   ## Load balancer IP address
   ## Is not required, but allows for static address with
@@ -120,15 +91,13 @@ ingress:
   ##
   enabled: false
   host:
-  # ingressClassName:
 
   # Ingress annotations
-  annotations: {}
-    # Optionally add here the annotations related to the ingress provider, see examples below:
-    # kubernetes.io/ingress.class: traefik
-    # kubernetes.io/ingress.class: nginx
-    # kubernetes.io/tls-acme: 'true'
-    # nginx.ingress.kubernetes.io/rewrite-target: /
+  annotations:
+    kubernetes.io/ingress.class: traefik
+#    kubernetes.io/ingress.class: nginx
+#    kubernetes.io/tls-acme: 'true'
+#    nginx.ingress.kubernetes.io/rewrite-target: /
 
   # TLS if enabled load the tls.crt and tls.keys as a secrets and enable TLS on the ingress
   tls:
@@ -138,51 +107,13 @@ ingress:
     key: |-
 
 lenses:
-  # Set the details to provision Lenses using lenses-cli
-  provision:
-    enabled: false
-
-    # Find more details in https://docs.lenses.io/current/installation/kubernetes/helm/#helm-provision
-    # About provision.yaml structure: https://docs.lenses.io/current/tools/cli/provision/provision-yaml/
-    # GitOps limitations, using lenses.provision https://docs.lenses.io/current/tools/cli/provision/gitops-limitations/
-    yaml:
-
-    # Find more details in https://docs.lenses.io/current/installation/kubernetes/helm/#helm-provision-secrets
-    secrets: {}
-      # Base64 encoded. Read how to convert from .pem to .jks in the article: https://docs.lenses.io/current/configuration/dynamic/pem-to-jks-conversion/
-      # data:
-      #   kafka.keystore.jks: |-
-      #   kafka.truststore.jks: |-
-      # stringData:
-
-    # Find more details in https://docs.lenses.io/current/installation/kubernetes/helm/#helm-provision-sidecar
-    sidecar:
-      # name:
-      image:
-        repository: lensesio/lenses-cli
-        # Default to .Chart.AppVersion with major.minor semantic (e.g 5.0)
-        # tag:
-        # pullPolicy: IfNotPresent
-        # registrySecretKey:
-
-      # Additional volume mounts to load additional files from pre-existing volumes, secrets or vault secrets to use in provisioning
-      # Use it in conjuction with lenses.additionalVolumes
-      additionalVolumeMounts:
-        # - name: lenses-super-secrets
-        #   mountPath: "/data/lenses-super-secrets"
-
-
-  # For additional generic JVM settings
-  # Read more: https://docs.lenses.io/current/configuration/static/jvm/
+  # For generic settings
+  # Read more: https://docs.lenses.io/4.0/configuration/jvm/#content
   lensesOpts: |-
 
-  # Each version of the helm chart for Lenses is accompanied by a values.yaml.
-  # This values file contains sane defaults for all the supported Lenses configuration options for that version of the chart.
-  # Although great care has been taken to cover most use cases in the chart, we may encounter situations where a specific configuration option is required but is not available.
-  # To support such cases, Lenses Helm Chart provides the lenses.append.conf mechanism.
   append:
-    # Custom configuration values, will take precedence over the env variables and auto-generated values
-    # Read more: https://help.lenses.io/knowledge-base/helm/helm-lenses-append-conf/
+    # Add custom configuration values, will take precedence over the env variables and auto-generated values
+    # Read more: https://docs.lenses.io/3.2/install_setup/deployment-options/docker-deployment.html#configuration-via-files-and-secrets
     conf: |-
 
   jvm:
@@ -195,15 +126,11 @@ lenses:
     #performanceOpts are any jvm tuning options to add to the jvm
     performanceOpts:
 
-    # DEPRECATED in favor of Values.lenses.opts.trustStoreFileData, please use the latter
-    # trustStoreFileData:
-    # DEPRECATED in favor of Values.lenses.opts.trustStorePassword, please use the latter
-    # trustStorePassword:
+    # base64 encoded truststore data
+    trustStoreFileData: |-
 
-  # Override the default logback xml
-  # Used primarily to load a Lenses provided xml with debug level set for Lenses libs
-  # Can be used to load your custom logback if needed
-  # logbackXml: /opt/lenses/logback-debug.xml
+    # trust store password
+    trustStorePassword:
 
   # TODO: Replace with docker implementation
   # Global truststore/keystore for the JVM
@@ -212,12 +139,16 @@ lenses:
     # openssl base64 < kafka.truststore.jks | tr -d '\n'
     trustStoreFileData: |-
 
+    # base64 trust store password
+    # echo "$password" | tr -d '\n' | base64
     trustStorePassword: |-
 
     # base64 encoded truststore data
     # openssl base64 < kafka.truststore.jks | tr -d '\n'
     keyStoreFileData: |-
 
+    # base64 keystore password
+    # echo "$password" | tr -d '\n' | base64
     keyStorePassword: |-
 
   tls:
@@ -228,8 +159,12 @@ lenses:
     # openssl base64 < kafka.truststore.jks | tr -d '\n'
     keyStoreFileData: |-
 
+    # base64 keystore password
+    # echo "$password" | tr -d '\n' | base64
     keyStorePassword: |-
 
+    # base64 key password
+    # echo "$password" | tr -d '\n' | base64
     keyPassword: |-
 
     # Authenticate to Lenses with client authentication
@@ -239,43 +174,201 @@ lenses:
     # openssl base64 < kafka.truststore.jks | tr -d '\n'
     trustStoreFileData: |-
 
+    # base64 trust store password
+    # echo "$password" | tr -d '\n' | base64
     trustStorePassword: |-
 
+  # Broker details
+  ## Brokers should be behind a service, if so set one entry in the hosts
+  ## If your brokers are outside explicitly add them to the hosts. Note you only need one to bootstrap
+  ## but you should specify more than one for resilience
 
-  # Find more details in https://docs.lenses.io/current/installation/kubernetes/helm/#helm-storage
+  # kafka ssl
+  # The keytab, key and truststores file data are the base64 encoded contents of the files. YOU MUST PROVIDE THE DATA BASE64 encoded
+  # openssl base64 < client.keystore.jks | tr -d '\n'
+  # The passwords will be base64enc by the secret
+  # and added to the kafka secret and mounted into /mnt/secrets
+  kafka:
+    ssl:
+      # TLS setup to connect to brokers over TLS with/without client authentication
+      enabled: false
+
+      # base64 encoded truststore data
+      trustStoreFileData: |-
+
+      # password strings
+      trustStorePassword:
+
+      # base64 encoded keystore data
+      keyStoreFileData: |-
+
+      keyStorePassword:
+      keyPassword:
+    sasl:
+      # Authenticate to brokers using SASL, can be used in conjuction with SSL
+      enabled: false
+
+      # mechanism is the sasl authentication mechanism GSSAPI, SCRAM or PLAIN
+      mechanism: GSSAPI
+
+      # jaasFileData is the contents of the kafka jaas file mounted in /mnt/secrets
+      # Note: this will be deprecated in favor of jaasConfig
+      jaasFileData: |-
+
+      # jaasConfig
+      # This configuration is used inline, so do not enclose it in 'KafkaClient{ }'
+      # jaasConfig: |-
+      #   com.sun.security.auth.module.Krb5LoginModule required useKeyTab=true keyTab="lenses.keytab" storeKey=true useTicketCache=false serviceName=kafka principal="lenses@TESTING.LENSES.IO";
+      jaasConfig: |-
+
+      # krb5Conf is the kerberos config data to be mounted into /etc
+      krb5Conf: |-
+
+      # keyTabData is the base64 contents kerberos keytab file is using kerberos mounted in /mnt/secrets
+      # openssl base64 < keytab | tr -d '\n'
+      keyTabData: |-
+
+    # JMX/JOLOKIA Metrics
+    metrics:
+      enabled: false
+      username:
+      password:
+      ssl:
+      type: "JMX"
+      port: 9102
+      # For multiple ports:
+      # ports:
+      #   - id: foo
+      #     port: 9103
+      #     host: example1
+      #   - id: bar
+      #     port: 9104
+      #     host: example2
+      # For multiple ports from AWS:
+      # type: AWS
+      # ports:
+      #   - id: foo
+      #     url: example1:9103
+      #   - id: bar
+      #     url: example2:9104
+
+    bootstrapServers:
+      - name: kafka
+        port: 9092
+        sslPort: 9093
+        saslSslPort: 9094
+        saslPlainTextPort: 9095
+
+  # zookeeper
+  ## Zookeepers should be behind a service, if so set one entry in the hosts
+  ## If your zookeepers are outside explicitly add them to the hosts.
+  zookeepers:
+    enabled: false
+    chroot:
+    hosts:
+      - host: zookeeper
+        port: 2181
+        # JMX/JOLOKIA Metrics
+        # metrics:
+        #   type: "JMX"
+        #   port: 9102
+        #   protocol:
+        #   username:
+        #   password:
+        #   ssl:
+
+  # schemaRegistries
+  ## Schema registries should be behind a service, if so set one entry in the hosts
+  ## If your schema registries are outside explicitly add them to the hosts.
+  schemaRegistries:
+    enabled: false
+    mode:
+    topic:
+    hosts:
+      - host: schema-registry
+        protocol: http
+        port: 8081
+        # If your schema registry accepts request in a path eg. <url>:<port>/api/v1
+        path:
+        # JMX/JOLOKIA Metrics
+        # metrics:
+        #   type: "JMX"
+        #   port: 9102
+        #   protocol:
+        #   username:
+        #   password:
+        #   ssl:
+
+    ssl:
+      ## Encryption in Transit
+      # base64 encoded truststore data
+      trustStoreFileData: |-
+
+      # password strings
+      trustStorePassword:
+
+      ## Authentication via TLS certificates
+      # base64 encoded keystore data
+      keyStoreFileData: |-
+
+      keyStorePassword:
+      keyPassword:
+
+    security:
+      enabled: false
+
+      # Authenticate against a protected cluster
+      # For BasicAuth set authType to `USER_INFO`
+      authType:
+      username:
+      password:
+
+  connectClusters:
+    enabled: false
+    clusters:
+      - name: streamreactor
+        port: 8083
+        jmxPort: 9102
+        protocol: http
+        offsetsTopic: connect-offsets
+        statusTopic: connect-status
+        configTopic: connect-configs
+
+        # Authenticate using BasicAuth
+        authType:
+        username:
+        password:
+
+        # TODO: Add connect auth using SSL
+
+        # Secret provider
+        aes256:
+          - key: PasswordPasswordPasswordPassword
+
+        hosts:
+          - host: connect-worker-1
+            # JMX/JOLOKIA Metrics
+            # metrics:
+            #   type: "JMX"
+            #   port: 9102
+            #   protocol:
+            #   username:
+            #   password:
+            #   ssl:
+          - host: connect-worker-2
+          - host: connect-worker-3
+
   storage:
     postgres:
       enabled: false
       host:
       port:               # optional, defaults to 5432
-
-      # Set the username for postgres connection
-      # Use the value "external" to bypass the Helm validation and handle the username externally.
-      # The common use case for using "external" is to take the actual value from a Kubernetes Secret resource already deployed.
-      # To do so, add the following definition under 'lenses.additionalEnv' key:
-      # - name: LENSES_STORAGE_POSTGRES_USERNAME
-      #   valueFrom:
-      #     secretKeyRef:
-      #       name: [SECRET_RESOURCE_NAME]
-      #       key: [SECRET_RESOURCE_KEY]
-      username:           # use "external" to manage it using secrets
-
-      # Set the password for postgres connection
-      # Use the value "external" to bypass the Helm validation and handle the password externally.
-      # The common use case for using "external" is to take the actual value from a Kubernetes Secret resource already deployed.
-      # To do so, add the following definition under 'lenses.additionalEnv' key:
-      # - name: LENSES_STORAGE_POSTGRES_PASSWORD
-      #   valueFrom:
-      #     secretKeyRef:
-      #       name: [SECRET_RESOURCE_NAME]
-      #       key: [SECRET_RESOURCE_KEY]
-      password:           # use "external" to manage it using secrets
-
+      username:
+      password:
       database:
       schema:             # optional, defaults to public schema
 
   # Data Application Deployment Framework
-  # TODO: Link missing for DAD docs
   deployments:
     eventsBufferSize: 10000
     errorsBufferSize: 1000
@@ -284,9 +377,10 @@ lenses:
       statusInterval: 30 second
       actionsBufferSize: 1000
 
+  # sql
   sql:
-    # processorImage: eu.gcr.io/lenses-container-registry/lenses-sql-processor
-    # processorImageTag: 2.3
+#    processorImage: eu.gcr.io/lenses-container-registry/lenses-sql-processor
+#    processorImageTag: 2.3
     mode: IN_PROC
     heap: 1024M
     minHeap: 128M
@@ -294,7 +388,7 @@ lenses:
     memRequest: 128M
     livenessInitialDelay: 60 seconds
 
-  # Alert Plugins. Multiple alert plugins are supported.
+  # alerts
   alerts:
     enabled: true
     consumersLagThreshold: 50000
@@ -319,7 +413,7 @@ lenses:
 
 
 
-  # The url to the grafana host
+  #grafana
   grafanaUrl:
 
   # topics
@@ -328,31 +422,12 @@ lenses:
     suffix:
 
   security:
-    defaultUser: {}
-      # Change Default Lenses user credentials.
-      # Username: admin / Password:admin
-
-      # Set the username for Lenses admin
-      # Use the value "external" to bypass the Helm validation and handle the username externally.
-      # The common use case for using "external" is to take the actual value from a Kubernetes Secret resource already deployed.
-      # To do so, add the following definition under 'lenses.additionalEnv' key:
-      # - name: LENSES_SECURITY_USER
-      #   valueFrom:
-      #     secretKeyRef:
-      #       name: [SECRET_RESOURCE_NAME]
-      #       key: [SECRET_RESOURCE_KEY]
-      # username: admin
-
-      # Set the password for Lenses admin
-      # Use the value "external" to bypass the Helm validation and handle the username externally.
-      # The common use case for using "external" is to take the actual value from a Kubernetes Secret resource already deployed.
-      # To do so, add the following definition under 'lenses.additionalEnv' key:
-      # - name: LENSES_SECURITY_PASSWORD
-      #   valueFrom:
-      #     secretKeyRef:
-      #       name: [SECRET_RESOURCE_NAME]
-      #       key: [SECRET_RESOURCE_KEY]
-      # password: admin
+    # Change Default Lenses user credentials.
+    # Username: admin / Password:admin
+    defaultUser:
+    # Example
+    #  username: admin
+    #  password: admin
 
     # SPNEGO for incoming connections to Lenses
     kerberos:
@@ -367,15 +442,6 @@ lenses:
       enabled: false
       url: ""
       base: ""
-      # Set LDAP password
-      # Use the value "external" to bypass the Helm validation and handle the password externally.
-      # The common use case for using "external" is to take the actual value from a Kubernetes Secret resource already deployed.
-      # To do so, add the following definition under 'lenses.additionalEnv' key:
-      # - name: LENSES_SECURITY_LDAP_PASSWORD
-      #   valueFrom:
-      #     secretKeyRef:
-      #       name: [SECRET_RESOURCE_NAME]
-      #       key: [SECRET_RESOURCE_KEY]
       password: ""
       user: ""
       filter: ""
@@ -423,48 +489,24 @@ lenses:
       # Password for accessing the private key within the keystore.
       keyPassword:
 
-      # idp settings
-      idp:
-        session:
-          lifetime:
-            # example: 100days
-            max:
-
-      # groups settings
-      groups:
-        enabled: false
-        plugin:
-          class:
-
     append:
       conf: |-
 
-  # Additional env variables appended to deployment
-  # Follows the format of [EnvVar spec](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.21/#envvar-v1-core)
-  additionalEnv:
-    # - name: FOO
-    #   value: bar
+  # license is the Lenses license
+  license: |-
 
-  # Note: this will be deprecated in version 5.0
+  # licenseUrl is a url pointing to the Lenses license
+  licenseUrl:
+
   # Uncomment to inject custom env vars if needed
-  # env:
-  #   CUSTOM_ENV_VAR: "foo"
+#  env:
+#    CUSTOM_ENV_VAR: "foo"
 
-  # Note: this will be deprecated in version 5.0
   # extra configurations that will be append to the lenses.conf file mounted in /mnt/settings
   ## keys must be uppercase and underscores for separators suit for use as environment variables
   ## see https://docs.lenses.io/install_setup/configuration/lenses-config.html#option-reference
   configOverrides: {}
     #LENSES_PROPERTY : value
-
-  # Disable livenessProbe, used while debugging
-  livenessProbe:
-    enabled: true
-
-  # Pause execution of Lenses start up script to allow the user to login into the container and
-  # check the running environment, used while debugging
-  pauseExec:
-    enabled: false
 
 sidecarContainers:
   # - name: sidecar-example
