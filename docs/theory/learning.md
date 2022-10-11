@@ -34,17 +34,6 @@
 - [Terraform - Getting Started](https://app.pluralsight.com/library/courses/terraform-getting-started-2021)
 - [Using Terraform to Manage Applications and Infrastructure](https://learn.acloud.guru/course/using-terraform-to-manage-applications-and-infrastructure/overview)
 
-## GitOps
-
-- [GitOps: The Big Picture](https://app.pluralsight.com/library/courses/gitops-the-big-picture/table-of-contents)
-- [Introduction to GitOps (LFS169)](https://training.linuxfoundation.org/training/introduction-to-gitops-lfs169/) ✅
-
-## ArgoCD
-
-- [Getting Started with Argo CD](https://app.pluralsight.com/library/courses/argo-cd-getting-started) ✅
-- [GitOps Fundamentals](https://codefresh.learnworlds.com/) ✅
-- [GitOps com ArgoCD para Engenheiros de Dados no Kubernetes](https://www.youtube.com/watch?v=A30IOS8ZGLc) ✅
-- [Getting Started with ArgoCD and OpenShift GitOps Operator](https://developers.redhat.com/courses/gitops/getting-started-argocd-and-openshift-gitops-operator)
 
 ## Prometheus
 

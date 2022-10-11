@@ -6,6 +6,9 @@
 - `watch kubectl get pods -n processing`
 - `kubectl apply -f https://raw.githubusercontent.com/vsvale/kappa_k8s_config/master/repository/yamls/processing/spark/crb_spark_operator.yaml`
 
+## Create image
+
+
 ## Install ksqldb
 
 - `kubectl apply -f https://raw.githubusercontent.com/vsvale/kappa_k8s_config/master/repository/app-manifests/processing/ksqldb.yaml`

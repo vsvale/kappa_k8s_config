@@ -38,10 +38,42 @@
     - Metastore and queue (redis) in another node
     - multiple worker nodes pull from queue
 
+### DAG
+- data pipeline
+- direct acyclic graph: graph with nodes and edges, but edges are directed and the is no loop
+ 
 ### Operators
+- node in a DAG
+- task in a DAG
+- Action Operators: execute Python
+- Transfer Operator: from mysql to Presto
+- Sensor: file watch
+
+### Task
+- instance of an Operator
+
+### Task Instance
+- when a task is ready to be schedule
+- represents a specific run of a task: DAG + TASK + Point in time
+
+### Dependencies
+- >>
+- edges in a DAG
+- relantionship between tasks
+
+### Workflow
+- DAG with operators and dependencies
+
+### Task lifecicle
+1. Create a py file in dag folder
+2. Web Server (30s) and Scheduler (5 min) parse dags
+3. if dag is ready to be triggered, scheduler create a Dagrun (instance of dag) in metastore with status running, at beginning tasks in Dagrun object have no status
+4. if task is ready to be triggered, scheduler create a taskinstance in metastore with status scheduled
+5. Scheduler send the taskinstance into the executor and chage the status in metastore to queued
+6. Executor take that task and execute in a worker (status running), updating the status in metastore (sucess or failed)
+7. Web server updates the UI
 
 ### Trigger rules
-
 
 - all_success (default): All upstream tasks have succeeded
 - all_failed: All upstream tasks are in a failed or upstream_failed state
@@ -78,7 +110,7 @@
     - cronjob: '* * * * * ' minute, hour, day, month, day of week
 - start_date: d-1 start run
 - end_date: when dag stop scheduling
-    - 
+
 
 ### X-com
 - Cross-communications: push and pull of metadata

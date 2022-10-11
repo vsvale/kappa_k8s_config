@@ -1,17 +1,11 @@
-# using jbod strategy as storage
-# https://cwiki.apache.org/confluence/display/KAFKA/KIP-112%3A+Handle+disk+failure+for+JBOD
 apiVersion: kafka.strimzi.io/v1beta2
 kind: Kafka
 metadata:
-  # kafka cluster name
   name: edh
 spec:
   kafka:
-    # broker version
     version: 3.2.3
-    # initial replicas
     replicas: 3
-    # provision lbs
     listeners:
       - name: plain
         port: 9092
@@ -21,16 +15,10 @@ spec:
         port: 9093
         type: internal
         tls: true
-      - name: external
-        port: 9094
-        type: loadbalancer
-        tls: false
-    readinessProbe:
-      initialDelaySeconds: 15
-      timeoutSeconds: 5
-    livenessProbe:
-      initialDelaySeconds: 15
-      timeoutSeconds: 5
+#      - name: external
+#        port: 9094
+#        type: loadbalancer
+#        tls: false
     config:
       default.replication.factor: 3
       num.partitions: 6
@@ -40,6 +28,12 @@ spec:
       log.message.format.version: "3.2.3"
       inter.broker.protocol.version: "3.2.3"
       log.retention.hours: 2160
+    readinessProbe:
+      initialDelaySeconds: 15
+      timeoutSeconds: 5
+    livenessProbe:
+      initialDelaySeconds: 15
+      timeoutSeconds: 5
     storage:
       type: jbod
       volumes:
@@ -51,8 +45,6 @@ spec:
           type: persistent-claim
           size: 15Gi
           deleteClaim: false
-    # resource limitation
-    # -xms -xmx set as same as resources [limit]
     resources:
       requests:
         memory: 512Mi
@@ -66,7 +58,6 @@ spec:
         configMapKeyRef:
           name: kafka-metrics
           key: kafka-metrics-config.yml
-  # zookeeper information
   zookeeper:
     replicas: 3
     storage:
@@ -74,7 +65,6 @@ spec:
       size: 10Gi
       deleteClaim: false
     resources:
-      # requests and limits
       requests:
         memory: 512Mi
         cpu: "250m"
