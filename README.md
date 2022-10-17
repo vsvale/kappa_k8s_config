@@ -6,11 +6,12 @@
 - [Ingestion](docs/ingestion/strimzi.md)
 - [Processing](docs/processing/processing.md)
 - [Database YugabyteDB](docs/database/databases.md)
-- [Storage Minio](docs/deepstorage/minio.md)
-- [Database postgres](docs/database/databases.md)
+- [Datastore Pinot](docs/datastore/pinot.md)
 
 ## Optional
 - [Orchestrator](docs/orchestrator/airflow.md)
 - [Database mssql](docs/database/databases.md)
 - [Database mysql](docs/database/databases.md)
-- [Database mongodb](docs/database/databases.md)
+- [Database postgres](docs/database/databases.md)
+- [Lenses](docs/dataops/lenses.md)
+- [Storage Minio](docs/deepstorage/minio.md)

@@ -77,7 +77,7 @@ controller:
     accessMode: ReadWriteOnce
     size: 1G
     mountPath: /var/pinot/controller/data
-    storageClass: "standard"
+    storageClass: ""
     extraVolumes: []
     extraVolumeMounts: []
 
@@ -380,7 +380,7 @@ minion:
     accessMode: ReadWriteOnce
     size: 4G
     mountPath: /var/pinot/minion/data
-    storageClass: "standard"
+    storageClass: ""
     #storageClass: "ssd"
     extraVolumes: []
     extraVolumeMounts: []

@@ -154,7 +154,12 @@ ingestion
   - [YugabyteDB](https://www.confluent.io/hub/yugabyteinc/yb-kafka-connector)
 - MongoDB: source MongoDb
 - CDC: CDC Debezium. Log based, Insert,update and deletes
+- Transaction logs
+  - Mysql: binlog
+  - Postgres: write-ahead log
+  - MongoDB: op log
 - JDBC: source JDBC. Query based. Inserts and updates
+
 
 ### Nomenclatura topico
 

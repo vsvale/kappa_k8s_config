@@ -1,0 +1,1 @@
+![minio_tier.png](img/minio_tier.png)
