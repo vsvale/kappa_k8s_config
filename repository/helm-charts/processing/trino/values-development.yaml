@@ -6,111 +6,52 @@ image:
     runAsUser: 1000
     runAsGroup: 1000
 
-imagePullSecrets: []
-# For example:
-# imagePullSecrets:
-#   - name: registry-credentials
-
 ingress:
   enabled: false
-  ingressClassName:
   annotations: {}
-    # kubernetes.io/ingress.class: nginx
   host: ""
   tls:
     secretName: ""
 
-config:
-  general:
-    node:
-      environment: production
-      dataDir: /data/trino
-      pluginDir: /usr/lib/trino/plugin
-    log:
-      trino:
-        level: INFO
+server:
+  workers: 1
+  node:
+    environment: production
+    dataDir: /data/trino
+    pluginDir: /usr/lib/trino/plugin
+  log:
+    trino:
+      level: INFO
+  config:
     path: /etc/trino
     http:
       port: 8080
     processForwarded: false
-    # -- Trino supports multiple authentication types: PASSWORD, CERTIFICATE, OAUTH2, JWT, KERBEROS
+    # Trino supports multiple authentication types: PASSWORD, CERTIFICATE, OAUTH2, JWT, KERBEROS
     # For more info: https://trino.io/docs/current/security/authentication-types.html
-    authenticationType: ""
-    httpsServer:
-      enabled: false
-      port: 8443
-      keystore:
-        path: "/usr/local/certs/clustercoord.pem"
-        # JKS keystores always require a password, while PEM format certificates can optionally require a password
-        key: ""
-    internalCommunicationSharedSecret: some-secret
+    # authenticationType: "PASSWORD"
     query:
       maxMemory: "2GB"
       maxMemoryPerNode: "2GB"
       maxTotalMemory: "3GB"
       maxTotalMemoryPerNode: "3GB"
-    prestoCompatibleHeader: false
+  jvm:
+    maxHeapSize: "3G"
+    gcMethod:
+      type: "UseG1GC"
+      g1:
+        heapRegionSize: "32M"
 
-  coordinator:
-    replicas: 1
-    env: []
-    nodeSelector: {}
-    tolerations: []
-    affinity: {}
-    podAnnotations: {}
-    resources: {}
-    # limits:
-    #  cpu: 100m
-    #  memory: 128Mi
-    # requests:
-    #  cpu: 100m
-    #  memory: 128Mi
-    initContainers: {}
-    #   - name: init-coordinator
-    #     image: busybox:1.28
-    #     imagePullPolicy: IfNotPresent
-    #     command: ['sh', '-c', "until nslookup myservice.$(cat /var/run/secrets/kubernetes.io/serviceaccount/namespace).svc.cluster.local; do echo waiting for myservice; sleep 2; done"]
-    jvm:
-      maxHeapSize: "24G"
-      gcMethod:
-        type: "UseG1GC"
-        g1:
-          heapRegionSize: "32M"
-    jvmExtraConfig: ""
-    extraConfig: ""
-
-  worker:
-    # -- Replica count when autoscaler is disabled. If autoscaler is enabled, it sets minimum number of replicas.
-    replicas: 1
-    env: []
-    nodeSelector: {}
-    tolerations: []
-    affinity: {}
-    podAnnotations: {}
-    resources:
-     limits:
-      cpu: 1000m
-      memory: 4000Mi
-     requests:
-      cpu: 500m
-      memory: 2000Mi
-    initContainers: {}
-    # worker:
-    #   - name: init-worker
-    #     image: busybox:1.28
-    #     command: ['sh', '-c', 'echo The worker is running! && sleep 3600']
-    jvm:
-      maxHeapSize: "3G"
-      gcMethod:
-        type: "UseG1GC"
-        g1:
-          heapRegionSize: "32M"
-    jvmExtraConfig: ""
-    extraConfig: ""
-    autoscaler:
-      enabled: false
-      maxReplicas: 5
-      targetCPUUtilizationPercentage: 50
+initContainers: {}
+  # coordinator:
+  #   - name: init-coordinator
+  #     image: busybox:1.28
+  #     imagePullPolicy: IfNotPresent
+  #     command: ['sh', '-c', "until nslookup myservice.$(cat /var/run/secrets/kubernetes.io/serviceaccount/namespace).svc.cluster.local; do echo waiting for myservice; sleep 2; done"]
+  # worker:
+  #   - name: init-worker
+  #     image: busybox:1.28
+  #     command: ['sh', '-c', 'echo The worker is running! && sleep 3600']
 
 auth: {}
   # Set username and password
@@ -174,208 +115,61 @@ accessControl: {}
   #       ]
   #     }
 
-resourceGroups: {}
-  # # Supported types: pvc or configmap
-  # type: pvc
-  # # Rules file is mounted to /etc/trino/resource-groups
-  # configFile: "/resource-groups/resource-groups.json"
-  # # If you use pvc as the type, you have to specify the pvcName field:
-  # pvcName:
-  # # If you use pvc as the type, you can specify the name of the volume with the pvcVolumeName:
-  # pvcVolumeName:
-  # # If you use configmap as the type, you have to specify the rules field:
-  # rules:
-  #   resource-groups.json: |-
-  #     {
-  #       "rootGroups": [
-  #         {
-  #           "name": "global",
-  #           "softMemoryLimit": "80%",
-  #           "hardConcurrencyLimit": 100,
-  #           "maxQueued": 1000,
-  #           "schedulingPolicy": "weighted",
-  #           "jmxExport": true,
-  #           "subGroups": [
-  #             {
-  #               "name": "data_definition",
-  #               "softMemoryLimit": "10%",
-  #               "hardConcurrencyLimit": 5,
-  #               "maxQueued": 100,
-  #               "schedulingWeight": 1
-  #             },
-  #             {
-  #               "name": "adhoc",
-  #               "softMemoryLimit": "10%",
-  #               "hardConcurrencyLimit": 50,
-  #               "maxQueued": 1,
-  #               "schedulingWeight": 10,
-  #               "subGroups": [
-  #                 {
-  #                   "name": "other",
-  #                   "softMemoryLimit": "10%",
-  #                   "hardConcurrencyLimit": 2,
-  #                   "maxQueued": 1,
-  #                   "schedulingWeight": 10,
-  #                   "schedulingPolicy": "weighted_fair",
-  #                   "subGroups": [
-  #                     {
-  #                       "name": "${USER}",
-  #                       "softMemoryLimit": "10%",
-  #                       "hardConcurrencyLimit": 1,
-  #                       "maxQueued": 100
-  #                     }
-  #                   ]
-  #                 },
-  #                 {
-  #                   "name": "bi-${toolname}",
-  #                   "softMemoryLimit": "10%",
-  #                   "hardConcurrencyLimit": 10,
-  #                   "maxQueued": 100,
-  #                   "schedulingWeight": 10,
-  #                   "schedulingPolicy": "weighted_fair",
-  #                   "subGroups": [
-  #                     {
-  #                       "name": "${USER}",
-  #                       "softMemoryLimit": "10%",
-  #                       "hardConcurrencyLimit": 3,
-  #                       "maxQueued": 10
-  #                     }
-  #                   ]
-  #                 }
-  #               ]
-  #             },
-  #             {
-  #               "name": "pipeline",
-  #               "softMemoryLimit": "80%",
-  #               "hardConcurrencyLimit": 45,
-  #               "maxQueued": 100,
-  #               "schedulingWeight": 1,
-  #               "jmxExport": true,
-  #               "subGroups": [
-  #                 {
-  #                   "name": "pipeline_${USER}",
-  #                   "softMemoryLimit": "50%",
-  #                   "hardConcurrencyLimit": 5,
-  #                   "maxQueued": 100
-  #                 }
-  #               ]
-  #             }
-  #           ]
-  #         },
-  #         {
-  #           "name": "admin",
-  #           "softMemoryLimit": "100%",
-  #           "hardConcurrencyLimit": 50,
-  #           "maxQueued": 100,
-  #           "schedulingPolicy": "query_priority",
-  #           "jmxExport": true
-  #         }
-  #       ],
-  #       "selectors": [
-  #         {
-  #           "user": "bob",
-  #           "group": "admin"
-  #         },
-  #         {
-  #           "userGroup": "admin",
-  #           "group": "admin"
-  #         },
-  #         {
-  #           "source": ".*pipeline.*",
-  #           "queryType": "DATA_DEFINITION",
-  #           "group": "global.data_definition"
-  #         },
-  #         {
-  #           "source": ".*pipeline.*",
-  #           "group": "global.pipeline.pipeline_${USER}"
-  #         },
-  #         {
-  #           "source": "jdbc#(?<toolname>.*)",
-  #           "clientTags": ["hipri"],
-  #           "group": "global.adhoc.bi-${toolname}.${USER}"
-  #         },
-  #         {
-  #           "group": "global.adhoc.other.${USER}"
-  #         }
-  #       ],
-  #       "cpuQuotaPeriod": "1h"
-  #     }
-
 # If you want to provide your own secrets resource, you can use this field:
 # connectorsSecret:
 
-groupProvider: {}
-  # # Supported types: pvc or configmap
-  # type: pvc
-  # refreshPeriod: 5s
-  # # Rules file is mounted to /etc/trino/group-provider
-  # configFile: "/group-provider/groups.txt"
-  # # If you use pvc as the type, you have to specify the pvcName field:
-  # pvcName:
-  # # If you use pvc as the type, you can specify the name of the volume with the pvcVolumeName:
-  # pvcVolumeName:
-  # # If you use configmap as the type, you have to specify the groups field:
-  # groups:
-  #   groups.txt: |-
-  #    group_name:user_1,user_2,user_3
-
 connectors:
-  # Connectors configuration usually contains sensitive data (like passwords, usernames, ...)
-  # so data is stored in a secret
-  # mysql.properties: |-
-  #   connector.name=mysql
-  #   connection-url=jdbc:mysql://mysqlserver:3306
-  #   connection-user=mysqluser
-  #   connection-password=mysqlpassword
-  # elk.properties: |-
-  #   connector.name=elasticsearch
-  #   elasticsearch.host=elasticsearchserver
-  #   elasticsearch.port=9200
-  #   elasticsearch.default-schema-name=default
-  #   elasticsearch.security=PASSWORD
-  #   elasticsearch.auth.user=elastiuser
-  #   elasticsearch.auth.password=elasticpassword
-  #   elasticsearch.tls.enabled=true
+    pinot.properties: |-
+     connector.name=pinot
+     pinot.controller-urls=pinot-controller.datastore.svc.Cluster.local:9000
+
     kafka.properties: |-
      connector.name=kafka
      kafka.table-names=src-app-users-json,src-app-agent-json,src-app-credit-card-json,src-app-musics-json,src-app-rides-json
      kafka.nodes=edh-kafka-brokers.ingestion.svc.Cluster.local:9092
      kafka.hide-internal-columns=false
 
-schemas: {}
+    minio.properties: |-
+     connector.name=hive-hadoop2
+     hive.metastore=file
+     hive.s3-file-system-type=TRINO
+     hive.metastore.catalog.dir=s3://trino/
+     hive.allow-drop-table=true
+     hive.s3.aws-access-key=console
+     hive.s3.aws-secret-key=console123
+     hive.s3.endpoint=http://minio.deepstorage.svc.Cluster.local:9000
+     hive.s3.path-style-access=true
+     hive.s3.ssl.enabled=false
+     hive.s3select-pushdown.enabled=true
+     hive.allow-add-column=true
+     hive.allow-drop-column=true
+     hive.allow-drop-table=true
+     hive.allow-rename-table=true
+     hive.allow-rename-column=true
+     hive.s3.multipart.min-file-size=5GB
+     hive.s3.multipart.min-part-size=5GB
+     hive.s3.max-connections=5000
+
+    postgres.properties: |-
+     connector.name=postgresql
+     connection-url=jdbc:postgresql://yb-tservers.database.svc.Cluster.local:5433/owshq
+     connection-user=yugabyte
+     connection-password=yugabyte
+
+    sqlserver.properties: |-
+      connector.name=sqlserver
+      connection-url=jdbc:sqlserver://mssql-mssql-linux.database.svc.Cluster.local:1433;database=owshq
+      connection-user=sa
+      connection-password=IlS27OpKxw9EYObU80dz
+
+    cassandra.properties: |-
+      connector.name=cassandra
+      cassandra.contact-points=10.0.129.163:9042
+      cassandra.username=yugabyte
+      cassandra.password=yugabyte
+
+schemas:
   # Custom schemas that will be mounted in /etc/trino/schemas
-  # testschema.json: |-
-  #   {
-  #     "tableName": "testtable",
-  #     "schemaName": "testschema",
-  #     "topicName": "testtopic",
-  #     "key": {
-  #         "dataFormat": "json",
-  #         "fields": [
-  #             {
-  #                 "name": "_key",
-  #                 "dataFormat": "VARCHAR",
-  #                 "type": "VARCHAR",
-  #                 "hidden": "false"
-  #             }
-  #         ]
-  #     },
-  #     "message": {
-  #         "dataFormat": "json",
-  #         "fields": [
-  #             {
-  #                 "name": "id",
-  #                 "mapping": "id",
-  #                 "type": "BIGINT"
-  #             },
-  #             {
-  #                 "name": "test_field",
-  #                 "mapping": "test_field",
-  #                 "type": "VARCHAR"
-  #             }
-  #         ]
-  #     }
-  #   }
    users_schema.json: |-
      {
        "tableName": "src-app-users-json",
@@ -464,30 +258,19 @@ schemas: {}
        }
      }
 
-
 service:
   type: ClusterIP
 
-secretMounts: []
-  # - name: ssl-cert
-  #   secretName: ssl-cert
-  #   path: /usr/local/certs/
-  # - name: ssh-key
-  #   secretName: ssh-key
-  #   path: /home/trino/.ssh/id_rsa.pub
-  #   subPath: id_rsa.pub
+resources:
+   limits:
+    cpu: 1000m
+    memory: 4000Mi
+   requests:
+    cpu: 500m
+    memory: 2000Mi
 
-configMapMounts: []
-  # - name: ssh-config
-  #   configMapName: ssh-config
-  #   path: /home/trino/.ssh/config
-  #   subPath: config
+nodeSelector: {}
 
-serviceAccount:
-  # Specifies whether a service account should be created
-  create: true
-  # Annotations to add to the service account
-  annotations: {}
-  # The name of the service account to use.
-  # If not set and create is true, a name is generated using the fullname template
-  name: ""
+tolerations: []
+
+affinity: {}
