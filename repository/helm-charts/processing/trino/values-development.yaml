@@ -386,43 +386,106 @@ catalogs: {}
   #   connector.name=tpcds
   #   tpcds.splits-per-node=4
 
-schemas: {}
+sschemas:
   # Custom schemas that will be mounted in /etc/trino/schemas
-  # testschema.json: |-
-  #   {
-  #     "tableName": "testtable",
-  #     "schemaName": "testschema",
-  #     "topicName": "testtopic",
-  #     "key": {
-  #         "dataFormat": "json",
-  #         "fields": [
-  #             {
-  #                 "name": "_key",
-  #                 "dataFormat": "VARCHAR",
-  #                 "type": "VARCHAR",
-  #                 "hidden": "false"
-  #             }
-  #         ]
-  #     },
-  #     "message": {
-  #         "dataFormat": "json",
-  #         "fields": [
-  #             {
-  #                 "name": "id",
-  #                 "mapping": "id",
-  #                 "type": "BIGINT"
-  #             },
-  #             {
-  #                 "name": "test_field",
-  #                 "mapping": "test_field",
-  #                 "type": "VARCHAR"
-  #             }
-  #         ]
-  #     }
-  #   }
+   users_schema.json: |-
+     {
+       "tableName": "src-app-users-json",
+       "schemaName": "kafka.default",
+       "topicName": "src-app-users-json",
+       "key": {
+           "dataFormat": "json",
+           "fields": [
+               {
+                   "name": "_key",
+                   "dataFormat": "VARCHAR",
+                   "type": "VARCHAR",
+                   "hidden": "false"
+               }
+           ]
+       },
+       "message": {
+           "dataFormat": "json",
+           "fields": [
+               {
+                   "name": "user_id",
+                   "mapping": "user_id",
+                   "type": "BIGINT"
+               },
+               {
+                   "name": "uuid",
+                   "mapping": "uuid",
+                   "type": "VARCHAR"
+               },
+               {
+                   "name": "first_name",
+                   "mapping": "first_name",
+                   "type": "VARCHAR"
+               },
+               {
+                   "name": "last_name",
+                   "mapping": "last_name",
+                   "type": "VARCHAR"
+               },
+               {
+                   "name": "date_birth",
+                   "mapping": "date_birth",
+                   "type": "VARCHAR"
+               },
+               {
+                   "name": "city",
+                   "mapping": "city",
+                   "type": "VARCHAR"
+               },
+               {
+                   "name": "country",
+                   "mapping": "country",
+                   "type": "VARCHAR"
+               },
+               {
+                   "name": "company_name",
+                   "mapping": "company_name",
+                   "type": "VARCHAR"
+               },
+               {
+                   "name": "job",
+                   "mapping": "job",
+                   "type": "VARCHAR"
+               },
+               {
+                   "name": "phone_number",
+                   "mapping": "phone_number",
+                   "type": "VARCHAR"
+               },
+               {
+                   "name": "last_access_time",
+                   "mapping": "last_access_time",
+                   "type": "VARCHAR"
+               },
+               {
+                   "name": "time_zone",
+                   "mapping": "time_zone",
+                   "type": "VARCHAR"
+               },
+               {
+                   "name": "dt_current_timestamp",
+                   "mapping": "dt_current_timestamp",
+                   "type": "VARCHAR"
+               }
+           ]
+       }
+     }
 
 service:
   type: ClusterIP
+
+resources:
+   limits:
+    cpu: 1000m
+    memory: 4000Mi
+   requests:
+    cpu: 500m
+    memory: 2000Mi
 
 secretMounts: []
   # - name: ssl-cert
