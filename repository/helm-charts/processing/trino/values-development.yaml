@@ -25,7 +25,7 @@ server:
   config:
     path: /etc/trino
     http:
-      port: 8080
+      port: 8382
     processForwarded: false
     # Trino supports multiple authentication types: PASSWORD, CERTIFICATE, OAUTH2, JWT, KERBEROS
     # For more info: https://trino.io/docs/current/security/authentication-types.html
