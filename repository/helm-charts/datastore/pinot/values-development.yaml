@@ -31,8 +31,7 @@ imagePullSecrets: []
 
 terminationGracePeriodSeconds: 30
 
-securityContext:
-  {}
+securityContext: {}
   # capabilities:
   #   drop:
   #   - ALL
@@ -53,8 +52,6 @@ serviceAccount:
   # If not set and create is true, a name is generated using the fullname template
   name: ""
 
-additionalMatchLabels: {}
-
 # ------------------------------------------------------------------------------
 # Pinot Controller:
 # ------------------------------------------------------------------------------
@@ -62,8 +59,7 @@ controller:
   name: controller
   replicaCount: 1
   podManagementPolicy: Parallel
-  podSecurityContext:
-    {}
+  podSecurityContext: {}
     # fsGroup: 2000
   securityContext: {}
 
@@ -75,14 +71,13 @@ controller:
   persistence:
     enabled: true
     accessMode: ReadWriteOnce
-    size: 1G
+    size: 5G
     mountPath: /var/pinot/controller/data
-    storageClass: ""
-    extraVolumes: []
-    extraVolumeMounts: []
+    storageClass: "default"
 
   data:
     dir: /var/pinot/controller/data
+    #dir: s3://minio.deepstorage.svc.cluster.local/pinot/segment-store/
 
   vip:
     enabled: false
@@ -114,16 +109,6 @@ controller:
     type: LoadBalancer
     port: 9000
     annotations: {}
-
-  ingress:
-    v1beta1:
-      enabled: false
-      annotations: {}
-      tls: {}
-      path: /
-      hosts: []
-    v1:
-      enabled: false
 
   resources: {}
 
@@ -166,7 +151,7 @@ controller:
       pinot.controller.storage.factory.s3.secretKey=7YtllJhENMXk76bdemuJXF2Ygw136Wqi
       pinot.controller.segment.fetcher.protocols=file,http,s3
       pinot.controller.segment.fetcher.s3.class=org.apache.pinot.common.utils.fetcher.PinotFSSegmentFetcher
-      controller.task.scheduler.enabled=true
+      controller.local.temp.dir=/tmp/pinot-tmp-data/
 
 # ------------------------------------------------------------------------------
 # Pinot Broker:
@@ -175,8 +160,7 @@ broker:
   name: broker
   replicaCount: 1
   podManagementPolicy: Parallel
-  podSecurityContext:
-    {}
+  podSecurityContext: {}
     # fsGroup: 2000
   securityContext: {}
 
@@ -192,10 +176,6 @@ broker:
     endpoint: "/health"
     livenessEnabled: true
     readinessEnabled: true
-
-  persistence:
-    extraVolumes: []
-    extraVolumeMounts: []
 
   service:
     annotations: {}
@@ -215,16 +195,6 @@ broker:
     port: 8099
     # For example, in private GKE cluster, you might add cloud.google.com/load-balancer-type: Internal
     annotations: {}
-
-  ingress:
-    v1beta1:
-      enabled: false
-      annotations: {}
-      tls: {}
-      path: /
-      hosts: []
-    v1:
-      enabled: false
 
   resources: {}
 
@@ -266,8 +236,7 @@ server:
   name: server
   replicaCount: 1
   podManagementPolicy: Parallel
-  podSecurityContext:
-    {}
+  podSecurityContext: {}
     # fsGroup: 2000
   securityContext: {}
 
@@ -282,12 +251,10 @@ server:
   persistence:
     enabled: true
     accessMode: ReadWriteOnce
-    size: 4G
+    size: 5G
     mountPath: /var/pinot/server/data
-    storageClass: ""
+    storageClass: "default"
     #storageClass: "ssd"
-    extraVolumes: []
-    extraVolumeMounts: []
 
   #jvmOpts: "-Xms512M -Xmx1G -XX:+UseG1GC -XX:MaxGCPauseMillis=200 -Xlog:gc*:file=/opt/pinot/gc-pinot-server.log"
 
@@ -318,7 +285,9 @@ server:
 
   tolerations: []
 
-  podAnnotations: {}
+  podAnnotations:
+    "prometheus.io/scrape": "true"
+    "prometheus.io/port": "8080"
 
   updateStrategy:
     type: RollingUpdate
@@ -359,8 +328,7 @@ minion:
   name: minion
   replicaCount: 1
   podManagementPolicy: Parallel
-  podSecurityContext:
-    {}
+  podSecurityContext: {}
     # fsGroup: 2000
   securityContext: {}
 
@@ -380,10 +348,8 @@ minion:
     accessMode: ReadWriteOnce
     size: 4G
     mountPath: /var/pinot/minion/data
-    storageClass: ""
+    storageClass: "default"
     #storageClass: "ssd"
-    extraVolumes: []
-    extraVolumeMounts: []
 
   service:
     annotations: {}
@@ -472,7 +438,7 @@ zookeeper:
   ## Pod scheduling preferences (by default keep pods within a release on separate nodes).
   ## ref: https://kubernetes.io/docs/concepts/configuration/assign-pod-node/#affinity-and-anti-affinity
   ## By default we don't set affinity:
-  affinity: {} # Criteria by which pod label-values influence scheduling for zookeeper pods.
+  affinity: {}  # Criteria by which pod label-values influence scheduling for zookeeper pods.
   # podAntiAffinity:
   #   requiredDuringSchedulingIgnoredDuringExecution:
   #     - topologyKey: "kubernetes.io/hostname"
