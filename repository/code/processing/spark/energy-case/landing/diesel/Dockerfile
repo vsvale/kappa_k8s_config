@@ -15,7 +15,7 @@ RUN pip install --no-cache-dir --upgrade pip && \
 COPY ./diesel-to-landing.py /app/
 
 # copy jar files
-COPY ./jars /opt/spark/jars
+COPY repository/code/processing/spark/jars /opt/spark/jars
 
 # set work directory
 WORKDIR /app
