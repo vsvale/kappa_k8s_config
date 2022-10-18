@@ -8,7 +8,7 @@ spec:
   mode: cluster
   image: "vsvale/load-to-landing-diesel:1.0.0"
   imagePullPolicy: Always
-  mainApplicationFile: "local:///app/data-extract.py"
+  mainApplicationFile: "local:///app/diesel-to-landing.py"
   sparkVersion: "1.0.0"
   restartPolicy:
     type: OnFailure

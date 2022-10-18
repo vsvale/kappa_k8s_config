@@ -27,6 +27,9 @@ def main():
         .config("spark.memory.offHeap.size","100mb") \
         .getOrCreate()
 
+    # Set log level to info
+    spark.sparkContext.setLogLevel('INFO')
+
     # [extraction]
     # diesel df from url
 

@@ -8,10 +8,11 @@ RUN mkdir -p /app
 
 # pip install
 RUN pip install --no-cache-dir --upgrade pip && \
-    pip install --no-cache-dir delta-spark
+    pip install --no-cache-dir delta-spark && \
+    pip install koalas
 
 # copy spark program
-COPY diesel-to-landing.py /app/
+COPY ./diesel-to-landing.py /app/
 
 # copy jar files
 COPY ./jars /opt/spark/jars
