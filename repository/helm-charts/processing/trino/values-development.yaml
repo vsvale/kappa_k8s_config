@@ -15,7 +15,6 @@ ingress:
   enabled: false
   ingressClassName:
   annotations: {}
-    # kubernetes.io/ingress.class: nginx
   host: ""
   tls:
     secretName: ""
@@ -31,7 +30,7 @@ config:
         level: INFO
     path: /etc/trino
     http:
-      port: 8080
+      port: 8383
     processForwarded: false
     # -- Trino supports multiple authentication types: PASSWORD, CERTIFICATE, OAUTH2, JWT, KERBEROS
     # For more info: https://trino.io/docs/current/security/authentication-types.html
@@ -331,32 +330,32 @@ connectors:
      connector.name=pinot
      pinot.controller-urls=pinot-controller.datastore.svc.Cluster.local:9000
 
-    kafka.properties: |-
-     connector.name=kafka
-     kafka.table-names=src-app-users-json,src-app-agent-json,src-app-credit-card-json,src-app-musics-json,src-app-rides-json
-     kafka.nodes=edh-kafka-brokers.ingestion.svc.Cluster.local:9092
-     kafka.hide-internal-columns=false
+#    kafka.properties: |-
+#     connector.name=kafka
+#     kafka.table-names=src-app-users-json,src-app-agent-json,src-app-credit-card-json,src-app-musics-json,src-app-rides-json
+#     kafka.nodes=edh-kafka-brokers.ingestion.svc.Cluster.local:9092
+#     kafka.hide-internal-columns=false
 
-    minio.properties: |-
-     connector.name=hive-hadoop2
-     hive.metastore=file
-     hive.s3-file-system-type=TRINO
-     hive.metastore.catalog.dir=s3://trino/
-     hive.allow-drop-table=true
-     hive.s3.aws-access-key=LBGipuLnLkJgwjXE
-     hive.s3.aws-secret-key=WjnPIFgPIhsjeFSgyvo0vurlMNfjDWyV
-     hive.s3.endpoint=http://minio.deepstorage.svc.Cluster.local:9000
-     hive.s3.path-style-access=true
-     hive.s3.ssl.enabled=false
-     hive.s3select-pushdown.enabled=true
-     hive.allow-add-column=true
-     hive.allow-drop-column=true
-     hive.allow-drop-table=true
-     hive.allow-rename-table=true
-     hive.allow-rename-column=true
-     hive.s3.multipart.min-file-size=5GB
-     hive.s3.multipart.min-part-size=5GB
-     hive.s3.max-connections=5000
+#    minio.properties: |-
+#     connector.name=hive-hadoop2
+#     hive.metastore=file
+#     hive.s3-file-system-type=TRINO
+#     hive.metastore.catalog.dir=s3://trino/
+#     hive.allow-drop-table=true
+#     hive.s3.aws-access-key=LBGipuLnLkJgwjXE
+#     hive.s3.aws-secret-key=WjnPIFgPIhsjeFSgyvo0vurlMNfjDWyV
+#     hive.s3.endpoint=http://minio.deepstorage.svc.Cluster.local:9000
+#     hive.s3.path-style-access=true
+#     hive.s3.ssl.enabled=false
+#     hive.s3select-pushdown.enabled=true
+#     hive.allow-add-column=true
+#     hive.allow-drop-column=true
+#     hive.allow-drop-table=true
+#     hive.allow-rename-table=true
+#     hive.allow-rename-column=true
+#     hive.s3.multipart.min-file-size=5GB
+#     hive.s3.multipart.min-part-size=5GB
+#     hive.s3.max-connections=5000
 
     postgres.properties: |-
      connector.name=postgresql
@@ -370,11 +369,11 @@ connectors:
       connection-user=sa
       connection-password=IlS27OpKxw9EYObU80dz
 
-    cassandra.properties: |-
-      connector.name=cassandra
-      cassandra.contact-points=10.43.135.57:9042
-      cassandra.username=yugabyte
-      cassandra.password=yugabyte
+#    cassandra.properties: |-
+#      connector.name=cassandra
+#      cassandra.contact-points=10.43.135.57:9042
+#      cassandra.username=yugabyte
+#      cassandra.password=yugabyte
 
 catalogs: {}
   # Catalogs that will be mounted in {{ .Values.config.general.path }}/catalog
@@ -386,7 +385,7 @@ catalogs: {}
   #   connector.name=tpcds
   #   tpcds.splits-per-node=4
 
-sschemas:
+schemas:
   # Custom schemas that will be mounted in /etc/trino/schemas
    users_schema.json: |-
      {
