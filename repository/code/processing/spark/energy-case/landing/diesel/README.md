@@ -6,4 +6,7 @@
 - docker push vsvale/diesel-to-landing:1.0.0
 
 # Apply yaml
-- kubectl apply -f https://raw.githubusercontent.com/vsvale/kappa_k8s_config/master/repository/code/processing/spark/energy-case/landing/diesel/diesel-to-landing.yaml
+- kubectl apply -f https://raw.githubusercontent.com/vsvale/kappa_k8s_config/master/repository/code/processing/spark/energy-case/landing/diesel/app-manifest/diesel-to-landing_manifest.yaml
+- kubectl get sparkapplication
+
+vsvale/diesel-to-landing
