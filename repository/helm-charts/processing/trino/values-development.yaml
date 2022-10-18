@@ -371,7 +371,7 @@ connectors:
 
     cassandra.properties: |-
       connector.name=cassandra
-      cassandra.contact-points=10.43.135.57:9042
+      cassandra.contact-points=172.18.0.5:9042
       cassandra.username=yugabyte
       cassandra.password=yugabyte
 
