@@ -76,7 +76,7 @@ diagnosticMode:
 image:
   registry: docker.io
   repository: bitnami/mongodb-sharded
-  tag: 6.0.1-debian-11-r8
+  tag: 6.0.2-debian-11-r1
   digest: ""
   ## Specify a imagePullPolicy
   ## Defaults to 'Always' if image tag is 'latest', else set to 'IfNotPresent'
@@ -108,7 +108,7 @@ auth:
   ## @param auth.rootPassword MongoDB(&reg;) root password
   ## ref: https://github.com/bitnami/containers/tree/main/bitnami/mongodb#setting-the-root-user-and-password-on-first-run
   ##
-  rootPassword: ""
+  rootPassword: "PlumberSDE"
   ## @param auth.replicaSetKey Key used for authentication in the replicaset (only when `architecture=replicaset`)
   ##
   replicaSetKey: ""
@@ -124,7 +124,7 @@ auth:
 ## @param shards Number of shards to be created
 ## ref: https://docs.mongodb.com/manual/core/sharded-cluster-shards/
 ##
-shards: 2
+shards: 1
 ## Properties for all of the pods in the cluster (shards, config servers and mongos)
 ##
 common:
@@ -234,7 +234,7 @@ common:
 volumePermissions:
   ## @param volumePermissions.enabled Enable init container that changes volume permissions in the data directory (for cases where the default k8s `runAsUser` and `fsUser` values do not work)
   ##
-  enabled: false
+  enabled: true
   ## @param volumePermissions.image.registry Init container volume-permissions image registry
   ## @param volumePermissions.image.repository Init container volume-permissions image name
   ## @param volumePermissions.image.tag Init container volume-permissions image tag
@@ -245,7 +245,7 @@ volumePermissions:
   image:
     registry: docker.io
     repository: bitnami/bitnami-shell
-    tag: 11-debian-11-r35
+    tag: 11-debian-11-r37
     digest: ""
     pullPolicy: IfNotPresent
     ## Optionally specify an array of imagePullSecrets.
@@ -258,7 +258,14 @@ volumePermissions:
     pullSecrets: []
   ## @param volumePermissions.resources Init container resource requests/limit
   ##
-  resources: {}
+  resources:
+    requests:
+      cpu: 150m
+      memory: 128Mi
+    limits:
+      cpu: 250m
+      memory: 256Mi
+
 ## Kubernetes service type
 ## ref: https://kubernetes.io/docs/concepts/services-networking/service/
 ##
@@ -318,7 +325,6 @@ service:
   ##     timeoutSeconds: 300
   ##
   sessionAffinityConfig: {}
-
 ## @section Config Server parameters
 ##
 
@@ -332,7 +338,13 @@ configsvr:
   ## @param configsvr.resources Configure pod resources
   ## ref: https://kubernetes.io/docs/user-guide/compute-resources/
   ##
-  resources: {}
+  resources:
+    requests:
+      cpu: 150m
+      memory: 128Mi
+    limits:
+      cpu: 250m
+      memory: 256Mi
   ## @param configsvr.hostAliases Deployment pod host aliases
   ## https://kubernetes.io/docs/concepts/services-networking/add-entries-to-pod-etc-hosts-with-host-aliases/
   ##
@@ -646,7 +658,13 @@ mongos:
   ## @param mongos.resources Configure pod resources
   ## ref: https://kubernetes.io/docs/user-guide/compute-resources/
   ##
-  resources: {}
+  resources:
+    requests:
+      cpu: 150m
+      memory: 128Mi
+    limits:
+      cpu: 250m
+      memory: 256Mi
   ## @param mongos.hostAliases Deployment pod host aliases
   ## https://kubernetes.io/docs/concepts/services-networking/add-entries-to-pod-etc-hosts-with-host-aliases/
   ##
@@ -970,7 +988,13 @@ shardsvr:
     ## @param shardsvr.dataNode.resources Configure pod resources
     ## ref: https://kubernetes.io/docs/user-guide/compute-resources/
     ##
-    resources: {}
+    resources:
+      requests:
+        cpu: 150m
+        memory: 128Mi
+      limits:
+        cpu: 250m
+        memory: 256Mi
     ## @param shardsvr.dataNode.mongodbExtraFlags MongoDB&reg; additional command line flags
     ## Can be used to specify command line flags, for example:
     ## mongodbExtraFlags:
@@ -1034,7 +1058,7 @@ shardsvr:
     ## tolerations:
     ## - key: "shardId"
     ##   operator: "Equal"
-    ##   value: "{{ .dataNodeLoopId }}"
+    ##   value: "{{ .dataNodeLoopId }}"  arbiter:
     ##   effect: "NoSchedule"
     ##
     tolerations: []
@@ -1289,7 +1313,13 @@ shardsvr:
     ## @param shardsvr.arbiter.resources Configure pod resources
     ## ref: https://kubernetes.io/docs/user-guide/compute-resources/
     ##
-    resources: {}
+    resources:
+      requests:
+        cpu: 150m
+        memory: 128Mi
+      limits:
+        cpu: 250m
+        memory: 256Mi
     ## @param shardsvr.arbiter.mongodbExtraFlags MongoDB&reg; additional command line flags
     ## Can be used to specify command line flags, for example:
     ## mongodbExtraFlags:
@@ -1531,7 +1561,7 @@ shardsvr:
 metrics:
   ## @param metrics.enabled Start a side-car prometheus exporter
   ##
-  enabled: false
+  enabled: True
   ## @param metrics.image.registry MongoDB&reg; exporter image registry
   ## @param metrics.image.repository MongoDB&reg; exporter image name
   ## @param metrics.image.tag MongoDB&reg; exporter image tag
@@ -1542,7 +1572,7 @@ metrics:
   image:
     registry: docker.io
     repository: bitnami/mongodb-exporter
-    tag: 0.34.0-debian-11-r14
+    tag: 0.34.0-debian-11-r19
     digest: ""
     pullPolicy: Always
     ## Optionally specify an array of imagePullSecrets.
@@ -1563,7 +1593,13 @@ metrics:
   ## @param metrics.resources Metrics exporter resource requests and limits
   ## ref: https://kubernetes.io/docs/user-guide/compute-resources/
   ##
-  resources: {}
+  resources:
+    requests:
+      cpu: 150m
+      memory: 128Mi
+    limits:
+      cpu: 250m
+      memory: 256Mi
   ## Configure Container Security Context
   ## ref: https://kubernetes.io/docs/tasks/configure-pod-container/security-context/#set-the-security-context-for-a-container
   ## @param metrics.containerSecurityContext.enabled Enabled containers' Security Context

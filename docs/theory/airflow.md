@@ -73,19 +73,6 @@
 6. Executor take that task and execute in a worker (status running), updating the status in metastore (sucess or failed)
 7. Web server updates the UI
 
-### Trigger rules
-
-- all_success (default): All upstream tasks have succeeded
-- all_failed: All upstream tasks are in a failed or upstream_failed state
-- all_done: All upstream tasks are done with their execution
-- all_skipped: All upstream tasks are in a skipped state
-- one_failed: At least one upstream task has failed (does not wait for all upstream tasks to be done)
-- one_success: At least one upstream task has succeeded (does not wait for all upstream tasks to be done)
-- none_failed: All upstream tasks have not failed or upstream_failed - that is, all upstream tasks have succeeded or been skipped
-- none_failed_min_one_success: All upstream tasks have not failed or upstream_failed, and at least one upstream task has succeeded.
-- none_skipped: No upstream task is in a skipped state - that is, all upstream tasks are in a success, failed, or upstream_failed state
-- always: No dependencies at all, run this task at any time
-
 ### Tasks status
 
 - none: The Task has not yet been queued for execution (its dependencies are not yet met)
@@ -102,6 +89,32 @@
 - up_for_reschedule: The task is a Sensor that is in reschedule mode
 - deferred: The task has been deferred to a trigger
 - removed: The task has vanished from the DAG since the run started
+
+### Trigger rules
+
+- all_success (default): All upstream tasks have succeeded
+- all_failed: All upstream tasks are in a failed or upstream_failed state
+- all_done: All upstream tasks are done with their execution
+- all_skipped: All upstream tasks are in a skipped state
+- one_failed: At least one upstream task has failed (does not wait for all upstream tasks to be done)
+- one_success: At least one upstream task has succeeded (does not wait for all upstream tasks to be done)
+- none_failed: All upstream tasks have not failed or upstream_failed - that is, all upstream tasks have succeeded or been skipped
+- none_failed_min_one_success: All upstream tasks have not failed or upstream_failed, and at least one upstream task has succeeded.
+- none_skipped: No upstream task is in a skipped state - that is, all upstream tasks are in a success, failed, or upstream_failed state
+- always: No dependencies at all, run this task at any time
+
+### Provider
+- Extend functionalities to airflow core 
+- Entirely separated can be updated withput waiting for airflow
+
+### Extras
+- Allows install set of dependencies needed for a feature
+- Kubernetes extra, Celery extra
+
+### The 3 ways
+- UI: manage and monitor, check logs of tasks, history of dag runs
+- CLI: test tasks, update and initialize Airflow
+- Rest API: build app in top of airflow
 
 ### Schedule
 - scheduler_interval or schedule
