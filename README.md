@@ -12,8 +12,9 @@
 
 ## Optional
 - [Orchestrator: Airflow](docs/orchestrator/airflow.md)
-- [Database: mssql](docs/database/databases.md)
-- [Database: mysql](docs/database/databases.md)
-- [Database: postgres](docs/database/databases.md)
+- [Database: Mssql](docs/database/databases.md)
+- [Database: Mysql](docs/database/databases.md)
+- [Database: Postgres](docs/database/databases.md)
+- [Database: Mongodb](docs/database/databases.md)
 - [Kafka UI: Lenses](docs/dataops/lenses.md)
 - [Storage: Minio](docs/deepstorage/minio.md)
