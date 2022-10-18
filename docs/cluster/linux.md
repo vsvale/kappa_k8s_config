@@ -107,6 +107,7 @@ export PS1="\u@\h \[\033[36m\]\w\[\033[91m\]\$(git_data) \[\033[00m\]$ "
 - `cd kappa_k8s_config`
 - `git lfs install`
 - `git lfs track "*.jar"`
+- `git lfs migrate import --include="*.jar"`
 
 
 ## Create namespaces
