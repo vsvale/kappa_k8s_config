@@ -369,11 +369,11 @@ connectors:
       connection-user=sa
       connection-password=IlS27OpKxw9EYObU80dz
 
-#    cassandra.properties: |-
-#      connector.name=cassandra
-#      cassandra.contact-points=10.43.135.57:9042
-#      cassandra.username=yugabyte
-#      cassandra.password=yugabyte
+    cassandra.properties: |-
+      connector.name=cassandra
+      cassandra.contact-points=10.43.135.57:9042
+      cassandra.username=yugabyte
+      cassandra.password=yugabyte
 
 catalogs: {}
   # Catalogs that will be mounted in {{ .Values.config.general.path }}/catalog
