@@ -2,10 +2,10 @@
 - `docker images`
 - see version of airflow image https://hub.docker.com/r/apache/airflow/tags
 - `docker pull apache/airflow:latest-python3.7`
-- `docker build ./repository/code/orchestrator/airflow/ -t vsvale-airflow:2.4.1`
-- `docker tag vsvale-airflow:2.4.1 vsvale/vsvale-airflow:2.4.1`
+- `docker build ./repository/code/orchestrator/airflow/ -t vsvale-airflow:2.4.2`
+- `docker tag vsvale-airflow:2.4.2 vsvale/vsvale-airflow:2.4.2`
 - `docker login`
-- `docker push vsvale/vsvale-airflow:2.4.1`
+- `docker push vsvale/vsvale-airflow:2.4.2`
 - update version to [values.yaml](../../repository/helm-charts/orchestrator/airflow/values.yaml)
 
 ## Install

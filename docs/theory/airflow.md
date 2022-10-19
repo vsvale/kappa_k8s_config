@@ -28,6 +28,14 @@
 - Executor: how tasks will be executed. Kuberbetes, Celery, Sequential, Local
 - Worker: where tasks are executed
 
+### Executor
+- defines the way tasks are going to be executed in aiflow instance
+- in any executor has a queue where tasks going to be pushed and pulled by workes. Queue define order of execution of tasks. 
+- Local: multiple tasks in the same machine
+- Kubernetes: mutiple tasks in k8s
+- default: Sequential executor, no paralalism cause sqlite don't allow multiple writes at same time
+- grep executor airflow.cfg
+
 ### Architecture
 - Single node: all componentes run in the same machine
     - Web server presents all data from metastore
@@ -63,6 +71,11 @@
 
 ### Workflow
 - DAG with operators and dependencies
+
+#### Task Actions
+- if using kubernetes and celery executor can run task
+- clear restart the task (retry)
+- Mark failed and mark success
 
 ### Task lifecicle
 1. Create a py file in dag folder
@@ -115,6 +128,51 @@
 - UI: manage and monitor, check logs of tasks, history of dag runs
 - CLI: test tasks, update and initialize Airflow
 - Rest API: build app in top of airflow
+
+### UI delete DAG
+- Only delete metadata not dag file
+
+#### Toggle
+- Unpause dag, now it can be scheduled
+
+#### Tree view
+- First view when open dag
+- History, status of tasks boxes and status of DAG run (circle)
+
+#### Graph View
+- check dependencies
+- status of the tasks for the latest DAG run
+
+#### Gant View
+- Durantion of tasks
+- identify bottlenecks
+- identify parallelism
+
+#### Task instance
+- click in task in any view
+- get logs
+- get details
+- get rendered data in templates
+- Filter upstream show from trask to start
+
+#### CLI import commands
+- airflow db init: init database and generate the files and folders needed by airflow
+- airflow db upgrade: upgrade airflow instance
+- airflow db reset: reset default factory
+- airflow webserver: start UI
+- airflow scheduler: start scheduler
+- airflow celery worker: start celery worker in each machine
+- airflow dags pause/unpause: toggle dag to be scheduled or not
+- airflow dags trigger: trigger a dag
+- airflow dags list: list dags
+- airflow tasks list dag_id: list task of a dag
+- airflow tasks test dag_id 2022-12-31: test if tasks works
+- airflow dags backfill -s startdate -e enddate --reset_dagruns dag_id: run all from paused date
+
+### Stable Rest API
+- production ready
+- endpoint with crud to each component of ariflow
+
 
 ### Schedule
 - scheduler_interval or schedule

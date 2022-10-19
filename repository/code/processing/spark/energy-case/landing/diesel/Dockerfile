@@ -7,15 +7,14 @@ USER root:root
 RUN mkdir -p /app
 
 # pip install
-RUN pip install --no-cache-dir --upgrade pip && \
-    pip install --no-cache-dir delta-spark && \
-    pip install koalas
+RUN pip install --upgrade pip
+RUN pip install -r requirements.txt
 
 # copy spark program
 COPY ./diesel-to-landing.py /app/
 
 # copy jar files
-COPY repository/code/processing/spark/jars /opt/spark/jars
+COPY ./jars /opt/spark/jars
 
 # set work directory
 WORKDIR /app

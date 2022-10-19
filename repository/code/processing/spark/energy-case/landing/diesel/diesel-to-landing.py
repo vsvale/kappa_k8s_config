@@ -12,7 +12,7 @@ def main():
     spark = SparkSession \
         .builder \
         .appName("diesel-to-landing") \
-        .config("spark.hadoop.fs.s3a.endpoint", "http://minio.deepstorage.svc.Cluster.local:9000") \
+        .config("spark.hadoop.fs.s3a.endpoint", "http://172.18.0.2:9000") \
         .config("spark.hadoop.fs.s3a.access.key", "LBGipuLnLkJgwjXE") \
         .config("spark.hadoop.fs.s3a.secret.key", "WjnPIFgPIhsjeFSgyvo0vurlMNfjDWyV") \
         .config("spark.hadoop.fs.s3a.path.style.access", True) \
