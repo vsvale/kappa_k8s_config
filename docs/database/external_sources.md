@@ -26,7 +26,7 @@
     - HOST: sampledb.mssql.somee.com
     - PORT:
     - USERNAME: vsvale_SQLLogin_1
-    - PASSWORD:
+    - PASSWORD: 41y12q7yhx
     - DATABASE: sampledb
     - `use sampledb;`
     - `select * from SaLesLt.Customer;`
