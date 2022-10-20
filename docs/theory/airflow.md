@@ -33,6 +33,7 @@
 - in any executor has a queue where tasks going to be pushed and pulled by workes. Queue define order of execution of tasks. 
 - Local: multiple tasks in the same machine
 - Kubernetes: mutiple tasks in k8s
+- Celery: distribute task in pultiple machines, need a queue in redis and install airflow and dependencies in each worker
 - default: Sequential executor, no paralalism cause sqlite don't allow multiple writes at same time
 - grep executor airflow.cfg
 
@@ -173,18 +174,64 @@
 - production ready
 - endpoint with crud to each component of ariflow
 
+### DAG
+- dag_id is the only thing obrigatory in a DAG
+
+- start_date time a dag can be scheduled
+- if start_date is not defined the default value is none. 
+- If a task is created without start_date DAG is invalid.
+- start_date can be in future or in the past
+- you can define start_date in operator, but is not recommended
+- always use dates in UTC, but you can use TZ
+- schedule_interval interval need to wait to run dag
+- every 24 hours is the default schedule_interval
+- first run = start_date + schedule_interval
+- execution_date is the scheduled period
+- end_date: when dag stop scheduling
 
 ### Schedule
 - scheduler_interval or schedule
     - None: manual
     - @daily, @weekly, @monthly
     - cronjob: '* * * * * ' minute, hour, day, month, day of week
-- start_date: d-1 start run
-- end_date: when dag stop scheduling
+    - conjob is a string that represents a interval of time
+    - timedelta is relative from the last execution_Date
 
+### Backfilling
+- run or rerun past non triggered or triggered DAG run
+- after pause for many days
+- catchup=True/False in dag
+- max_active_runs limits catchup
+
+### Operator
+- operator = task
+- 1 operator 1 task, more efficient
+- operator must be indepotent: same input same output
+- unique task id
+- default_args apply to all tasks
+- in Pythonoperator you can access dag context by passing **kwargs as parameter of function
+- ds is execution date in pythonoperator
+- op_kwargs = {'my_param':42} and put my_param as parameter
+- on_failure_callback= run a command when task failed
+
+### Sensor
+- special operator
+- wait for a file 
 
 ### X-com
 - Cross-communications: push and pull of metadata
+- return in pythonoperator or pass ti as parameter and ti.xcom_push(key='return_value',value=42)
+- it is save in metadatabase, max 2gb
+- key:value
+- to use xcom value in python operator use ti as parameter and ti.xcom_pull(key='return_value',task_id['name_of_returned_task'])
+- can be used task_pull(task_push())
+
+### Concurrency
+- Parallelism: maximum number of tasks can be execute at same time in airflow (default 32)
+- dag_concurrency: defines the number of tasks for a given dag that can be executed in parallel across all of the DAG runs (default 16)
+- max_active_runs_per_dag: defines the number of dag runs that can run at the same time for a given DAG (defaul 16)
+- max_active_runs: defines the number of dag runs that can run at same time for a specific dag
+- concurrency: defines the number of task runs that can run at same time for a specific dag
 
 ### [REST API](https://airflow.apache.org/docs/apache-airflow/stable/stable-rest-api-ref.html)
 - OpenAPI 3
@@ -251,3 +298,5 @@
     3. Orchestration: watch data lake using a sensor or in scheduled basis to trigger processing, after that deliver to serving
     4. Apache Spark: intelligent framework for dealing with transformation
     5. Seving: MDW
+
+    free-retry-exam-airflow-fundamentals

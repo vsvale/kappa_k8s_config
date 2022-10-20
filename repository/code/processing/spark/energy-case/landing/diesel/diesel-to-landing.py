@@ -12,7 +12,7 @@ def main():
     spark = SparkSession \
         .builder \
         .appName("diesel-to-landing") \
-        .config("spark.hadoop.fs.s3a.endpoint", "http://172.18.0.2:9000") \
+        .config("spark.hadoop.fs.s3a.endpoint", "http://172.18.0.2:9443") \
         .config("spark.hadoop.fs.s3a.access.key", "LBGipuLnLkJgwjXE") \
         .config("spark.hadoop.fs.s3a.secret.key", "WjnPIFgPIhsjeFSgyvo0vurlMNfjDWyV") \
         .config("spark.hadoop.fs.s3a.path.style.access", True) \
@@ -49,16 +49,19 @@ def main():
     sdf_diesel_raw = sdf_diesel_raw.withColumn("created_at", current_timestamp())
     sdf_diesel_raw = sdf_diesel_raw.withColumn("load_date", current_date())
 
+    df = spark.read.format('csv').options(header='true', inferSchema='true').load('s3a://landing/airflow/staging.csv')
+    df.show()
 
     # [write to lake]
     # [landing area]
-    write_mode = "overwrite"
-    landing_path = "s3a://landing"
-
-    sdf_diesel_raw.coalesce(1).write.mode(write_mode)\
-        .format('com.databricks.spark.csv')\
-        .partitionBy("load_date")\
-        .save(landing_path + "/diesel/", header = True)
+#    write_mode = "overwrite"
+#    landing_path = "s3a://lakehouse"
+#
+#    sdf_diesel_raw.write.mode(write_mode)\
+#        .format('com.databricks.spark.csv')\
+#        .option("header", "true")\
+#        .partitionBy("load_date")\
+#        .save(landing_path + "/landing/diesel/vendas-oleo-diesel-tipo-m3-2013-2022.csv")
 
     # stop session
     spark.stop()

@@ -6,7 +6,7 @@
 - `watch kubectl get pods -n processing`
 - `kubectl apply -f https://raw.githubusercontent.com/vsvale/kappa_k8s_config/master/repository/yamls/processing/spark/crb_spark_operator.yaml`
 
-## Create base image
+### Create base image
 - docker pull gcr.io/spark-operator/spark-py:v3.1.1-hadoop3
 - docker build ./repository/code/processing/spark/base_image/ -t spark_base_image:3.1.1
 - docker tag spark_base_image:3.1.1 vsvale/spark_base_image:3.1.1
