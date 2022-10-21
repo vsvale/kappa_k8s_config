@@ -6,9 +6,9 @@
 - [Ingestion: Kafka](docs/ingestion/strimzi.md)
 - [Processing: Spark](docs/processing/processing.md)
 - [Processing: KSQLDB](docs/processing/processing.md)
-- [Processing: Trino](docs/processing/processing.md)
 - [Database: YugabyteDB](docs/database/databases.md)
 - [Datastore: Pinot](docs/datastore/pinot.md)
+- [Processing: Trino](docs/processing/processing.md)
 
 ## Optional
 - [Orchestrator: Airflow](docs/orchestrator/airflow.md)
