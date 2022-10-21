@@ -6,7 +6,7 @@ metadata:
 spec:
   type: LoadBalancer
   ports:
-  - port: 80
-    targetPort: 8080
+  - port: 8686
+    targetPort: 80
   selector:
     app: minio
