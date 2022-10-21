@@ -6,7 +6,7 @@ metadata:
 spec:
   type: LoadBalancer
   ports:
-  - port: 9444
+  - port: 433
     targetPort: 433
   selector:
     app: minio
