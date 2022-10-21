@@ -1,0 +1,27 @@
+apiVersion: "kafka.strimzi.io/v1beta2"
+kind: "KafkaConnector"
+metadata:
+  # connector name
+  name: "sink-ysql-sqlserver-sampledb-customes-avro-68bc3778"
+  labels:
+    # kafka connect [cluster] name
+    strimzi.io/cluster: edh
+spec:
+  class: io.confluent.connect.jdbc.JdbcSinkConnector
+  tasksMax: 2
+  config:
+    key.converter: "io.confluent.connect.avro.AvroConverter"
+    key.converter.schema.registry.url: "http://schema-registry-cp-schema-registry:8081"
+    value.converter: "io.confluent.connect.avro.AvroConverter"
+    value.converter.schema.registry.url: "http://schema-registry-cp-schema-registry:8081"
+    connection.url: "jdbc:postgresql://yb-tservers.database.svc.cluster.local:5433/owshq?user=plumber&password=PlumberSDE"
+    connection.attempts: "2"
+    topics: "src-sqlserver-jdbc-sampledb-custumer-avro"
+    table.name.format: "sampledb_custumer"
+    auto.create: "true"
+    auto.evolve: "true"
+    insert.mode: "upsert"
+    pk.mode: "record_key"
+    pk.fields: "CustomerID"
+    batch.size: "1500"
+    delete.enabled: true
