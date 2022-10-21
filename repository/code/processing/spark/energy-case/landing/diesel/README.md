@@ -4,5 +4,6 @@
 - docker tag diesel-to-landing:1.0.0 vsvale/diesel-to-landing:1.0.0
 - docker login
 - docker push vsvale/diesel-to-landing:1.0.0
-
-# Put yaml in dag folder in airflow repository
+- Put yaml in dag folder in airflow repository
+- trigger dag
+- kubectl logs diesel-to-landing-driver -n processing

@@ -2,6 +2,7 @@
 # import libraries
 from delta.tables import *
 from pyspark.sql import SparkSession
+from pyspark.sql import Row
 from pyspark.sql.functions import current_timestamp, current_date
 import databricks.koalas as ks
 import pandas as pd
@@ -12,7 +13,7 @@ def main():
     spark = SparkSession \
         .builder \
         .appName("diesel-to-landing") \
-        .config("spark.hadoop.fs.s3a.endpoint", "http://172.18.0.2:9443") \
+        .config("spark.hadoop.fs.s3a.endpoint", "http://172.18.0.2:9000") \
         .config("spark.hadoop.fs.s3a.access.key", "LBGipuLnLkJgwjXE") \
         .config("spark.hadoop.fs.s3a.secret.key", "WjnPIFgPIhsjeFSgyvo0vurlMNfjDWyV") \
         .config("spark.hadoop.fs.s3a.path.style.access", True) \
@@ -49,8 +50,13 @@ def main():
     sdf_diesel_raw = sdf_diesel_raw.withColumn("created_at", current_timestamp())
     sdf_diesel_raw = sdf_diesel_raw.withColumn("load_date", current_date())
 
-    df = spark.read.format('csv').options(header='true', inferSchema='true').load('s3a://landing/airflow/staging.csv')
-    df.show()
+    sdf_diesel_raw.write.format("jdbc")\
+        .option("url","jdbc:postgresql://yb-tservers.database.svc.cluster.local:5433/owshq?user=plumber&password=PlumberSDE")\
+        .option("driver", "org.postgresql.Driver")\
+        .option("dbtable", "diesel_raw")\
+        .option("mode", "overwrite")\
+        .save()
+
 
     # [write to lake]
     # [landing area]
