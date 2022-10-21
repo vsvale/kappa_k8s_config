@@ -78,7 +78,7 @@ export PS1="\u@\h \[\033[36m\]\w\[\033[91m\]\$(git_data) \[\033[00m\]$ "
 
 ## Create Cluster
 
-- `k3d cluster create kappa --volume $HOME/k3d:/var/lib/rancher/k3s/storage@all -s 1 --servers-memory 6Gb -a 3 --agents-memory 58gb --api-port 6443 -p 8081:80@loadbalancer`
+- `k3d cluster create kappa --volume $HOME/k3d:/var/lib/rancher/k3s/storage@all -s 1 --servers-memory 6Gb -a 3 --agents-memory 58gb --api-port 6443 -p 8081:80@loadbalancer -p 8443:443@loadbalancer`
 
 ## Install Terraform
 - `sudo apt-get update && sudo apt-get install -y gnupg software-properties-common`

@@ -2,7 +2,7 @@ apiVersion: "kafka.strimzi.io/v1beta2"
 kind: "KafkaConnector"
 metadata:
   # connector name
-  name: "sink-minio-sqlserver-sampledb-customer-avro-8a8a32c7"
+  name: "sink-minio-sqlserver-sampledb-customer-avro-8a8a32c9"
   labels:
     # kafka connect [cluster] name
     strimzi.io/cluster: edh

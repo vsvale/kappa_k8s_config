@@ -7,6 +7,6 @@ spec:
   type: LoadBalancer
   ports:
   - port: 433
-    targetPort: 433
+    targetPort: 9000
   selector:
     app: minio
