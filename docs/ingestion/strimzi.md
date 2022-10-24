@@ -47,7 +47,7 @@
 ## Connectors
 - `kubectl apply -f https://raw.githubusercontent.com/vsvale/kappa_k8s_config/master/repository/app-manifests/ingestion/kafka-connectors.yaml`
 
-- `kubectl get applications -n cicd`
+- `kubectl get applications -n ingestion`
 - `kubectl get kafkaconnectors -n ingestion`
 - `kubectl get kafkaconnectors -n ingestion <name> -oyaml`
 - `kubens ingestion && kubectl get strimzi`
