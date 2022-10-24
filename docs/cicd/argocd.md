@@ -16,7 +16,7 @@
 - `kubectl apply -f https://raw.githubusercontent.com/vsvale/kappa_k8s_config/master/repository/yamls/cicd/svc_ingress_argocd.yaml -n cicd`
 - [http://127.0.0.1:8081/argocd/login](http://127.0.0.1:8081/argocd/login)
 - user: admin
-- password: kubectl -n cicd get secret argocd-initial-admin-secret -o jsonpath="{.data.password}" | base64 -d  | more
+- password: `kubectl -n cicd get secret argocd-initial-admin-secret -o jsonpath="{.data.password}" | base64 -d  | more`
 
 ### create cluster role binding for admin user
 
@@ -24,4 +24,4 @@
 
 ### repository k8_config
 
-- `[Add](http://127.0.0.1:8081/argocd/settings/repos) https://github.com/vsvale/kappa_k8s_config.git
+- Add https://github.com/vsvale/kappa_k8s_config.git
