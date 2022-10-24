@@ -7,7 +7,7 @@
 
 ## Install docker
 - `sudo apt update`
-- `sudo apt install -y ca-certificates curl gnupg lsb-release`
+- `sudo apt install -y ca-certificates curl gnupg lsb-release apt-transport-https software-properties-common`
 - `curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /usr/share/keyrings/docker-archive-keyring.gpg`
 - `echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/docker-archive-keyring.gpg] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null`
 - `sudo apt-get update`
@@ -94,7 +94,7 @@ export PS1="\u@\h \[\033[36m\]\w\[\033[91m\]\$(git_data) \[\033[00m\]$ "
     https://apt.releases.hashicorp.com $(lsb_release -cs) main" | \
     sudo tee /etc/apt/sources.list.d/hashicorp.list
 `
-- `sudo apt update && sudo apt install terraform`
+- `sudo apt update && sudo apt-get install terraform`
 - `terraform version`
 
 ## git
@@ -102,6 +102,7 @@ export PS1="\u@\h \[\033[36m\]\w\[\033[91m\]\$(git_data) \[\033[00m\]$ "
 - [Donwload lfs](https://github.com/git-lfs/git-lfs/releases/download/v3.2.0/git-lfs-linux-amd64-v3.2.0.tar.gz)
 - `cd ~/Downloads`
 - `tar -xf git-lfs-linux-amd64-v3.2.0.tar.gz`
+- `cd git-lfs-3.2.0`
 - `chmod 755 install.sh`
 - `sudo ./install.sh`
 - `cd kappa_k8s_config`
