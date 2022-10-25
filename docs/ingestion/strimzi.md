@@ -13,11 +13,13 @@
 
 ## Broker
 
-- persistent claim: `kubectl apply -f https://raw.githubusercontent.com/vsvale/kappa_k8s_config/master/repository/yamls/ingestion/broker_persistent_claim/kafka-pc.yaml`
+- persistent claim: `kubectl apply -f https://raw.githubusercontent.com/vsvale/kappa_k8s_config/master/repository/app-manifests/ingestion/kafka-broker-pc.yaml`
 - jbod: `kubectl apply -f https://raw.githubusercontent.com/vsvale/kappa_k8s_config/master/repository/app-manifests/ingestion/kafka-broker.yaml`
 - ephemeral: `kubectl apply -f https://raw.githubusercontent.com/vsvale/kappa_k8s_config/master/repository/app-manifests/ingestion/kafka-broker-ephemeral.yaml`
 
 ## Kafka Connector
+
+### Create image
 - Download jars:
   - [S3 source](https://www.confluent.io/hub/confluentinc/kafka-connect-s3-source)
   - [S3 sync](https://www.confluent.io/hub/confluentinc/kafka-connect-s3)
@@ -36,6 +38,8 @@
 - `docker tag vsvale-kafka-connect-strimzi:3.2.3 vsvale/vsvale-kafka-connect-strimzi:3.2.3`
 - `docker login`
 - `docker push vsvale/vsvale-kafka-connect-strimzi:3.2.3`
+
+### Install Connect
 - `kubectl apply -f https://raw.githubusercontent.com/vsvale/kappa_k8s_config/master/repository/app-manifests/ingestion/kafka-connect.yaml`
 
 ## Schema Registry
@@ -48,6 +52,7 @@
 ## Connectors
 - `kubectl apply -f https://raw.githubusercontent.com/vsvale/kappa_k8s_config/master/repository/app-manifests/ingestion/kafka-connectors.yaml`
 
+## Verify status connector
 - `kubectl get applications -n ingestion`
 - `kubectl get kafkaconnectors -n ingestion`
 - `kubectl get kafkaconnectors -n ingestion <name> -oyaml`

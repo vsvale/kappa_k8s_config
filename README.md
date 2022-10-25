@@ -8,6 +8,7 @@
 - [Processing: KSQLDB](docs/processing/processing.md)
 - [Database: YugabyteDB](docs/database/databases.md)
 - [Datastore: Pinot](docs/datastore/pinot.md)
+- [Storage: Minio](docs/deepstorage/minio.md)
 - [Processing: Trino](docs/processing/processing.md)
 
 ## Optional
@@ -17,4 +18,3 @@
 - [Database: Postgres](docs/database/databases.md)
 - [Database: Mongodb](docs/database/databases.md)
 - [Kafka UI: Lenses](docs/dataops/lenses.md)
-- [Storage: Minio](docs/deepstorage/minio.md)
