@@ -67,7 +67,6 @@ export PS1="\u@\h \[\033[36m\]\w\[\033[91m\]\$(git_data) \[\033[00m\]$ "
 - `export PATH="${KREW_ROOT:-$HOME/.krew}/bin:$PATH"`
 
 ## Auto complete
-
 - `sudo apt-get update`
 - `sudo apt-get install -y bash-completion`
 - `echo "source <(kubectl completion bash)" >> ~/.bashrc`
