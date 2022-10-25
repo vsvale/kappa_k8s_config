@@ -35,9 +35,6 @@ global:
       # profile: PROFILE # AWS profile
 
   notifications:
-      slack: # Write to a webhook.
-      enabled: false # Allow kubecost to write to your slackbot.
-      webhook: https://hooks.slack.com/services/T00000000/B00000000/XXXXXXXXXXXXXXXXXXXXXXXX # Example Webhook
     # Kubecost alerting configuration
     # Ref: http://docs.kubecost.com/alerts
     # alertConfigs:

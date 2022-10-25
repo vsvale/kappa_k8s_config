@@ -19,3 +19,4 @@
 - [Database: Postgres](docs/database/databases.md)
 - [Database: Mongodb](docs/database/databases.md)
 - [Kafka UI: Lenses](docs/dataops/lenses.md)
+- [Cost: kubecost](docs/cost/cost.md)
