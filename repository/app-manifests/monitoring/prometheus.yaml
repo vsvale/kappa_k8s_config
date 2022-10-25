@@ -7,7 +7,7 @@ spec:
   project: default
   source:
     repoURL: "https://github.com/vsvale/kappa_k8s_config.git"
-    path: repository/helm-charts/monitoring/prometheus-alertmanager-grafana
+    path: repository/helm-charts/monitoring/kube-prometheus-stack
     targetRevision: HEAD
     helm:
       valueFiles:
