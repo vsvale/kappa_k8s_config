@@ -2,7 +2,7 @@ apiVersion: "kafka.strimzi.io/v1beta2"
 kind: "KafkaConnector"
 metadata:
   # connector name
-  name: "sink-minio-sqlserver-sampledb-customer-avro-8a8a32c9"
+  name: "sink-minio-sqlserver-sampledb-customer-avro-8a8a32d1"
   labels:
     # kafka connect [cluster] name
     strimzi.io/cluster: edh
@@ -21,8 +21,8 @@ spec:
     flush.size: 500
     rotate.schedule.interval.ms: 54000
     store.url: "http://minio.deepstorage.svc.cluster.local"
-    aws.access.key.id: "LBGipuLnLkJgwjXE"
-    aws.secret.access.key: "WjnPIFgPIhsjeFSgyvo0vurlMNfjDWyV"
+    aws.access.key.id: "gkenSag2FXeITi3y"
+    aws.secret.access.key: "s1gtsShKIlBAVhEACYMIJGa8QlOsdKDc"
     storage.class: "io.confluent.connect.s3.storage.S3Storage"
     format.class: "io.confluent.connect.s3.format.parquet.ParquetFormat"
     enhanced.avro.schema.support: True

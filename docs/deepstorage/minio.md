@@ -2,7 +2,7 @@
 - `kubectl apply -f https://raw.githubusercontent.com/vsvale/kappa_k8s_config/master/repository/app-manifests/deepstorage/miniooperator.yaml`
 - `kubectl apply -f https://raw.githubusercontent.com/vsvale/kappa_k8s_config/master/repository/yamls/deepstorage/svc_lb_minio_ui.yaml`
 - `kubectl apply -f https://raw.githubusercontent.com/vsvale/kappa_k8s_config/master/repository/yamls/deepstorage/jwt_minio.yaml`
-- `kubectl get secret console-sa-secret -o jsonpath="{.data.token}"| base64 --decode`
+- `kubectl get secret console-sa-secret -o jsonpath="{.data.token}" -n deepstorage| base64 --decode`
 - create tenant. 1 tenant per namespace. Tenant must be a storageclass with volume binding mode "WaitForFirstConsumer"
 - Download credentials
 - access [console](https://172.18.0.2:9443/)
