@@ -3,6 +3,8 @@ kind: Application
 metadata:
   name: kafka-broker
   namespace: cicd
+  argocd.argoproj.io/hook: Skip
+  argocd.argoproj.io/sync-wave: "0"
 spec:
   project: default
   source:
