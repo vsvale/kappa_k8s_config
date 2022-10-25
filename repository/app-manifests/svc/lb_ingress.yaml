@@ -1,7 +1,7 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: lb_ingress
+  name: lb-ingress-kappa
   namespace: cicd
 spec:
   project: default
