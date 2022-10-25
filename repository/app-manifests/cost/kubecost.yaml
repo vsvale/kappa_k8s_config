@@ -9,7 +9,7 @@ spec:
   project: default
   source:
     repoURL: "https://github.com/vsvale/kappa_k8s_config.git"
-    path: repository/helm-charts/cost/kubecost
+    path: repository/helm-charts/cost/cost-analyzer
     targetRevision: HEAD
     helm:
       valueFiles:
