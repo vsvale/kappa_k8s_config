@@ -4,7 +4,7 @@ metadata:
   name: metrics-ingestion
   namespace: cicd
   annotations:
-    argocd.argoproj.io/hook: Sync
+    argocd.argoproj.io/hook: PreSync
     argocd.argoproj.io/sync-wave: "1"
 spec:
   project: default
