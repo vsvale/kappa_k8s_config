@@ -1,3 +1,7 @@
+## Database App of Apps
+- `kubectl apply -f https://raw.githubusercontent.com/vsvale/kappa_k8s_config/master/repository/cluster-manifests/cluster/database.yaml`
+
+## Manual Instalation
 ## MSSQL
 
 - `helm repo add stable https://charts.helm.sh/stable`

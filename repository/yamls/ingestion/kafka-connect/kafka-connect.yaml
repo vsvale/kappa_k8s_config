@@ -11,8 +11,9 @@ spec:
   version: 3.2.3
   replicas: 2
   bootstrapServers: edh-kafka-bootstrap:9093
-  image: vsvale/vsvale-kafka-connect-strimzi:3.2.3
-  # imagePullPolicy: Always
+  #image: vsvale/vsvale-kafka-connect-strimzi:3.2.3
+  image: mateushenrique/owshq-kafka-connect-strimzi:3.2.3
+  imagePullPolicy: Always
   tls:
     trustedCertificates:
       - secretName: edh-cluster-ca-cert

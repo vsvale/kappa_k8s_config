@@ -59,4 +59,4 @@
 - Get containers: `docker ps -a`
 - Stop containers: `docker stop containerid`
 - Delete container: `docker rm containerid`
-
+- see inside a container image: docker run --rm -it --entrypoint bash <image-name-or-id>

@@ -4,9 +4,9 @@
 ## Tools
 - [CD: Argo CD](docs/cicd/argocd.md)
 - [Ingestion: Kafka](docs/ingestion/strimzi.md)
+- [Database: YugabyteDB](docs/database/databases.md)
 - [Processing: Spark](docs/processing/processing.md)
 - [Processing: KSQLDB](docs/processing/processing.md)
-- [Database: YugabyteDB](docs/database/databases.md)
 - [Datastore: Pinot](docs/datastore/pinot.md)
 - [Storage: Minio](docs/deepstorage/minio.md)
 - [Processing: Trino](docs/processing/processing.md)

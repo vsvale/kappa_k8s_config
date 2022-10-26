@@ -1,5 +1,7 @@
-# Install Strimzi
+## Ingetion App of Apps
+- `kubectl apply -f https://raw.githubusercontent.com/vsvale/kappa_k8s_config/master/repository/cluster-manifests/cluster/ingestion.yaml`
 
+## Install Strimzi manual
 - `helm repo add strimzi https://strimzi.io/charts/`
 - `helm repo update`
 - `kubectl apply -f https://raw.githubusercontent.com/vsvale/kappa_k8s_config/master/repository/app-manifests/ingestion/strimzi.yaml`
