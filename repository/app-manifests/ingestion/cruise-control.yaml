@@ -3,8 +3,9 @@ kind: Application
 metadata:
   name: cruise-control
   namespace: cicd
-  argocd.argoproj.io/hook: Sync
-  argocd.argoproj.io/sync-wave: "-50"
+  annotations:
+    argocd.argoproj.io/hook: Sync
+    argocd.argoproj.io/sync-wave: "-4"
 spec:
   project: default
   source:
