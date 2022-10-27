@@ -1,9 +1,8 @@
 ## Ingetion App of Apps
 - `kubectl apply -f https://raw.githubusercontent.com/vsvale/kappa_k8s_config/master/repository/cluster-manifests/cluster/ingestion.yaml`
+- run sync in argocd cicd/ingestion
 
 ## Install Strimzi manual
-- `helm repo add strimzi https://strimzi.io/charts/`
-- `helm repo update`
 - `kubectl apply -f https://raw.githubusercontent.com/vsvale/kappa_k8s_config/master/repository/app-manifests/ingestion/strimzi.yaml`
 - `watch kubectl get pods -n ingestion`
 
