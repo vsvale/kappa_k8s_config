@@ -1,6 +1,6 @@
 ## Install
-
-- `helm repo add pinot https://raw.githubusercontent.com/apache/pinot/master/kubernetes/helm`
+- `kubectl apply -f https://raw.githubusercontent.com/vsvale/kappa_k8s_config/master/repository/cluster-manifests/cluster/datastore.yaml`
+OR Install Manual
 - `kubectl apply -f https://raw.githubusercontent.com/vsvale/kappa_k8s_config/master/repository/app-manifests/datastore/pinot.yaml`
 
 # Commands
