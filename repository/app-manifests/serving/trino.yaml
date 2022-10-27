@@ -7,14 +7,14 @@ spec:
   project: default
   source:
     repoURL: "https://github.com/vsvale/kappa_k8s_config.git"
-    path: repository/helm-charts/processing/trino
+    path: repository/helm-charts/serving/trino
     targetRevision: HEAD
     helm:
       valueFiles:
         - values-development.yaml
   destination:
     server: "https://kubernetes.default.svc"
-    namespace: processing
+    namespace: serving
   syncPolicy:
     automated:
       prune: true
