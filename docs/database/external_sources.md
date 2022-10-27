@@ -24,7 +24,7 @@
 
 ### Using <https://somee.com/> as source for MSSQL
     - HOST: sampledb.mssql.somee.com
-    - PORT:
+    - PORT: 1433
     - USERNAME: vsvale_SQLLogin_1
     - PASSWORD: 41y12q7yhx
     - DATABASE: sampledb

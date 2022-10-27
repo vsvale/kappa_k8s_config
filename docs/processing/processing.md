@@ -19,7 +19,14 @@ OR Install Manual
 
 - `kubectl apply -f https://raw.githubusercontent.com/vsvale/kappa_k8s_config/master/repository/app-manifests/processing/ksqldb.yaml`
 - `watch kubectl get pods -n processing`
+
+### Query KSQLDB
+- kubectl get pods -n processing
 - KSQLDB=nomedopod
 - `kubectl exec $KSQLDB -n processing -ti -- bash ksql`
-
-
+- SET 'auto.offset.reset' = 'earliest';
+- SET 'auto.offset.reset' = 'latest';
+- SHOW TOPICS;
+- SHOW STREAMS;
+- SHOW TABLES;
+- SHOW QUERIES;
