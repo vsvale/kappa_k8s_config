@@ -3,8 +3,6 @@ kind: Application
 metadata:
   name: kafka-connect
   namespace: cicd
-  annotations:
-    argocd.argoproj.io/hook: Sync
 spec:
   project: default
   source:

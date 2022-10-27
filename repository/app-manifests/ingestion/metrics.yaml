@@ -3,8 +3,6 @@ kind: Application
 metadata:
   name: metrics-ingestion
   namespace: cicd
-  annotations:
-    argocd.argoproj.io/hook: PreSync
 spec:
   project: default
   source:
