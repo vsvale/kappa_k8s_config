@@ -9,7 +9,7 @@
 - [Processing: KSQLDB](docs/processing/processing.md)
 - [Datastore: Pinot](docs/datastore/pinot.md)
 - [Storage: Minio](docs/deepstorage/minio.md)
-- [Processing: Trino](docs/processing/processing.md)
+- [Serving: Trino](docs/processing/processing.md)
 - [Logging: Elastic stack](docs/logging/logging.md)
 
 ## Optional

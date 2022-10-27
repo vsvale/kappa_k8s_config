@@ -1,6 +1,7 @@
 ## Ingetion App of Apps
 - `kubectl apply -f https://raw.githubusercontent.com/vsvale/kappa_k8s_config/master/repository/cluster-manifests/cluster/ingestion.yaml`
-- run sync in argocd cicd/ingestion
+
+# Or Install manual
 
 ## Install Strimzi manual
 - `kubectl apply -f https://raw.githubusercontent.com/vsvale/kappa_k8s_config/master/repository/app-manifests/ingestion/strimzi.yaml`
@@ -9,7 +10,8 @@
 ## Config maps
 
 - `kubens ingestion`
-- `kubectl apply -f https://raw.githubusercontent.com/vsvale/kappa_k8s_config/master/repository/app-manifests/ingestion/metrics.yaml`
+- `kubectl apply -f https://raw.githubusercontent.com/vsvale/kappa_k8s_confi- `helm repo add spark-operator https://googlecloudplatform.github.io/spark-on-k8s-operator`
+- `helm repo update`g/master/repository/app-manifests/ingestion/metrics.yaml`
 - `kubectl get configmaps`
 
 ## Broker

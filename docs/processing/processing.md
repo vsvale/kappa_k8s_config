@@ -1,7 +1,9 @@
-## Install Spark
+## Install App of Apps
+- `kubectl apply -f https://raw.githubusercontent.com/vsvale/kappa_k8s_config/master/repository/cluster-manifests/cluster/processing.yaml`
 
-- `helm repo add spark-operator https://googlecloudplatform.github.io/spark-on-k8s-operator`
-- `helm repo update`
+OR Install Manual
+
+## Install Spark
 - `kubectl apply -f https://raw.githubusercontent.com/vsvale/kappa_k8s_config/master/repository/app-manifests/processing/spark-operator.yaml`
 - `watch kubectl get pods -n processing`
 - `kubectl apply -f https://raw.githubusercontent.com/vsvale/kappa_k8s_config/master/repository/yamls/processing/spark/crb_spark_operator.yaml`
@@ -21,10 +23,3 @@
 - `kubectl exec $KSQLDB -n processing -ti -- bash ksql`
 
 
-## Install Trino
-
-- Last one
-- update all credential in values
-- `helm repo add valeriano-manassero https://valeriano-manassero.github.io/helm-charts`
-- `kubectl apply -f https://raw.githubusercontent.com/vsvale/kappa_k8s_config/master/repository/app-manifests/processing/trino.yaml`
-- `watch kubectl get pods -n processing`
