@@ -13,3 +13,4 @@
 - Cost - kubecost: `kubectl apply -f https://raw.githubusercontent.com/vsvale/kappa_k8s_config/master/repository/cluster-manifests/cluster/cost.yaml`
 - [Serving: Trino](docs/serving/serving.md)
 - [Logging: Elastic stack](docs/logging/logging.md)
+- 
