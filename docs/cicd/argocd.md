@@ -1,7 +1,5 @@
 ## Install
-
-- `helm repo add argo https://argoproj.github.io/argo-helm`
-- `helm repo update`
+- `kubens cicd`
 - `helm upgrade --install -f https://raw.githubusercontent.com/vsvale/kappa_k8s_config/master/repository/helm-charts/cicd/argo-cd/values-dev.yaml argocd argo/argo-cd --namespace cicd --debug --timeout 10m0s`
 - `watch kubectl get pods -n cicd`
 

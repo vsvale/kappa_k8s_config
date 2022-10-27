@@ -37,6 +37,9 @@ export PS1="\u@\h \[\033[36m\]\w\[\033[91m\]\$(git_data) \[\033[00m\]$ "
 - `echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/helm.gpg] https://baltocdn.com/helm/stable/debian/ all main" | sudo tee /etc/apt/sources.list.d/helm-stable-debian.list`
 - `sudo apt-get update`
 - `sudo apt-get install helm`
+- `helm repo add argo https://argoproj.github.io/argo-helm && helm repo add kubecost https://kubecost.github.io/cost-analyzer/ && helm repo add stable https://charts.helm.sh/stable && helm repo add bitnami https://charts.bitnami.com/bitnami && helm repo add yugabytedb https://charts.yugabyte.com && helm repo add lensesio https://helm.repo.lenses.io/ && 
+helm repo add pinot https://raw.githubusercontent.com/apache/pinot/master/kubernetes/helm && helm repo add miniop https://operator.min.io/ && helm repo add strimzi https://strimzi.io/charts/ && helm repo add elastic https://helm.elastic.co && helm repo add prometheus-community https://prometheus-community.github.io/helm-charts && helm repo add apache-airflow https://airflow.apache.org/ && helm repo add spark-operator https://googlecloudplatform.github.io/spark-on-k8s-operator && helm repo add valeriano-manassero https://valeriano-manassero.github.io/helm-charts`
+- `helm repo update`
 
 ## Kubectl
 - `sudo apt-get update`
@@ -52,20 +55,6 @@ export PS1="\u@\h \[\033[36m\]\w\[\033[91m\]\$(git_data) \[\033[00m\]$ "
 - `sudo ln -s /usr/local/kubectx/kubectx /usr/local/bin/kubectx`
 - `sudo ln -s /usr/local/kubectx/kubens /usr/local/bin/kubens`
 
-## Krew
-- ```
-    (
-        set -x; cd "$(mktemp -d)" &&
-        OS="$(uname | tr '[:upper:]' '[:lower:]')" &&
-        ARCH="$(uname -m | sed -e 's/x86_64/amd64/' -e 's/\(arm\)\(64\)\?.*/\1\2/' -e 's/aarch64$/arm64/')" &&
-        KREW="krew-${OS}_${ARCH}" &&
-        curl -fsSLO "https://github.com/kubernetes-sigs/krew/releases/latest/download/${KREW}.tar.gz" &&
-        tar zxvf "${KREW}.tar.gz" &&
-        ./"${KREW}" install krew
-    )
-
-- `export PATH="${KREW_ROOT:-$HOME/.krew}/bin:$PATH"`
-
 ## Auto complete
 - `sudo apt-get update`
 - `sudo apt-get install -y bash-completion`
@@ -79,35 +68,23 @@ export PS1="\u@\h \[\033[36m\]\w\[\033[91m\]\$(git_data) \[\033[00m\]$ "
 
 - `k3d cluster create kappa --volume $HOME/k3d:/var/lib/rancher/k3s/storage@all -s 1 --servers-memory 12Gb -a 3 --agents-memory 50gb --api-port 6443 -p 8081:80@loadbalancer`
 
-## Install Terraform
-- `sudo apt-get update && sudo apt-get install -y gnupg software-properties-common`
-- `wget -O- https://apt.releases.hashicorp.com/gpg | \
-    gpg --dearmor | \
-    sudo tee /usr/share/keyrings/hashicorp-archive-keyring.gpg
-`
-- `gpg --no-default-keyring \
-    --keyring /usr/share/keyrings/hashicorp-archive-keyring.gpg \
-    --fingerprint
-`
-- `echo "deb [signed-by=/usr/share/keyrings/hashicorp-archive-keyring.gpg] \
-    https://apt.releases.hashicorp.com $(lsb_release -cs) main" | \
-    sudo tee /etc/apt/sources.list.d/hashicorp.list
-`
-- `sudo apt update && sudo apt-get install terraform`
+## [Install Terraform](https://developer.hashicorp.com/terraform/tutorials/aws-get-started/install-cli)
 - `terraform version`
 
 ## git
 - `git clone https://github.com/vsvale/kappa_k8s_config.git`
-- [Donwload lfs](https://github.com/git-lfs/git-lfs/releases/download/v3.2.0/git-lfs-linux-amd64-v3.2.0.tar.gz)
-- `cd ~/Downloads`
-- `tar -xf git-lfs-linux-amd64-v3.2.0.tar.gz`
-- `cd git-lfs-3.2.0`
-- `chmod 755 install.sh`
-- `sudo ./install.sh`
 - `cd kappa_k8s_config`
+- `wget https://github.com/git-lfs/git-lfs/releases/download/v3.2.0/git-lfs-linux-amd64-v3.2.0.tar.gz`
+- `tar -xf git-lfs-linux-amd64-v3.2.0.tar.gz`
+- `rm git-lfs-linux-amd64-v3.2.0.tar.gz`
+- `chmod 755 git-lfs-3.2.0/install.sh`
+- `sudo git-lfs-3.2.0//install.sh`
+- `rm -rf git-lfs-3.2.0`
 - `git lfs install`
 - `git lfs track "*.jar"`
 - `git lfs migrate import --include="*.jar"`
+- `git config --global user.email "viniciusdvale@gmail.com"`
+- `git config --global user.name "dataeng"`
 
 
 ## Create namespaces
