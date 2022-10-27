@@ -1,3 +1,6 @@
+##
+- Update s3 credential in values
+
 ## Install
 - `kubectl apply -f https://raw.githubusercontent.com/vsvale/kappa_k8s_config/master/repository/cluster-manifests/cluster/datastore.yaml`
 OR Install Manual

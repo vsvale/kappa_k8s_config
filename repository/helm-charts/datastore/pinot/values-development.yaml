@@ -315,8 +315,8 @@ server:
       pinot.server.storage.factory.class.s3=org.apache.pinot.plugin.filesystem.S3PinotFS
       pinot.server.storage.factory.s3.endpoint=http://minio.deepstorage.svc.cluster.local/pinot/segment-store/
       pinot.server.storage.factory.s3.region=us-east-1
-      pinot.server.storage.factory.s3.accessKey=k2THBY5Yr1NqCFbI
-      pinot.server.storage.factory.s3.secretKey=7YtllJhENMXk76bdemuJXF2Ygw136Wqi
+      pinot.server.storage.factory.s3.accessKey=fikkgwHUG0LQjiCv
+      pinot.server.storage.factory.s3.secretKey=6I1bwdteAZX4WXHmGWTDditWwAJvO1v9
       pinot.server.segment.fetcher.protocols=file,http,s3
       pinot.server.segment.fetcher.s3.class=org.apache.pinot.common.utils.fetcher.PinotFSSegmentFetcher
 

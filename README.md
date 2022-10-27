@@ -4,19 +4,12 @@
 ## Tools
 - [CD: Argo CD](docs/cicd/argocd.md)
 - [Ingestion: Kafka](docs/ingestion/strimzi.md)
-- [Database: YugabyteDB](docs/database/databases.md)
-- [Processing: Spark](docs/processing/processing.md)
-- [Processing: KSQLDB](docs/processing/processing.md)
+- [Databases - YugabyteDB,Mssql,Mysql,Postgres,Mongodb](docs/database/databases.md)
+- [Kafka UI: Lenses](docs/dataops/lenses.md)
+- [Processing - Spark, KSQLDB](docs/processing/processing.md)
 - [Datastore: Pinot](docs/datastore/pinot.md)
 - [Storage: Minio](docs/deepstorage/minio.md)
-- [Serving: Trino](docs/processing/processing.md)
-- [Logging: Elastic stack](docs/logging/logging.md)
-
-## Optional
 - [Orchestrator: Airflow](docs/orchestrator/airflow.md)
-- [Database: Mssql](docs/database/databases.md)
-- [Database: Mysql](docs/database/databases.md)
-- [Database: Postgres](docs/database/databases.md)
-- [Database: Mongodb](docs/database/databases.md)
-- [Kafka UI: Lenses](docs/dataops/lenses.md)
-- [Cost: kubecost](docs/cost/cost.md)
+- Cost - kubecost: `kubectl apply -f https://raw.githubusercontent.com/vsvale/kappa_k8s_config/master/repository/cluster-manifests/cluster/cost.yaml`
+- [Serving: Trino](docs/serving/serving.md)
+- [Logging: Elastic stack](docs/logging/logging.md)
