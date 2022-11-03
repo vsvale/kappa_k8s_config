@@ -1,0 +1,21 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: cert-manager
+  namespace: cicd
+spec:
+  project: default
+  source:
+    repoURL: "https://github.com/vsvale/kappa_k8s_config.git"
+    path: repository/helm-charts/gateway/kong
+    targetRevision: HEAD
+    helm:
+      valueFiles:
+        - values-development.yaml
+  destination:
+    server: "https://kubernetes.default.svc"
+    namespace: gateway
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
