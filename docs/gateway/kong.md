@@ -8,7 +8,7 @@
 - kubectl create secret generic kong-enterprise-license --from-literal=license="'{}'" -n gateway --dry-run=client -o yaml | kubectl apply -f -
 
 ## jetstack
-- kubectl apply -f 
+- kubectl apply -f https://raw.githubusercontent.com/vsvale/kappa_k8s_config/master/repository/cluster-manifests/cluster/gateway.yaml
 - helm repo add kong https://charts.konghq.com
 
 ## Konga
