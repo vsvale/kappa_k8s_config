@@ -178,7 +178,7 @@ manager:
       konghq.com/https-redirect-status-code: "301"
       kubernetes.io/ingress.class: default
       nginx.ingress.kubernetes.io/backend-protocol: HTTPS
-    enabled: true
+    enabled: trueng
     hostname: kong.127-0-0-1.nip.io
     path: /
     tls: quickstart-kong-admin-cert
@@ -193,7 +193,7 @@ migrations:
   enabled: true
   postUpgrade: true
   preUpgrade: true
-namespace: kong
+namespace: gateway
 podAnnotations:
   kuma.io/gateway: enabled
 portal:
