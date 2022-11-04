@@ -136,11 +136,12 @@ admin:
   # Enable creating a Kubernetes service for the admin API
   # Disabling this is recommended for most ingress controller configurations
   # Enterprise users that wish to use Kong Manager with the controller should enable this
-  enabled: false
-  type: NodePort
+  enabled: true
+  type: ClusterIP
   # To specify annotations or labels for the admin service, add them to the respective
   # "annotations" or "labels" dictionaries below.
-  annotations: {}
+  annotations:
+    konghq.com/protocol: https
   #  service.beta.kubernetes.io/aws-load-balancer-proxy-protocol: "*"
   labels: {}
 
@@ -168,21 +169,29 @@ admin:
     # Additional listen parameters, e.g. "reuseport", "backlog=16384"
     parameters:
     - http2
+    
 
   # Kong admin ingress settings. Useful if you want to expose the Admin
   # API of Kong outside the k8s cluster.
   ingress:
     # Enable/disable exposure using ingress.
-    enabled: false
+    enabled: true
     ingressClassName:
     # TLS secret name.
     # tls: kong-admin.example.com-tls
     # Ingress hostname
-    hostname:
+    hostname: kong.127-0-0-1.nip.io
     # Map of ingress annotations.
-    annotations: {}
+    annotations:
+      konghq.com/https-redirect-status-code: "301"
+      konghq.com/protocols: https
+      konghq.com/strip-path: "true"
+      kubernetes.io/ingress.class: default
+      nginx.ingress.kubernetes.io/app-root: /
+      nginx.ingress.kubernetes.io/backend-protocol: HTTPS
+      nginx.ingress.kubernetes.io/permanent-redirect-code: "301"
     # Ingress path.
-    path: /
+    path: /api
     # Each path in an Ingress is required to have a corresponding path type. (ImplementationSpecific/Exact/Prefix)
     pathType: ImplementationSpecific
 
@@ -253,7 +262,7 @@ cluster:
 # Specify Kong proxy service configuration
 proxy:
   # Enable creating a Kubernetes service for the proxy
-  enabled: true
+  enabled: false
   type: LoadBalancer
   # To specify annotations or labels for the proxy service, add them to the respective
   # "annotations" or "labels" dictionaries below.
