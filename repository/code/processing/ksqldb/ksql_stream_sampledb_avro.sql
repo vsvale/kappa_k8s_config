@@ -20,17 +20,24 @@ order.ORDERDATE,
 order.SHIPDATE,
 order.DUEDATE,
 CONCAT_WS(' ',CAST(client.FIRSTNAME AS VARCHAR),CAST(client.MIDDLENAME AS VARCHAR),CAST(client.LASTNAME AS VARCHAR)) AS CUSTOMER,
-client.EMAILADDRESS,
+MASK(client.EMAILADDRESS),
 TIMESTAMPTOSTRING(order.ROWTIME,'yyyy-MM-dd HH:mm:ss', 'America/Sao_Paulo') AS "processing_time"
 FROM ksql_stream_sampledb_salesorderheader_avro AS order
 INNER JOIN ksql_stream_sampledb_customer_avro AS client WITHIN 36500 DAYS
 ON order.CUSTOMERID = client.CUSTOMERID
+PARTITION BY order.CUSTOMERID
 EMIT CHANGES;
 
 SELECT * FROM output_ksql_stream_sampledb_customerdates_avro emit changes limit 5;
 
+CREATE OR REPLACE TABLE output_ksql_tb_sampledb_customerdates_avro
+WITH (KAFKA_TOPIC='output_ksql_tb_sampledb_customerdates_avro', PARTITIONS=6, VALUE_FORMAT='AVRO')
+AS
+SELECT
+CUSTOMER,
+COUNT(CUSTOMER) AS "QTY_ORDERS"
+FROM output_ksql_stream_sampledb_customerdates_avro WINDOW TUMBLING (SIZE 36500 DAYS)
+GROUP BY CUSTOMER
+EMIT CHANGES;
 
-
-
-
-
+SELECT * FROM output_ksql_tb_sampledb_customerdates_avro emit changes limit 5;
