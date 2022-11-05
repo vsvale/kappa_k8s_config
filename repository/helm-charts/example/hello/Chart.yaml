@@ -1,0 +1,14 @@
+apiVersion: v2
+appVersion: v3
+description: A Helm chart for my simple hello application
+home: https://www.kleinloog.ch/post/go-cli/
+maintainers:
+- email: arnoud@kleinloog.ch
+  name: Arnoud Kleinloog
+  url: https://www.kleinloog.ch/
+name: hello
+sources:
+- https://github.com/akleinloog/hello
+- https://github.com/akleinloog/hello-helm
+type: application
+version: 0.3.0

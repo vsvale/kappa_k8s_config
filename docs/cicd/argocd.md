@@ -11,7 +11,6 @@
 ### Login
 
 - `kubens cicd`
-
 - `kubectl apply -f https://raw.githubusercontent.com/vsvale/kappa_k8s_config/master/repository/cluster-manifests/cluster/lb.yaml`
 - [http://127.0.0.1:8081/argocd/login](http://127.0.0.1:8081/argocd/login)
 - user: admin

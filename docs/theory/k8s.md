@@ -1,7 +1,7 @@
 # K8s
 
-![K8s.excalidraw.png](../../../imgs/K8s.excalidraw.png)
-![pods.excalidraw.png](../../../imgs/pods.excalidraw.png)
+![K8s.excalidraw.png](img/K8s.excalidraw.png)
+![pods.excalidraw.png](img/pods.excalidraw.png)
 
 - [Cheat sheet](https://kubernetes.io/pt-br/docs/reference/kubectl/cheatsheet/)
 - [Basics](https://kubernetes.io/pt-br/docs/tutorials/kubernetes-basics/)
