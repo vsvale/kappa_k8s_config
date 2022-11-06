@@ -281,7 +281,7 @@ controller:
       enable: true
 
       ## The HTTP port of the Ingress Controller service.
-      port: 80
+      port: 8687
 
       ## The custom NodePort for the HTTP port. Requires controller.service.type set to NodePort.
       nodePort: ""
