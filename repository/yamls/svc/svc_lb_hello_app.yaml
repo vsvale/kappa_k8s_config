@@ -3,11 +3,24 @@ kind: Service
 metadata:
   name: svc-lb-nginx
   namespace: example
+  labels:
+    app.kubernetes.io/instance: nginx
+    app.kubernetes.io/managed-by: Helm
+    app.kubernetes.io/name: nginx-nginx-ingress
+    argocd.argoproj.io/instance: nginx
+    helm.sh/chart: nginx-ingress-0.15.1
 spec:
   type: LoadBalancer
   ports:
-  - port: 80
+  - name: http
+    nodePort: 32061
+    port: 80
+    protocol: TCP
     targetPort: 80
+  - name: https
+    nodePort: 30627
+    port: 443
+    protocol: TCP
+    targetPort: 443
   selector:
-      app.kubernetes.io/instance: nginx
-      app.kubernetes.io/name: nginx-nginx-ingress
+    app: nginx-nginx-ingress
