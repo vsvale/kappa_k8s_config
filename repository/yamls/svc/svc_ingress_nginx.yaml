@@ -1,20 +1,20 @@
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: hello-ingress
+  name: nginx-ingress
   namespace: example
   labels:
-    app: hello-app
+    app: nginx
   annotations:
     ingress.kubernetes.io/ssl-redirect: "false"
 spec:
   rules:
   - http:
       paths:
-      - path: /hello
+      - path: /nginx
         pathType: Prefix
         backend:
           service:
-            name: hello-app
+            name: nginx-nginx-ingress
             port:
               number: 80 
