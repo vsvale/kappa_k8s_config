@@ -17,10 +17,5 @@ spec:
     port: 8687
     protocol: TCP
     targetPort: 80
-  - name: https
-    nodePort: 30627
-    port: 443
-    protocol: TCP
-    targetPort: 443
   selector:
     app: nginx-nginx-ingress
