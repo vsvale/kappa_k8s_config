@@ -1,7 +1,7 @@
 apiVersion: "kafka.strimzi.io/v1beta2"
 kind: "KafkaConnector"
 metadata:
-  name: "src-sqlserver-jdbc-sampledb-salesorderheader-avro-05b34d17"
+  name: "src-sqlserver-jdbc-sampledb-salesorderheader-avro-05b34d18"
   labels:
     strimzi.io/cluster: edh
 spec:
@@ -20,7 +20,7 @@ spec:
     mode: "timestamp+incrementing"
     incrementing.column.name: "SalesOrderID"
     timestamp.column.name: "Custom_TS"
-    query: "select t.* from (select *, CONVERT (DATETIME2, ModifiedDate) as Custom_TS  from SaLesLt.SalesOrder) as t"
+    query: "select t.* from (select *, CONVERT (DATETIME2, ModifiedDate) as Custom_TS  from SaLesLt.SalesOrderHeader) as t"
     validate.non.null: "false"
     transforms: "createKey,extractInt,InsertTopic,InsertSourceDetails"
     transforms.createKey.type: "org.apache.kafka.connect.transforms.ValueToKey"
