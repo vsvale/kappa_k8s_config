@@ -1,7 +1,7 @@
 apiVersion: "kafka.strimzi.io/v1beta2"
 kind: "KafkaConnector"
 metadata:
-  name: "src-sqlserver-jdbc-sampledb-custumer-avro-05b34d15"
+  name: "src-sqlserver-jdbc-sampledb-customer-avro-05b34d17"
   labels:
     strimzi.io/cluster: edh
 spec:
@@ -16,10 +16,11 @@ spec:
     connection.user: "vsvale_SQLLogin_1"
     connection.password: "41y12q7yhx"
     connection.attempts: "2"
-    query: "select * from SaLesLt.Customer"
-    mode: "incrementing"
-    topic.prefix: "src-example-custumer"
+    topic.prefix: "src-example-customer"
+    mode: "timestamp+incrementing"
     incrementing.column.name: "CustomerID"
+    timestamp.column.name: "Custom_TS"
+    query: "select t.* from (select *, CONVERT (DATETIME2, ModifiedDate) as Custom_TS  from SaLesLt.Customer) as t"
     validate.non.null: "false"
     transforms: "createKey,extractInt,InsertTopic,InsertSourceDetails"
     transforms.createKey.type: "org.apache.kafka.connect.transforms.ValueToKey"

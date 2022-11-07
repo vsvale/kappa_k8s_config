@@ -1,7 +1,7 @@
 apiVersion: "kafka.strimzi.io/v1beta2"
 kind: "KafkaConnector"
 metadata:
-  name: "src-sqlserver-jdbc-sampledb-address-avro-05b34d16"
+  name: "src-sqlserver-jdbc-sampledb-address-avro-05b34d17"
   labels:
     strimzi.io/cluster: edh
 spec:
