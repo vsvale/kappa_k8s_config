@@ -12,7 +12,7 @@ ingestion
 
 ![Kafka_theory.png](img/Kafka_theory.png)
 
-- Plataforma que possibilita o recebimento de enventos em tempo real e a entrega desses eventos em tempo real
+- Plataforma que possibilita o recebimento de eventos em tempo real e a entrega desses eventos em tempo real
 - Criado em 2011 no LinkedIn, doado para Apache Foundation em 2011
 - Um datalake em tempo real
 - É uma engine de armazenamento, mas possui apis para inserção, leitura, processamento e integração com datastores
