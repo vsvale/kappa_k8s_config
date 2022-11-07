@@ -1,7 +1,7 @@
 apiVersion: "kafka.strimzi.io/v1beta2"
 kind: "KafkaConnector"
 metadata:
-  name: "src-sqlserver-jdbc-sampledb-address-avro-05b34d15"
+  name: "src-sqlserver-jdbc-sampledb-address-avro-05b34d16"
   labels:
     strimzi.io/cluster: edh
 spec:
@@ -19,8 +19,8 @@ spec:
     topic.prefix: "src-example-address"
     mode: "timestamp+incrementing"
     incrementing.column.name: "AddressID"
-    timestamp.column.name: "ModifiedDate"
-    query: "select * from SaLesLt.Address"
+    timestamp.column.name: "Custom_TS"
+    query: "select t.* from (select *, CONVERT (DATETIME2, ModifiedDate) as Custom_TS  from SaLesLt.Address) as t"
     validate.non.null: "false"
     transforms: "createKey,extractInt,InsertTopic,InsertSourceDetails"
     transforms.createKey.type: "org.apache.kafka.connect.transforms.ValueToKey"
