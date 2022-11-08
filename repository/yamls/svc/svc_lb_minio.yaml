@@ -22,7 +22,7 @@ spec:
   - name: http-minio
     port: 8686
     protocol: TCP
-    targetPort: 9000
+    targetPort: 80
   selector:
     v1.min.io/tenant: kappastorage
   sessionAffinity: None
