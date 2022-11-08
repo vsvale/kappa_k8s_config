@@ -13,4 +13,4 @@
   -o $HOME/minio-binaries/mc
 - chmod +x $HOME/minio-binaries/mc
 - export PATH=$PATH:$HOME/minio-binaries/
-- mc config host add minio https://minioserver.example.net ACCESS_KEY SECRET KEY
+- mc config host add minio http://172.18.0.2:8686 ACCESS_KEY SECRET KEY

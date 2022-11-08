@@ -14,9 +14,9 @@ if __name__ == '__main__':
     spark = SparkSession \
         .builder \
         .appName("customer-bronze-py") \
-        .config("spark.hadoop.fs.s3a.endpoint", "http://20.62.75.137") \
-        .config("spark.hadoop.fs.s3a.access.key", "fikkgwHUG0LQjiCv") \
-        .config("spark.hadoop.fs.s3a.secret.key", "6I1bwdteAZX4WXHmGWTDditWwAJvO1v9") \
+        .config("spark.hadoop.fs.s3a.endpoint", "http://172.18.0.2:8686") \
+        .config("spark.hadoop.fs.s3a.access.key", "4jVszc6Opmq7oaOu") \
+        .config("spark.hadoop.fs.s3a.secret.key", "ebUjidNSHktNJOhaqeRseqmEr9IEBggD") \
         .config("spark.hadoop.fs.s3a.path.style.access", True) \
         .config("spark.hadoop.fs.s3a.fast.upload", True) \
         .config("spark.hadoop.fs.s3a.multipart.size", 104857600) \
@@ -38,8 +38,7 @@ if __name__ == '__main__':
 
     # [landing zone area]
     # device and subscription
-    get_customer = "s3a://landing/example/*/*/*/*.parquet"
-    get_subscription_file = "s3a://landing/subscription/*.json"
+    get_customer = "s3a://landing/example/src-example-customer/2022/11/07/15/*.parquet"
 
     # read device data
     # json file from landing zone
