@@ -7,11 +7,11 @@ spec:
   project: default
   source:
     repoURL: "https://github.com/vsvale/kappa_k8s_config.git"
-    path: repository/helm-charts/deepstorage/minio-operator
+    path: repository/helm-charts/deepstorage/operator
     targetRevision: HEAD
     helm:
       valueFiles:
-        - values-development.yaml
+        - values.yaml
   destination:
     server: "https://kubernetes.default.svc"
     namespace: deepstorage
