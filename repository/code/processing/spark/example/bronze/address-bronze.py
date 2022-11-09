@@ -2,8 +2,7 @@
 from delta.tables import DeltaTable
 from pyspark.sql import SparkSession
 from pyspark import SparkConf
-from pyspark.sql.types import DateType, StringType, TimestampType, DecimalType
-from pyspark.sql.functions import current_timestamp, col, current_date
+from pyspark.sql.functions import current_timestamp, current_date
 
 # main spark program
 # init application
@@ -13,7 +12,7 @@ if __name__ == '__main__':
     # set configs
     spark = SparkSession \
         .builder \
-        .appName("customer-bronze-py") \
+        .appName("address-bronze-py") \
         .config("spark.hadoop.fs.s3a.endpoint", "http://172.18.0.2:8686") \
         .config("spark.hadoop.fs.s3a.access.key", "4jVszc6Opmq7oaOu") \
         .config("spark.hadoop.fs.s3a.secret.key", "ebUjidNSHktNJOhaqeRseqmEr9IEBggD") \
@@ -33,28 +32,54 @@ if __name__ == '__main__':
     # set log level
     spark.sparkContext.setLogLevel("INFO")
 
-    # set location of files
-    # minio data lake engine
+    # variables
+    topic = "src-example-address"
+    destination_folder = "/example/address/"
 
     # [landing zone area]
     # device and subscription
-    landing_customer = "s3a://landing/example/src-example-customer/*/*/*/*/*.parquet"
+    landing_path = "s3a://landing/example/"+topic+"/*/*/*/*/*.parquet"
 
     # read device data
     # json file from landing zone
-    customer = spark.read.parquet(landing_customer)
+    landing_table = spark.read.parquet(landing_path)
 
-    # count amount of rows ingested from lake
-    origin_count = customer.count()
+    landing_table = landing_table.withColumn("b_create_at", current_timestamp())
+    landing_table = landing_table.withColumn("b_load_date", current_date())
 
+
+    # [write to lakehouse]
+    # [bronze zone area]
+    # data lakehouse paradigm
+    # need to read the entire landing zone
+    # usual scenario but not the best practice
+    write_delta_mode = "overwrite"
     delta_bronze_zone = "s3a://lakehouse/bronze"
-    destination_folder = "/example/customer/"
-
-    b_customer = spark.read \
-        .format("delta") \
-        .load(delta_bronze_zone + destination_folder)
+    bronze = delta_bronze_zone + destination_folder
     
-    destiny_count = b_customer.count()
+    if DeltaTable.isDeltaTable(spark, bronze):
+        dt_table = DeltaTable.forPath(spark, bronze)
+        dt_table.alias("historical_data")\
+            .merge(
+                landing_table.alias("new_data"),
+                '''
+                historical_data.AddressID = new_data.AddressID 
+                AND historical_data.Custom_TS = new_data.Custom_TS''')\
+            .whenMatchedUpdateAll()\
+            .whenNotMatchedInsertAll()
+    else:
+        landing_table.write.mode(write_delta_mode)\
+            .format("delta")\
+            .partitionBy("b_load_date")\
+            .save(bronze)
+    #verify count origin vs destination
+    origin_count = landing_table.count()
+
+    destiny = spark.read \
+        .format("delta") \
+        .load(bronze)
+    
+    destiny_count = destiny.count()
 
     if origin_count != destiny_count:
         raise AssertionError("Counts of origin and destiny are not equal")

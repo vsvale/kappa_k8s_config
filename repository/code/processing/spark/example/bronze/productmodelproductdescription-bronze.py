@@ -12,7 +12,7 @@ if __name__ == '__main__':
     # set configs
     spark = SparkSession \
         .builder \
-        .appName("customer-bronze-py") \
+        .appName("productmodelproductdescription-bronze-py") \
         .config("spark.hadoop.fs.s3a.endpoint", "http://172.18.0.2:8686") \
         .config("spark.hadoop.fs.s3a.access.key", "4jVszc6Opmq7oaOu") \
         .config("spark.hadoop.fs.s3a.secret.key", "ebUjidNSHktNJOhaqeRseqmEr9IEBggD") \
@@ -33,14 +33,15 @@ if __name__ == '__main__':
     spark.sparkContext.setLogLevel("INFO")
 
     # variables
-    topic = "src-example-customer"
-    destination_folder = "/example/customer/"
+    topic = "src-example-productmodelproductdescription"
+    destination_folder = "/example/productmodelproductdescription/"
 
     # [landing zone area]
     # device and subscription
     landing_path = "s3a://landing/example/"+topic+"/*/*/*/*/*.parquet"
 
     # read device data
+    # json file from landing zone
     landing_table = spark.read.parquet(landing_path)
 
     landing_table = landing_table.withColumn("b_create_at", current_timestamp())
@@ -62,7 +63,7 @@ if __name__ == '__main__':
             .merge(
                 landing_table.alias("new_data"),
                 '''
-                historical_data.CustomerID = new_data.CustomerID 
+                historical_data.Custom_Key = new_data.Custom_Key 
                 AND historical_data.Custom_TS = new_data.Custom_TS''')\
             .whenMatchedUpdateAll()\
             .whenNotMatchedInsertAll()

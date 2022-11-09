@@ -4,8 +4,8 @@ FROM vsvale/spark_base_image:3.1.1
 USER root:root
 
 # copy spark program
-COPY ./customer-bronze.py /app/
-COPY ./verify_bronze_customer.py /app/
+COPY ./*.py /app/
+
 
 # set work directory
 WORKDIR /app
