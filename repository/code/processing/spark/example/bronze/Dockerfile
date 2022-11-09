@@ -5,6 +5,7 @@ USER root:root
 
 # copy spark program
 COPY ./customer-bronze.py /app/
+COPY ./verify_bronze_customer.py /app/
 
 # set work directory
 WORKDIR /app
