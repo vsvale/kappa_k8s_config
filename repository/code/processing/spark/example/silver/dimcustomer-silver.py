@@ -51,7 +51,7 @@ if __name__ == '__main__':
     silver_table = (
         customer_df
         .join(customeraddress_df, col("c.CustomerID")==col("ca.CustomerID"),"left")
-        .join(address_df,col("a.AddressID")==col("ca.AddressID"),how="left")
+        .join(address_df,col("a.AddressID")==col("ca.AddressID"),"left")
         .select(
             col("c.CustomerID").alias("CustomerKey"),
             col("a.AddressID").alias("GeographKey"),
@@ -83,6 +83,9 @@ if __name__ == '__main__':
     )
     )
 
+    silver_table = silver_table.withColumn("s_create_at", current_timestamp())
+    silver_table = silver_table.withColumn("s_load_date", current_date())
+
    
     if DeltaTable.isDeltaTable(spark, destination_folder):
         dt_table = DeltaTable.forPath(spark, destination_folder)
@@ -97,11 +100,11 @@ if __name__ == '__main__':
     else:
         silver_table.write.mode(write_delta_mode)\
             .format("delta")\
-            .partitionBy("b_load_date")\
+            .partitionBy("s_load_date")\
             .save(destination_folder)
 
     #verify count origin vs destination
-    origin_count = customer_df.count()
+    origin_count = silver_table.count()
 
     destiny = spark.read \
         .format("delta") \
