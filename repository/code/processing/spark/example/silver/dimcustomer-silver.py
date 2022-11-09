@@ -49,8 +49,8 @@ if __name__ == '__main__':
     customeraddress_df = customeraddress_df.alias("ca")
 
     silver_table = (
-        customer_bronze
-        .join(customeraddress_df, col("c.CustomerID")==col("ca.CustomerID"),how="left")
+        customer_df
+        .join(customeraddress_df, col("c.CustomerID")==col("ca.CustomerID"),"left")
         .join(address_df,col("a.AddressID")==col("ca.AddressID"),how="left")
         .select(
             col("c.CustomerID").alias("CustomerKey"),
