@@ -6,7 +6,6 @@ USER root:root
 # copy spark program
 COPY ./*.py /app/
 
-
 # set work directory
 WORKDIR /app
 

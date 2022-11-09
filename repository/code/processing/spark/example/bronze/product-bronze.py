@@ -24,6 +24,7 @@ if __name__ == '__main__':
         .config("spark.delta.logStore.class", "org.apache.spark.sql.delta.storage.S3SingleDriverLogStore") \
         .config("spark.sql.extensions", "io.delta.sql.DeltaSparkSessionExtension") \
         .config("spark.sql.catalog.spark_catalog", "org.apache.spark.sql.delta.catalog.DeltaCatalog") \
+        .config("spark.sql.parquet.enableVectorizedReader","false") \
         .getOrCreate()
 
     # show configured parameters
@@ -43,6 +44,7 @@ if __name__ == '__main__':
     # read device data
     # json file from landing zone
     landing_table = spark.read.parquet(landing_path)
+    landing_table = landing_table
 
     landing_table = landing_table.withColumn("b_create_at", current_timestamp())
     landing_table = landing_table.withColumn("b_load_date", current_date())
