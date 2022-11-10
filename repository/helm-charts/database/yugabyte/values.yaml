@@ -130,7 +130,7 @@ Services:
     label: "yb-tserver"
     skipHealthChecks: false
     ports:
-      http-ui: "9011"
+      http-ui: "9000"
       tcp-rpc-port: "9100"
       tcp-yql-port: "9042"
       tcp-yedis-port: "6379"
