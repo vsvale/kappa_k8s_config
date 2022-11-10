@@ -78,5 +78,13 @@ if __name__ == '__main__':
         .option("dbtable","dimcurrency")\
         .save()
 
+    gold_table.write \
+    .format("jdbc") \
+    .option("url", "jdbc:postgresql:172.18.0.2:5433/salesdw") \
+    .option("dbtable", "public.dimcurrency") \
+    .option("user", "plumber") \
+    .option("password", "PlumberSDE") \
+    .save()
+
     # stop session
     spark.stop()
