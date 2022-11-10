@@ -44,7 +44,7 @@ if __name__ == '__main__':
     StructField("CurrencyAlternateKey", StringType(), True),
     StructField("CurrencyName", StringType(), True)])
 
-    silver_table = spark.read.csv(origin_folder,header='False', schema=schema,delimiter='|')
+    silver_table = spark.read.options(header='False',delimiter='|').csv(origin_folder, schema=schema)
 
     silver_table = silver_table.withColumn("s_create_at", current_timestamp())
     silver_table = silver_table.withColumn("s_load_date", current_date())
