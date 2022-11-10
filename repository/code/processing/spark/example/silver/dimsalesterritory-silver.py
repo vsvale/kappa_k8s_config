@@ -2,7 +2,9 @@
 from delta.tables import DeltaTable
 from pyspark.sql import SparkSession
 from pyspark import SparkConf
-from pyspark.sql.functions import current_timestamp, current_date, col, lit, when
+from pyspark.sql.functions import current_timestamp, current_date, col, lit, concat
+from pyspark.ml.feature import StringIndexer
+from pyspark.sql.types import IntegerType, StringType
 
 # main spark program
 # init application
@@ -12,7 +14,7 @@ if __name__ == '__main__':
     # set configs
     spark = SparkSession \
         .builder \
-        .appName("customer-silver-py") \
+        .appName("example-salesterritory-silver-py") \
         .config("spark.hadoop.fs.s3a.endpoint", "http://172.18.0.2:8686") \
         .config("spark.hadoop.fs.s3a.access.key", "4jVszc6Opmq7oaOu") \
         .config("spark.hadoop.fs.s3a.secret.key", "ebUjidNSHktNJOhaqeRseqmEr9IEBggD") \
@@ -33,53 +35,30 @@ if __name__ == '__main__':
     spark.sparkContext.setLogLevel("INFO")
 
     # variables
-    customer_bronze = "s3a://lakehouse/bronze/example/customer/"
     address_bronze = "s3a://lakehouse/bronze/example/address/"
-    customeraddress_bronze = "s3a://lakehouse/bronze/example/customeraddress/"
 
-    destination_folder = "s3a://lakehouse/silver/example/dimcustomer/"
+    destination_folder = "s3a://lakehouse/silver/example/dimsalesterritory/"
     write_delta_mode = "overwrite"
     # read bronze data
 
-    customer_df = spark.read.format("delta").load(customer_bronze)
-    customer_df = customer_df.alias("c")
     address_df = spark.read.format("delta").load(address_bronze)
+
+
+    indexer_statecode = StringIndexer(inputCol="StateProvince", outputCol="StateProvinceCode")
+    indexer_countrycode = StringIndexer(inputCol="CountryRegion", outputCol="CountryRegionCode")
+    address_df = indexer_statecode.fit(address_df).transform(address_df)
+    address_df = indexer_countrycode.fit(address_df).transform(address_df)
     address_df = address_df.alias("a")
-    customeraddress_df = spark.read.format("delta").load(customeraddress_bronze)
-    customeraddress_df = customeraddress_df.alias("ca")
 
     silver_table = (
-        customer_df
-        .join(customeraddress_df, col("c.CustomerID")==col("ca.CustomerID"),"left")
-        .join(address_df,col("a.AddressID")==col("ca.AddressID"),"left")
+        address_df
         .select(
-            col("c.CustomerID").alias("CustomerKey"),
-            col("a.AddressID").alias("GeographKey"),
-            col("c.rowguid").alias("CustomerAlternateKey"),
-            col("c.Title").alias("Title"),
-            col("c.FirstName").alias("FirstName"),
-            col("c.MiddleName").alias("MiddleName"),
-            col("c.LastName").alias("LastName"),
-            col("c.NameStyle").alias("NameStyle"),
-            col("c.Suffix").alias("Suffix"),
-            when(col("c.Title").isin(["Sr.","Mr."]),"M").when(col("c.Title").isin(["Sra.","Ms."]),"F").otherwise(lit(None)).alias("Gender"),
-            col("c.EmailAddress").alias("EmailAddress"),
-            lit(None).alias("YearlyIncome"),
-            lit(None).alias("TotalChildren"),
-            lit(None).alias("NumberChildrenAtHome"),
-            lit(None).alias("EnglishEducation"),
-            lit(None).alias("SpanishEducation"),
-            lit(None).alias("FrenchEducation"),
-            lit(None).alias("EnglishOccupation"),
-            lit(None).alias("SpanishOccupation"),
-            lit(None).alias("FrenchOccupation"),
-            lit(None).alias("HouseOwnerFlag"),
-            lit(None).alias("NumberCarsOwned"),
-            col("a.AddressLine1").alias("AddressLine1"),
-            col("a.AddressLine2").alias("AddressLine2"),
-            col("c.Phone").alias("Phone"),
-            lit(None).alias("DateFirstPurchase"),
-            lit(None).alias("CommuteDistance")
+            lit(None).alias("SalesTerritoryKey"),
+            lit(None).alias("SalesTerritoryAlternateKey"),
+            col("a.CountryRegion").alias("SalesTerritoryRegion"),
+            col("a.CountryRegion").alias("SalesTerritoryCountry"),
+            lit(None).alias("SalesTerritoryGroup"),
+            lit(None).alias("SalesTerritoryImage")
     )
     )
 
@@ -93,7 +72,7 @@ if __name__ == '__main__':
             .merge(
                 silver_table.alias("new_data"),
                 '''
-                historical_data.CustomerID = new_data.CustomerID 
+                historical_data.SalesTerritoryKey = new_data.SalesTerritoryKey 
                 ''')\
             .whenMatchedUpdateAll()\
             .whenNotMatchedInsertAll()
@@ -114,6 +93,6 @@ if __name__ == '__main__':
 
     if origin_count != destiny_count:
         raise AssertionError("Counts of origin and destiny are not equal")
-
+    
     # stop session
     spark.stop()

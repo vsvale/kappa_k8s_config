@@ -14,7 +14,7 @@ if __name__ == '__main__':
     # set configs
     spark = SparkSession \
         .builder \
-        .appName("geography-silver-py") \
+        .appName("example-geography-silver-py") \
         .config("spark.hadoop.fs.s3a.endpoint", "http://172.18.0.2:8686") \
         .config("spark.hadoop.fs.s3a.access.key", "4jVszc6Opmq7oaOu") \
         .config("spark.hadoop.fs.s3a.secret.key", "ebUjidNSHktNJOhaqeRseqmEr9IEBggD") \
@@ -36,33 +36,35 @@ if __name__ == '__main__':
 
     # variables
     address_bronze = "s3a://lakehouse/bronze/example/address/"
+    salesterritory_silver = "s3a://lakehouse/silver/example/dimsalesterritory/"
 
     destination_folder = "s3a://lakehouse/silver/example/dimgeography/"
     write_delta_mode = "overwrite"
     # read bronze data
 
     address_df = spark.read.format("delta").load(address_bronze)
-
+    salesterritory_df = spark.read.format("delta").load(address_bronze)
 
     indexer_statecode = StringIndexer(inputCol="StateProvince", outputCol="StateProvinceCode")
-    indexer_countrycode = StringIndexer(inputCol="CountryRegion", outputCol="CountryRegionCode")
     address_df = indexer_statecode.fit(address_df).transform(address_df)
-    address_df = indexer_countrycode.fit(address_df).transform(address_df)
+
     address_df = address_df.alias("a")
+    salesterritory_df = salesterritory_df.alias("st")
 
     silver_table = (
         address_df
+        .join(salesterritory_df,col("a.CountryRegion")==col("st.SalesTerritoryCountry"),"left")
         .select(
             col("a.AddressID").alias("GeographyKey"),
             col("a.City").alias("City"),
             col("a.StateProvinceCode").alias("StateProvinceCode"),
             col("a.StateProvince").alias("StateProvinceName"),
-            col("a.CountryRegionCode").alias("CountryRegionCode"),
-            col("a.CountryRegion").alias("EnglishCountryRegionName"),
+            col("st.SalesTerritoryKey").alias("CountryRegionCode"),
+            col("st.SalesTerritoryCountry").alias("EnglishCountryRegionName"),
             lit(None).alias("SpanishCountryRegionName"),
             lit(None).alias("FrenchCountryRegionName"),
             col("a.PostalCode").alias("PostalCode"),
-            concat(col("a.StateProvinceCode").cast(StringType()),col("a.CountryRegionCode").cast(StringType())).cast(IntegerType()).alias("SalesTerritoryKey"),
+            col("st.SalesTerritoryKey").alias("SalesTerritoryKey"),
             lit(None).alias("IpAddressLocator")
     )
     )
@@ -98,6 +100,6 @@ if __name__ == '__main__':
 
     if origin_count != destiny_count:
         raise AssertionError("Counts of origin and destiny are not equal")
-
+    
     # stop session
     spark.stop()
