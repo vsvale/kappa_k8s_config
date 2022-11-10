@@ -43,8 +43,6 @@ if __name__ == '__main__':
 
     address_df = spark.read.format("delta").load(address_bronze)
 
-
-
     indexer_countrycode = StringIndexer(inputCol="CountryRegion", outputCol="SalesTerritoryKey")
     address_df = indexer_countrycode.fit(address_df).transform(address_df)
     address_df = address_df.alias("a")
@@ -52,19 +50,20 @@ if __name__ == '__main__':
     silver_table = (
         address_df
         .select(
-            lit("a.SalesTerritoryKey").alias("SalesTerritoryKey"),
+            col("a.SalesTerritoryKey").alias("SalesTerritoryKey"),
             lit(None).alias("SalesTerritoryAlternateKey"),
             col("a.CountryRegion").alias("SalesTerritoryRegion"),
             col("a.CountryRegion").alias("SalesTerritoryCountry"),
             lit(None).alias("SalesTerritoryGroup"),
             lit(None).alias("SalesTerritoryImage")
-    )
+    ).distinct()
     )
 
     silver_table = silver_table.withColumn("s_create_at", current_timestamp())
     silver_table = silver_table.withColumn("s_load_date", current_date())
 
-   
+    silver_table.show()
+
     if DeltaTable.isDeltaTable(spark, destination_folder):
         dt_table = DeltaTable.forPath(spark, destination_folder)
         dt_table.alias("historical_data")\
@@ -87,6 +86,8 @@ if __name__ == '__main__':
     destiny = spark.read \
         .format("delta") \
         .load(destination_folder)
+
+    destiny.show()
     
     destiny_count = destiny.count()
 

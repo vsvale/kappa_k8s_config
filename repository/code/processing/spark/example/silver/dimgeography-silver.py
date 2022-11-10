@@ -51,6 +51,8 @@ if __name__ == '__main__':
     address_df = address_df.alias("a")
     salesterritory_df = salesterritory_df.alias("st")
 
+    salesterritory_df.show()
+
     silver_table = (
         address_df
         .join(salesterritory_df,col("a.CountryRegion")==col("st.SalesTerritoryCountry"),"left")
