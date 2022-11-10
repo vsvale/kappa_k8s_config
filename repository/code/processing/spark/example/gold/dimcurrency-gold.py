@@ -73,13 +73,10 @@ if __name__ == '__main__':
 
 
     gold_table.write.format("jdbc")\
-        .option("url","postgresql://172.18.0.2:5433/salesdw")\
+        .option("url","postgresql://plumber:PlumberSDE@yb-tservers.database.svc.Cluster.local:5433/salesdw")\
         .option("driver","org.postgresql.Driver")\
         .option("dbtable","dimcurrency")\
-        .option("user","plumber")\
-        .option("password","PlumberSDE")\
         .save()
-
 
     # stop session
     spark.stop()
