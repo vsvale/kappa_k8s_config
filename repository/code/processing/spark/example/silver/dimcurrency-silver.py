@@ -2,9 +2,8 @@
 from delta.tables import DeltaTable
 from pyspark.sql import SparkSession
 from pyspark import SparkConf
-from pyspark.sql.functions import current_timestamp, current_date, col, lit, concat
-from pyspark.ml.feature import StringIndexer
-from pyspark.sql.types import IntegerType, StringType
+from pyspark.sql.functions import current_timestamp, current_date, col, lit, when
+from pyspark.sql.types import StructType, StructField, IntegerType, StringType
 
 # main spark program
 # init application
@@ -14,7 +13,7 @@ if __name__ == '__main__':
     # set configs
     spark = SparkSession \
         .builder \
-        .appName("example-geography-silver-py") \
+        .appName("example-currency-silver-py") \
         .config("spark.hadoop.fs.s3a.endpoint", "http://172.18.0.2:8686") \
         .config("spark.hadoop.fs.s3a.access.key", "4jVszc6Opmq7oaOu") \
         .config("spark.hadoop.fs.s3a.secret.key", "ebUjidNSHktNJOhaqeRseqmEr9IEBggD") \
@@ -35,39 +34,17 @@ if __name__ == '__main__':
     spark.sparkContext.setLogLevel("INFO")
 
     # variables
-    address_bronze = "s3a://lakehouse/bronze/example/address/"
-    salesterritory_silver = "s3a://lakehouse/silver/example/dimsalesterritory/"
-
-    destination_folder = "s3a://lakehouse/silver/example/dimgeography/"
+    origin_folder = "s3a://landing/example/files-dim/DimCurrency.csv"
+    destination_folder = "s3a://lakehouse/silver/example/dimcurrency/"
     write_delta_mode = "overwrite"
-    # read bronze data
+    # read data
 
-    address_df = spark.read.format("delta").load(address_bronze)
-    salesterritory_df = spark.read.format("delta").load(salesterritory_silver)
+    schema = StructType([
+    StructField("CurrencyKey", IntegerType(), True),
+    StructField("CurrencyAlternateKey", StringType(), True),
+    StructField("CurrencyName", StringType(), True)])
 
-    indexer_statecode = StringIndexer(inputCol="StateProvince", outputCol="StateProvinceCode")
-    address_df = indexer_statecode.fit(address_df).transform(address_df)
-
-    address_df = address_df.alias("a")
-    salesterritory_df = salesterritory_df.alias("st")
-
-    silver_table = (
-        address_df
-        .join(salesterritory_df,col("a.CountryRegion")==col("st.SalesTerritoryCountry"),"left")
-        .select(
-            col("a.AddressID").alias("GeographyKey"),
-            col("a.City").alias("City"),
-            col("a.StateProvinceCode").alias("StateProvinceCode"),
-            col("a.StateProvince").alias("StateProvinceName"),
-            col("st.SalesTerritoryKey").alias("CountryRegionCode"),
-            col("st.SalesTerritoryCountry").alias("EnglishCountryRegionName"),
-            lit(None).alias("SpanishCountryRegionName"),
-            lit(None).alias("FrenchCountryRegionName"),
-            col("a.PostalCode").alias("PostalCode"),
-            col("st.SalesTerritoryKey").alias("SalesTerritoryKey"),
-            lit(None).alias("IpAddressLocator")
-    )
-    )
+    silver_table = spark.read.csv(origin_folder,header='False', schema=schema,delimiter='|')
 
     silver_table = silver_table.withColumn("s_create_at", current_timestamp())
     silver_table = silver_table.withColumn("s_load_date", current_date())
@@ -79,7 +56,7 @@ if __name__ == '__main__':
             .merge(
                 silver_table.alias("new_data"),
                 '''
-                historical_data.AddressID = new_data.AddressID 
+                historical_data.CurrencyKey = new_data.CurrencyKey 
                 ''')\
             .whenMatchedUpdateAll()\
             .whenNotMatchedInsertAll()
@@ -100,6 +77,6 @@ if __name__ == '__main__':
 
     if origin_count != destiny_count:
         raise AssertionError("Counts of origin and destiny are not equal")
-    
+
     # stop session
     spark.stop()

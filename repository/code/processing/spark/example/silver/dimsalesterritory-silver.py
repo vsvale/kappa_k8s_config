@@ -62,8 +62,6 @@ if __name__ == '__main__':
     silver_table = silver_table.withColumn("s_create_at", current_timestamp())
     silver_table = silver_table.withColumn("s_load_date", current_date())
 
-    silver_table.show()
-
     if DeltaTable.isDeltaTable(spark, destination_folder):
         dt_table = DeltaTable.forPath(spark, destination_folder)
         dt_table.alias("historical_data")\
@@ -87,8 +85,7 @@ if __name__ == '__main__':
         .format("delta") \
         .load(destination_folder)
 
-    destiny.show()
-    
+   
     destiny_count = destiny.count()
 
     if origin_count != destiny_count:
