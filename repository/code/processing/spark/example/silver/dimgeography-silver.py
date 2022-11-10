@@ -43,7 +43,7 @@ if __name__ == '__main__':
     # read bronze data
 
     address_df = spark.read.format("delta").load(address_bronze)
-    salesterritory_df = spark.read.format("delta").load(address_bronze)
+    salesterritory_df = spark.read.format("delta").load(salesterritory_silver)
 
     indexer_statecode = StringIndexer(inputCol="StateProvince", outputCol="StateProvinceCode")
     address_df = indexer_statecode.fit(address_df).transform(address_df)

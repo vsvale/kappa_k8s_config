@@ -44,16 +44,15 @@ if __name__ == '__main__':
     address_df = spark.read.format("delta").load(address_bronze)
 
 
-    indexer_statecode = StringIndexer(inputCol="StateProvince", outputCol="StateProvinceCode")
-    indexer_countrycode = StringIndexer(inputCol="CountryRegion", outputCol="CountryRegionCode")
-    address_df = indexer_statecode.fit(address_df).transform(address_df)
+
+    indexer_countrycode = StringIndexer(inputCol="CountryRegion", outputCol="SalesTerritoryKey")
     address_df = indexer_countrycode.fit(address_df).transform(address_df)
     address_df = address_df.alias("a")
 
     silver_table = (
         address_df
         .select(
-            lit(None).alias("SalesTerritoryKey"),
+            lit("a.SalesTerritoryKey").alias("SalesTerritoryKey"),
             lit(None).alias("SalesTerritoryAlternateKey"),
             col("a.CountryRegion").alias("SalesTerritoryRegion"),
             col("a.CountryRegion").alias("SalesTerritoryCountry"),
