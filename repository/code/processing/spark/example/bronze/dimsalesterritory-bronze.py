@@ -3,7 +3,7 @@ from delta.tables import DeltaTable
 from pyspark.sql import SparkSession
 from pyspark import SparkConf
 from pyspark.sql.functions import current_timestamp, current_date, col, lit, when
-from pyspark.sql.types import StructType, StructField, IntegerType, StringType, TimestampType, DateType
+from pyspark.sql.types import StructType, StructField, IntegerType, StringType, DateType, DoubleType, BinaryType
 
 # main spark program
 # init application
@@ -13,7 +13,7 @@ if __name__ == '__main__':
     # set configs
     spark = SparkSession \
         .builder \
-        .appName("example-currency-silver-py") \
+        .appName("example-salesterritory-bronze-py") \
         .config("spark.hadoop.fs.s3a.endpoint", "http://172.18.0.2:8686") \
         .config("spark.hadoop.fs.s3a.access.key", "4jVszc6Opmq7oaOu") \
         .config("spark.hadoop.fs.s3a.secret.key", "ebUjidNSHktNJOhaqeRseqmEr9IEBggD") \
@@ -34,49 +34,48 @@ if __name__ == '__main__':
     spark.sparkContext.setLogLevel("INFO")
 
     # variables
-    origin_folder = "s3a://lakehouse/silver/example/dimcurrency/"
-    destination_folder = "s3a://lakehouse/gold/example/dimcurrency/"
+    origin_folder = "s3a://landing/example/dw-files/DimSalesTerritory.csv"
+    destination_folder = "s3a://lakehouse/bronze/example/dimsalesterritory/"
     write_delta_mode = "overwrite"
-
-    DeltaTable.createIfNotExists(spark) \
-        .tableName("dimcurrency") \
-        .addColumn("CurrencyKey", IntegerType()) \
-        .addColumn("CurrencyAlternateKey", StringType()) \
-        .addColumn("CurrencyName", StringType()) \
-        .addColumn("create_at", TimestampType()) \
-        .addColumn("load_date", DateType(), generatedAlwaysAs="CAST(create_at AS DATE)") \
-        .partitionedBy("load_date") \
-        .location(destination_folder) \
-        .execute()
-    
     # read data
 
-    origin_table = spark.read.format("delta").load(origin_folder)
-    gold_table = gold_table.withColumn("create_at", current_timestamp())
-    gold_table = gold_table.alias("c") 
+    schema = StructType([
+    StructField("SalesTerritoryKey", IntegerType(), True),
+    StructField("SalesTerritoryAlternateKey", IntegerType(), True),
+    StructField("SalesTerritoryRegion", StringType(), True),
+    StructField("SalesTerritoryCountry", StringType(), True),
+    StructField("SalesTerritoryGroup", StringType(), True),
+    StructField("SalesTerritoryImage", BinaryType(), True)])
+
+    bronze_table = spark.read.options(header='False',delimiter='|').csv(origin_folder, schema=schema)
    
     if DeltaTable.isDeltaTable(spark, destination_folder):
         dt_table = DeltaTable.forPath(spark, destination_folder)
         dt_table.alias("historical_data")\
             .merge(
-                gold_table.alias("new_data"),
+                bronze_table.alias("new_data"),
                 '''
-                historical_data.CurrencyKey = new_data.CurrencyKey 
+                historical_data.SalesTerritoryKey = new_data.SalesTerritoryKey 
                 ''')\
             .whenMatchedUpdateAll()\
             .whenNotMatchedInsertAll()
     else:
-        gold_table.write.mode(write_delta_mode)\
+        bronze_table.write.mode(write_delta_mode)\
             .format("delta")\
-            .partitionBy("load_date")\
+            .partitionBy("s_load_date")\
             .save(destination_folder)
 
+    #verify count origin vs destination
+    origin_count = bronze_table.count()
 
+    destiny = spark.read \
+        .format("delta") \
+        .load(destination_folder)
+    
+    destiny_count = destiny.count()
 
-    gold_table.write \
-    .jdbc("jdbc:postgresql://yb-tservers.database.svc.Cluster.local:5433/salesdw", "public.dimcurrency",
-          properties={"user": "plumber", "password": "PlumberSDE"}).mode("overwrite").load()
-          
+    if origin_count != destiny_count:
+        raise AssertionError("Counts of origin and destiny are not equal")
 
     # stop session
     spark.stop()
