@@ -44,13 +44,15 @@ if __name__ == '__main__':
     StructField("SalesOrderLineNumber", IntegerType(), True),
     StructField("SalesReasonKey", IntegerType(), True)])
 
-    bronze_table = spark.read.options(header='False',delimiter='|').csv(origin_folder, schema=schema)
+    landing_table = spark.read.options(header='False',delimiter='|').csv(origin_folder, schema=schema)
+    landing_table = landing_table.withColumn("b_create_at", current_timestamp())
+    landing_table = landing_table.withColumn("b_load_date", current_date())
    
     if DeltaTable.isDeltaTable(spark, destination_folder):
         dt_table = DeltaTable.forPath(spark, destination_folder)
         dt_table.alias("historical_data")\
             .merge(
-                bronze_table.alias("new_data"),
+                landing_table.alias("new_data"),
                 '''
                 historical_data.SalesOrderNumber = new_data.SalesOrderNumber and
                 historical_data.SalesOrderLineNumber = new_data.SalesOrderLineNumber and
@@ -59,13 +61,13 @@ if __name__ == '__main__':
             .whenMatchedUpdateAll()\
             .whenNotMatchedInsertAll()
     else:
-        bronze_table.write.mode(write_delta_mode)\
+        landing_table.write.mode(write_delta_mode)\
             .format("delta")\
-            .partitionBy("s_load_date")\
+            .partitionBy("b_load_date")\
             .save(destination_folder)
 
     #verify count origin vs destination
-    origin_count = bronze_table.count()
+    origin_count = landing_table.count()
 
     destiny = spark.read \
         .format("delta") \

@@ -72,7 +72,7 @@ if __name__ == '__main__':
     else:
         bronze_table.write.mode(write_delta_mode)\
             .format("delta")\
-            .partitionBy("s_load_date")\
+            .partitionBy("b_load_date")\
             .save(destination_folder)
 
     #verify count origin vs destination
