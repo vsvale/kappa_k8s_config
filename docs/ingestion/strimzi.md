@@ -82,3 +82,5 @@ kafka-avro-console-consumer \
 ### Yamls Example
 
 - `https://github.com/strimzi/strimzi-kafka-operator/tree/main/examples`
+
+

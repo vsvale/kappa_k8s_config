@@ -66,6 +66,7 @@ ingestion
 - store stream of records
 - logical structure to record events
 
+
 ### Particoes
 
 - Um topico é reparticionado em inumeras partições
@@ -277,3 +278,5 @@ To manage topics, topics data, consumers group, schema registry, connect
 - Apache Kafka raft metadata mode - Kraft
 - Consensus protocol for comunication
 - New Quorum controller service
+
+### 

@@ -1,5 +1,0 @@
-BOOTSTRAP_SERVERS = 127.0.01:9092
-INPUT_MOVIES_TITLES_TOPIC='src-example-customer'
-OUTPUT_TOPIC_MOVIES_BY_USERS_STREAM='output-pyspark-example-customer'
-STARTING_OFFSETS='latest'
-CHECKPOINT='checkpoint'
