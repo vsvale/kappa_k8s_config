@@ -18,6 +18,7 @@ metadata:
     controller: false
     kind: Kafka
     name: edh
+  uid: a547a073-7a3f-4463-a831-dc409f3fb888
 spec:
   allocateLoadBalancerNodePorts: true
   externalTrafficPolicy: Cluster
