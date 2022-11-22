@@ -1,11 +1,7 @@
 ## Create image
 - `docker images`
 - see version of airflow image https://hub.docker.com/r/apache/airflow/tags
-- `docker pull apache/airflow:latest-python3.7`
-- `docker build ./repository/code/orchestrator/airflow/ -t vsvale-airflow:2.4.2`
-- `docker tag vsvale-airflow:2.4.2 vsvale/vsvale-airflow:2.4.2`
-- `docker login`
-- `docker push vsvale/vsvale-airflow:2.4.2`
+- https://raw.githubusercontent.com/vsvale/kappa_code/main/orchestrator/airflow/readme.md
 - update version to [values.yaml](../../repository/helm-charts/orchestrator/airflow/values.yaml)
 
 ## Install
@@ -14,10 +10,15 @@
 - with smtp:
     -  add smpt in values and apply locally dont send to git
     - `helm upgrade --install -f ./repository/helm-charts/orchestrator/airflow/values.yaml airflow apache-airflow/airflow --namespace orchestrator --debug --timeout 10m0s`
-- Kubernetes Connection "Admin" > "Connections"
+
+## Connections
+-  "Admin" > "Connections"
+- Kubernetes Connection:
     - name:"kubeconnect"
     - service: Kubernetes
     - mark the box "in-cluster"
+- MiniO Connection: {"aws_access_key_id": "YOURACCESSKEY", "aws_secret_access_key": "YOURSECRETKEY", "host": "http://minio.deepstorage.svc.Cluster.local:9000"}
+- YugabyteDB Connection: {"name": "yugabytedb_ysql", "host": "yb-tservers.database.svc.cluster.local", "schema": "owshq", "login": "yugabyte", "password": "yugabyte", "port": "5433"}
 
 ## CLI
 - kubens orchestrator
