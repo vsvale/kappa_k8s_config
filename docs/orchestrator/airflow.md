@@ -6,7 +6,7 @@
 
 ## Install
 
-- without smtp: `helm upgrade --install -f https://raw.githubusercontent.com/vsvale/kappa_k8s_config/master/repository/helm-charts/orchestrator/airflow/values.yaml airflow apache-airflow/airflow --namespace orchestrator --debug --timeout 10m0s`
+- without smtp: `kubectl apply -f https://raw.githubusercontent.com/vsvale/kappa_k8s_config/master/repository/app-manifests/orchestrator/airflow.yaml`
 - with smtp:
     -  add smpt in values and apply locally dont send to git
     - `helm upgrade --install -f ./repository/helm-charts/orchestrator/airflow/values.yaml airflow apache-airflow/airflow --namespace orchestrator --debug --timeout 10m0s`
@@ -17,7 +17,7 @@
     - name:"kubeconnect"
     - service: Kubernetes
     - mark the box "in-cluster"
-- MiniO Connection: {"aws_access_key_id": "YOURACCESSKEY", "aws_secret_access_key": "YOURSECRETKEY", "host": "http://minio.deepstorage.svc.Cluster.local:9000"}
+- MiniO Connection: {"aws_access_key_id": "YOURACCESSKEY", "aws_secret_access_key": "YOURSECRETKEY", "host": "http://172.18.0.2:8686"}
 - YugabyteDB Connection: {"name": "yugabytedb_ysql", "host": "yb-tservers.database.svc.cluster.local", "schema": "owshq", "login": "yugabyte", "password": "yugabyte", "port": "5433"}
 
 ## CLI
